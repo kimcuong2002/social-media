@@ -20,14 +20,14 @@ const Notification = () => {
         <Button px="0">
           {' '}
           <WrapItem className="bg-gray-500 p-2 rounded-full">
-            <IoMdNotifications className="text-2xl text-white" />
+            <IoMdNotifications className="text-md lg:text-xl text-white" />
           </WrapItem>
         </Button>
       </PopoverTrigger>
       <PopoverContent w="400px">
         <PopoverArrow />
         <PopoverCloseButton />
-        <PopoverHeader>Notification</PopoverHeader>
+        <PopoverHeader className="!font-bold">Notification</PopoverHeader>
         <PopoverBody>
           <NotificationBox />
         </PopoverBody>

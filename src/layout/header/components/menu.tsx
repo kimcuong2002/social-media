@@ -18,7 +18,7 @@ const Menu = () => {
       <PopoverTrigger>
         <Button px="0">
           <WrapItem className="bg-gray-500 p-2 rounded-full">
-            <MdWindow className="text-2xl text-white" />
+            <MdWindow className="text-md lg:text-xl text-white" />
           </WrapItem>
         </Button>
       </PopoverTrigger>

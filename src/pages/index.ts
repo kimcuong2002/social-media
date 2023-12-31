@@ -1,5 +1,2 @@
-import { lazy } from 'react';
-
-const Home = lazy(() => import('@/pages/home'));
-
-export { Home };
+export * from './home/home';
+export * from './profile/profile';

@@ -17,7 +17,7 @@ const Message = () => {
       <PopoverTrigger>
         <Button px="0">
           <WrapItem className="bg-gray-500 p-2 rounded-full">
-            <MdMessage className="text-2xl text-white" />
+            <MdMessage className="text-md lg:text-xl text-white" />
           </WrapItem>
         </Button>
       </PopoverTrigger>
