@@ -1,9 +1,11 @@
 import { FC, lazy } from 'react';
 
-import { Navigate, useRoutes } from 'react-router-dom';
+import { useRoutes } from 'react-router-dom';
 
 import { routeList } from '@/data/constant/navs';
 import LayoutComponent from '@/layout';
+import { Profile } from '@/pages';
+import { Home } from '@/pages/home/home';
 
 const NotFound = lazy(() => import('@/pages/not-found'));
 
@@ -14,7 +16,11 @@ const routes = [
     children: [
       {
         path: '',
-        element: <Navigate to="home" />,
+        element: <Home />,
+      },
+      {
+        path: '/profile',
+        element: <Profile />,
       },
       ...routeList,
       {

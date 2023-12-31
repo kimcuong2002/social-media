@@ -1,18 +1,30 @@
-import { Box, Text } from '@chakra-ui/react';
-import { FaRegClosedCaptioning } from 'react-icons/fa';
+import { Box, Button, Text } from '@chakra-ui/react';
+import { FaRegWindowClose } from 'react-icons/fa';
 import { FaCheck } from 'react-icons/fa6';
+
+const menu = [
+  {
+    name: 'Check read',
+    icon: <FaCheck />,
+  },
+  {
+    name: 'Remove notification',
+    icon: <FaRegWindowClose />,
+  },
+];
 
 const Menu = () => {
   return (
     <Box>
-      <Box className="flex justify-start gap-1 items-center hover:bg-gray-200 p-2 rounded-md">
-        <FaCheck />
-        <Text>Đánh dấu là đã đọc</Text>
-      </Box>
-      <Box className="flex justify-start gap-1 items-center hover:bg-gray-200 p-2 rounded-md">
-        <FaRegClosedCaptioning />
-        <Text>Gỡ thông báo này</Text>
-      </Box>
+      {menu.map((item) => (
+        <Button
+          key={item.name}
+          className="flex !justify-start items-center gap-4 w-11/12 my-1"
+        >
+          <Box>{item.icon}</Box>
+          <Text>{item.name}</Text>
+        </Button>
+      ))}
     </Box>
   );
 };

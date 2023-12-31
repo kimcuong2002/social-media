@@ -8,9 +8,9 @@ import HeaderComponent from './header';
 
 const LayoutComponent = () => {
   return (
-    <div className="w-full h-full">
+    <div className="w-full">
       <HeaderComponent />
-      <div className="px-4 py-20 flex flex-col">
+      <div className="bg-[#F6F6F7] py-16 flex flex-col">
         <ErrorBoundary fallbackRender={fallbackRender}>
           <Suspense
             fallback={
