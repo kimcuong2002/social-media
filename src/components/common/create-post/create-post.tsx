@@ -1,16 +1,17 @@
-import { Avatar, Box, Button, Divider, Text } from '@chakra-ui/react';
-import { BiFile, BiImage, BiSmile, BiVideo } from 'react-icons/bi';
+import {
+  Avatar,
+  Box,
+  Button,
+  Divider,
+  IconButton,
+  Text,
+} from '@chakra-ui/react';
 
+import { optionInput } from '../constant';
 import { avatar1 } from '@/assets';
 
-const optionUpload = [
-  { icon: <BiVideo />, id: 1 },
-  { icon: <BiSmile />, id: 2 },
-  { icon: <BiImage />, id: 3 },
-  { icon: <BiFile />, id: 4 },
-];
-
 export const CreatePost = () => {
+  const options = optionInput.slice(0, 4);
   return (
     <Box className="bg-white mt-4 p-4 rounded-lg border-2">
       <Box className="flex items-center gap-4">
@@ -19,9 +20,14 @@ export const CreatePost = () => {
       </Box>
       <Divider className="my-4" />
       <Box className="flex justify-between items-center">
-        <Box className="flex gap-4 text-2xl text-gray-400 cursor-pointer">
-          {optionUpload.map((item) => (
-            <Box key={item.id}>{item.icon}</Box>
+        <Box className="flex gap-1 text-2xl text-gray-400 cursor-pointer">
+          {options.map((item) => (
+            <IconButton
+              aria-label="Search database"
+              icon={item.icon}
+              key={item.id}
+              variant="ghost"
+            />
           ))}
         </Box>
         <Button colorScheme="twitter" size="sm">
