@@ -4,6 +4,7 @@ import Lottie from 'lottie-react';
 import hello from '../../lottie/hello.json';
 import { icons, google } from '@/assets';
 import { LoginForm } from '@/components';
+import { singInWithGoogle } from '@/features';
 
 export const Login = () => {
   return (
@@ -23,7 +24,12 @@ export const Login = () => {
           <Text className="text-[#525252] text-2xl !font-bold !text-left mb-4">
             Login to your account
           </Text>
-          <Button colorScheme="teal" variant="outline" className="w-full">
+          <Button
+            colorScheme="teal"
+            variant="outline"
+            className="w-full"
+            onClick={singInWithGoogle}
+          >
             <Image src={google} className="w-6 h-6 mr-4" />
             Login With Google
           </Button>
