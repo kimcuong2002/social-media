@@ -49,11 +49,12 @@ export const LoginForm = () => {
         <FormLabel>Username</FormLabel>
         <Input
           id="username"
-          type="email"
-          value={login.username}
+          type="text"
+          // value={login.username}
           {...register('username', {
             required: true,
-            maxLength: 20,
+            maxLength: 50,
+            minLength: 10,
             pattern: /^[A-Za-z]+$/i,
           })}
         />
@@ -61,12 +62,15 @@ export const LoginForm = () => {
           <FormErrorMessage>This field is required</FormErrorMessage>
         )}
         {errors?.username?.type === 'maxLength' && (
-          <FormErrorMessage>
-            First name cannot exceed 20 characters
-          </FormErrorMessage>
+          <FormErrorMessage>User cannot exceed 20 characters</FormErrorMessage>
         )}
         {errors?.username?.type === 'pattern' && (
           <FormErrorMessage>Alphabetical characters only</FormErrorMessage>
+        )}
+        {errors?.username?.type === 'minLength' && (
+          <FormErrorMessage>
+            Username cannot be less than 5 characters
+          </FormErrorMessage>
         )}
       </FormControl>
       <FormControl isInvalid={isPassWordError}>
@@ -77,10 +81,10 @@ export const LoginForm = () => {
             pr="4.5rem"
             type={show ? 'text' : 'password'}
             placeholder="Enter password"
-            value={login.password}
-            {...register('username', {
+            {...register('password', {
               required: true,
-              maxLength: 20,
+              maxLength: 50,
+              minLength: 5,
               pattern: /^[A-Za-z]+$/i,
             })}
           />
@@ -95,11 +99,16 @@ export const LoginForm = () => {
         )}
         {errors?.password?.type === 'maxLength' && (
           <FormErrorMessage>
-            First name cannot exceed 20 characters
+            Password cannot exceed 20 characters
           </FormErrorMessage>
         )}
         {errors?.password?.type === 'pattern' && (
           <FormErrorMessage>Alphabetical characters only</FormErrorMessage>
+        )}
+        {errors?.password?.type === 'minLength' && (
+          <FormErrorMessage>
+            Password cannot be less than 5 characters
+          </FormErrorMessage>
         )}
       </FormControl>
       <Box className="text-sm flex justify-between items-center my-2 text-[#7F265B]">
