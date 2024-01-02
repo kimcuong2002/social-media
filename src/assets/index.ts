@@ -6,10 +6,14 @@ import design from './design.png';
 import develop from './develop.png';
 import facebook_logo from './Facebook_logo.png.webp';
 import game from './game.png';
+import google from './google-icon.png';
 import healt from './healt.svg';
+import icons from './icons.png';
 import menu from './menu.png';
 
 export {
+  google,
+  icons,
   facebook_logo,
   anhbia,
   avataa,

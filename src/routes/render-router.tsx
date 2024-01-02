@@ -4,7 +4,7 @@ import { useRoutes } from 'react-router-dom';
 
 import { routeList } from '@/data/constant/navs';
 import LayoutComponent from '@/layout';
-import { Profile } from '@/pages';
+import { Login, Profile } from '@/pages';
 import { Home } from '@/pages/home/home';
 
 const NotFound = lazy(() => import('@/pages/not-found'));
@@ -28,6 +28,10 @@ const routes = [
         element: <NotFound />,
       },
     ],
+  },
+  {
+    path: '/login',
+    element: <Login />,
   },
 ];
 
