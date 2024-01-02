@@ -49,28 +49,24 @@ export const LoginForm = () => {
         <FormLabel>Username</FormLabel>
         <Input
           id="username"
-          type="text"
-          // value={login.username}
           {...register('username', {
-            required: true,
-            maxLength: 50,
-            minLength: 10,
-            pattern: /^[A-Za-z]+$/i,
+            required: 'This field is required',
+            maxLength: {
+              value: 50,
+              message: 'User cannot exceed 50 characters',
+            },
+            minLength: {
+              value: 10,
+              message: 'Username cannot be less than 5 characters',
+            },
+            pattern: {
+              value: /^[A-Za-z]+$/i,
+              message: 'Alphabetical characters only',
+            },
           })}
         />
-        {errors?.username?.type === 'required' && (
-          <FormErrorMessage>This field is required</FormErrorMessage>
-        )}
-        {errors?.username?.type === 'maxLength' && (
-          <FormErrorMessage>User cannot exceed 20 characters</FormErrorMessage>
-        )}
-        {errors?.username?.type === 'pattern' && (
-          <FormErrorMessage>Alphabetical characters only</FormErrorMessage>
-        )}
-        {errors?.username?.type === 'minLength' && (
-          <FormErrorMessage>
-            Username cannot be less than 5 characters
-          </FormErrorMessage>
+        {errors?.username && (
+          <FormErrorMessage>{errors.username.message}</FormErrorMessage>
         )}
       </FormControl>
       <FormControl isInvalid={isPassWordError}>
@@ -82,10 +78,19 @@ export const LoginForm = () => {
             type={show ? 'text' : 'password'}
             placeholder="Enter password"
             {...register('password', {
-              required: true,
-              maxLength: 50,
-              minLength: 5,
-              pattern: /^[A-Za-z]+$/i,
+              required: 'This field is required',
+              maxLength: {
+                value: 50,
+                message: 'Password cannot exceed 50 characters',
+              },
+              minLength: {
+                value: 5,
+                message: 'Password cannot be less than 5 characters',
+              },
+              pattern: {
+                value: /^[A-Za-z]+$/i,
+                message: 'Alphabetical characters only',
+              },
             })}
           />
           <InputRightElement width="3rem">
@@ -94,21 +99,8 @@ export const LoginForm = () => {
             </Button>
           </InputRightElement>
         </InputGroup>
-        {errors?.password?.type === 'required' && (
-          <FormErrorMessage>This field is required</FormErrorMessage>
-        )}
-        {errors?.password?.type === 'maxLength' && (
-          <FormErrorMessage>
-            Password cannot exceed 20 characters
-          </FormErrorMessage>
-        )}
-        {errors?.password?.type === 'pattern' && (
-          <FormErrorMessage>Alphabetical characters only</FormErrorMessage>
-        )}
-        {errors?.password?.type === 'minLength' && (
-          <FormErrorMessage>
-            Password cannot be less than 5 characters
-          </FormErrorMessage>
+        {errors.password && (
+          <FormErrorMessage>{errors.password.message}</FormErrorMessage>
         )}
       </FormControl>
       <Box className="text-sm flex justify-between items-center my-2 text-[#7F265B]">
