@@ -7,7 +7,11 @@ type Props = {
 };
 
 const ErrorShow: FC<Props> = ({ message }) => {
-  return <Text>{message}</Text>;
+  return (
+    <Text fontSize="sm" color="red">
+      {message}
+    </Text>
+  );
 };
 
 export default ErrorShow;
