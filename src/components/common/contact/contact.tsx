@@ -9,7 +9,7 @@ export type ContactType = {
   state: 'on' | 'off';
 };
 
-const Contact: FC<ContactType> = ({ thumb, name, state }) => {
+export const Contact: FC<ContactType> = ({ thumb, name, state }) => {
   return (
     <Box className="flex justify-start items-center gap-4 my-2">
       <Avatar src={thumb} size="sm">
@@ -25,5 +25,3 @@ const Contact: FC<ContactType> = ({ thumb, name, state }) => {
     </Box>
   );
 };
-
-export default Contact;
