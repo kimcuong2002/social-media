@@ -1,5 +1,6 @@
 import { Suspense } from 'react';
 
+import { Box, Text } from '@chakra-ui/react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Outlet } from 'react-router-dom';
 
@@ -8,22 +9,22 @@ import HeaderComponent from './header';
 
 const LayoutComponent = () => {
   return (
-    <div className="w-full">
+    <Box className="w-full">
       <HeaderComponent />
-      <div className="bg-[#F6F6F7] py-16 flex flex-col">
+      <Box className="bg-[#F6F6F7] py-16 flex flex-col">
         <ErrorBoundary fallbackRender={fallbackRender}>
           <Suspense
             fallback={
-              <div className="w-full h-full flex justify-center items-center">
-                <span>Loading...</span>
-              </div>
+              <Box className="w-full h-full flex justify-center items-center">
+                <Text>Loading...</Text>
+              </Box>
             }
           >
             <Outlet />
           </Suspense>
         </ErrorBoundary>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

@@ -1,5 +1,5 @@
 import { avataa, avatar1, avatar2 } from '@/assets';
-import { ContactType } from '@/layout/navbar-layout/components/right-navbar/components/contact';
+import { ContactType } from '@/components';
 
 export const datas: ContactType[] = [
   {
