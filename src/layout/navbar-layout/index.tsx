@@ -3,7 +3,7 @@ import { FC, ReactNode } from 'react';
 import { Box } from '@chakra-ui/react';
 
 import LeftNavBar from './components/left-navbar';
-import RightNavBar from './components/right-navbar/right-navbar';
+import RightNavBar from './components/right-navbar';
 
 type Props = {
   children: ReactNode;
