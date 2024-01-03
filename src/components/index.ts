@@ -7,4 +7,3 @@ export * from './common/post/post';
 export * from './common/login-form/login-form';
 export * from './common/signin-form/signin-form';
 export * from './common/contact/contact';
-export * from './common/contact/contact';
