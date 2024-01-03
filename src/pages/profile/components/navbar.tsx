@@ -25,7 +25,12 @@ const Navbar = () => {
   return (
     <Box className="w-full bg-white flex justify-center items-center gap-2 py-2">
       {navBarDatas.map((item) => (
-        <Button key={item.name} colorScheme="teal" variant="ghost">
+        <Button
+          key={item.name}
+          colorScheme="teal"
+          variant="ghost"
+          size={{ base: 'xs', lg: 'md' }}
+        >
           {item.name}
         </Button>
       ))}
