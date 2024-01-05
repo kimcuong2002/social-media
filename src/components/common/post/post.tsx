@@ -39,10 +39,7 @@ export const Post = () => {
           </Text>
         </Box>
       </Box>
-      <Text className="my-2">
-        Em moi 18 tuoi va van chua co ny a, tuyen ny biet quan tam cham soc em
-        a. Nha giau dep trai la duoc. Yeu tat ca cac anh ahihi
-      </Text>
+      <Text className="my-2">Xin chao cac ban!!!</Text>
       <Box className="flex gap-1">
         <Image src={avatar1} className="w-1/2" />
         <Image src={avatar2} className="w-1/2" />
