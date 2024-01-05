@@ -1,36 +1,116 @@
+import { ChangeEvent, useState } from 'react';
+
 import {
   Avatar,
   Box,
   Button,
   Divider,
-  IconButton,
+  Grid,
+  Image,
+  Input,
   Text,
 } from '@chakra-ui/react';
+import { IoCloseSharp } from 'react-icons/io5';
+import { v4 as uuidv4 } from 'uuid';
 
 import { optionInput } from '../constant';
 import { avatar1 } from '@/assets';
+import { PostType, FileType } from '@/ts/types';
 
 export const CreatePost = () => {
+  const [files, setFiles] = useState<FileType[]>([]);
+  const [content, setContent] = useState('');
+  const [listPost, setListPost] = useState<PostType[]>([]);
+
+  const handleChooseFiles = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files;
+    if (file) {
+      const fileList = Array.from(file).map((item) => ({
+        id: uuidv4(),
+        file: item,
+      }));
+      setFiles((prevFiles) => [...prevFiles, ...fileList]);
+    }
+  };
+
+  const handleDeleteFile = (id: string) => {
+    setFiles((prevFiles) => {
+      return prevFiles.filter((file) => file.id !== id);
+    });
+  };
+
+  const handleContentValue = (e: ChangeEvent<HTMLInputElement>) => {
+    const content = e.target.value;
+    setContent(content);
+  };
+
+  const handleCreatePost = () => {
+    const newPost: PostType = {
+      id: uuidv4(),
+      listFile: files,
+      content: content,
+    };
+
+    setListPost((prevPost) => [...prevPost, newPost]);
+    setFiles([]);
+    setContent('');
+  };
+
+  localStorage.setItem('Posts', JSON.stringify(listPost));
+
   const options = optionInput.slice(0, 4);
+
   return (
     <Box className="bg-white mt-4 p-4 rounded-lg border-2">
       <Box className="flex items-center gap-4">
         <Avatar src={avatar1} />
         <Text className="text-gray-500">Share something...</Text>
       </Box>
-      <Divider className="my-4" />
+      <Grid
+        className="mt-4"
+        templateColumns={{ sm: 'repeat(2,1fr)', md: 'repeat(3,1fr)' }}
+        gap={2}
+      >
+        {files &&
+          files.map((item) => (
+            <Box key={item.id} className="relative group">
+              <Image
+                src={URL.createObjectURL(item.file)}
+                className="w-full h-[150px] rounded-md"
+              />
+              <IoCloseSharp
+                className="text-3xl cursor-pointer absolute top-2 right-0 -translate-x-1/2 hidden group-hover:block transform hover:rotate-[45deg] hover:scale-105 hover:duration-300 text-red-700"
+                onClick={() => handleDeleteFile(item.id)}
+              />
+            </Box>
+          ))}
+        <Input
+          placeholder="Insert your content"
+          className="!border-0 !outline-none w-full"
+          onChange={handleContentValue}
+        />
+      </Grid>
+      <Divider className="mb-4" />
       <Box className="flex justify-between items-center">
-        <Box className="flex gap-1 text-2xl text-gray-400 cursor-pointer">
+        <Box className="flex gap-4 text-2xl text-gray-500">
           {options.map((item) => (
-            <IconButton
-              aria-label="Search database"
-              icon={item.icon}
-              key={item.id}
-              variant="ghost"
-            />
+            <div key={item.id}>
+              <label htmlFor={item.value}>
+                <Box className="cursor-pointer">{item.icon}</Box>
+              </label>
+              <Input
+                multiple
+                type="file"
+                name={item.value}
+                id={item.value}
+                accept={item.value}
+                className="hidden"
+                onChange={(e) => handleChooseFiles(e)}
+              />
+            </div>
           ))}
         </Box>
-        <Button colorScheme="twitter" size="sm">
+        <Button colorScheme="twitter" size="sm" onClick={handleCreatePost}>
           Post
         </Button>
       </Box>
