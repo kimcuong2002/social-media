@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react';
 
 import SideBar from './components/sidebar';
-import { CreatePost, Post } from '@/components';
+import { CreatePost } from '@/components';
 import NavbarLayout from '@/layout/navbar-layout';
 
 export const Home = () => {
@@ -14,7 +14,6 @@ export const Home = () => {
       }
     >
       <CreatePost />
-      <Post />
     </NavbarLayout>
   );
 };

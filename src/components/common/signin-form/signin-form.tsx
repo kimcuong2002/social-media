@@ -4,15 +4,7 @@ import { Box, Input, Text, Checkbox } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 
 import ErrorShow from '../error-show/error-show';
-
-interface SignInInput {
-  firstname: string;
-  surname: string;
-  phonenumber: string;
-  username: string;
-  password: string;
-  gender: string;
-}
+import { SignInInput } from '@/ts/types';
 
 export const SignInForm = () => {
   const [male, setMale] = useState(false);

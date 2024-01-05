@@ -1,3 +1,5 @@
+import { FC } from 'react';
+
 import {
   Avatar,
   Box,
@@ -12,7 +14,8 @@ import { BiComment, BiLike, BiShare } from 'react-icons/bi';
 
 import Comment from '../comment/comment';
 import { optionInput } from '../constant';
-import { avatar1, avatar2 } from '@/assets';
+import { avatar1 } from '@/assets';
+import { PostType } from '@/ts/types';
 
 const actionPost = [
   {
@@ -27,7 +30,7 @@ const actionPost = [
   },
 ];
 
-export const Post = () => {
+export const Post: FC<PostType> = ({ content, listFile }) => {
   return (
     <Box className="bg-white my-4 p-4 rounded-lg border-2">
       <Box className="flex items-center gap-2">
@@ -39,10 +42,16 @@ export const Post = () => {
           </Text>
         </Box>
       </Box>
-      <Text className="my-2">Xin chao cac ban!!!</Text>
+      <Text className="my-2">{content}</Text>
       <Box className="flex gap-1">
-        <Image src={avatar1} className="w-1/2" />
-        <Image src={avatar2} className="w-1/2" />
+        {listFile &&
+          listFile.map((item) => (
+            <Image
+              src={URL.createObjectURL(item.file)}
+              key={item.id}
+              className="w-1/2"
+            />
+          ))}
       </Box>
       <Box className="flex justify-between items-center my-4">
         <Box className="flex justify-center gap-3 lg:gap-10">

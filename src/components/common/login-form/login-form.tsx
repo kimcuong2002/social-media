@@ -16,16 +16,13 @@ import { useForm } from 'react-hook-form';
 import { FaRegEyeSlash, FaRegEye } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
-interface LoginInput {
-  username: string;
-  password: string;
-}
+import { LoginInput } from '@/ts/types';
 
 export const LoginForm = () => {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
 
-  const [login, setLogin] = useState({
+  const [login] = useState({
     username: '',
     password: '',
   });

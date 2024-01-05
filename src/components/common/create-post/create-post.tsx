@@ -84,12 +84,12 @@ export const CreatePost = () => {
               />
             </Box>
           ))}
-        <Input
-          placeholder="Insert your content"
-          className="!border-0 !outline-none w-full"
-          onChange={handleContentValue}
-        />
       </Grid>
+      <Input
+        placeholder="Insert your content"
+        className="!border-0 !outline-none w-full mt-4"
+        onChange={handleContentValue}
+      />
       <Divider className="mb-4" />
       <Box className="flex justify-between items-center">
         <Box className="flex gap-4 text-2xl text-gray-500">
