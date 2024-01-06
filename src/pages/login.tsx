@@ -14,10 +14,10 @@ import {
 } from '@chakra-ui/react';
 import Lottie from 'lottie-react';
 
-import hello from '../../lottie/hello.json';
+import { singInWithGoogle } from '../config/firebase/firebase';
+import hello from '../lottie/hello.json';
 import { icons, google } from '@/assets';
-import { LoginForm, SignInForm } from '@/components';
-import { singInWithGoogle } from '@/features';
+import { LoginForm, SignInForm } from '@/features';
 
 export const Login = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();

@@ -1,15 +1,10 @@
-import { useMemo } from 'react';
-
 import { Box, Divider, Text } from '@chakra-ui/react';
 
 import { Contact } from '@/components';
 import { datas } from '@/data';
 
 const ListFriend = () => {
-  const friends = useMemo(() => {
-    const listFriends = datas.slice(0, 10);
-    return listFriends;
-  }, [datas]);
+  const listFriends = datas.slice(0, 10);
 
   return (
     <Box className="bg-white mt-4 p-4 rounded-lg border-2">
@@ -18,7 +13,7 @@ const ListFriend = () => {
         <Text className="text-green-900 font-bold cursor-pointer">See all</Text>
       </Box>
       <Divider className="my-2" />
-      {friends.map((item) => (
+      {listFriends.map((item) => (
         <Contact
           key={item.id}
           name={item.name}

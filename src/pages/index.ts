@@ -1,3 +1,3 @@
-export * from './home/home';
-export * from './profile/profile';
-export * from './login/login';
+export * from './home';
+export * from './profile';
+export * from './login';

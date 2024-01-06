@@ -1,6 +1,6 @@
 import { Box } from '@chakra-ui/react';
 
-import SideBar from './components/sidebar';
+import SideBar from '../features/home/components/sidebar';
 import { CreatePost } from '@/components';
 import NavbarLayout from '@/layout/navbar-layout';
 

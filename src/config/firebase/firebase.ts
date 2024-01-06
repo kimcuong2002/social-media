@@ -27,9 +27,6 @@ export const singInWithGoogle = () => {
       localStorage.setItem('user', JSON.stringify(user));
     })
     .catch((error) => {
-      console.log(
-        '🚀 ~ file: firebase.ts:30 ~ singInWithGoogle ~ error:',
-        error,
-      );
+      alert(error);
     });
 };

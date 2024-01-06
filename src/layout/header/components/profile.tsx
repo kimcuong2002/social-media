@@ -13,17 +13,10 @@ import {
 } from '@chakra-ui/react';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
-import { ProfileOptions } from '@/components';
-
-type Usertype = {
-  name: string;
-  image: string;
-  email: string;
-};
+import { ProfileOptions } from '../../../features/profile/components/profile-options';
+import { avatar1 } from '@/assets';
 
 const Profile = () => {
-  const storedUser = localStorage.getItem('user');
-  const user: Usertype | null = storedUser ? JSON.parse(storedUser) : null;
   return (
     <Popover>
       <PopoverTrigger>
@@ -31,10 +24,10 @@ const Profile = () => {
           <Box className="flex justify-between items-center gap-2 cursor-pointer">
             <Avatar
               name="Dan Abrahmov"
-              src={user.image}
+              src={avatar1}
               className="!w-8 !h-8 relative lg:!h-9 lg:!w-9"
             />
-            <Text className="text-black hidden lg:block">{user.name}</Text>
+            <Text className="text-black hidden lg:block">Kimcuong</Text>
             <MdKeyboardArrowDown className="hidden lg:block" />
             <MdKeyboardArrowDown className="block absolute bottom-0 right-0 -translate-x-1/2 -translate-y-1/2 lg:hidden " />
           </Box>

@@ -12,9 +12,9 @@ import {
 } from '@chakra-ui/react';
 import { BiComment, BiLike, BiShare } from 'react-icons/bi';
 
-import Comment from '../comment/comment';
-import { optionInput } from '../constant';
+import { optionInput } from './constant';
 import { avatar1 } from '@/assets';
+import { Comment } from '@/components';
 import { PostType } from '@/ts/types';
 
 const actionPost = [

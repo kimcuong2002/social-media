@@ -5,7 +5,7 @@ import { BiHeart } from 'react-icons/bi';
 
 import CommentInput from './component/comment-input';
 
-const Comment = () => {
+export const Comment = () => {
   const [reply, setReply] = useState(false);
 
   const toggleOpenReply = () => {
@@ -41,5 +41,3 @@ const Comment = () => {
     </Box>
   );
 };
-
-export default Comment;

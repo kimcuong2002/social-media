@@ -13,7 +13,7 @@ import {
 import { IoCloseSharp } from 'react-icons/io5';
 import { v4 as uuidv4 } from 'uuid';
 
-import { optionInput } from '../constant';
+import { optionInput } from './constant';
 import { avatar1 } from '@/assets';
 import { PostType, FileType } from '@/ts/types';
 

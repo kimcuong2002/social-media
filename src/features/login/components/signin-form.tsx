@@ -3,7 +3,7 @@ import { useState, ChangeEvent } from 'react';
 import { Box, Input, Text, Checkbox } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 
-import ErrorShow from '../error-show/error-show';
+import ErrorShow from '../../form/error-show/error-show';
 import { SignInInput } from '@/ts/types';
 
 export const SignInForm = () => {

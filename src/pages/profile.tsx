@@ -1,12 +1,12 @@
 import { Box, Image } from '@chakra-ui/react';
 
-import Information from './components/information';
-import ListFriend from './components/list-friend';
-import ListPhoto from './components/list-photo';
-import Navbar from './components/navbar';
-import ProfileAvatar from './components/profile-avartar';
+import Information from '../features/profile/components/information';
+import ListFriend from '../features/profile/components/list-friend';
+import ListPhoto from '../features/profile/components/list-photo';
+import Navbar from '../features/profile/components/navbar';
+import ProfileAvatar from '../features/profile/components/profile-avartar';
 import { anhbia } from '@/assets';
-import { CreatePost, Post } from '@/components';
+import { CreatePost } from '@/components';
 
 export const Profile = () => {
   return (
@@ -30,9 +30,6 @@ export const Profile = () => {
           </Box>
           <Box className="w-full md:w-3/4 md:mt-[220px]">
             <CreatePost />
-            <Post />
-            <Post />
-            <Post />
           </Box>
         </Box>
       </Box>

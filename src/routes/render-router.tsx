@@ -5,7 +5,7 @@ import { useRoutes } from 'react-router-dom';
 import { routeList } from '@/data/constant/navs';
 import LayoutComponent from '@/layout';
 import { Login, Profile } from '@/pages';
-import { Home } from '@/pages/home/home';
+import { Home } from '@/pages';
 
 const NotFound = lazy(() => import('@/pages/not-found'));
 
