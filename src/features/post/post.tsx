@@ -9,6 +9,7 @@ import {
   InputGroup,
   Input,
   InputRightElement,
+  Grid,
 } from '@chakra-ui/react';
 import { BiComment, BiLike, BiShare } from 'react-icons/bi';
 
@@ -43,16 +44,16 @@ export const Post: FC<PostType> = ({ content, listFile }) => {
         </Box>
       </Box>
       <Text className="my-2">{content}</Text>
-      <Box className="flex gap-1">
+      <Grid
+        className="my-6"
+        templateColumns={{ sm: 'repeat(2,1fr)', md: 'repeat(3,1fr)' }}
+        gap={2}
+      >
         {listFile &&
           listFile.map((item) => (
-            <Image
-              src={URL.createObjectURL(item.file)}
-              key={item.id}
-              className="w-1/2"
-            />
+            <Image src={item.file} key={item.id} className=" w-full h-40" />
           ))}
-      </Box>
+      </Grid>
       <Box className="flex justify-between items-center my-4">
         <Box className="flex justify-center gap-3 lg:gap-10">
           {actionPost.map((item) => (

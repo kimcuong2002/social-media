@@ -1,6 +1,7 @@
 import Logo from './components/logo';
 import Menu from './components/menu';
 import Message from './components/message';
+import MobileMenu from './components/mobile-menu';
 import Notification from './components/notification';
 import Profile from './components/profile';
 import Search from './components/search';
@@ -11,6 +12,7 @@ const HeaderComponent = () => {
       <div className="w-full h-full flex items-center justify-between gap-2 lg:px-10">
         <Logo />
         <Search />
+        <MobileMenu />
         <div className="flex justify-center items-center gap-1 lg:gap-4">
           <Menu />
           <Message />

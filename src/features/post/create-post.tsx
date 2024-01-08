@@ -27,7 +27,7 @@ export const CreatePost = () => {
     if (file) {
       const fileList = Array.from(file).map((item) => ({
         id: uuidv4(),
-        file: item,
+        file: URL.createObjectURL(item),
       }));
       setFiles((prevFiles) => [...prevFiles, ...fileList]);
     }
@@ -50,13 +50,12 @@ export const CreatePost = () => {
       listFile: files,
       content: content,
     };
-
-    setListPost((prevPost) => [...prevPost, newPost]);
+    const fakeListPost = listPost;
+    setListPost([...fakeListPost, newPost]);
+    localStorage.setItem('Posts', JSON.stringify([...fakeListPost, newPost]));
     setFiles([]);
     setContent('');
   };
-
-  localStorage.setItem('Posts', JSON.stringify(listPost));
 
   const options = optionInput.slice(0, 4);
 
@@ -74,10 +73,7 @@ export const CreatePost = () => {
         {files &&
           files.map((item) => (
             <Box key={item.id} className="relative group">
-              <Image
-                src={URL.createObjectURL(item.file)}
-                className="w-full h-[150px] rounded-md"
-              />
+              <Image src={item.file} className="w-full h-[150px] rounded-md" />
               <IoCloseSharp
                 className="text-3xl cursor-pointer absolute top-2 right-0 -translate-x-1/2 hidden group-hover:block transform hover:rotate-[45deg] hover:scale-105 hover:duration-300 text-red-700"
                 onClick={() => handleDeleteFile(item.id)}

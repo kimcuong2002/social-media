@@ -5,7 +5,7 @@ import { useRoutes } from 'react-router-dom';
 import { routeList } from '@/data/constant/navs';
 import LayoutComponent from '@/layout';
 import { Login, Profile } from '@/pages';
-import { Home } from '@/pages';
+import { Cart, Home } from '@/pages';
 
 const NotFound = lazy(() => import('@/pages/not-found'));
 
@@ -21,6 +21,10 @@ const routes = [
       {
         path: '/profile',
         element: <Profile />,
+      },
+      {
+        path: '/cart',
+        element: <Cart />,
       },
       ...routeList,
       {

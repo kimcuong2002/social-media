@@ -1,19 +1,36 @@
+import { useState } from 'react';
+
 import { Box } from '@chakra-ui/react';
 
 import SideBar from '../features/home/components/sidebar';
 import { CreatePost } from '@/components';
+import { Post } from '@/features';
+import { RightNavBar } from '@/features';
 import NavbarLayout from '@/layout/navbar-layout';
+import { PostType } from '@/ts/types';
 
 export const Home = () => {
+  const [listPost] = useState<PostType[]>(
+    localStorage.getItem('Posts')
+      ? (JSON.parse(localStorage.getItem('Posts') as string) as PostType[])
+      : [],
+  );
   return (
-    <NavbarLayout
-      navBarChildren={
-        <Box>
-          <SideBar />
+    <NavbarLayout navBarChildren={<SideBar />}>
+      <Box className="flex w-full justify-between">
+        <Box className="hidden md:block"></Box>
+        <Box className="w-full lg:w-8/12">
+          <CreatePost />
+          {listPost.map((item) => (
+            <Post
+              key={item.id}
+              content={item.content}
+              listFile={item.listFile}
+            />
+          ))}
         </Box>
-      }
-    >
-      <CreatePost />
+        <RightNavBar className="w-3/12" />
+      </Box>
     </NavbarLayout>
   );
 };
