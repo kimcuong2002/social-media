@@ -3,7 +3,6 @@ import { FC, ReactNode } from 'react';
 import { Box } from '@chakra-ui/react';
 
 import LeftNavBar from './components/left-navbar';
-import RightNavBar from './components/right-navbar';
 
 type Props = {
   children: ReactNode;
@@ -12,12 +11,11 @@ type Props = {
 
 const NavbarLayout: FC<Props> = ({ children, navBarChildren }) => {
   return (
-    <Box className="flex justify-between h-screen">
+    <Box className="flex justify-between">
       <LeftNavBar>{navBarChildren}</LeftNavBar>
-      <Box className="mx-2 md:mx-10 w-full lg:w-6/12 flex flex-col overflow-y-auto no-scrollbar">
+      <Box className="mx-2 w-full flex flex-col overflow-y-auto no-scrollbar lg:w-9/12">
         {children}
       </Box>
-      <RightNavBar />
     </Box>
   );
 };

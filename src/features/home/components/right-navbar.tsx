@@ -6,7 +6,11 @@ import { LuSearch } from 'react-icons/lu';
 import { Contact } from '@/components';
 import { datas } from '@/data';
 
-const RightNavBar = () => {
+type Props = {
+  className?: string;
+};
+
+export const RightNavBar = ({ className }: Props) => {
   const [totalOnline, setTotalOnline] = useState(0);
 
   useEffect(() => {
@@ -21,7 +25,7 @@ const RightNavBar = () => {
   }, [totalOnline]);
 
   return (
-    <Box className="bg-white p-4 w-2/12 hidden lg:block">
+    <Box className={`bg-white p-4 w-2/12 hidden lg:block ${className}`}>
       <Box className="flex justify-between items-center">
         <Text className="font-bold">Contact</Text>
         <IconButton
@@ -47,5 +51,3 @@ const RightNavBar = () => {
     </Box>
   );
 };
-
-export default RightNavBar;

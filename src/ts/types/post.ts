@@ -1,10 +1,10 @@
 export type PostType = {
-  id: string;
+  id?: string;
   listFile: FileType[];
   content: string;
 };
 
 export type FileType = {
   id: string;
-  file: File;
+  file: string;
 };

@@ -39,7 +39,7 @@ const leftNavBar = [
 ];
 
 type Props = {
-  children: ReactNode;
+  children?: ReactNode;
 };
 
 const LeftNavBar: FC<Props> = ({ children }) => {

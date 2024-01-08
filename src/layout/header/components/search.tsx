@@ -11,7 +11,11 @@ const Search = () => {
         <InputLeftElement pointerEvents="none">
           <FiSearch className="hidden md:block" />
         </InputLeftElement>
-        <Input type="tel" placeholder="Search" className="px-2 lg:px-0" />
+        <Input
+          type="tel"
+          placeholder="Search"
+          className="px-2 hidden lg:block lg:px-0"
+        />
       </InputGroup>
     </Box>
   );
