@@ -2,10 +2,8 @@ import { useState } from 'react';
 
 import { Box } from '@chakra-ui/react';
 
-import SideBar from '../features/home/components/sidebar';
 import { CreatePost } from '@/components';
-import { Post } from '@/features';
-import { RightNavBar } from '@/features';
+import { Post, RightNavBar, HomeSideBar } from '@/features';
 import NavbarLayout from '@/layout/navbar-layout';
 import { PostType } from '@/ts/types';
 
@@ -16,7 +14,7 @@ export const Home = () => {
       : [],
   );
   return (
-    <NavbarLayout navBarChildren={<SideBar />}>
+    <NavbarLayout navBarChildren={<HomeSideBar />}>
       <Box className="flex w-full justify-between">
         <Box className="hidden md:block"></Box>
         <Box className="w-full lg:w-8/12">
