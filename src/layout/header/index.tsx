@@ -1,3 +1,5 @@
+import { Box } from '@chakra-ui/react';
+
 import Logo from './components/logo';
 import Menu from './components/menu';
 import Message from './components/message';
@@ -9,17 +11,24 @@ import Search from './components/search';
 const HeaderComponent = () => {
   return (
     <header className="bg-secondary block fixed w-full inset-x-0 z-30 h-16 px-4 shadow-xl">
-      <div className="w-full h-full flex items-center justify-between gap-2 lg:px-10">
-        <Logo />
-        <Search />
-        <MobileMenu />
-        <div className="flex justify-center items-center gap-1 lg:gap-4">
+      <Box className="w-full h-full flex items-center justify-between gap-2 lg:px-10">
+        <Box className="flex justify-center items-center ">
+          <Logo />
+          <Box className="block lg:hidden">
+            <Search />
+          </Box>
+          <MobileMenu />
+        </Box>
+        <Box className="hidden lg:block">
+          <Search />
+        </Box>
+        <Box className="flex justify-center items-center gap-1 lg:gap-4">
           <Menu />
           <Message />
           <Notification />
           <Profile />
-        </div>
-      </div>
+        </Box>
+      </Box>
     </header>
   );
 };

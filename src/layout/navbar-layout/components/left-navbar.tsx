@@ -40,11 +40,12 @@ const leftNavBar = [
 
 type Props = {
   children?: ReactNode;
+  className?: string;
 };
 
-const LeftNavBar: FC<Props> = ({ children }) => {
+const LeftNavBar: FC<Props> = ({ children, className }) => {
   return (
-    <Box className="gap-1 w-3/12 hidden lg:flex">
+    <Box className={`gap-1 w-3/12 hidden lg:flex ${className}`}>
       <Box className="flex flex-col gap-2 bg-white p-2">
         {leftNavBar.map((item) => (
           <Link to={item.link} key={item.link}>
