@@ -4,7 +4,7 @@ module.exports = {
     browser: true,
     es6: true,
   },
-  ignorePatterns: ['./tsconfig.json'],
+  ignorePatterns: ['./tsconfig.json', 'src/assets/video.mp4'],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
