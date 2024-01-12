@@ -16,8 +16,10 @@ import google from './google-icon.png';
 import healt from './healt.svg';
 import icons from './icons.png';
 import menu from './menu.png';
+import video from './video.mp4';
 
 export {
+  video,
   anh1,
   anh2,
   anh3,
