@@ -1,6 +1,8 @@
 import { Box, Button, Divider, Text } from '@chakra-ui/react';
 import { BiHome, BiVideo, BiSave, BiPlus } from 'react-icons/bi';
 
+import { SideBarButton } from '@/components';
+
 const videoOptions = [
   {
     name: 'Home',
@@ -25,15 +27,11 @@ export const VideoSideBar = () => {
       <Divider className="mb-4" />
       <Box className="flex flex-col">
         {videoOptions.map((item) => (
-          <button
+          <SideBarButton
             key={item.name}
-            className="flex justify-start items-center gap-4 py-3 rounded-lg px-4 font-bold hover:bg-slate-400 hover:text-white group"
-          >
-            <Box className="text-green-800 text-2xl group-hover:text-white">
-              {item.icon}
-            </Box>
-            <Text>{item.name}</Text>
-          </button>
+            buttonIcon={item.icon}
+            buttonName={item.name}
+          />
         ))}
         <Button
           leftIcon={<BiPlus className="text-xl" />}

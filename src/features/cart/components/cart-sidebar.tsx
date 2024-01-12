@@ -14,6 +14,8 @@ import {
 } from 'react-icons/bi';
 import { RxAvatar } from 'react-icons/rx';
 
+import { SideBarButton } from '@/components';
+
 const marketSidebarItem = [
   {
     name: 'Find all item',
@@ -72,15 +74,11 @@ export const CartSideBar = () => {
       <Divider className="mb-4" />
       <Box className="flex flex-col">
         {marketSidebarItem.map((item) => (
-          <button
+          <SideBarButton
             key={item.name}
-            className="flex justify-start items-center gap-4 py-3 rounded-lg px-4 font-bold  hover:bg-slate-400 hover:text-white group"
-          >
-            <Box className="text-green-800 text-2xl group-hover:text-white">
-              {item.icon}
-            </Box>
-            <Text>{item.name}</Text>
-          </button>
+            buttonIcon={item.icon}
+            buttonName={item.name}
+          />
         ))}
         <Button
           leftIcon={<BiPlus className="text-xl" />}
@@ -102,13 +100,11 @@ export const CartSideBar = () => {
       </Text>
       <Box className="flex flex-col gap-4">
         {categoriesItem.map((item) => (
-          <button
+          <SideBarButton
             key={item.name}
-            className="flex items-center text-xl gap-4 px-4 py-2 rounded-md hover:bg-purple-600 hover:text-white"
-          >
-            <Box>{item.icon}</Box>
-            <Text>{item.name}</Text>
-          </button>
+            buttonIcon={item.icon}
+            buttonName={item.name}
+          />
         ))}
       </Box>
     </Box>

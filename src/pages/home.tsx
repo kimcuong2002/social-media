@@ -17,7 +17,7 @@ export const Home = () => {
     <NavbarLayout navBarChildren={<HomeSideBar />}>
       <Box className="flex w-full justify-between">
         <Box className="hidden md:block"></Box>
-        <Box className="w-full lg:w-8/12">
+        <Box className="w-full lg:w-11/12 xl:w-8/12">
           <CreatePost />
           {listPost.map((item) => (
             <Post
@@ -27,6 +27,7 @@ export const Home = () => {
             />
           ))}
         </Box>
+        <Box className="hidden md:block"></Box>
         <RightNavBar className="w-3/12" />
       </Box>
     </NavbarLayout>

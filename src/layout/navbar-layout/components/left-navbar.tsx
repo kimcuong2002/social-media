@@ -9,6 +9,8 @@ import {
   BiMessage,
   BiVideo,
 } from 'react-icons/bi';
+import { HiOutlineUserGroup } from 'react-icons/hi2';
+import { RxAvatar } from 'react-icons/rx';
 import { Link } from 'react-router-dom';
 
 const leftNavBar = [
@@ -17,7 +19,15 @@ const leftNavBar = [
     link: '/',
   },
   {
+    icon: <RxAvatar />,
+    link: '/profile',
+  },
+  {
     icon: <BiGroup />,
+    link: '/friends',
+  },
+  {
+    icon: <HiOutlineUserGroup />,
     link: '/group',
   },
   {
@@ -34,7 +44,7 @@ const leftNavBar = [
   },
   {
     icon: <BiCalendar />,
-    link: '/calendar',
+    link: '/event',
   },
 ];
 

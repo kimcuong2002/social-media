@@ -4,7 +4,16 @@ import { useRoutes } from 'react-router-dom';
 
 import { routeList } from '@/data/constant/navs';
 import LayoutComponent from '@/layout';
-import { Login, Profile, Cart, Home, Video } from '@/pages';
+import {
+  Login,
+  Profile,
+  Cart,
+  Home,
+  Video,
+  Event,
+  Group,
+  Friends,
+} from '@/pages';
 
 const NotFound = lazy(() => import('@/pages/not-found'));
 
@@ -28,6 +37,18 @@ const routes = [
       {
         path: '/video',
         element: <Video />,
+      },
+      {
+        path: '/friends',
+        element: <Friends />,
+      },
+      {
+        path: '/group',
+        element: <Group />,
+      },
+      {
+        path: 'event',
+        element: <Event />,
       },
       ...routeList,
       {

@@ -4,3 +4,4 @@ export * from './notification/notification';
 export * from '../features/post/create-post';
 export * from './contact/contact';
 export * from './comment/comment';
+export * from './common/button/sidebar-button';

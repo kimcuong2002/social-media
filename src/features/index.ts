@@ -6,3 +6,4 @@ export * from './cart/components/category';
 export * from './cart/components/cart-sidebar';
 export * from './home/components/home-sidebar';
 export * from './video/component/video-sidebar';
+export * from './friends/components/friend-sidedbar';

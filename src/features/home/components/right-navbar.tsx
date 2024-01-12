@@ -25,7 +25,7 @@ export const RightNavBar = ({ className }: Props) => {
   }, [totalOnline]);
 
   return (
-    <Box className={`bg-white p-4 w-2/12 hidden lg:block ${className}`}>
+    <Box className={`bg-white p-4 w-2/12 hidden xl:block ${className}`}>
       <Box className="flex justify-between items-center">
         <Text className="font-bold">Contact</Text>
         <IconButton

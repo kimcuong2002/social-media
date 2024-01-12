@@ -21,27 +21,22 @@ const Search = () => {
   };
   return (
     <Box className="flex justify-center items-center">
-      {openSearch ? (
-        ''
-      ) : (
-        <Box className="lg:hidden mr-2">
-          <Button px="0" className="lg:hidden" onClick={handleOpenSearch}>
-            <WrapItem className="bg-gray-500 p-2 rounded-full">
-              <FiSearch className="text-md text-white" />
-            </WrapItem>
-          </Button>
-        </Box>
-      )}
+      <Box className="lg:hidden mr-2">
+        <Button
+          px="0"
+          className="lg:hidden"
+          onClick={openSearch ? handleCloseSearch : handleOpenSearch}
+        >
+          <WrapItem className="bg-gray-500 p-2 rounded-full text-md text-white">
+            {openSearch ? <IoMdArrowRoundBack /> : <FiSearch />}
+          </WrapItem>
+        </Button>
+      </Box>
       {openSearch && (
         <Box className="flex justify-center items-center gap-1">
-          <IoMdArrowRoundBack
-            onClick={handleCloseSearch}
-            className="text-2xl"
-          />
           <Input placeholder="Search" size="sm" />
         </Box>
       )}
-
       <Box className="hidden lg:block">
         <InputGroup size="md" className="!bg-gray-200 rounded-xl">
           <InputLeftElement pointerEvents="none">
