@@ -47,7 +47,7 @@ const MobileMenu = () => {
         placement="left"
       >
         <DrawerOverlay />
-        <DrawerContent className="!bg-gray-500">
+        <DrawerContent className="!bg-[#F6F6F7]">
           <DrawerCloseButton />
           <LeftNavBar className="w-full !flex h-screen">
             {sidebarComponent}

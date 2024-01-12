@@ -31,7 +31,18 @@ const actionPost = [
   },
 ];
 
-export const Post: FC<PostType> = ({ content, listFile }) => {
+export const Post: FC<PostType> = ({
+  content,
+  listFile,
+  typePost,
+  videoSrc,
+}) => {
+  const videoProps = {
+    src: videoSrc,
+    name: 'header',
+    allowFullScreen: true,
+    title: 'video',
+  };
   return (
     <Box className="bg-white my-4 p-4 rounded-lg border-2">
       <Box className="flex items-center gap-2">
@@ -44,16 +55,23 @@ export const Post: FC<PostType> = ({ content, listFile }) => {
         </Box>
       </Box>
       <Text className="my-2">{content}</Text>
-      <Grid
-        className="my-6"
-        templateColumns={{ sm: 'repeat(2,1fr)', md: 'repeat(3,1fr)' }}
-        gap={2}
-      >
-        {listFile &&
-          listFile.map((item) => (
-            <Image src={item.file} key={item.id} className=" w-full h-40" />
-          ))}
-      </Grid>
+      {typePost === 'video' ? (
+        <video {...videoProps} controls>
+          <track src="captions.vtt" kind="captions" label="English" default />
+        </video>
+      ) : (
+        <Grid
+          className="my-6"
+          templateColumns={{ sm: 'repeat(2,1fr)', md: 'repeat(3,1fr)' }}
+          gap={2}
+        >
+          {listFile &&
+            listFile.map((item) => (
+              <Image src={item.file} key={item.id} className=" w-full h-40" />
+            ))}
+        </Grid>
+      )}
+
       <Box className="flex justify-between items-center my-4">
         <Box className="flex justify-center gap-3 lg:gap-10">
           {actionPost.map((item) => (

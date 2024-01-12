@@ -14,10 +14,10 @@ const HeaderComponent = () => {
       <Box className="w-full h-full flex items-center justify-between gap-2 lg:px-10">
         <Box className="flex justify-center items-center ">
           <Logo />
+          <MobileMenu />
           <Box className="block lg:hidden">
             <Search />
           </Box>
-          <MobileMenu />
         </Box>
         <Box className="hidden lg:block">
           <Search />

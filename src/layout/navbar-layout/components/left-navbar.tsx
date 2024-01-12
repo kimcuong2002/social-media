@@ -30,7 +30,7 @@ const leftNavBar = [
   },
   {
     icon: <BiVideo />,
-    link: '/call',
+    link: '/video',
   },
   {
     icon: <BiCalendar />,
@@ -44,12 +44,17 @@ type Props = {
 };
 
 const LeftNavBar: FC<Props> = ({ children, className }) => {
+  const currentPath = window.location.pathname;
   return (
     <Box className={`gap-1 w-3/12 hidden lg:flex ${className}`}>
       <Box className="flex flex-col gap-2 bg-white p-2">
         {leftNavBar.map((item) => (
           <Link to={item.link} key={item.link}>
-            <Button variant="ghost" fontSize="xl">
+            <Button
+              variant="ghost"
+              fontSize="xl"
+              className={currentPath === item.link ? 'bg-violet-700' : ''}
+            >
               {item.icon}
             </Button>
           </Link>
