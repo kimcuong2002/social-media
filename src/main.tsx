@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 
 import './index.css';
-import QueryProvider from './provider/query-provider.tsx';
+import { ApolloClientProvider } from './provider/apollo-client-provider.tsx';
 import Routes from './routes/index.tsx';
 import { ToasterConfig } from '@/components';
 
@@ -12,12 +12,11 @@ import { ChakraProvider } from '@chakra-ui/react';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <ChakraProvider>
-      <QueryProvider>
+    <ApolloClientProvider>
+      <ChakraProvider>
         <ToasterConfig />
-        {/* <ColorModeScript   initialColorMode={theme.config.initialColorMode} /> */}
         <Routes />
-      </QueryProvider>
-    </ChakraProvider>
+      </ChakraProvider>
+    </ApolloClientProvider>
   </React.StrictMode>,
 );
