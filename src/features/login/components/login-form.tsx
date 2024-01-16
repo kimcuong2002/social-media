@@ -16,8 +16,7 @@ import { FaRegEyeSlash, FaRegEye } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 
 import ErrorShow from '../../form/error-show/error-show';
-import { useAuthStore, useLoginMutation } from '@/features/auth';
-import { LoginInput } from '@/features/user';
+import { LoginValues, useAuthStore, useLoginMutation } from '@/features/auth';
 
 export const LoginForm = () => {
   const [show, setShow] = useState(false);
@@ -28,7 +27,7 @@ export const LoginForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginInput>();
+  } = useForm<LoginValues>();
 
   const tokenLocal = localStorage.getItem('token');
 
@@ -39,7 +38,7 @@ export const LoginForm = () => {
 
   const [login] = useLoginMutation();
 
-  const onSubmit: SubmitHandler<LoginInput> = (data) => {
+  const onSubmit: SubmitHandler<LoginValues> = (data) => {
     void login({
       variables: { body: data },
       onCompleted: (data) => {
@@ -54,7 +53,7 @@ export const LoginForm = () => {
 
   useEffect(() => {
     if (token || tokenLocal) {
-      navigate('/', { replace: true });
+      navigate('/home', { replace: true });
     }
   }, [navigate, token, tokenLocal]);
 
