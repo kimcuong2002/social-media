@@ -1,30 +1,15 @@
-import {
-  Box,
-  Button,
-  Image,
-  Modal,
-  Text,
-  useDisclosure,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalCloseButton,
-  Divider,
-} from '@chakra-ui/react';
+import { Box, Button, Image, Text } from '@chakra-ui/react';
 import Lottie from 'lottie-react';
 
 import { singInWithGoogle } from '../config/firebase/firebase';
 import hello from '../lottie/hello.json';
 import { icons, google } from '@/assets';
-import { LoginForm, SignInForm } from '@/features';
+import { LoginForm, SignUpForm } from '@/features';
 
 export const Login = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
   return (
     <Box className="w-full h-screen flex justify-center items-center px-2">
-      <Box className="flex justify-center items-center bg-white rounded-xl shadow-2xl p-2 border-4 w-full lg:w-5/6 xl:w-4/6">
+      <Box className="flex justify-center items-center bg-white rounded-xl shadow-2xl p-2 py-10 border-4 w-full md:w-2/3 lg:w-5/6 xl:w-4/6">
         <Box className="hidden lg:block">
           <Lottie animationData={hello} />
           <Text className="text-center text-[#73114B] font-bold text-2xl">
@@ -54,20 +39,7 @@ export const Login = () => {
           <LoginForm />
           <Box className="flex mt-4 justify-center text-sm gap-1">
             <Text className="text-[#828282]">Not Registered Yet?</Text>
-            <Text className="text-[#7F265B] cursor-pointer" onClick={onOpen}>
-              Create an account
-            </Text>
-            <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
-              <ModalOverlay />
-              <ModalContent>
-                <ModalHeader>Sign Up</ModalHeader>
-                <ModalCloseButton />
-                <Divider />
-                <ModalBody>
-                  <SignInForm />
-                </ModalBody>
-              </ModalContent>
-            </Modal>
+            <SignUpForm />
           </Box>
         </Box>
       </Box>

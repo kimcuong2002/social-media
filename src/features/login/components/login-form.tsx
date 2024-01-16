@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import {
   Box,
@@ -8,24 +8,21 @@ import {
   InputGroup,
   InputRightElement,
   Checkbox,
-  FormControl,
   FormLabel,
-  FormErrorMessage,
 } from '@chakra-ui/react';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { FaRegEyeSlash, FaRegEye } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-import { LoginInput } from '@/ts/types';
+import ErrorShow from '../../form/error-show/error-show';
+import { useAuthStore, useLoginMutation } from '@/features/auth';
+import { LoginInput } from '@/features/user';
 
 export const LoginForm = () => {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
-
-  const [login] = useState({
-    username: '',
-    password: '',
-  });
+  const navigate = useNavigate();
 
   const {
     register,
@@ -33,49 +30,66 @@ export const LoginForm = () => {
     formState: { errors },
   } = useForm<LoginInput>();
 
-  const onSubmit = (data: LoginInput) => {
-    alert(JSON.stringify(data));
+  const tokenLocal = localStorage.getItem('token');
+
+  const { token, loginUser } = useAuthStore((state) => ({
+    token: state.token,
+    loginUser: state.loginUser,
+  }));
+
+  const [login] = useLoginMutation();
+
+  const onSubmit: SubmitHandler<LoginInput> = (data) => {
+    void login({
+      variables: { body: data },
+      onCompleted: (data) => {
+        void loginUser(data.login);
+        void toast.success('Login successfully');
+      },
+      onError: () => {
+        void toast.error('Username or password invalid');
+      },
+    });
   };
 
-  const isUserNameError = login.username === '';
-  const isPassWordError = login.password === '';
+  useEffect(() => {
+    if (token || tokenLocal) {
+      navigate('/', { replace: true });
+    }
+  }, [navigate, token, tokenLocal]);
 
   return (
     <form method="POST" onSubmit={handleSubmit(onSubmit)}>
-      <FormControl isInvalid={isUserNameError} className="mb-4">
+      <Box className="mb-6">
         <FormLabel>Username</FormLabel>
         <Input
           id="username"
+          placeholder="Username"
           {...register('username', {
-            required: 'This field is required',
+            required: 'What is your username',
             maxLength: {
               value: 50,
               message: 'User cannot exceed 50 characters',
             },
             minLength: {
-              value: 10,
+              value: 5,
               message: 'Username cannot be less than 5 characters',
-            },
-            pattern: {
-              value: /^[A-Za-z]+$/i,
-              message: 'Alphabetical characters only',
             },
           })}
         />
         {errors?.username && (
-          <FormErrorMessage>{errors.username.message}</FormErrorMessage>
+          <ErrorShow message={errors.username.message as string} />
         )}
-      </FormControl>
-      <FormControl isInvalid={isPassWordError}>
+      </Box>
+      <Box>
         <FormLabel>Password</FormLabel>
         <InputGroup size="md">
           <Input
-            id="password"
-            pr="4.5rem"
             type={show ? 'text' : 'password'}
-            placeholder="Enter password"
+            id="password"
+            placeholder="Password"
             {...register('password', {
-              required: 'This field is required',
+              required: 'Please input your password',
               maxLength: {
                 value: 50,
                 message: 'Password cannot exceed 50 characters',
@@ -83,10 +97,6 @@ export const LoginForm = () => {
               minLength: {
                 value: 5,
                 message: 'Password cannot be less than 5 characters',
-              },
-              pattern: {
-                value: /^[A-Za-z]+$/i,
-                message: 'Alphabetical characters only',
               },
             })}
           />
@@ -96,10 +106,10 @@ export const LoginForm = () => {
             </Button>
           </InputRightElement>
         </InputGroup>
-        {errors.password && (
-          <FormErrorMessage>{errors.password.message}</FormErrorMessage>
+        {errors?.password && (
+          <ErrorShow message={errors.password.message as string} />
         )}
-      </FormControl>
+      </Box>
       <Box className="text-sm flex justify-between items-center my-2 text-[#7F265B]">
         <Checkbox defaultChecked>Remember me</Checkbox>
         <Link to="">
