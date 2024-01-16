@@ -20,7 +20,7 @@ const videoOptions = [
 
 export const VideoSideBar = () => {
   return (
-    <Box className="h-screen">
+    <Box className="h-screen overflow-y-scroll no-scrollbar">
       <Text className="font-bold mb-4" fontSize="2xl">
         Videos
       </Text>

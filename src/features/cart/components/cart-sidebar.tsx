@@ -68,10 +68,10 @@ const categoriesItem = [
 export const CartSideBar = () => {
   return (
     <Box>
-      <Text className="font-bold mb-4" fontSize="2xl">
+      <Text className="font-bold" fontSize="2xl">
         Marketplace
       </Text>
-      <Divider className="mb-4" />
+      <Divider className="my-4" />
       <Box className="flex flex-col">
         {marketSidebarItem.map((item) => (
           <SideBarButton
@@ -93,7 +93,6 @@ export const CartSideBar = () => {
         Filter
       </Text>
       <Text className="font-bold cursor-pointer">Danang . 20km</Text>
-
       <Divider className="my-4" />
       <Text className="uppercase my-4 text-violet-800 font-bold" fontSize="sm">
         All Categories

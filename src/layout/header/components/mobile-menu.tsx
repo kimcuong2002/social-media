@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { BiMenu } from 'react-icons/bi';
 
-import { CartSideBar, HomeSideBar } from '@/features';
+import { CartSideBar, GroupSideBar, HomeSideBar } from '@/features';
 import LeftNavBar from '@/layout/navbar-layout/components/left-navbar';
 
 const MobileMenu = () => {
@@ -22,8 +22,10 @@ const MobileMenu = () => {
   useEffect(() => {
     if (currentPath == '/') {
       setSidebarComponent(<HomeSideBar />);
-    } else {
+    } else if (currentPath == '/cart') {
       setSidebarComponent(<CartSideBar />);
+    } else {
+      setSidebarComponent(<GroupSideBar />);
     }
   }, [currentPath]);
 

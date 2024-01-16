@@ -1,11 +1,8 @@
-import { Box } from '@chakra-ui/react';
-
+import { GroupSideBar } from '@/features';
 import NavbarLayout from '@/layout/navbar-layout';
 
 export const Group = () => {
   return (
-    <NavbarLayout navBarChildren={<Box>dasbfashj</Box>}>
-      asdfasdfasd
-    </NavbarLayout>
+    <NavbarLayout navBarChildren={<GroupSideBar />}>asdfasdfasd</NavbarLayout>
   );
 };

@@ -38,7 +38,7 @@ export const RightNavBar = ({ className }: Props) => {
       <Text fontSize="sm" className="text-gray-500">
         Online - {totalOnline}
       </Text>
-      <Box className="h-[650px] overflow-y-scroll no-scrollbar">
+      <Box className="h-screen overflow-y-scroll no-scrollbar">
         {datas.map((item) => (
           <Contact
             key={item.id}

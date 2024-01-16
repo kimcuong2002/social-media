@@ -29,7 +29,7 @@ const videoDatas = [
 export const Video = () => {
   return (
     <NavbarLayout navBarChildren={<VideoSideBar />}>
-      <Box className="w-full flex flex-col justify-center items-center">
+      <Box className="w-full flex flex-col justify-center items-center h-screen overflow-y-scroll no-scrollbar">
         <Box className="lg:w-11/12 xl:w-9/12">
           {videoDatas.map((item) => (
             <Post
