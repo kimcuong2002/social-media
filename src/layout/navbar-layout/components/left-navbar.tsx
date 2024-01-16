@@ -1,52 +1,9 @@
 import { FC, ReactNode } from 'react';
 
 import { Box, Button } from '@chakra-ui/react';
-import {
-  BiCalendar,
-  BiCart,
-  BiGroup,
-  BiHome,
-  BiMessage,
-  BiVideo,
-} from 'react-icons/bi';
-import { HiOutlineUserGroup } from 'react-icons/hi2';
-import { RxAvatar } from 'react-icons/rx';
 import { Link } from 'react-router-dom';
 
-const leftNavBar = [
-  {
-    icon: <BiHome />,
-    link: '/',
-  },
-  {
-    icon: <RxAvatar />,
-    link: '/profile',
-  },
-  {
-    icon: <BiGroup />,
-    link: '/friends',
-  },
-  {
-    icon: <HiOutlineUserGroup />,
-    link: '/group',
-  },
-  {
-    icon: <BiCart />,
-    link: '/cart',
-  },
-  {
-    icon: <BiMessage />,
-    link: '/message',
-  },
-  {
-    icon: <BiVideo />,
-    link: '/video',
-  },
-  {
-    icon: <BiCalendar />,
-    link: '/event',
-  },
-];
+import { leftNavBar } from './constant';
 
 type Props = {
   children?: ReactNode;
