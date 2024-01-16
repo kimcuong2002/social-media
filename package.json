@@ -1,10 +1,11 @@
 {
-  "name": "react-template-for-starter",
-  "author": "NuiCoder",
+  "name": "social-media",
+  "author": "KimCuong",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "codegen": "graphql-codegen --watch",
     "dev": "vite",
     "preinstall": "npx only-allow pnpm",
     "build": "tsc && vite build",
