@@ -6,3 +6,4 @@ export * from './video';
 export * from './event';
 export * from './friends';
 export * from './group';
+export * from './message';
