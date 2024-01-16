@@ -1,4 +1,9 @@
 export const LOGIN_PATH = '/login';
 export const HOME_PATH = '/home';
-export const USER_PATH = '/users';
-export const TODO_PATH = '/todo';
+export const PROFILE_PATH = '/profile';
+export const CART_PATH = '/cart';
+export const VIDEO_PATH = '/video';
+export const FRIEND_PATH = '/friend';
+export const GROUP_PATH = '/group';
+export const EVENT_PATH = '/event';
+export const CHAT_PATH = '/chat';

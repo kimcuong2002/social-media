@@ -1,9 +1,18 @@
 import { cloneDeep } from 'lodash';
 import { Link } from 'react-router-dom';
 
-import { HOME_PATH } from './path';
+import {
+  CART_PATH,
+  CHAT_PATH,
+  FRIEND_PATH,
+  GROUP_PATH,
+  HOME_PATH,
+  PROFILE_PATH,
+  VIDEO_PATH,
+} from './path';
 import { TypeNavs, TypeRoutes } from './type-navs';
-import { Home } from '@/pages';
+import { Cart, Friends, Group, Home, Message, Profile, Video } from '@/pages';
+import PrivateRoute from '@/routes/private-route';
 import { capitalizeFirstLetter } from '@/utils';
 
 const navs: TypeNavs[] = [
@@ -11,6 +20,36 @@ const navs: TypeNavs[] = [
     key: HOME_PATH,
     label: 'home',
     element: <Home />,
+  },
+  {
+    key: PROFILE_PATH,
+    label: 'profile',
+    element: <Profile />,
+  },
+  {
+    key: CART_PATH,
+    label: 'cart',
+    element: <Cart />,
+  },
+  {
+    key: VIDEO_PATH,
+    label: 'video',
+    element: <Video />,
+  },
+  {
+    key: FRIEND_PATH,
+    label: 'friend',
+    element: <Friends />,
+  },
+  {
+    key: GROUP_PATH,
+    label: 'group',
+    element: <Group />,
+  },
+  {
+    key: CHAT_PATH,
+    label: 'chat',
+    element: <Message />,
   },
 ];
 
@@ -24,10 +63,7 @@ const getRoutes = (arr: TypeRoutes[], nav: TypeNavs, basePath = '') => {
 
   arr.push({
     path: basePath + nav.key,
-    // element: nav.element && (
-    //   <PrivateRoute permission={nav.permission}>{nav.element}</PrivateRoute>
-    // ),
-    element: nav.element,
+    element: nav.element && <PrivateRoute>{nav.element}</PrivateRoute>,
   });
 
   return arr;
