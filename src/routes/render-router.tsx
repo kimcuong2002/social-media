@@ -1,54 +1,26 @@
 import { FC, lazy } from 'react';
 
-import { useRoutes } from 'react-router-dom';
+import { Navigate, useRoutes } from 'react-router-dom';
 
+import { LOGIN_PATH } from '@/data';
 import { routeList } from '@/data/constant/navs';
 import LayoutComponent from '@/layout';
-import {
-  Login,
-  Profile,
-  Cart,
-  Home,
-  Video,
-  Event,
-  Group,
-  Friends,
-} from '@/pages';
+import { Login } from '@/pages';
 
 const NotFound = lazy(() => import('@/pages/not-found'));
 
 const routes = [
+  {
+    path: '/login',
+    element: <Login />,
+  },
   {
     path: '/',
     element: <LayoutComponent />,
     children: [
       {
         path: '',
-        element: <Home />,
-      },
-      {
-        path: '/profile',
-        element: <Profile />,
-      },
-      {
-        path: '/cart',
-        element: <Cart />,
-      },
-      {
-        path: '/video',
-        element: <Video />,
-      },
-      {
-        path: '/friends',
-        element: <Friends />,
-      },
-      {
-        path: '/group',
-        element: <Group />,
-      },
-      {
-        path: 'event',
-        element: <Event />,
+        element: <Navigate to={LOGIN_PATH} />,
       },
       ...routeList,
       {
@@ -56,10 +28,6 @@ const routes = [
         element: <NotFound />,
       },
     ],
-  },
-  {
-    path: '/login',
-    element: <Login />,
   },
 ];
 
