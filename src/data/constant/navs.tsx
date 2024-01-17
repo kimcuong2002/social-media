@@ -2,16 +2,16 @@ import { cloneDeep } from 'lodash';
 import { Link } from 'react-router-dom';
 
 import {
-  CART_PATH,
   CHAT_PATH,
   FRIEND_PATH,
   GROUP_PATH,
   HOME_PATH,
+  MARKET_PATH,
   PROFILE_PATH,
   VIDEO_PATH,
 } from './path';
 import { TypeNavs, TypeRoutes } from './type-navs';
-import { Cart, Friends, Group, Home, Message, Profile, Video } from '@/pages';
+import { Market, Friends, Group, Home, Chat, Profile, Video } from '@/pages';
 import PrivateRoute from '@/routes/private-route';
 import { capitalizeFirstLetter } from '@/utils';
 
@@ -27,9 +27,9 @@ const navs: TypeNavs[] = [
     element: <Profile />,
   },
   {
-    key: CART_PATH,
+    key: MARKET_PATH,
     label: 'cart',
-    element: <Cart />,
+    element: <Market />,
   },
   {
     key: VIDEO_PATH,
@@ -49,7 +49,7 @@ const navs: TypeNavs[] = [
   {
     key: CHAT_PATH,
     label: 'chat',
-    element: <Message />,
+    element: <Chat />,
   },
 ];
 

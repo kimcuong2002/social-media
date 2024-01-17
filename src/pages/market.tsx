@@ -63,7 +63,7 @@ const categoriesDatas = [
   },
 ];
 
-export const Cart = () => {
+export const Market = () => {
   return (
     <NavbarLayout navBarChildren={<CartSideBar />}>
       <Box className="w-ful mx-10 mt-4">

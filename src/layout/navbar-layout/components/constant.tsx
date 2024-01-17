@@ -14,7 +14,7 @@ import {
   PROFILE_PATH,
   FRIEND_PATH,
   GROUP_PATH,
-  CART_PATH,
+  MARKET_PATH,
   CHAT_PATH,
   EVENT_PATH,
   VIDEO_PATH,
@@ -39,7 +39,7 @@ export const leftNavBar = [
   },
   {
     icon: <BiCart />,
-    link: CART_PATH,
+    link: MARKET_PATH,
   },
   {
     icon: <BiMessage />,

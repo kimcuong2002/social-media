@@ -1,5 +1,5 @@
 import { Box } from '@chakra-ui/react';
 
-export const Message = () => {
+export const Chat = () => {
   return <Box>Message</Box>;
 };
