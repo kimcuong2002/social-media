@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -144,6 +145,7 @@ export type IsPostToGroupDto = {
 export type LoginResponse = {
   __typename?: 'LoginResponse';
   access_token: Scalars['String']['output'];
+  expiresIn: Scalars['String']['output'];
   user: User;
 };
 
@@ -154,7 +156,7 @@ export type LoginUserDto = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  create: User;
+  create: ResponseUserDto;
   createCollection: ResponseDto;
   createGroup: Group;
   createPost: Post;
@@ -361,13 +363,14 @@ export type Query = {
   __typename?: 'Query';
   getCollections: PaginationCollectionDto;
   getGroupById: Group;
+  getInfoUser: ResponseUserDto;
   getPostById: Post;
   getPosts: PaginationGroupDto;
   getPostsByGroup: PaginationPostDto;
   getSaved: Saved;
   topic: Topic;
   topics: Array<Topic>;
-  user: User;
+  user: ResponseDto;
   users: PaginationUserDto;
 };
 
@@ -427,6 +430,24 @@ export type ResponseDto = {
 export type ResponseSingleUpload = {
   __typename?: 'ResponseSingleUpload';
   url: Scalars['String']['output'];
+};
+
+export type ResponseUserDto = {
+  __typename?: 'ResponseUserDto';
+  avatar: Scalars['String']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  dayOfBirth: Scalars['String']['output'];
+  description: Scalars['String']['output'];
+  email: Scalars['String']['output'];
+  friends: Array<User>;
+  friendsReq: Array<User>;
+  fullname: Scalars['String']['output'];
+  gender: Scalars['Float']['output'];
+  id: Scalars['ID']['output'];
+  phone: Scalars['String']['output'];
+  role: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+  username: Scalars['String']['output'];
 };
 
 export type Saved = {
@@ -544,3 +565,298 @@ export type User = {
   updatedAt: Scalars['DateTime']['output'];
   username: Scalars['String']['output'];
 };
+
+export type LoginMutationVariables = Exact<{
+  body: LoginUserDto;
+}>;
+
+export type LoginMutation = {
+  __typename?: 'Mutation';
+  login: {
+    __typename?: 'LoginResponse';
+    access_token: string;
+    user: {
+      __typename?: 'User';
+      fullname: string;
+      avatar: string;
+      dayOfBirth: string;
+      description: string;
+      gender: number;
+      id: string;
+      phone: string;
+      email: string;
+      role: string;
+      createdAt: any;
+      friends: Array<{
+        __typename?: 'User';
+        fullname: string;
+        avatar: string;
+        dayOfBirth: string;
+        description: string;
+        gender: number;
+        id: string;
+        phone: string;
+        email: string;
+        role: string;
+        createdAt: any;
+      }>;
+      friendsReq: Array<{
+        __typename?: 'User';
+        fullname: string;
+        avatar: string;
+        dayOfBirth: string;
+        description: string;
+        gender: number;
+        id: string;
+        phone: string;
+        email: string;
+        role: string;
+        createdAt: any;
+      }>;
+    };
+  };
+};
+
+export type SignupMutationVariables = Exact<{
+  body: SignUpUserDto;
+}>;
+
+export type SignupMutation = {
+  __typename?: 'Mutation';
+  signup: { __typename?: 'User'; username: string };
+};
+
+export const LoginDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'Login' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'body' } },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'LoginUserDto' },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'login' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'body' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'body' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'user' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fullname' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'avatar' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'dayOfBirth' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'description' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'gender' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'phone' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'email' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'role' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'createdAt' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'friends' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'fullname' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'avatar' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'dayOfBirth' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'description' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'gender' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'phone' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'email' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'role' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'createdAt' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'friendsReq' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'fullname' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'avatar' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'dayOfBirth' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'description' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'gender' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'phone' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'email' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'role' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'createdAt' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'access_token' },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
+export const SignupDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'Signup' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'body' } },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'SignUpUserDto' },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'signup' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'body' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'body' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'username' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<SignupMutation, SignupMutationVariables>;
