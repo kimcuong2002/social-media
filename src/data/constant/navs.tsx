@@ -9,9 +9,19 @@ import {
   MARKET_PATH,
   PROFILE_PATH,
   VIDEO_PATH,
+  EVENT_PATH,
 } from './path';
 import { TypeNavs, TypeRoutes } from './type-navs';
-import { Market, Friends, Group, Home, Chat, Profile, Video } from '@/pages';
+import {
+  Market,
+  Friends,
+  Group,
+  Home,
+  Chat,
+  Profile,
+  Video,
+  Events,
+} from '@/pages';
 import PrivateRoute from '@/routes/private-route';
 import { capitalizeFirstLetter } from '@/utils';
 
@@ -50,6 +60,11 @@ const navs: TypeNavs[] = [
     key: CHAT_PATH,
     label: 'chat',
     element: <Chat />,
+  },
+  {
+    key: EVENT_PATH,
+    label: 'event',
+    element: <Events />,
   },
 ];
 
