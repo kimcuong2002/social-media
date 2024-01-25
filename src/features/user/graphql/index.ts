@@ -1,24 +1,35 @@
 import { gql } from '@apollo/client';
 
 export const GET_USER_DETAIL = gql`
-  query ($id: String!) {[
+  query ($id: String!) {
     getUserById(id: $id) {
-      id
+      address
       avatar
+      company
       createdAt
       dayOfBirth
       description
       email
-      friends
-      friendsReq
+      files{}
+      friends{
+        name
+        id
+        avatar
+      }
+      friendsReq{
+        name
+        id
+        avatar
+      }
       fullname
       gender
       id
-      password
       phone
+      relationship
       role
+      university
       updatedAt
       username
     }
-  ]} 
+  }
 `;
