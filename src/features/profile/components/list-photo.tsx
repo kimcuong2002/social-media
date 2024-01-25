@@ -24,7 +24,7 @@ const listImage = [
   anh6,
 ];
 
-const ListPhoto = () => {
+export const ListPhoto = () => {
   return (
     <Box className="bg-white mt-4 p-4 rounded-lg border-2">
       <Box className="flex justify-between">
@@ -48,5 +48,3 @@ const ListPhoto = () => {
     </Box>
   );
 };
-
-export default ListPhoto;

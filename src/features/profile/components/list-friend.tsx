@@ -3,7 +3,7 @@ import { Box, Divider, Text } from '@chakra-ui/react';
 import { Contact } from '@/components';
 import { datas } from '@/data';
 
-const ListFriend = () => {
+export const ListFriend = () => {
   const listFriends = datas.slice(0, 10);
 
   return (
@@ -24,5 +24,3 @@ const ListFriend = () => {
     </Box>
   );
 };
-
-export default ListFriend;
