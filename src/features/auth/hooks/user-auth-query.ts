@@ -3,11 +3,13 @@ import {
   DefaultContext,
   OperationVariables,
   useMutation,
+  useQuery,
 } from '@apollo/client';
 
 import useAuthStore from './user-auth-store';
-import { LOGIN, SIGN_UP } from '../graphql';
+import { GET_INFOR_USER, LOGIN, SIGN_UP } from '../graphql';
 import { RegisterInput, ResponseLogin } from '../services/type';
+import { UserType } from '@/features/user';
 
 export const useLoginMutation = () =>
   useMutation<
@@ -27,6 +29,8 @@ export const useSignUpMutation = () =>
 
 export const useLogoutMutation = () => {
   const logout = useAuthStore((state) => state.logout);
-
   return { logout };
 };
+
+export const useQueryInfoUser = () =>
+  useQuery<{ getInfoUser: UserType }, OperationVariables>(GET_INFOR_USER);
