@@ -68,6 +68,15 @@ export type CreateGroupDto = {
   updatedAt?: Scalars['DateTime']['input'];
 };
 
+export type CreateMessageDto = {
+  author: Scalars['String']['input'];
+  content: Scalars['String']['input'];
+  createdAt?: Scalars['DateTime']['input'];
+  room: Scalars['String']['input'];
+  typeMessage?: Scalars['String']['input'];
+  updatedAt?: Scalars['DateTime']['input'];
+};
+
 export type CreatePostDto = {
   authorsPostShared?: Array<Scalars['String']['input']>;
   content: Scalars['String']['input'];
@@ -102,18 +111,23 @@ export type CreateTopicDto = {
 };
 
 export type CreateUserDto = {
+  address?: Scalars['String']['input'];
   avatar?: Scalars['String']['input'];
+  company?: Scalars['String']['input'];
   createdAt?: Scalars['DateTime']['input'];
   dayOfBirth?: Scalars['String']['input'];
   description?: Scalars['String']['input'];
   email: Scalars['String']['input'];
+  files?: Array<Scalars['String']['input']>;
   friends?: Array<Scalars['String']['input']>;
   friendsReq?: Array<Scalars['String']['input']>;
   fullname: Scalars['String']['input'];
   gender?: Scalars['Float']['input'];
   password: Scalars['String']['input'];
   phone: Scalars['String']['input'];
+  relationship?: Scalars['Float']['input'];
   role?: Scalars['String']['input'];
+  university?: Scalars['String']['input'];
   updatedAt?: Scalars['DateTime']['input'];
   username: Scalars['String']['input'];
 };
@@ -154,11 +168,23 @@ export type LoginUserDto = {
   username: Scalars['String']['input'];
 };
 
+export type Message = {
+  __typename?: 'Message';
+  author: User;
+  content: Scalars['String']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['ID']['output'];
+  room: Scalars['String']['output'];
+  typeMessage: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   create: ResponseUserDto;
   createCollection: ResponseDto;
   createGroup: Group;
+  createMessage: Message;
   createPost: Post;
   createSaved: Saved;
   createTopic: Topic;
@@ -167,17 +193,20 @@ export type Mutation = {
   deleteGroup: ResponseDto;
   deleteMarketCollection: ResponseDto;
   deleteMarketSaved: ResponseDto;
+  deleteMessage: ResponseDto;
   deletePost: ResponseDto;
   deletePostCollection: ResponseDto;
   deletePostSaved: ResponseDto;
   deleteTopic: ResponseDto;
   login: LoginResponse;
   signup: User;
+  updatFileForUser: ResponseDto;
   update: ResponseDto;
   updateCollection: ResponseDto;
   updateGroup: ResponseDto;
   updateMarketCollection: ResponseDto;
   updateMarketSaved: ResponseDto;
+  updateMessage: Message;
   updatePost: ResponseDto;
   updatePostCollection: ResponseDto;
   updatePostSaved: ResponseDto;
@@ -196,6 +225,10 @@ export type MutationCreateCollectionArgs = {
 
 export type MutationCreateGroupArgs = {
   body: CreateGroupDto;
+};
+
+export type MutationCreateMessageArgs = {
+  body: CreateMessageDto;
 };
 
 export type MutationCreatePostArgs = {
@@ -232,6 +265,10 @@ export type MutationDeleteMarketSavedArgs = {
   idSaved: Scalars['String']['input'];
 };
 
+export type MutationDeleteMessageArgs = {
+  id: Scalars['String']['input'];
+};
+
 export type MutationDeletePostArgs = {
   id: Scalars['String']['input'];
 };
@@ -258,6 +295,10 @@ export type MutationSignupArgs = {
   body: SignUpUserDto;
 };
 
+export type MutationUpdatFileForUserArgs = {
+  files: Array<Scalars['String']['input']>;
+};
+
 export type MutationUpdateArgs = {
   body: UpdateUserDto;
   id: Scalars['String']['input'];
@@ -281,6 +322,11 @@ export type MutationUpdateMarketCollectionArgs = {
 export type MutationUpdateMarketSavedArgs = {
   idMarket: Scalars['String']['input'];
   idSaved: Scalars['String']['input'];
+};
+
+export type MutationUpdateMessageArgs = {
+  body: UpdateMessageDto;
+  id: Scalars['String']['input'];
 };
 
 export type MutationUpdatePostArgs = {
@@ -361,6 +407,7 @@ export type Post = {
 
 export type Query = {
   __typename?: 'Query';
+  getAllMessage: Array<Message>;
   getCollections: PaginationCollectionDto;
   getGroupById: Group;
   getInfoUser: ResponseUserDto;
@@ -372,6 +419,10 @@ export type Query = {
   topics: Array<Topic>;
   user: ResponseDto;
   users: PaginationUserDto;
+};
+
+export type QueryGetAllMessageArgs = {
+  room: Scalars['String']['input'];
 };
 
 export type QueryGetCollectionsArgs = {
@@ -434,18 +485,23 @@ export type ResponseSingleUpload = {
 
 export type ResponseUserDto = {
   __typename?: 'ResponseUserDto';
+  address: Scalars['String']['output'];
   avatar: Scalars['String']['output'];
+  company: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
   dayOfBirth: Scalars['String']['output'];
   description: Scalars['String']['output'];
   email: Scalars['String']['output'];
+  files: Array<Scalars['String']['output']>;
   friends: Array<User>;
   friendsReq: Array<User>;
   fullname: Scalars['String']['output'];
   gender: Scalars['Float']['output'];
   id: Scalars['ID']['output'];
   phone: Scalars['String']['output'];
+  relationship: Scalars['Float']['output'];
   role: Scalars['String']['output'];
+  university: Scalars['String']['output'];
   updatedAt: Scalars['DateTime']['output'];
   username: Scalars['String']['output'];
 };
@@ -461,18 +517,23 @@ export type Saved = {
 };
 
 export type SignUpUserDto = {
+  address?: Scalars['String']['input'];
   avatar?: Scalars['String']['input'];
+  company?: Scalars['String']['input'];
   createdAt?: Scalars['DateTime']['input'];
   dayOfBirth?: Scalars['String']['input'];
   description?: Scalars['String']['input'];
   email: Scalars['String']['input'];
+  files?: Array<Scalars['String']['input']>;
   friends?: Array<Scalars['String']['input']>;
   friendsReq?: Array<Scalars['String']['input']>;
   fullname: Scalars['String']['input'];
   gender?: Scalars['Float']['input'];
   password: Scalars['String']['input'];
   phone: Scalars['String']['input'];
+  relationship?: Scalars['Float']['input'];
   role?: Scalars['String']['input'];
+  university?: Scalars['String']['input'];
   updatedAt?: Scalars['DateTime']['input'];
   username: Scalars['String']['input'];
 };
@@ -507,6 +568,11 @@ export type UpdateGroupDto = {
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
+export type UpdateMessageDto = {
+  content?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
 export type UpdatePostDto = {
   authorsPostShared?: InputMaybe<Array<Scalars['String']['input']>>;
   content?: InputMaybe<Scalars['String']['input']>;
@@ -533,27 +599,35 @@ export type UpdateTopicDto = {
 };
 
 export type UpdateUserDto = {
+  address?: InputMaybe<Scalars['String']['input']>;
   avatar?: InputMaybe<Scalars['String']['input']>;
+  company?: InputMaybe<Scalars['String']['input']>;
   dayOfBirth?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
+  files?: InputMaybe<Array<Scalars['String']['input']>>;
   friends?: InputMaybe<Array<Scalars['String']['input']>>;
   friendsReq?: InputMaybe<Array<Scalars['String']['input']>>;
   fullname?: InputMaybe<Scalars['String']['input']>;
   gender?: InputMaybe<Scalars['Float']['input']>;
   phone?: InputMaybe<Scalars['String']['input']>;
+  relationship?: InputMaybe<Scalars['Float']['input']>;
   role?: InputMaybe<Scalars['String']['input']>;
+  university?: InputMaybe<Scalars['String']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   username?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type User = {
   __typename?: 'User';
+  address: Scalars['String']['output'];
   avatar: Scalars['String']['output'];
+  company: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
   dayOfBirth: Scalars['String']['output'];
   description: Scalars['String']['output'];
   email: Scalars['String']['output'];
+  files: Array<Scalars['String']['output']>;
   friends: Array<User>;
   friendsReq: Array<User>;
   fullname: Scalars['String']['output'];
@@ -561,7 +635,9 @@ export type User = {
   id: Scalars['ID']['output'];
   password: Scalars['String']['output'];
   phone: Scalars['String']['output'];
+  relationship: Scalars['Float']['output'];
   role: Scalars['String']['output'];
+  university: Scalars['String']['output'];
   updatedAt: Scalars['DateTime']['output'];
   username: Scalars['String']['output'];
 };
@@ -624,6 +700,63 @@ export type SignupMutationVariables = Exact<{
 export type SignupMutation = {
   __typename?: 'Mutation';
   signup: { __typename?: 'User'; username: string };
+};
+
+export type GetInfoUserQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetInfoUserQuery = {
+  __typename?: 'Query';
+  getInfoUser: {
+    __typename?: 'ResponseUserDto';
+    avatar: string;
+    createdAt: any;
+    dayOfBirth: string;
+    description: string;
+    email: string;
+    fullname: string;
+    gender: number;
+    id: string;
+    phone: string;
+    role: string;
+    username: string;
+    friends: Array<{ __typename?: 'User'; fullname: string; avatar: string }>;
+    friendsReq: Array<{
+      __typename?: 'User';
+      fullname: string;
+      avatar: string;
+    }>;
+  };
+};
+
+export type UpdateMutationVariables = Exact<{
+  body: UpdateUserDto;
+  id: Scalars['String']['input'];
+}>;
+
+export type UpdateMutation = {
+  __typename?: 'Mutation';
+  update: { __typename?: 'ResponseDto'; message: string; status: number };
+};
+
+export type UploadSingleFilesMutationVariables = Exact<{
+  file: Scalars['Upload']['input'];
+}>;
+
+export type UploadSingleFilesMutation = {
+  __typename?: 'Mutation';
+  uploadSingleFiles: { __typename?: 'ResponseSingleUpload'; url: string };
+};
+
+export type UploadMultipleFilesMutationVariables = Exact<{
+  file: Array<Scalars['Upload']['input']> | Scalars['Upload']['input'];
+}>;
+
+export type UploadMultipleFilesMutation = {
+  __typename?: 'Mutation';
+  uploadMultipleFiles: Array<{
+    __typename?: 'ResponseSingleUpload';
+    url: string;
+  }>;
 };
 
 export const LoginDocument = {
@@ -860,3 +993,248 @@ export const SignupDocument = {
     },
   ],
 } as unknown as DocumentNode<SignupMutation, SignupMutationVariables>;
+export const GetInfoUserDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'GetInfoUser' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'getInfoUser' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'avatar' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'dayOfBirth' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'email' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'friends' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fullname' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'avatar' },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'friendsReq' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fullname' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'avatar' },
+                      },
+                    ],
+                  },
+                },
+                { kind: 'Field', name: { kind: 'Name', value: 'fullname' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'gender' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'phone' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'role' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'username' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetInfoUserQuery, GetInfoUserQueryVariables>;
+export const UpdateDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'Update' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'body' } },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'UpdateUserDto' },
+            },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'update' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'body' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'body' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'id' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'id' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'message' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'status' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<UpdateMutation, UpdateMutationVariables>;
+export const UploadSingleFilesDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'UploadSingleFiles' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'file' } },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'Upload' },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'uploadSingleFiles' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'file' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'file' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  UploadSingleFilesMutation,
+  UploadSingleFilesMutationVariables
+>;
+export const UploadMultipleFilesDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'UploadMultipleFiles' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'file' } },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'ListType',
+              type: {
+                kind: 'NonNullType',
+                type: {
+                  kind: 'NamedType',
+                  name: { kind: 'Name', value: 'Upload' },
+                },
+              },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'uploadMultipleFiles' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'files' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'file' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  UploadMultipleFilesMutation,
+  UploadMultipleFilesMutationVariables
+>;
