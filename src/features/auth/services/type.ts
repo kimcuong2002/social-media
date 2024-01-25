@@ -8,11 +8,14 @@ export type LoginValues = {
 export type ResponseLogin = {
   access_token: string;
   user: UserType;
+  expiresIn: string;
 };
 
-export type RegisterInput = Partial<
-  Pick<
-    UserType,
-    'fullname' | 'phone' | 'username' | 'password' | 'email' | 'gender'
-  >
->;
+export type RegisterInput = {
+  fullname: string;
+  phone: string;
+  username: string;
+  password: string;
+  email: string;
+  gender: number;
+};
