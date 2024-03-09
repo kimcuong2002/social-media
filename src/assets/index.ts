@@ -7,6 +7,7 @@ import anh6 from './anh6.jpeg';
 import anhbia from './anhbia.jpg';
 import avatar1 from './avatar1.jpg';
 import avatar2 from './avatar2.jpg';
+import avatardefault from './avatardefault.jpg';
 import avataa from './avatvata.jpeg';
 import design from './design.png';
 import develop from './develop.png';
@@ -19,6 +20,7 @@ import menu from './menu.png';
 import video from './video.mp4';
 
 export {
+  avatardefault,
   video,
   anh1,
   anh2,

@@ -15,7 +15,7 @@ import toast from 'react-hot-toast';
 import { FaRegEyeSlash, FaRegEye } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 
-import ErrorShow from '../../form/error-show/error-show';
+import { ErrorShow } from '@/features';
 import { LoginValues, useAuthStore, useLoginMutation } from '@/features/auth';
 
 export const LoginForm = () => {

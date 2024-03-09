@@ -16,6 +16,6 @@ export * from './profile/components/cover-image';
 export * from './profile/components/information';
 export * from './profile/components/list-friend';
 export * from './profile/components/list-photo';
-export * from './profile/components/navbar';
 export * from './profile/components/profile-avartar';
 export * from './profile/components/profile-options';
+export * from './form/error-show/error-show';

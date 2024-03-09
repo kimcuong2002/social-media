@@ -13,11 +13,12 @@ export const Home = () => {
       ? (JSON.parse(localStorage.getItem('Posts') as string) as PostType[])
       : [],
   );
+
   return (
     <NavbarLayout navBarChildren={<HomeSideBar />}>
       <Box className="flex w-full justify-between">
         <Box className="hidden md:block"></Box>
-        <Box className="w-full lg:w-11/12 xl:w-8/12">
+        <Box className="w-full lg:w-11/12 xl:w-8/12 overflow-y-scroll h-screen no-scrollbar">
           <CreatePost />
           {listPost.map((item) => (
             <Post

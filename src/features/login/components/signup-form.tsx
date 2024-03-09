@@ -17,7 +17,7 @@ import {
 import { SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
-import ErrorShow from '../../form/error-show/error-show';
+import { ErrorShow } from '@/features';
 import { RegisterInput, useSignUpMutation } from '@/features/auth';
 
 export const SignUpForm = () => {

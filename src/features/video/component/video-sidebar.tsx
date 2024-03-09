@@ -38,7 +38,7 @@ export const VideoSideBar = () => {
           colorScheme="facebook"
           className="my-2"
         >
-          Create new Event
+          Create new Video
         </Button>
       </Box>
       <Divider className="my-4" />

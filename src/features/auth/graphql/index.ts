@@ -51,3 +51,32 @@ export const SIGN_UP = gql`
     }
   }
 `;
+
+export const GET_INFOR_USER = gql`
+  query GetInfoUser {
+    getInfoUser {
+      avatar
+      createdAt
+      dayOfBirth
+      description
+      email
+      address
+      description
+      company
+      university
+      relationship
+      friends {
+        fullname
+        avatar
+      }
+      friendsReq {
+        fullname
+        avatar
+      }
+      fullname
+      gender
+      id
+      phone
+    }
+  }
+`;

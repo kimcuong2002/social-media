@@ -14,20 +14,32 @@ import {
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
 import { ProfileOptions } from '../../../features/profile/components/profile-options';
-import { avatar1 } from '@/assets';
+import { avatardefault } from '@/assets';
+import { useQueryInfoUser } from '@/features/auth';
 
 const Profile = () => {
+  const { data } = useQueryInfoUser();
   return (
     <Popover>
       <PopoverTrigger>
         <Button className="!px-0">
           <Box className="flex justify-between items-center gap-2 cursor-pointer">
-            <Avatar
-              name="Dan Abrahmov"
-              src={avatar1}
-              className="!w-8 !h-8 relative lg:!h-9 lg:!w-9"
-            />
-            <Text className="text-black hidden lg:block">Kimcuong</Text>
+            {data?.getInfoUser.avatar ? (
+              <Avatar
+                name="Dan Abrahmov"
+                src={data?.getInfoUser?.avatar}
+                className="!w-8 !h-8 relative lg:!h-9 lg:!w-9"
+              />
+            ) : (
+              <Avatar
+                src={avatardefault}
+                className="!w-8 !h-8 relative lg:!h-9 lg:!w-9"
+              />
+            )}
+
+            <Text className="text-black hidden lg:block">
+              {data?.getInfoUser.fullname}
+            </Text>
             <MdKeyboardArrowDown className="hidden lg:block" />
             <MdKeyboardArrowDown className="block absolute bottom-0 right-0 -translate-x-1/2 -translate-y-1/2 lg:hidden " />
           </Box>

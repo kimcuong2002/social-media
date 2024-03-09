@@ -1,49 +1,67 @@
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 
-import { Avatar, Box, Button, IconButton, Input, Text } from '@chakra-ui/react';
+import {
+  Avatar,
+  Box,
+  Button,
+  IconButton,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+  Text,
+  useDisclosure,
+} from '@chakra-ui/react';
 import { BiCamera } from 'react-icons/bi';
 import { BsPersonAdd } from 'react-icons/bs';
 import { FaFacebookMessenger } from 'react-icons/fa';
 
+import { Upload } from '@/components';
+
 type Props = {
   avatarLink?: string;
+  fullnameUser: string;
+  description?: string;
 };
 
-const ProfileAvatar = ({ avatarLink }: Props) => {
-  const [avatar, setAvartar] = useState<string>(avatarLink ? avatarLink : '');
-
-  const handlePreviewAvatar = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      const file = e.target.files[0];
-      if (file) {
-        setAvartar(URL.createObjectURL(file));
-      } else {
-        setAvartar('');
-      }
-    }
-  };
+export const ProfileAvatar = ({
+  avatarLink,
+  fullnameUser,
+  description,
+}: Props) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [avatar] = useState<string>(avatarLink ? avatarLink : '');
 
   return (
     <Box className="bg-white flex flex-col justify-center items-center w-full py-4 rounded-lg border-2 mt-4">
       <Box className="relative">
-        {avatar ? <Avatar src={avatar} size="2xl" /> : <Avatar size="2xl" />}
-        <label htmlFor="avatar">
-          <BiCamera className="cursor-pointer bg-gray-300 p-1 text-2xl rounded-full absolute bottom-0 right-0 -translate-x-1/2 -translate-y-1/2" />
-        </label>
-        <Input
-          type="file"
-          className="hidden"
-          id="avatar"
-          name="avatar"
-          accept="image/*"
-          onChange={(e) => handlePreviewAvatar(e)}
+        {avatar ? (
+          <Avatar src={avatar} size="2xl" />
+        ) : (
+          <Avatar src="" size="2xl" />
+        )}
+        <BiCamera
+          className="cursor-pointer bg-gray-300 p-1 text-2xl rounded-full absolute bottom-0 right-0 -translate-x-1/2 -translate-y-1/2"
+          onClick={onOpen}
         />
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Change your avatar</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <Upload />
+            </ModalBody>
+          </ModalContent>
+        </Modal>
       </Box>
-      <Text className="font-bold mt-5" fontSize="xl">
-        Kim Cuong
+      <Text className="font-bold mt-5" fontSize={{ base: 'md', lg: 'lg' }}>
+        {fullnameUser}
       </Text>
       <Text className="text-gray-500 mt-2 mb-4" fontSize="sm">
-        Code | Eat | Sleep
+        {description}
       </Text>
       <Box className="flex gap-4">
         <Button
@@ -63,5 +81,3 @@ const ProfileAvatar = ({ avatarLink }: Props) => {
     </Box>
   );
 };
-
-export default ProfileAvatar;

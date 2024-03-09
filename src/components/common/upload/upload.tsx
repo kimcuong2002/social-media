@@ -1,47 +1,22 @@
 import { FC, useEffect, useMemo, useState } from 'react';
 
-import {
-  ApolloCache,
-  DefaultContext,
-  OperationVariables,
-  useMutation,
-} from '@apollo/client';
 import { Box, Input, Text } from '@chakra-ui/react';
 import { LuUploadCloud } from 'react-icons/lu';
 
-import { UPLOAD_MULTIPLE_FILE, UPLOAD_SINGLE_FILE } from '@/gql';
-
-// import {
-//   useUploadMultipleFilesMutation,
-//   useUploadSingleFileMutation,
-// } from '@/hooks';
+import {
+  useUploadMultipleFilesMutation,
+  useUploadSingleFileMutation,
+} from '@/hooks';
 
 type Props = {
-  setValue: (_v: string[]) => void;
+  setValue?: (_v: string[]) => void;
 };
 
 export const Upload: FC<Props> = ({ setValue }) => {
   const [filesUpload, setFilesUpload] = useState<FileList | null>();
 
-  // const [uploadSingleFiles] = useUploadSingleFileMutation();
-  // const [uploadMultipleFiles] = useUploadMultipleFilesMutation();
-
-  const [uploadSingleFiles] = useMutation<
-    {
-      uploadSingleFile: { url: string[] };
-    },
-    OperationVariables,
-    DefaultContext,
-    ApolloCache<unknown>
-  >(UPLOAD_SINGLE_FILE);
-  const [uploadMultipleFiles] = useMutation<
-    {
-      uploadMultipleFiles: { url: [string] };
-    },
-    OperationVariables,
-    DefaultContext,
-    ApolloCache<unknown>
-  >(UPLOAD_MULTIPLE_FILE);
+  const [uploadSingleFiles] = useUploadSingleFileMutation();
+  const [uploadMultipleFiles] = useUploadMultipleFilesMutation();
 
   const imagePreview = useMemo(() => {
     if (filesUpload) {
@@ -61,7 +36,7 @@ export const Upload: FC<Props> = ({ setValue }) => {
         void uploadSingleFiles({
           variables: { file: filesUpload[0] },
           onCompleted: (data) => {
-            setValue && setValue(data.uploadSingleFile.url);
+            setValue && setValue(data.uploadSingleFiles.url);
           },
         });
       } else {

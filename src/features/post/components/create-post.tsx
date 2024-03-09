@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useMemo, useState } from 'react';
 
 import {
   Avatar,
@@ -14,13 +14,25 @@ import { IoCloseSharp } from 'react-icons/io5';
 import { v4 as uuidv4 } from 'uuid';
 
 import { optionInput } from '../constant';
-import { avatar1 } from '@/assets';
+import { useQueryInfoUser } from '@/features/auth';
 import { PostType, FileType } from '@/ts/types';
 
 export const CreatePost = () => {
   const [files, setFiles] = useState<FileType[]>([]);
   const [content, setContent] = useState('');
   const [listPost, setListPost] = useState<PostType[]>([]);
+
+  const { data } = useQueryInfoUser();
+
+  const authPost = useMemo(() => {
+    if (data) {
+      const result = {
+        avatar: data.getInfoUser.avatar,
+        id: data.getInfoUser.id,
+      };
+      return result;
+    }
+  }, [data]);
 
   const handleChooseFiles = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files;
@@ -62,7 +74,7 @@ export const CreatePost = () => {
   return (
     <Box className="bg-white mt-4 p-4 rounded-lg border-2">
       <Box className="flex items-center gap-4">
-        <Avatar src={avatar1} />
+        <Avatar src={authPost?.avatar} />
         <Text className="text-gray-500">Share something...</Text>
       </Box>
       <Grid

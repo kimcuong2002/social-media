@@ -1,34 +1,97 @@
-import { Box, Image } from '@chakra-ui/react';
+import { useMemo } from 'react';
 
-import Information from '../features/profile/components/information';
-import ListFriend from '../features/profile/components/list-friend';
-import ListPhoto from '../features/profile/components/list-photo';
-import Navbar from '../features/profile/components/navbar';
-import ProfileAvatar from '../features/profile/components/profile-avartar';
-import { anhbia } from '@/assets';
+import { Box } from '@chakra-ui/react';
+import { BiCake, BiPhone } from 'react-icons/bi';
+import { FaRegHeart } from 'react-icons/fa';
+import {
+  MdOutlineAddHomeWork,
+  MdOutlineBook,
+  MdOutlineHome,
+  MdOutlineMailOutline,
+  MdOutlineTimer,
+} from 'react-icons/md';
+import { v4 as uuidv4 } from 'uuid';
+
 import { CreatePost } from '@/components';
+import {
+  CoverImage,
+  Information,
+  ListFriend,
+  ListPhoto,
+  ProfileAvatar,
+} from '@/features';
+import { useQueryInfoUser } from '@/features/auth';
+import { converDateToString } from '@/utils';
 
 export const Profile = () => {
+  const { data } = useQueryInfoUser();
+
+  const informationUser = useMemo(() => {
+    if (data) {
+      const result = [
+        {
+          id: uuidv4(),
+          icon: <MdOutlineHome />,
+          name: data.getInfoUser.address,
+        },
+        {
+          id: uuidv4(),
+          icon: <MdOutlineAddHomeWork />,
+          name: data.getInfoUser.company,
+        },
+        {
+          id: uuidv4(),
+          icon: <MdOutlineBook />,
+          name: data.getInfoUser.university,
+        },
+        {
+          id: uuidv4(),
+          icon: <FaRegHeart />,
+          name: data.getInfoUser.relationship,
+        },
+        {
+          id: uuidv4(),
+          icon: <BiCake />,
+          name: data.getInfoUser.dayOfBirth,
+        },
+        {
+          id: uuidv4(),
+          icon: <BiPhone />,
+          name: data.getInfoUser.phone,
+        },
+        {
+          id: uuidv4(),
+          icon: <MdOutlineMailOutline />,
+          name: data.getInfoUser.email,
+        },
+        {
+          id: uuidv4(),
+          icon: <MdOutlineTimer />,
+          name: converDateToString(data.getInfoUser.createdAt as Date),
+        },
+      ];
+      return result;
+    }
+  }, [data]);
+
   return (
     <Box>
       <Box className="relative z-10">
-        <Image src={anhbia} alt="" className="w-full h-96 bg-cover" />
-        <Box className="hidden md:block">
-          <Navbar />
-        </Box>
+        <CoverImage />
       </Box>
       <Box className="flex w-full justify-center items-center absolute top-2/4 bg-white">
         <Box className="flex flex-col gap-4 w-5/6 md:w-full md:flex-row md:mx-4 lg:w-5/6 xl:w-4/6">
           <Box className="w-full md:w-1/4 z-20">
-            <ProfileAvatar avatarLink="https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg" />
-            <Information />
+            <ProfileAvatar
+              avatarLink={data?.getInfoUser.avatar}
+              fullnameUser={data?.getInfoUser.fullname as string}
+              description={data?.getInfoUser.description}
+            />
+            <Information informationUser={informationUser} />
             <ListPhoto />
             <ListFriend />
           </Box>
-          <Box className="block md:hidden">
-            <Navbar />
-          </Box>
-          <Box className="w-full md:w-3/4 md:mt-[220px]">
+          <Box className="w-full md:w-3/4 md:mt-[255px]">
             <CreatePost />
           </Box>
         </Box>
