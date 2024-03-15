@@ -10,6 +10,7 @@ import {
   Input,
   Text,
 } from '@chakra-ui/react';
+import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
 import { IoCloseSharp } from 'react-icons/io5';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -21,6 +22,16 @@ export const CreatePost = () => {
   const [files, setFiles] = useState<FileType[]>([]);
   const [content, setContent] = useState('');
   const [listPost, setListPost] = useState<PostType[]>([]);
+  const [openEmoji, setOpenEmoji] = useState(false);
+  const [emoji, setEmoji] = useState<string | null>();
+
+  const handleEmojiSelect = (
+    event: MouseEvent,
+    emojiObject: EmojiClickData,
+  ) => {
+    // setContent((prevContent) => prevContent + emoji);
+    setEmoji(emojiObject.emoji);
+  };
 
   const { data } = useQueryInfoUser();
 
@@ -53,7 +64,7 @@ export const CreatePost = () => {
 
   const handleContentValue = (e: ChangeEvent<HTMLInputElement>) => {
     const content = e.target.value;
-    setContent(content);
+    setContent(content + emoji);
   };
 
   const handleCreatePost = () => {
@@ -93,34 +104,46 @@ export const CreatePost = () => {
             </Box>
           ))}
       </Grid>
-      <Input
+      <input
         placeholder="Insert your content"
         className="!border-0 !outline-none w-full mt-4"
         onChange={handleContentValue}
       />
       <Divider className="mb-4" />
-      <Box className="flex justify-between items-center">
-        <Box className="flex gap-4 text-2xl text-gray-500">
-          {options.map((item) => (
-            <div key={item.id}>
-              <label htmlFor={item.value}>
-                <Box className="cursor-pointer">{item.icon}</Box>
-              </label>
-              <Input
-                multiple
-                type="file"
-                name={item.value}
-                id={item.value}
-                accept={item.value}
-                className="hidden"
-                onChange={(e) => handleChooseFiles(e)}
-              />
-            </div>
-          ))}
+      <Box>
+        <Box className="flex justify-between items-center">
+          <Box className="flex gap-4 text-2xl text-gray-500">
+            {options.map((item) => (
+              <div key={item.id}>
+                <label htmlFor={item.value}>
+                  {item.open ? (
+                    <Box
+                      className="cursor-pointer"
+                      onClick={() => setOpenEmoji(!openEmoji)}
+                    >
+                      {item.icon}
+                    </Box>
+                  ) : (
+                    <Box className="cursor-pointer">{item.icon}</Box>
+                  )}
+                </label>
+                <Input
+                  multiple
+                  type="file"
+                  name={item.value}
+                  id={item.value}
+                  accept={item.value}
+                  className="hidden"
+                  onChange={(e) => handleChooseFiles(e)}
+                />
+              </div>
+            ))}
+          </Box>
+          <Button colorScheme="twitter" size="sm" onClick={handleCreatePost}>
+            Post
+          </Button>
         </Box>
-        <Button colorScheme="twitter" size="sm" onClick={handleCreatePost}>
-          Post
-        </Button>
+        {openEmoji && <EmojiPicker onEmojiClick={handleEmojiSelect} />}
       </Box>
     </Box>
   );
