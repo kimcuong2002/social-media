@@ -81,9 +81,8 @@ export type CreatePostDto = {
   authorsPostShared?: Array<Scalars['String']['input']>;
   content: Scalars['String']['input'];
   createdAt?: Scalars['DateTime']['input'];
-  idAuthor: Scalars['String']['input'];
   idGroup?: Scalars['String']['input'];
-  image?: Array<Scalars['String']['input']>;
+  images?: Array<Scalars['String']['input']>;
   isGhim?: Scalars['Boolean']['input'];
   statusPostToGroup?: Scalars['Boolean']['input'];
   topic: Scalars['String']['input'];
@@ -91,6 +90,13 @@ export type CreatePostDto = {
   usersLiked?: Array<Scalars['String']['input']>;
   verified?: Scalars['Boolean']['input'];
   video?: Array<Scalars['String']['input']>;
+};
+
+export type CreateRoomDto = {
+  createdAt?: Scalars['DateTime']['input'];
+  members: Array<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  updatedAt?: Scalars['DateTime']['input'];
 };
 
 export type CreateSavedDto = {
@@ -186,6 +192,7 @@ export type Mutation = {
   createGroup: Group;
   createMessage: Message;
   createPost: Post;
+  createRoom: Room;
   createSaved: Saved;
   createTopic: Topic;
   delete: ResponseDto;
@@ -197,8 +204,12 @@ export type Mutation = {
   deletePost: ResponseDto;
   deletePostCollection: ResponseDto;
   deletePostSaved: ResponseDto;
+  deleteRoom: ResponseDto;
   deleteTopic: ResponseDto;
+  ghimPost: ResponseDto;
+  likePost: ResponseDto;
   login: LoginResponse;
+  sharePost: ResponseDto;
   signup: User;
   updatFileForUser: ResponseDto;
   update: ResponseDto;
@@ -210,6 +221,7 @@ export type Mutation = {
   updatePost: ResponseDto;
   updatePostCollection: ResponseDto;
   updatePostSaved: ResponseDto;
+  updateRoom: ResponseDto;
   updateTopic: ResponseDto;
   uploadMultipleFiles: Array<ResponseSingleUpload>;
   uploadSingleFiles: ResponseSingleUpload;
@@ -233,6 +245,10 @@ export type MutationCreateMessageArgs = {
 
 export type MutationCreatePostArgs = {
   body: CreatePostDto;
+};
+
+export type MutationCreateRoomArgs = {
+  body: CreateRoomDto;
 };
 
 export type MutationCreateSavedArgs = {
@@ -283,12 +299,30 @@ export type MutationDeletePostSavedArgs = {
   idSaved: Scalars['String']['input'];
 };
 
+export type MutationDeleteRoomArgs = {
+  id: Scalars['String']['input'];
+};
+
 export type MutationDeleteTopicArgs = {
   id: Scalars['String']['input'];
 };
 
+export type MutationGhimPostArgs = {
+  idPost: Scalars['String']['input'];
+};
+
+export type MutationLikePostArgs = {
+  idPost: Scalars['String']['input'];
+  idUser: Scalars['String']['input'];
+};
+
 export type MutationLoginArgs = {
   body: LoginUserDto;
+};
+
+export type MutationSharePostArgs = {
+  idPost: Scalars['String']['input'];
+  idUser: Scalars['String']['input'];
 };
 
 export type MutationSignupArgs = {
@@ -344,6 +378,11 @@ export type MutationUpdatePostSavedArgs = {
   idSaved: Scalars['String']['input'];
 };
 
+export type MutationUpdateRoomArgs = {
+  body: UpdateRoomDto;
+  id: Scalars['String']['input'];
+};
+
 export type MutationUpdateTopicArgs = {
   body: UpdateTopicDto;
   id: Scalars['String']['input'];
@@ -391,11 +430,11 @@ export type ParamsQueryDto = {
 
 export type Post = {
   __typename?: 'Post';
+  author: User;
   authorsPostShared: Array<User>;
   content: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
   id: Scalars['ID']['output'];
-  idAuthor: Scalars['String']['output'];
   images: Array<Scalars['String']['output']>;
   isGhim: Scalars['Boolean']['output'];
   isPostToGroup: IsPostToGroupDto;
@@ -408,12 +447,15 @@ export type Post = {
 export type Query = {
   __typename?: 'Query';
   getAllMessage: Array<Message>;
+  getAllPost: PaginationPostDto;
+  getAllRoom: Array<Room>;
   getCollections: PaginationCollectionDto;
   getGroupById: Group;
   getInfoUser: ResponseUserDto;
   getPostById: Post;
   getPosts: PaginationGroupDto;
   getPostsByGroup: PaginationPostDto;
+  getRoomById: Room;
   getSaved: Saved;
   topic: Topic;
   topics: Array<Topic>;
@@ -423,6 +465,16 @@ export type Query = {
 
 export type QueryGetAllMessageArgs = {
   room: Scalars['String']['input'];
+};
+
+export type QueryGetAllPostArgs = {
+  filter: ParamsQueryDto;
+  limit: Scalars['Float']['input'];
+  page: Scalars['Float']['input'];
+};
+
+export type QueryGetAllRoomArgs = {
+  idUser: Scalars['String']['input'];
 };
 
 export type QueryGetCollectionsArgs = {
@@ -449,6 +501,10 @@ export type QueryGetPostsByGroupArgs = {
   idGroup: Scalars['String']['input'];
   limit: Scalars['Float']['input'];
   page: Scalars['Float']['input'];
+};
+
+export type QueryGetRoomByIdArgs = {
+  id: Scalars['String']['input'];
 };
 
 export type QueryGetSavedArgs = {
@@ -504,6 +560,16 @@ export type ResponseUserDto = {
   university: Scalars['String']['output'];
   updatedAt: Scalars['DateTime']['output'];
   username: Scalars['String']['output'];
+};
+
+export type Room = {
+  __typename?: 'Room';
+  author: User;
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['ID']['output'];
+  members: Array<User>;
+  name: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
 };
 
 export type Saved = {
@@ -577,9 +643,8 @@ export type UpdatePostDto = {
   authorsPostShared?: InputMaybe<Array<Scalars['String']['input']>>;
   content?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
-  idAuthor?: InputMaybe<Scalars['String']['input']>;
   idGroup?: InputMaybe<Scalars['String']['input']>;
-  image?: InputMaybe<Array<Scalars['String']['input']>>;
+  images?: InputMaybe<Array<Scalars['String']['input']>>;
   isGhim?: InputMaybe<Scalars['Boolean']['input']>;
   statusPostToGroup?: InputMaybe<Scalars['Boolean']['input']>;
   topic?: InputMaybe<Scalars['String']['input']>;
@@ -587,6 +652,13 @@ export type UpdatePostDto = {
   usersLiked?: InputMaybe<Array<Scalars['String']['input']>>;
   verified?: InputMaybe<Scalars['Boolean']['input']>;
   video?: InputMaybe<Array<Scalars['String']['input']>>;
+};
+
+export type UpdateRoomDto = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  members?: InputMaybe<Array<Scalars['String']['input']>>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
 export type UpdateTopicDto = {
@@ -713,12 +785,14 @@ export type GetInfoUserQuery = {
     dayOfBirth: string;
     description: string;
     email: string;
+    address: string;
+    company: string;
+    university: string;
+    relationship: number;
     fullname: string;
     gender: number;
     id: string;
     phone: string;
-    role: string;
-    username: string;
     friends: Array<{ __typename?: 'User'; fullname: string; avatar: string }>;
     friendsReq: Array<{
       __typename?: 'User';
@@ -1014,6 +1088,14 @@ export const GetInfoUserDocument = {
                 { kind: 'Field', name: { kind: 'Name', value: 'dayOfBirth' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'description' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'email' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'address' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'company' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'university' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'relationship' },
+                },
                 {
                   kind: 'Field',
                   name: { kind: 'Name', value: 'friends' },
@@ -1052,8 +1134,6 @@ export const GetInfoUserDocument = {
                 { kind: 'Field', name: { kind: 'Name', value: 'gender' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'id' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'phone' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'role' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'username' } },
               ],
             },
           },

@@ -13,4 +13,5 @@ export type UpdateInput = {
   email?: string;
   relationship?: number;
   dayOfBirth?: Date;
+  avatar?: string;
 };

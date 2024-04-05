@@ -17,7 +17,7 @@ const documents = {
     types.LoginDocument,
   '\n  mutation Signup($body: SignUpUserDto!) {\n    signup(body: $body) {\n      username\n    }\n  }\n':
     types.SignupDocument,
-  '\n  query GetInfoUser {\n    getInfoUser {\n      avatar\n      createdAt\n      dayOfBirth\n      description\n      email\n      friends {\n        fullname\n        avatar\n      }\n      friendsReq {\n        fullname\n        avatar\n      }\n      fullname\n      gender\n      id\n      phone\n      role\n      username\n    }\n  }\n':
+  '\n  query GetInfoUser {\n    getInfoUser {\n      avatar\n      createdAt\n      dayOfBirth\n      description\n      email\n      address\n      description\n      company\n      university\n      relationship\n      friends {\n        fullname\n        avatar\n      }\n      friendsReq {\n        fullname\n        avatar\n      }\n      fullname\n      gender\n      id\n      phone\n    }\n  }\n':
     types.GetInfoUserDocument,
   '\n  mutation Update($body: UpdateUserDto!, $id: String!) {\n    update(body: $body, id: $id) {\n      message\n      status\n    }\n  }\n':
     types.UpdateDocument,
@@ -57,8 +57,8 @@ export function gql(
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: '\n  query GetInfoUser {\n    getInfoUser {\n      avatar\n      createdAt\n      dayOfBirth\n      description\n      email\n      friends {\n        fullname\n        avatar\n      }\n      friendsReq {\n        fullname\n        avatar\n      }\n      fullname\n      gender\n      id\n      phone\n      role\n      username\n    }\n  }\n',
-): (typeof documents)['\n  query GetInfoUser {\n    getInfoUser {\n      avatar\n      createdAt\n      dayOfBirth\n      description\n      email\n      friends {\n        fullname\n        avatar\n      }\n      friendsReq {\n        fullname\n        avatar\n      }\n      fullname\n      gender\n      id\n      phone\n      role\n      username\n    }\n  }\n'];
+  source: '\n  query GetInfoUser {\n    getInfoUser {\n      avatar\n      createdAt\n      dayOfBirth\n      description\n      email\n      address\n      description\n      company\n      university\n      relationship\n      friends {\n        fullname\n        avatar\n      }\n      friendsReq {\n        fullname\n        avatar\n      }\n      fullname\n      gender\n      id\n      phone\n    }\n  }\n',
+): (typeof documents)['\n  query GetInfoUser {\n    getInfoUser {\n      avatar\n      createdAt\n      dayOfBirth\n      description\n      email\n      address\n      description\n      company\n      university\n      relationship\n      friends {\n        fullname\n        avatar\n      }\n      friendsReq {\n        fullname\n        avatar\n      }\n      fullname\n      gender\n      id\n      phone\n    }\n  }\n'];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -16,7 +16,7 @@ import { PostInput, PostType, ResPaginationPostData } from '../service/type';
 
 export const useCreatePostMutation = () =>
   useMutation<
-    { createPost: { status: string; data: PostInput } },
+    { createPost: { status: string; body: PostInput } },
     OperationVariables,
     DefaultContext,
     ApolloCache<unknown>

@@ -47,7 +47,7 @@ export const GET_POST_DETAIL = gql`
       content
       createdAt
       id
-      idAuthor
+      author
       images
       isGhim
       isPostToGroup {
@@ -119,7 +119,7 @@ export const GET_POST_BY_GROUP = gql`
         content
         createdAt
         id
-        idAuthor
+        author
         images
         isGhim
         isPostToGroup {
@@ -144,39 +144,25 @@ export const GET_POST_BY_GROUP = gql`
 export const CREATE_POST = gql`
   mutation createPost($body: CreatePostDto!) {
     createPost(body: $body) {
-      authorsPostShared {
-        avatar
-        createdAt
-        dayOfBirth
-        description
-        email
-        friends {
-          fullname
-          avatar
-          id
-        }
-        gender
-        id
-        phone
+      author {
         fullname
+        avatar
+        email
+      }
+      authorsPostShared {
+        fullname
+        avatar
+        email
       }
       content
+      createAt
       id
-      idAuthor
-      isGhim
       images
       isGhim
-      isPostToGroup {
-        status
-      }
-      topic {
-        name
-      }
-      updatedAt
-      usersLiked {
-        avatar
-        fullname
-      }
+      isPostToGroup
+      topic
+      updateAt
+      usersLiked
       videos
     }
   }

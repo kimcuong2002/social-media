@@ -1,6 +1,7 @@
 import { FC, useEffect, useMemo, useState } from 'react';
 
-import { Box, Input, Text } from '@chakra-ui/react';
+import { Box, Button, Input, Text } from '@chakra-ui/react';
+import { IoClose } from 'react-icons/io5';
 import { LuUploadCloud } from 'react-icons/lu';
 
 import {
@@ -29,10 +30,9 @@ export const Upload: FC<Props> = ({ setValue }) => {
     return null;
   }, [filesUpload]);
 
-  useEffect(() => {
+  const handleSubmitUpload = useEffect(() => {
     if (filesUpload) {
       if (filesUpload.length === 1) {
-        // TODO: CAll api upload single
         void uploadSingleFiles({
           variables: { file: filesUpload[0] },
           onCompleted: (data) => {
@@ -40,7 +40,6 @@ export const Upload: FC<Props> = ({ setValue }) => {
           },
         });
       } else {
-        // TODO: Call api upload multiple
         void uploadMultipleFiles({
           variables: {
             files: [filesUpload],
@@ -50,33 +49,42 @@ export const Upload: FC<Props> = ({ setValue }) => {
           },
         });
       }
-      setValue([]);
     }
   }, [filesUpload, setValue, uploadSingleFiles, uploadMultipleFiles]);
 
   return (
     <>
       {imagePreview &&
-        imagePreview.map((url) => <img key={url} src={url} alt="pic" />)}
-      <Box className="border-dotted border-4 border-sky-500 flex justify-center items-center py-10 rounded-lg ">
-        <label
-          htmlFor="upload"
-          className="w-full h-full flex flex-col justify-center items-center cursor-pointer"
-        >
-          <LuUploadCloud className="text-6xl" />
-          <Text className="font-bold">Choose your image</Text>
-        </label>
-      </Box>
-      <Input
-        className="hidden"
-        id="upload"
-        type="file"
-        onChange={(e) => {
-          if (e.target.files) {
-            setFilesUpload(e.target.files);
-          }
-        }}
-      />
+        imagePreview.map((url) => (
+          <Box key={url} className="relative">
+            <img src={url} alt="pic" />
+            <IoClose className="text-2xl absolute top-0 right-0 text-red-800 hover:rotate-[45deg] hover:scale-105 hover:duration-300 cursor-pointer " />
+          </Box>
+        ))}
+      {!imagePreview && (
+        <>
+          <Box className="border-dotted border-4 border-sky-500 flex justify-center items-center py-10 rounded-lg ">
+            <label
+              htmlFor="upload"
+              className="w-full h-full flex flex-col justify-center items-center cursor-pointer"
+            >
+              <LuUploadCloud className="text-6xl" />
+              <Text className="font-bold">Choose your image</Text>
+            </label>
+          </Box>
+          <Input
+            className="hidden"
+            id="upload"
+            type="file"
+            onChange={(e) => {
+              if (e.target.files) {
+                setFilesUpload(e.target.files);
+              }
+            }}
+          />
+        </>
+      )}
+      <Button onClick={() => handleSubmitUpload}>Save</Button>
     </>
   );
 };

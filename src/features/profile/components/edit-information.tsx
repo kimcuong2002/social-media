@@ -215,7 +215,7 @@ const EditInformation: FC<Props> = ({
               {...field}
               className="!bg-white"
             >
-              <option value={0}>Single</option>
+              <option value={0 as number}>Single</option>
               <option value={1}>Date</option>
               <option value={2}>Married</option>
             </Select>

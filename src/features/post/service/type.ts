@@ -1,5 +1,4 @@
 export type PostType = {
-  idAuthor: string;
   topic: string;
   content: string;
   image?: string[];
@@ -16,7 +15,7 @@ export type PostType = {
 
 export type PostInput = Pick<
   PostType,
-  'idAuthor' | 'topic' | 'content' | 'image' | 'video' | 'createAt'
+  'topic' | 'content' | 'image' | 'video' | 'createAt'
 >;
 
 export type ResPaginationPostData = {

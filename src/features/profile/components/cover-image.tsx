@@ -22,16 +22,7 @@ export type Props = {
 export const CoverImage: FC<Props> = ({ coverImageLink }) => {
   const [coverImage] = useState<string>(coverImageLink ? coverImageLink : '');
   const { isOpen, onOpen, onClose } = useDisclosure();
-  // const handleChangeCoverImage = (e: ChangeEvent<HTMLInputElement>) => {
-  //   if (e.target.files) {
-  //     const image = e.target.files[0];
-  //     if (image) {
-  //       setCoverImage(URL.createObjectURL(image));
-  //     } else {
-  //       setCoverImage('');
-  //     }
-  //   }
-  // };
+
   return (
     <Box className="relative group">
       {coverImage ? (

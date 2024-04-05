@@ -9,8 +9,8 @@ export const UPLOAD_SINGLE_FILE = gql`
 `;
 
 export const UPLOAD_MULTIPLE_FILE = gql`
-  mutation UploadMultipleFiles($file: [Upload!]!) {
-    uploadMultipleFiles(files: $file) {
+  mutation UploadMultipleFiles($files: [Upload!]!) {
+    uploadMultipleFiles(files: $files) {
       url
     }
   }

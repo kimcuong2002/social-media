@@ -19,3 +19,4 @@ export * from './profile/components/list-photo';
 export * from './profile/components/profile-avartar';
 export * from './profile/components/profile-options';
 export * from './form/error-show/error-show';
+export * from './topic/services/type';
