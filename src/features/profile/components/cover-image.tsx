@@ -1,8 +1,9 @@
-import { FC, useState } from 'react';
+import { useState } from 'react';
 
 import {
   Box,
   Image,
+  Input,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -11,25 +12,49 @@ import {
   ModalOverlay,
   useDisclosure,
 } from '@chakra-ui/react';
+import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { BiCamera } from 'react-icons/bi';
 
+import { useUpdateProfile } from '../hooks/use-update-profile';
 import { Upload } from '@/components';
+import { useQueryInfoUser } from '@/features/auth';
 
-export type Props = {
-  coverImageLink?: string;
-};
-
-export const CoverImage: FC<Props> = ({ coverImageLink }) => {
-  const [coverImage] = useState<string>(coverImageLink ? coverImageLink : '');
+export const CoverImage = () => {
+  const [coverImage, setCoverImage] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const { data, refetch } = useQueryInfoUser();
+
+  const [update] = useUpdateProfile();
+
+  const { handleSubmit } = useForm();
+  const updateCoverImage = () => {
+    void update({
+      variables: {
+        body: {
+          coverImage: coverImage[0],
+        },
+        id: data?.getInfoUser.id,
+      },
+      onCompleted: async () => {
+        toast.success('Update profile is successfully!');
+        onClose();
+        await refetch();
+      },
+      onError: (error) => {
+        toast.error(error.message);
+      },
+    });
+  };
 
   return (
     <Box className="relative group">
-      {coverImage ? (
+      {data?.getInfoUser.coverImage ? (
         <Image
-          src={coverImage}
           alt=""
           className="w-full h-[500px] bg-cover group-hover:opacity-75"
+          src={data.getInfoUser.coverImage}
         />
       ) : (
         <Image src="" alt="" className="w-full h-[500px] bg-cover" />
@@ -42,10 +67,19 @@ export const CoverImage: FC<Props> = ({ coverImageLink }) => {
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Change your avatar</ModalHeader>
+            <ModalHeader>Change your cover image</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <Upload />
+              <form onSubmit={handleSubmit(updateCoverImage)}>
+                <Upload
+                  typeUpload="coverImage"
+                  onChange={(data: unknown) => setCoverImage(data)}
+                />
+                <Input
+                  type="submit"
+                  className="my-4 mb-2 cursor-pointer !bg-green-500"
+                />
+              </form>
             </ModalBody>
           </ModalContent>
         </Modal>
