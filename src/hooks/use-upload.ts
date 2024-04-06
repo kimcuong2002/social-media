@@ -9,7 +9,7 @@ import { UPLOAD_MULTIPLE_FILE, UPLOAD_SINGLE_FILE } from './../gql/index';
 
 export const useUploadSingleFileMutation = () =>
   useMutation<
-    { uploadSingleFiles: { url: string[] } },
+    { uploadSingleFiles: { url: string } },
     OperationVariables,
     DefaultContext,
     ApolloCache<unknown>
@@ -17,7 +17,7 @@ export const useUploadSingleFileMutation = () =>
 
 export const useUploadMultipleFilesMutation = () =>
   useMutation<
-    { uploadMultipleFiles: { url: [string] } },
+    { uploadMultipleFiles: { url: string }[] },
     OperationVariables,
     DefaultContext,
     ApolloCache<unknown>

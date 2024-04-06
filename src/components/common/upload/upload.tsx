@@ -1,67 +1,117 @@
-import { FC, useEffect, useMemo, useState } from 'react';
+import { FC, SetStateAction, useEffect, useState } from 'react';
 
-import { Box, Button, Input, Text } from '@chakra-ui/react';
+import { Box, Input, Spinner, Text } from '@chakra-ui/react';
+import imageCompression from 'browser-image-compression';
 import { IoClose } from 'react-icons/io5';
 import { LuUploadCloud } from 'react-icons/lu';
 
 import {
+  useToast,
   useUploadMultipleFilesMutation,
   useUploadSingleFileMutation,
 } from '@/hooks';
 
 type Props = {
-  setValue?: (_v: string[]) => void;
+  value?: string[];
+  onChange?: (_: unknown) => void;
+  disable?: boolean;
+  typeUpload?: 'avatar' | 'coverImage' | 'normal';
 };
 
-export const Upload: FC<Props> = ({ setValue }) => {
+export const Upload: FC<Props> = ({
+  value,
+  onChange,
+  disable = false,
+  typeUpload = 'normal',
+}) => {
+  const { toast } = useToast();
   const [filesUpload, setFilesUpload] = useState<FileList | null>();
+  const [imagePreviews, setImagePreviews] = useState(value || []);
+  const [loading, setLoading] = useState(false);
 
-  const [uploadSingleFiles] = useUploadSingleFileMutation();
-  const [uploadMultipleFiles] = useUploadMultipleFilesMutation();
+  const [uploadSingleFiles, { loading: loadingSingleUpload }] =
+    useUploadSingleFileMutation();
+  const [uploadMultipleFiles, { loading: loadingMultipleUpload }] =
+    useUploadMultipleFilesMutation();
 
-  const imagePreview = useMemo(() => {
-    if (filesUpload) {
-      const result = [];
-      for (const file of filesUpload) {
-        result.push(URL.createObjectURL(file));
+  const uploadHandler = async () => {
+    if (!filesUpload) return;
+    if (filesUpload.length === 1) {
+      setLoading(true);
+      const compressedFile = await imageCompression(filesUpload[0], {
+        maxSizeMB: 1,
+      });
+      if (!compressedFile) {
+        return setLoading(false);
       }
-      return result;
+      if (compressedFile) {
+        void uploadSingleFiles({
+          variables: { file: compressedFile },
+          onCompleted: (data) => {
+            onChange &&
+              onChange([...imagePreviews, data.uploadSingleFiles.url]);
+            setImagePreviews([...imagePreviews, data.uploadSingleFiles.url]);
+            setLoading(false);
+          },
+          onError: (error) => {
+            setLoading(false);
+            toast.error(error.message);
+          },
+        });
+      }
+    } else {
+      void uploadMultipleFiles({
+        variables: {
+          files: filesUpload,
+        },
+        onCompleted: (data) => {
+          const result: SetStateAction<string[] | undefined> = [];
+          data.uploadMultipleFiles.map((res) => {
+            result.push(res.url);
+          });
+          onChange && onChange([...imagePreviews, ...result]);
+          setImagePreviews([...imagePreviews, ...result]);
+          setLoading(false);
+        },
+        onError: (error) => {
+          toast.error(error.message);
+          setLoading(false);
+        },
+      });
     }
-    return null;
+  };
+
+  useEffect(() => {
+    void uploadHandler();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filesUpload]);
 
-  const handleSubmitUpload = useEffect(() => {
-    if (filesUpload) {
-      if (filesUpload.length === 1) {
-        void uploadSingleFiles({
-          variables: { file: filesUpload[0] },
-          onCompleted: (data) => {
-            setValue && setValue(data.uploadSingleFiles.url);
-          },
-        });
-      } else {
-        void uploadMultipleFiles({
-          variables: {
-            files: [filesUpload],
-          },
-          onCompleted: (data) => {
-            setValue && setValue(data.uploadMultipleFiles.url);
-          },
-        });
-      }
-    }
-  }, [filesUpload, setValue, uploadSingleFiles, uploadMultipleFiles]);
+  useEffect(() => {
+    value && setImagePreviews(value);
+  }, [value]);
 
   return (
     <>
-      {imagePreview &&
-        imagePreview.map((url) => (
-          <Box key={url} className="relative">
-            <img src={url} alt="pic" />
-            <IoClose className="text-2xl absolute top-0 right-0 text-red-800 hover:rotate-[45deg] hover:scale-105 hover:duration-300 cursor-pointer " />
-          </Box>
-        ))}
-      {!imagePreview && (
+      {imagePreviews && imagePreviews.length > 0 && (
+        <Box className="flex flex-wrap justify-start items-center gap-2">
+          {imagePreviews.map((url, index) => (
+            <Box key={url} className="relative">
+              <img src={url} alt="pic" />
+              <IoClose
+                onClick={() => {
+                  const result = imagePreviews;
+                  result.splice(index, 1);
+                  setImagePreviews([...result]);
+                  onChange && onChange([...result]);
+                }}
+                className="text-2xl absolute top-0 right-0 text-red-800 hover:rotate-[45deg] hover:scale-105 hover:duration-300 cursor-pointer "
+              />
+            </Box>
+          ))}
+        </Box>
+      )}
+      {(loading || loadingSingleUpload || loadingMultipleUpload) && <Spinner />}
+      {typeUpload === 'normal' && (
         <>
           <Box className="border-dotted border-4 border-sky-500 flex justify-center items-center py-10 rounded-lg ">
             <label
@@ -76,6 +126,8 @@ export const Upload: FC<Props> = ({ setValue }) => {
             className="hidden"
             id="upload"
             type="file"
+            multiple={true}
+            disabled={disable}
             onChange={(e) => {
               if (e.target.files) {
                 setFilesUpload(e.target.files);
@@ -84,7 +136,32 @@ export const Upload: FC<Props> = ({ setValue }) => {
           />
         </>
       )}
-      <Button onClick={() => handleSubmitUpload}>Save</Button>
+      {(typeUpload === 'avatar' || typeUpload === 'coverImage') &&
+        imagePreviews.length === 0 && (
+          <>
+            <Box className="border-dotted border-4 border-sky-500 flex justify-center items-center py-10 rounded-lg ">
+              <label
+                htmlFor="upload"
+                className="w-full h-full flex flex-col justify-center items-center cursor-pointer"
+              >
+                <LuUploadCloud className="text-6xl" />
+                <Text className="font-bold">Choose your image</Text>
+              </label>
+            </Box>
+            <Input
+              className="hidden"
+              id="upload"
+              type="file"
+              multiple={true}
+              disabled={disable}
+              onChange={(e) => {
+                if (e.target.files) {
+                  setFilesUpload(e.target.files);
+                }
+              }}
+            />
+          </>
+        )}
     </>
   );
 };
