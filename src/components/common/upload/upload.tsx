@@ -110,7 +110,11 @@ export const Upload: FC<Props> = ({
           ))}
         </Box>
       )}
-      {(loading || loadingSingleUpload || loadingMultipleUpload) && <Spinner />}
+      {(loading || loadingSingleUpload || loadingMultipleUpload) && (
+        <Box className="w-full flex justify-center items-center mb-5">
+          <Spinner />
+        </Box>
+      )}
       {typeUpload === 'normal' && (
         <>
           <Box className="border-dotted border-4 border-sky-500 flex justify-center items-center py-10 rounded-lg ">

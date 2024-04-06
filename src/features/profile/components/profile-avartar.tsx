@@ -13,12 +13,17 @@ import {
   ModalOverlay,
   Text,
   useDisclosure,
+  Input,
 } from '@chakra-ui/react';
+import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { BiCamera } from 'react-icons/bi';
 import { BsPersonAdd } from 'react-icons/bs';
 import { FaFacebookMessenger } from 'react-icons/fa';
 
+import { useUpdateProfile } from '../hooks/use-update-profile';
 import { Upload } from '@/components';
+import { useQueryInfoUser } from '@/features/auth';
 
 type Props = {
   avatarLink?: string;
@@ -33,6 +38,31 @@ export const ProfileAvatar = ({
 }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [avatar] = useState<string>(avatarLink ? avatarLink : '');
+  const [value, setValue] = useState([]);
+  const [update] = useUpdateProfile();
+  const { data: UserData } = useQueryInfoUser();
+
+  const { handleSubmit } = useForm();
+
+  const updateAvatar = () => {
+    if (value.length > 0) {
+      void update({
+        variables: {
+          body: {
+            avatar: value[0],
+          },
+          id: UserData?.getInfoUser.id,
+        },
+        onCompleted: () => {
+          toast.success('Update profile is successfully!');
+          onClose();
+        },
+        onError: (error) => {
+          toast.error(error.message);
+        },
+      });
+    }
+  };
 
   return (
     <Box className="bg-white flex flex-col justify-center items-center w-full py-4 rounded-lg border-2 mt-4">
@@ -52,7 +82,16 @@ export const ProfileAvatar = ({
             <ModalHeader>Change your avatar</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <Upload />
+              <form onSubmit={handleSubmit(updateAvatar)}>
+                <Upload
+                  typeUpload="avatar"
+                  onChange={(data) => setValue(data)}
+                />
+                <Input
+                  type="submit"
+                  className="my-4 mb-2 cursor-pointer !bg-green-500"
+                />
+              </form>
             </ModalBody>
           </ModalContent>
         </Modal>
