@@ -175,7 +175,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-01-25T13:54:11.987Z\"",
+            "defaultValue": "\"2024-04-06T14:03:22.582Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -271,7 +271,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-01-25T13:54:11.987Z\"",
+            "defaultValue": "\"2024-04-06T14:03:22.582Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -394,7 +394,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-01-25T13:54:11.979Z\"",
+            "defaultValue": "\"2024-04-06T14:03:22.572Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -506,7 +506,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-01-25T13:54:11.979Z\"",
+            "defaultValue": "\"2024-04-06T14:03:22.572Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -565,7 +565,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-01-25T13:54:11.992Z\"",
+            "defaultValue": "\"2024-04-06T14:03:22.586Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -613,7 +613,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-01-25T13:54:11.992Z\"",
+            "defaultValue": "\"2024-04-06T14:03:22.586Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -680,23 +680,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-01-25T13:54:11.972Z\"",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "idAuthor",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
+            "defaultValue": "\"2024-04-06T14:03:22.566Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -717,7 +701,7 @@
             "deprecationReason": null
           },
           {
-            "name": "image",
+            "name": "images",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -800,7 +784,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-01-25T13:54:11.972Z\"",
+            "defaultValue": "\"2024-04-06T14:03:22.566Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -875,6 +859,89 @@
       },
       {
         "kind": "INPUT_OBJECT",
+        "name": "CreateRoomDto",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "createdAt",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              }
+            },
+            "defaultValue": "\"2024-04-06T14:03:22.646Z\"",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "members",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "name",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updatedAt",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              }
+            },
+            "defaultValue": "\"2024-04-06T14:03:22.646Z\"",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
         "name": "CreateSavedDto",
         "description": null,
         "fields": null,
@@ -907,7 +974,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-01-25T13:54:11.983Z\"",
+            "defaultValue": "\"2024-04-06T14:03:22.577Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -971,7 +1038,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-01-25T13:54:11.983Z\"",
+            "defaultValue": "\"2024-04-06T14:03:22.577Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -1014,7 +1081,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-01-25T13:54:11.967Z\"",
+            "defaultValue": "\"2024-04-06T14:03:22.559Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -1078,7 +1145,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-01-25T13:54:11.967Z\"",
+            "defaultValue": "\"2024-04-06T14:03:22.559Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -1142,6 +1209,22 @@
             "deprecationReason": null
           },
           {
+            "name": "coverImage",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": "\"\"",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "createdAt",
             "description": null,
             "type": {
@@ -1153,7 +1236,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-01-25T13:54:11.659Z\"",
+            "defaultValue": "\"2024-04-06T14:03:22.091Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -1401,7 +1484,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-01-25T13:54:11.659Z\"",
+            "defaultValue": "\"2024-04-06T14:03:22.091Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -2162,6 +2245,39 @@
             "deprecationReason": null
           },
           {
+            "name": "createRoom",
+            "description": null,
+            "args": [
+              {
+                "name": "body",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "CreateRoomDto",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Room",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "createSaved",
             "description": null,
             "args": [
@@ -2589,11 +2705,126 @@
             "deprecationReason": null
           },
           {
+            "name": "deleteRoom",
+            "description": null,
+            "args": [
+              {
+                "name": "id",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "ResponseDto",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "deleteTopic",
             "description": null,
             "args": [
               {
                 "name": "id",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "ResponseDto",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ghimPost",
+            "description": null,
+            "args": [
+              {
+                "name": "idPost",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "ResponseDto",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "likePost",
+            "description": null,
+            "args": [
+              {
+                "name": "idPost",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "idUser",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -2648,6 +2879,55 @@
               "ofType": {
                 "kind": "OBJECT",
                 "name": "LoginResponse",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "sharePost",
+            "description": null,
+            "args": [
+              {
+                "name": "idPost",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "idUser",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "ResponseDto",
                 "ofType": null
               }
             },
@@ -3170,6 +3450,55 @@
             "deprecationReason": null
           },
           {
+            "name": "updateRoom",
+            "description": null,
+            "args": [
+              {
+                "name": "body",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "UpdateRoomDto",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "id",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "ResponseDto",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "updateTopic",
             "description": null,
             "args": [
@@ -3603,6 +3932,22 @@
         "description": null,
         "fields": [
           {
+            "name": "author",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "User",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "authorsPostShared",
             "description": null,
             "args": [],
@@ -3668,22 +4013,6 @@
               "ofType": {
                 "kind": "SCALAR",
                 "name": "ID",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "idAuthor",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
                 "ofType": null
               }
             },
@@ -3870,6 +4199,112 @@
                   "ofType": {
                     "kind": "OBJECT",
                     "name": "Message",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "getAllPost",
+            "description": null,
+            "args": [
+              {
+                "name": "filter",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "ParamsQueryDto",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "limit",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Float",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "page",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Float",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "PaginationPostDto",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "getAllRoom",
+            "description": null,
+            "args": [
+              {
+                "name": "idUser",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "Room",
                     "ofType": null
                   }
                 }
@@ -4149,6 +4584,39 @@
               "ofType": {
                 "kind": "OBJECT",
                 "name": "PaginationPostDto",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "getRoomById",
+            "description": null,
+            "args": [
+              {
+                "name": "id",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Room",
                 "ofType": null
               }
             },
@@ -4484,6 +4952,22 @@
             "deprecationReason": null
           },
           {
+            "name": "coverImage",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "createdAt",
             "description": null,
             "args": [],
@@ -4771,6 +5255,121 @@
       },
       {
         "kind": "OBJECT",
+        "name": "Room",
+        "description": null,
+        "fields": [
+          {
+            "name": "author",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "User",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "createdAt",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "members",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "User",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "name",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updatedAt",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
         "name": "Saved",
         "description": null,
         "fields": [
@@ -4947,6 +5546,22 @@
             "deprecationReason": null
           },
           {
+            "name": "coverImage",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": "\"\"",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "createdAt",
             "description": null,
             "type": {
@@ -4958,7 +5573,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-01-25T13:54:11.659Z\"",
+            "defaultValue": "\"2024-04-06T14:03:22.091Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -5206,7 +5821,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-01-25T13:54:11.659Z\"",
+            "defaultValue": "\"2024-04-06T14:03:22.091Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -5481,7 +6096,7 @@
               "name": "DateTime",
               "ofType": null
             },
-            "defaultValue": "\"2024-01-25T13:54:11.979Z\"",
+            "defaultValue": "\"2024-04-06T14:03:22.572Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -5569,7 +6184,7 @@
               "name": "DateTime",
               "ofType": null
             },
-            "defaultValue": "\"2024-01-25T13:54:11.979Z\"",
+            "defaultValue": "\"2024-04-06T14:03:22.572Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -5604,7 +6219,7 @@
               "name": "DateTime",
               "ofType": null
             },
-            "defaultValue": "\"2024-01-25T13:54:11.992Z\"",
+            "defaultValue": "\"2024-04-06T14:03:22.586Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -5659,19 +6274,7 @@
               "name": "DateTime",
               "ofType": null
             },
-            "defaultValue": "\"2024-01-25T13:54:11.972Z\"",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "idAuthor",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
+            "defaultValue": "\"2024-04-06T14:03:22.566Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -5688,7 +6291,7 @@
             "deprecationReason": null
           },
           {
-            "name": "image",
+            "name": "images",
             "description": null,
             "type": {
               "kind": "LIST",
@@ -5751,7 +6354,7 @@
               "name": "DateTime",
               "ofType": null
             },
-            "defaultValue": "\"2024-01-25T13:54:11.972Z\"",
+            "defaultValue": "\"2024-04-06T14:03:22.566Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -5814,6 +6417,73 @@
       },
       {
         "kind": "INPUT_OBJECT",
+        "name": "UpdateRoomDto",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "createdAt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "defaultValue": "\"2024-04-06T14:03:22.646Z\"",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "members",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "name",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updatedAt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "defaultValue": "\"2024-04-06T14:03:22.646Z\"",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
         "name": "UpdateTopicDto",
         "description": null,
         "fields": null,
@@ -5838,7 +6508,7 @@
               "name": "DateTime",
               "ofType": null
             },
-            "defaultValue": "\"2024-01-25T13:54:11.967Z\"",
+            "defaultValue": "\"2024-04-06T14:03:22.559Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -5886,7 +6556,7 @@
               "name": "DateTime",
               "ofType": null
             },
-            "defaultValue": "\"2024-01-25T13:54:11.967Z\"",
+            "defaultValue": "\"2024-04-06T14:03:22.559Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -5927,6 +6597,18 @@
           },
           {
             "name": "company",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": "\"\"",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "coverImage",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -6113,7 +6795,7 @@
               "name": "DateTime",
               "ofType": null
             },
-            "defaultValue": "\"2024-01-25T13:54:11.659Z\"",
+            "defaultValue": "\"2024-04-06T14:03:22.091Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -6183,6 +6865,22 @@
           },
           {
             "name": "company",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "coverImage",
             "description": null,
             "args": [],
             "type": {

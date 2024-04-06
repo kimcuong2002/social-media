@@ -120,6 +120,7 @@ export type CreateUserDto = {
   address?: Scalars['String']['input'];
   avatar?: Scalars['String']['input'];
   company?: Scalars['String']['input'];
+  coverImage?: Scalars['String']['input'];
   createdAt?: Scalars['DateTime']['input'];
   dayOfBirth?: Scalars['String']['input'];
   description?: Scalars['String']['input'];
@@ -544,6 +545,7 @@ export type ResponseUserDto = {
   address: Scalars['String']['output'];
   avatar: Scalars['String']['output'];
   company: Scalars['String']['output'];
+  coverImage: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
   dayOfBirth: Scalars['String']['output'];
   description: Scalars['String']['output'];
@@ -586,6 +588,7 @@ export type SignUpUserDto = {
   address?: Scalars['String']['input'];
   avatar?: Scalars['String']['input'];
   company?: Scalars['String']['input'];
+  coverImage?: Scalars['String']['input'];
   createdAt?: Scalars['DateTime']['input'];
   dayOfBirth?: Scalars['String']['input'];
   description?: Scalars['String']['input'];
@@ -674,6 +677,7 @@ export type UpdateUserDto = {
   address?: InputMaybe<Scalars['String']['input']>;
   avatar?: InputMaybe<Scalars['String']['input']>;
   company?: InputMaybe<Scalars['String']['input']>;
+  coverImage?: InputMaybe<Scalars['String']['input']>;
   dayOfBirth?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
@@ -695,6 +699,7 @@ export type User = {
   address: Scalars['String']['output'];
   avatar: Scalars['String']['output'];
   company: Scalars['String']['output'];
+  coverImage: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
   dayOfBirth: Scalars['String']['output'];
   description: Scalars['String']['output'];
@@ -802,6 +807,209 @@ export type GetInfoUserQuery = {
   };
 };
 
+export type GetPostsQueryVariables = Exact<{
+  filter: ParamsQueryDto;
+  limit: Scalars['Float']['input'];
+  page: Scalars['Float']['input'];
+}>;
+
+export type GetPostsQuery = {
+  __typename?: 'Query';
+  getPosts: {
+    __typename?: 'PaginationGroupDto';
+    page: number;
+    total: number;
+    data: Array<{
+      __typename?: 'Group';
+      avatar: string;
+      coverImage: string;
+      createdAt: any;
+      description: string;
+      id: string;
+      idPrivate: boolean;
+      admins: Array<{
+        __typename?: 'User';
+        fullname: string;
+        id: string;
+        avatar: string;
+      }>;
+      author: {
+        __typename?: 'User';
+        fullname: string;
+        id: string;
+        avatar: string;
+      };
+      members: Array<{
+        __typename?: 'User';
+        avatar: string;
+        email: string;
+        fullname: string;
+        gender: number;
+        id: string;
+      }>;
+      membersReq: Array<{
+        __typename?: 'User';
+        avatar: string;
+        email: string;
+        fullname: string;
+        gender: number;
+        id: string;
+      }>;
+    }>;
+  };
+};
+
+export type GetPostByIdQueryVariables = Exact<{
+  id: Scalars['String']['input'];
+}>;
+
+export type GetPostByIdQuery = {
+  __typename?: 'Query';
+  getPostById: {
+    __typename?: 'Post';
+    content: string;
+    createdAt: any;
+    id: string;
+    images: Array<string>;
+    isGhim: boolean;
+    updatedAt: any;
+    videos: Array<string>;
+    author: {
+      __typename?: 'User';
+      fullname: string;
+      id: string;
+      avatar: string;
+    };
+    isPostToGroup: {
+      __typename?: 'IsPostToGroupDto';
+      status: boolean;
+      idGroup: string;
+    };
+    topic: { __typename?: 'Topic'; name: string };
+    usersLiked: Array<{
+      __typename?: 'User';
+      avatar: string;
+      createdAt: any;
+      dayOfBirth: string;
+      description: string;
+      email: string;
+      fullname: string;
+      gender: number;
+      id: string;
+      phone: string;
+      friends: Array<{
+        __typename?: 'User';
+        fullname: string;
+        id: string;
+        avatar: string;
+      }>;
+      friendsReq: Array<{
+        __typename?: 'User';
+        fullname: string;
+        id: string;
+        avatar: string;
+      }>;
+    }>;
+    authorsPostShared: Array<{
+      __typename?: 'User';
+      avatar: string;
+      createdAt: any;
+      dayOfBirth: string;
+      description: string;
+      email: string;
+      fullname: string;
+      gender: number;
+      id: string;
+      phone: string;
+      friends: Array<{
+        __typename?: 'User';
+        fullname: string;
+        id: string;
+        avatar: string;
+      }>;
+      friendsReq: Array<{
+        __typename?: 'User';
+        fullname: string;
+        id: string;
+        avatar: string;
+      }>;
+    }>;
+  };
+};
+
+export type GetPostsByGroupQueryVariables = Exact<{
+  idGroup: Scalars['String']['input'];
+  limit: Scalars['Float']['input'];
+  page: Scalars['Float']['input'];
+}>;
+
+export type GetPostsByGroupQuery = {
+  __typename?: 'Query';
+  getPostsByGroup: {
+    __typename?: 'PaginationPostDto';
+    page: number;
+    total: number;
+    data: Array<{
+      __typename?: 'Post';
+      content: string;
+      createdAt: any;
+      id: string;
+      images: Array<string>;
+      isGhim: boolean;
+      updatedAt: any;
+      videos: Array<string>;
+      authorsPostShared: Array<{
+        __typename?: 'User';
+        avatar: string;
+        fullname: string;
+        id: string;
+      }>;
+      author: {
+        __typename?: 'User';
+        fullname: string;
+        id: string;
+        avatar: string;
+      };
+      isPostToGroup: {
+        __typename?: 'IsPostToGroupDto';
+        idGroup: string;
+        status: boolean;
+      };
+      topic: { __typename?: 'Topic'; id: string; name: string };
+      usersLiked: Array<{ __typename?: 'User'; id: string; fullname: string }>;
+    }>;
+  };
+};
+
+export type CreatePostMutationVariables = Exact<{
+  body: CreatePostDto;
+}>;
+
+export type CreatePostMutation = {
+  __typename?: 'Mutation';
+  createPost: {
+    __typename?: 'Post';
+    content: string;
+    createdAt: any;
+    id: string;
+    images: Array<string>;
+    isGhim: boolean;
+    updatedAt: any;
+    videos: Array<string>;
+    authorsPostShared: Array<{
+      __typename?: 'User';
+      fullname: string;
+      avatar: string;
+    }>;
+    topic: { __typename?: 'Topic'; name: string };
+    usersLiked: Array<{
+      __typename?: 'User';
+      fullname: string;
+      avatar: string;
+    }>;
+  };
+};
+
 export type UpdateMutationVariables = Exact<{
   body: UpdateUserDto;
   id: Scalars['String']['input'];
@@ -810,6 +1018,18 @@ export type UpdateMutationVariables = Exact<{
 export type UpdateMutation = {
   __typename?: 'Mutation';
   update: { __typename?: 'ResponseDto'; message: string; status: number };
+};
+
+export type GetTopicsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetTopicsQuery = {
+  __typename?: 'Query';
+  topics: Array<{
+    __typename?: 'Topic';
+    image: string;
+    name: string;
+    id: string;
+  }>;
 };
 
 export type UploadSingleFilesMutationVariables = Exact<{
@@ -822,7 +1042,7 @@ export type UploadSingleFilesMutation = {
 };
 
 export type UploadMultipleFilesMutationVariables = Exact<{
-  file: Array<Scalars['Upload']['input']> | Scalars['Upload']['input'];
+  files: Array<Scalars['Upload']['input']> | Scalars['Upload']['input'];
 }>;
 
 export type UploadMultipleFilesMutation = {
@@ -1142,6 +1362,793 @@ export const GetInfoUserDocument = {
     },
   ],
 } as unknown as DocumentNode<GetInfoUserQuery, GetInfoUserQueryVariables>;
+export const GetPostsDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'GetPosts' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'filter' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'ParamsQueryDto' },
+            },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'limit' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: { kind: 'NamedType', name: { kind: 'Name', value: 'Float' } },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'page' } },
+          type: {
+            kind: 'NonNullType',
+            type: { kind: 'NamedType', name: { kind: 'Name', value: 'Float' } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'getPosts' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'filter' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'filter' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'page' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'page' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'limit' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'limit' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'page' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'total' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'data' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'admins' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'fullname' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'avatar' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'author' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'fullname' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'avatar' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'avatar' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'coverImage' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'createdAt' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'description' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'idPrivate' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'members' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'avatar' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'email' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'fullname' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'gender' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'membersReq' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'avatar' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'email' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'fullname' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'gender' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetPostsQuery, GetPostsQueryVariables>;
+export const GetPostByIdDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'GetPostById' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'getPostById' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'id' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'id' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'content' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'author' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fullname' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'avatar' },
+                      },
+                    ],
+                  },
+                },
+                { kind: 'Field', name: { kind: 'Name', value: 'images' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'isGhim' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'isPostToGroup' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'status' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'idGroup' },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'topic' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                    ],
+                  },
+                },
+                { kind: 'Field', name: { kind: 'Name', value: 'updatedAt' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'videos' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'usersLiked' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'avatar' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'createdAt' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'dayOfBirth' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'description' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'email' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'friends' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'fullname' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'avatar' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'friendsReq' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'fullname' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'avatar' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fullname' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'gender' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'phone' } },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'authorsPostShared' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'avatar' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'createdAt' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'dayOfBirth' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'description' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'email' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'friends' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'fullname' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'avatar' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'friendsReq' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'fullname' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'avatar' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fullname' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'gender' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'phone' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetPostByIdQuery, GetPostByIdQueryVariables>;
+export const GetPostsByGroupDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'GetPostsByGroup' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'idGroup' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'limit' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: { kind: 'NamedType', name: { kind: 'Name', value: 'Float' } },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'page' } },
+          type: {
+            kind: 'NonNullType',
+            type: { kind: 'NamedType', name: { kind: 'Name', value: 'Float' } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'getPostsByGroup' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'idGroup' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'idGroup' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'limit' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'limit' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'page' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'page' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'page' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'total' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'data' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'authorsPostShared' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'avatar' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'fullname' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'content' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'createdAt' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'author' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'fullname' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'avatar' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'images' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'isGhim' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'isPostToGroup' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'idGroup' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'status' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'topic' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'name' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'updatedAt' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'usersLiked' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'fullname' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'videos' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  GetPostsByGroupQuery,
+  GetPostsByGroupQueryVariables
+>;
+export const CreatePostDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'createPost' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'body' } },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CreatePostDto' },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'createPost' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'body' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'body' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'authorsPostShared' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fullname' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'avatar' },
+                      },
+                    ],
+                  },
+                },
+                { kind: 'Field', name: { kind: 'Name', value: 'content' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'images' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'isGhim' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'topic' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                    ],
+                  },
+                },
+                { kind: 'Field', name: { kind: 'Name', value: 'updatedAt' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'usersLiked' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fullname' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'avatar' },
+                      },
+                    ],
+                  },
+                },
+                { kind: 'Field', name: { kind: 'Name', value: 'videos' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<CreatePostMutation, CreatePostMutationVariables>;
 export const UpdateDocument = {
   kind: 'Document',
   definitions: [
@@ -1210,6 +2217,33 @@ export const UpdateDocument = {
     },
   ],
 } as unknown as DocumentNode<UpdateMutation, UpdateMutationVariables>;
+export const GetTopicsDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'getTopics' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'topics' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetTopicsQuery, GetTopicsQueryVariables>;
 export const UploadSingleFilesDocument = {
   kind: 'Document',
   definitions: [
@@ -1271,7 +2305,10 @@ export const UploadMultipleFilesDocument = {
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'file' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'files' },
+          },
           type: {
             kind: 'NonNullType',
             type: {
@@ -1299,7 +2336,7 @@ export const UploadMultipleFilesDocument = {
                 name: { kind: 'Name', value: 'files' },
                 value: {
                   kind: 'Variable',
-                  name: { kind: 'Name', value: 'file' },
+                  name: { kind: 'Name', value: 'files' },
                 },
               },
             ],
