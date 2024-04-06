@@ -57,6 +57,7 @@ export const GET_INFOR_USER = gql`
     getInfoUser {
       avatar
       createdAt
+      coverImage
       dayOfBirth
       description
       email

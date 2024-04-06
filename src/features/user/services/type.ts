@@ -2,6 +2,7 @@ export type UserType = {
   address?: string;
   avatar?: string;
   company?: string;
+  coverImage?: string;
   createdAt?: Date;
   dayOfBirth?: string;
   description?: string;
