@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 import { Box } from '@chakra-ui/react';
 import { BiCake, BiPhone } from 'react-icons/bi';
@@ -18,7 +18,10 @@ import {
   Information,
   ListFriend,
   ListPhoto,
+  Post,
+  PostTypeRes,
   ProfileAvatar,
+  useGetPostsQuery,
 } from '@/features';
 import { useQueryInfoUser } from '@/features/auth';
 import { converDateToString } from '@/utils';
@@ -47,7 +50,12 @@ export const Profile = () => {
         {
           id: uuidv4(),
           icon: <FaRegHeart />,
-          name: data.getInfoUser.relationship,
+          name:
+            data.getInfoUser.relationship === 0
+              ? 'Single'
+              : data.getInfoUser.relationship === 1
+              ? 'Married'
+              : 'Other',
         },
         {
           id: uuidv4(),
@@ -74,13 +82,25 @@ export const Profile = () => {
     }
   }, [data]);
 
+  const [posts, setPosts] = useState<undefined | PostTypeRes[]>([]);
+  const limit = 1000;
+  const page = 1;
+  const filter = {};
+
+  const { data: postsList } = useGetPostsQuery(limit, page, filter);
+  useMemo(() => {
+    if (postsList) {
+      setPosts(postsList.getAllPost.data);
+    }
+  }, [postsList]);
+
   return (
     <Box>
       <Box className="relative z-10">
         <CoverImage />
       </Box>
       <Box className="flex w-full justify-center items-center absolute top-2/4 bg-white">
-        <Box className="flex flex-col gap-4 w-5/6 md:w-full md:flex-row md:mx-4 lg:w-5/6 xl:w-4/6">
+        <Box className="flex flex-col gap-4 w-5/6 md:w-full md:flex-row md:mx-4 lg:w-full xl:w-4/6">
           <Box className="w-full md:w-1/4 z-20">
             <ProfileAvatar
               avatarLink={data?.getInfoUser.avatar}
@@ -93,6 +113,16 @@ export const Profile = () => {
           </Box>
           <Box className="w-full md:w-3/4 md:mt-[255px]">
             <CreatePost />
+            {posts?.map((item) => (
+              <Post
+                key={item.id}
+                content={item.content}
+                images={item.images}
+                fullname={item.author.fullname}
+                avatar={item.author.avatar}
+                createdAt={item.createdAt as Date}
+              />
+            ))}
           </Box>
         </Box>
       </Box>
