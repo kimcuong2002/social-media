@@ -40,7 +40,7 @@ export const ProfileAvatar = ({
   const [avatar] = useState<string>(avatarLink ? avatarLink : '');
   const [value, setValue] = useState([]);
   const [update] = useUpdateProfile();
-  const { data: UserData } = useQueryInfoUser();
+  const { data: userData, refetch } = useQueryInfoUser();
 
   const { handleSubmit } = useForm();
 
@@ -51,11 +51,12 @@ export const ProfileAvatar = ({
           body: {
             avatar: value[0],
           },
-          id: UserData?.getInfoUser.id,
+          id: userData?.getInfoUser.id,
         },
-        onCompleted: () => {
+        onCompleted: async () => {
           toast.success('Update profile is successfully!');
           onClose();
+          await refetch();
         },
         onError: (error) => {
           toast.error(error.message);
@@ -70,7 +71,7 @@ export const ProfileAvatar = ({
         {avatar ? (
           <Avatar src={avatar} size="2xl" />
         ) : (
-          <Avatar src="" size="2xl" />
+          <Avatar src={userData?.getInfoUser.avatar} size="2xl" />
         )}
         <BiCamera
           className="cursor-pointer bg-gray-300 p-1 text-2xl rounded-full absolute bottom-0 right-0 -translate-x-1/2 -translate-y-1/2"
