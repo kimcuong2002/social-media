@@ -21,6 +21,8 @@ const documents = {
     types.GetInfoUserDocument,
   '\n  mutation createGroup($body: CreateGroupDto!) {\n    createGroup(body: $body) {\n      name\n      avatar\n      createdAt\n    }\n  }\n':
     types.CreateGroupDocument,
+  '\n  query GetGroups($filter: ParamsQueryDto!, $limit: Float!, $page: Float!) {\n    getGroups(filter: $filter, page: $page, limit: $limit) {\n      data {\n        name\n        avatar\n        id\n        description\n        createdAt\n      }\n      page\n      total\n    }\n  }\n':
+    types.GetGroupsDocument,
   '\n  query GetAllPost($filter: ParamsQueryDto!, $limit: Float!, $page: Float!) {\n    getAllPost(filter: $filter, page: $page, limit: $limit) {\n      page\n      total\n      data {\n        id\n        authorsPostShared {\n          fullname\n          avatar\n          id\n        }\n        author {\n          fullname\n          avatar\n          id\n        }\n        content\n        images\n        topic {\n          image\n          name\n          color\n          id\n        }\n        createdAt\n        updatedAt\n        usersLiked {\n          fullname\n          avatar\n          id\n        }\n      }\n    }\n  }\n':
     types.GetAllPostDocument,
   '\n  query GetPostById($id: String!) {\n    getPostById(id: $id) {\n      content\n      createdAt\n      id\n      author {\n        fullname\n        id\n        avatar\n      }\n      images\n      isGhim\n      isPostToGroup {\n        status\n        idGroup\n      }\n      topic {\n        name\n      }\n      updatedAt\n      videos\n      usersLiked {\n        avatar\n        createdAt\n        dayOfBirth\n        description\n        email\n        friends {\n          fullname\n          id\n          avatar\n        }\n        friendsReq {\n          fullname\n          id\n          avatar\n        }\n        fullname\n        gender\n        id\n        phone\n      }\n      authorsPostShared {\n        avatar\n        createdAt\n        dayOfBirth\n        description\n        email\n        friends {\n          fullname\n          id\n          avatar\n        }\n        friendsReq {\n          fullname\n          id\n          avatar\n        }\n        fullname\n        gender\n        id\n        phone\n      }\n    }\n  }\n':
@@ -79,6 +81,12 @@ export function gql(
 export function gql(
   source: '\n  mutation createGroup($body: CreateGroupDto!) {\n    createGroup(body: $body) {\n      name\n      avatar\n      createdAt\n    }\n  }\n',
 ): (typeof documents)['\n  mutation createGroup($body: CreateGroupDto!) {\n    createGroup(body: $body) {\n      name\n      avatar\n      createdAt\n    }\n  }\n'];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: '\n  query GetGroups($filter: ParamsQueryDto!, $limit: Float!, $page: Float!) {\n    getGroups(filter: $filter, page: $page, limit: $limit) {\n      data {\n        name\n        avatar\n        id\n        description\n        createdAt\n      }\n      page\n      total\n    }\n  }\n',
+): (typeof documents)['\n  query GetGroups($filter: ParamsQueryDto!, $limit: Float!, $page: Float!) {\n    getGroups(filter: $filter, page: $page, limit: $limit) {\n      data {\n        name\n        avatar\n        id\n        description\n        createdAt\n      }\n      page\n      total\n    }\n  }\n'];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

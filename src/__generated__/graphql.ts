@@ -452,9 +452,9 @@ export type Query = {
   getAllRoom: Array<Room>;
   getCollections: PaginationCollectionDto;
   getGroupById: Group;
+  getGroups: PaginationGroupDto;
   getInfoUser: ResponseUserDto;
   getPostById: Post;
-  getPosts: PaginationGroupDto;
   getPostsByGroup: PaginationPostDto;
   getRoomById: Room;
   getSaved: Saved;
@@ -488,14 +488,14 @@ export type QueryGetGroupByIdArgs = {
   id: Scalars['String']['input'];
 };
 
-export type QueryGetPostByIdArgs = {
-  id: Scalars['String']['input'];
-};
-
-export type QueryGetPostsArgs = {
+export type QueryGetGroupsArgs = {
   filter: ParamsQueryDto;
   limit: Scalars['Float']['input'];
   page: Scalars['Float']['input'];
+};
+
+export type QueryGetPostByIdArgs = {
+  id: Scalars['String']['input'];
 };
 
 export type QueryGetPostsByGroupArgs = {
@@ -816,6 +816,29 @@ export type CreateGroupMutation = {
     name: string;
     avatar: string;
     createdAt: any;
+  };
+};
+
+export type GetGroupsQueryVariables = Exact<{
+  filter: ParamsQueryDto;
+  limit: Scalars['Float']['input'];
+  page: Scalars['Float']['input'];
+}>;
+
+export type GetGroupsQuery = {
+  __typename?: 'Query';
+  getGroups: {
+    __typename?: 'PaginationGroupDto';
+    page: number;
+    total: number;
+    data: Array<{
+      __typename?: 'Group';
+      name: string;
+      avatar: string;
+      id: string;
+      description: string;
+      createdAt: any;
+    }>;
   };
 };
 
@@ -1431,6 +1454,116 @@ export const CreateGroupDocument = {
     },
   ],
 } as unknown as DocumentNode<CreateGroupMutation, CreateGroupMutationVariables>;
+export const GetGroupsDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'GetGroups' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'filter' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'ParamsQueryDto' },
+            },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'limit' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: { kind: 'NamedType', name: { kind: 'Name', value: 'Float' } },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'page' } },
+          type: {
+            kind: 'NonNullType',
+            type: { kind: 'NamedType', name: { kind: 'Name', value: 'Float' } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'getGroups' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'filter' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'filter' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'page' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'page' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'limit' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'limit' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'data' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'avatar' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'description' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'createdAt' },
+                      },
+                    ],
+                  },
+                },
+                { kind: 'Field', name: { kind: 'Name', value: 'page' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'total' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetGroupsQuery, GetGroupsQueryVariables>;
 export const GetAllPostDocument = {
   kind: 'Document',
   definitions: [
