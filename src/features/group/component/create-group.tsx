@@ -1,56 +1,54 @@
-import { Box, FormErrorMessage, Input, Select, Text } from '@chakra-ui/react';
-import { useForm } from 'react-hook-form';
+import { Box, Input } from '@chakra-ui/react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 
-type FormType = {
-  groupName: string;
-  privacyGroup: 'public' | 'private';
+import GroupCreateForm from './group-create-form';
+import { useCreateGroup } from '../hooks/use-group-query';
+import { GroupInput } from '../service/type';
+
+const defaultValueForm = {
+  name: '',
+  description: '',
+  avatar: '',
+  coverImage: '',
 };
 
 const CreateGroup = () => {
   const {
-    register,
+    control,
     handleSubmit,
+    reset,
     formState: { errors },
-  } = useForm<FormType>();
+  } = useForm<GroupInput>({ defaultValues: defaultValueForm });
 
-  const onSubmit = (data: FormType) => {
-    alert(JSON.stringify(data));
+  const [createGroup, { loading }] = useCreateGroup();
+
+  const onSubmit: SubmitHandler<GroupInput> = (data) => {
+    void createGroup({
+      variables: {
+        body: {
+          ...data,
+          coverImage: data.coverImage[0],
+          avatar: data.avatar[0],
+        },
+      },
+      onCompleted: () => {
+        toast.success('Create group successfully!');
+        reset(defaultValueForm);
+      },
+      onError: (errors) => {
+        toast.error(errors.message);
+      },
+    });
   };
 
   return (
-    <form method="POST" onSubmit={handleSubmit(onSubmit)}>
-      <Box className="mb-6">
-        <Text>Group Name</Text>
-        <Input
-          id="groupName"
-          {...register('groupName', {
-            required: 'The group name invalid',
-            minLength: {
-              value: 5,
-              message: 'Group name minimum five characters',
-            },
-            maxLength: {
-              value: 50,
-              message: 'Group name maximum fivety character',
-            },
-          })}
-        />
-        {errors?.groupName && (
-          <FormErrorMessage>{errors.groupName.message}</FormErrorMessage>
-        )}
-      </Box>
-      <Text>Privacy</Text>
-      <Select
-        variant="outline"
-        {...register('privacyGroup', {
-          required: 'The group privacy is required',
-        })}
-      >
-        <option value="private">Private</option>
-        <option value="public">Public</option>
-      </Select>
-      <Input type="submit" placeholder="Submit" className="cursor-pointer" />
-    </form>
+    <Box>
+      <form method="POST" onSubmit={handleSubmit(onSubmit)}>
+        <GroupCreateForm control={control} errors={errors} disable={loading} />
+        <Input type="submit" />
+      </form>
+    </Box>
   );
 };
 
