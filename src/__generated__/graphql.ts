@@ -85,7 +85,7 @@ export type CreatePostDto = {
   images?: Array<Scalars['String']['input']>;
   isGhim?: Scalars['Boolean']['input'];
   statusPostToGroup?: Scalars['Boolean']['input'];
-  topic: Scalars['String']['input'];
+  topic: Scalars['ID']['input'];
   updatedAt?: Scalars['DateTime']['input'];
   usersLiked?: Array<Scalars['String']['input']>;
   verified?: Scalars['Boolean']['input'];
@@ -149,7 +149,7 @@ export type Group = {
   createdAt: Scalars['DateTime']['output'];
   description: Scalars['String']['output'];
   id: Scalars['ID']['output'];
-  idPrivate: Scalars['Boolean']['output'];
+  isPrivate: Scalars['Boolean']['output'];
   members: Array<User>;
   membersReq: Array<User>;
   name: Scalars['String']['output'];
@@ -628,18 +628,17 @@ export type UpdateGroupDto = {
   author?: InputMaybe<Scalars['String']['input']>;
   avatar?: InputMaybe<Scalars['String']['input']>;
   coverImage?: InputMaybe<Scalars['String']['input']>;
-  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   isPrivate?: InputMaybe<Scalars['Boolean']['input']>;
   members?: InputMaybe<Array<Scalars['String']['input']>>;
   membersReq?: InputMaybe<Array<Scalars['String']['input']>>;
   name?: InputMaybe<Scalars['String']['input']>;
-  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  updatedAt?: Scalars['DateTime']['input'];
 };
 
 export type UpdateMessageDto = {
-  content?: InputMaybe<Scalars['String']['input']>;
-  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  content: Scalars['String']['input'];
+  updatedAt?: Scalars['DateTime']['input'];
 };
 
 export type UpdatePostDto = {
@@ -658,19 +657,17 @@ export type UpdatePostDto = {
 };
 
 export type UpdateRoomDto = {
-  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   members?: InputMaybe<Array<Scalars['String']['input']>>;
   name?: InputMaybe<Scalars['String']['input']>;
-  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  updatedAt?: Scalars['DateTime']['input'];
 };
 
 export type UpdateTopicDto = {
   color?: InputMaybe<Scalars['String']['input']>;
-  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   image?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   rank?: InputMaybe<Scalars['Float']['input']>;
-  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  updatedAt?: Scalars['DateTime']['input'];
 };
 
 export type UpdateUserDto = {
@@ -690,7 +687,7 @@ export type UpdateUserDto = {
   relationship?: InputMaybe<Scalars['Float']['input']>;
   role?: InputMaybe<Scalars['String']['input']>;
   university?: InputMaybe<Scalars['String']['input']>;
-  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  updatedAt?: Scalars['DateTime']['input'];
   username?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -787,6 +784,7 @@ export type GetInfoUserQuery = {
     __typename?: 'ResponseUserDto';
     avatar: string;
     createdAt: any;
+    coverImage: string;
     dayOfBirth: string;
     description: string;
     email: string;
@@ -807,52 +805,62 @@ export type GetInfoUserQuery = {
   };
 };
 
-export type GetPostsQueryVariables = Exact<{
+export type CreateGroupMutationVariables = Exact<{
+  body: CreateGroupDto;
+}>;
+
+export type CreateGroupMutation = {
+  __typename?: 'Mutation';
+  createGroup: {
+    __typename?: 'Group';
+    name: string;
+    avatar: string;
+    createdAt: any;
+  };
+};
+
+export type GetAllPostQueryVariables = Exact<{
   filter: ParamsQueryDto;
   limit: Scalars['Float']['input'];
   page: Scalars['Float']['input'];
 }>;
 
-export type GetPostsQuery = {
+export type GetAllPostQuery = {
   __typename?: 'Query';
-  getPosts: {
-    __typename?: 'PaginationGroupDto';
+  getAllPost: {
+    __typename?: 'PaginationPostDto';
     page: number;
     total: number;
     data: Array<{
-      __typename?: 'Group';
-      avatar: string;
-      coverImage: string;
-      createdAt: any;
-      description: string;
+      __typename?: 'Post';
       id: string;
-      idPrivate: boolean;
-      admins: Array<{
+      content: string;
+      images: Array<string>;
+      createdAt: any;
+      updatedAt: any;
+      authorsPostShared: Array<{
         __typename?: 'User';
         fullname: string;
-        id: string;
         avatar: string;
+        id: string;
       }>;
       author: {
         __typename?: 'User';
         fullname: string;
-        id: string;
         avatar: string;
+        id: string;
       };
-      members: Array<{
-        __typename?: 'User';
-        avatar: string;
-        email: string;
-        fullname: string;
-        gender: number;
+      topic: {
+        __typename?: 'Topic';
+        image: string;
+        name: string;
+        color: string;
         id: string;
-      }>;
-      membersReq: Array<{
+      };
+      usersLiked: Array<{
         __typename?: 'User';
-        avatar: string;
-        email: string;
         fullname: string;
-        gender: number;
+        avatar: string;
         id: string;
       }>;
     }>;
@@ -995,19 +1003,27 @@ export type CreatePostMutation = {
     images: Array<string>;
     isGhim: boolean;
     updatedAt: any;
-    videos: Array<string>;
     authorsPostShared: Array<{
       __typename?: 'User';
       fullname: string;
       avatar: string;
     }>;
-    topic: { __typename?: 'Topic'; name: string };
     usersLiked: Array<{
       __typename?: 'User';
       fullname: string;
       avatar: string;
     }>;
   };
+};
+
+export type LikePostMutationVariables = Exact<{
+  idPost: Scalars['String']['input'];
+  idUser: Scalars['String']['input'];
+}>;
+
+export type LikePostMutation = {
+  __typename?: 'Mutation';
+  likePost: { __typename?: 'ResponseDto'; message: string; status: number };
 };
 
 export type UpdateMutationVariables = Exact<{
@@ -1026,8 +1042,10 @@ export type GetTopicsQuery = {
   __typename?: 'Query';
   topics: Array<{
     __typename?: 'Topic';
-    image: string;
     name: string;
+    color: string;
+    image: string;
+    rank: number;
     id: string;
   }>;
 };
@@ -1305,6 +1323,7 @@ export const GetInfoUserDocument = {
               selections: [
                 { kind: 'Field', name: { kind: 'Name', value: 'avatar' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'coverImage' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'dayOfBirth' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'description' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'email' } },
@@ -1362,13 +1381,63 @@ export const GetInfoUserDocument = {
     },
   ],
 } as unknown as DocumentNode<GetInfoUserQuery, GetInfoUserQueryVariables>;
-export const GetPostsDocument = {
+export const CreateGroupDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'createGroup' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'body' } },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CreateGroupDto' },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'createGroup' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'body' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'body' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'avatar' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<CreateGroupMutation, CreateGroupMutationVariables>;
+export const GetAllPostDocument = {
   kind: 'Document',
   definitions: [
     {
       kind: 'OperationDefinition',
       operation: 'query',
-      name: { kind: 'Name', value: 'GetPosts' },
+      name: { kind: 'Name', value: 'GetAllPost' },
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
@@ -1409,7 +1478,7 @@ export const GetPostsDocument = {
         selections: [
           {
             kind: 'Field',
-            name: { kind: 'Name', value: 'getPosts' },
+            name: { kind: 'Name', value: 'getAllPost' },
             arguments: [
               {
                 kind: 'Argument',
@@ -1447,9 +1516,10 @@ export const GetPostsDocument = {
                   selectionSet: {
                     kind: 'SelectionSet',
                     selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
                       {
                         kind: 'Field',
-                        name: { kind: 'Name', value: 'admins' },
+                        name: { kind: 'Name', value: 'authorsPostShared' },
                         selectionSet: {
                           kind: 'SelectionSet',
                           selections: [
@@ -1459,11 +1529,11 @@ export const GetPostsDocument = {
                             },
                             {
                               kind: 'Field',
-                              name: { kind: 'Name', value: 'id' },
+                              name: { kind: 'Name', value: 'avatar' },
                             },
                             {
                               kind: 'Field',
-                              name: { kind: 'Name', value: 'avatar' },
+                              name: { kind: 'Name', value: 'id' },
                             },
                           ],
                         },
@@ -1480,22 +1550,47 @@ export const GetPostsDocument = {
                             },
                             {
                               kind: 'Field',
-                              name: { kind: 'Name', value: 'id' },
+                              name: { kind: 'Name', value: 'avatar' },
                             },
                             {
                               kind: 'Field',
-                              name: { kind: 'Name', value: 'avatar' },
+                              name: { kind: 'Name', value: 'id' },
                             },
                           ],
                         },
                       },
                       {
                         kind: 'Field',
-                        name: { kind: 'Name', value: 'avatar' },
+                        name: { kind: 'Name', value: 'content' },
                       },
                       {
                         kind: 'Field',
-                        name: { kind: 'Name', value: 'coverImage' },
+                        name: { kind: 'Name', value: 'images' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'topic' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'image' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'name' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'color' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                          ],
+                        },
                       },
                       {
                         kind: 'Field',
@@ -1503,63 +1598,21 @@ export const GetPostsDocument = {
                       },
                       {
                         kind: 'Field',
-                        name: { kind: 'Name', value: 'description' },
-                      },
-                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'idPrivate' },
+                        name: { kind: 'Name', value: 'updatedAt' },
                       },
                       {
                         kind: 'Field',
-                        name: { kind: 'Name', value: 'members' },
+                        name: { kind: 'Name', value: 'usersLiked' },
                         selectionSet: {
                           kind: 'SelectionSet',
                           selections: [
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'avatar' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'email' },
-                            },
                             {
                               kind: 'Field',
                               name: { kind: 'Name', value: 'fullname' },
                             },
                             {
                               kind: 'Field',
-                              name: { kind: 'Name', value: 'gender' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'id' },
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'membersReq' },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'Field',
                               name: { kind: 'Name', value: 'avatar' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'email' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'fullname' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'gender' },
                             },
                             {
                               kind: 'Field',
@@ -1578,7 +1631,7 @@ export const GetPostsDocument = {
       },
     },
   ],
-} as unknown as DocumentNode<GetPostsQuery, GetPostsQueryVariables>;
+} as unknown as DocumentNode<GetAllPostQuery, GetAllPostQueryVariables>;
 export const GetPostByIdDocument = {
   kind: 'Document',
   definitions: [
@@ -2112,16 +2165,6 @@ export const CreatePostDocument = {
                 { kind: 'Field', name: { kind: 'Name', value: 'id' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'images' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'isGhim' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'topic' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
-                    ],
-                  },
-                },
                 { kind: 'Field', name: { kind: 'Name', value: 'updatedAt' } },
                 {
                   kind: 'Field',
@@ -2140,7 +2183,6 @@ export const CreatePostDocument = {
                     ],
                   },
                 },
-                { kind: 'Field', name: { kind: 'Name', value: 'videos' } },
               ],
             },
           },
@@ -2149,6 +2191,80 @@ export const CreatePostDocument = {
     },
   ],
 } as unknown as DocumentNode<CreatePostMutation, CreatePostMutationVariables>;
+export const LikePostDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'likePost' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'idPost' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'idUser' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'likePost' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'idPost' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'idPost' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'idUser' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'idUser' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'message' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'status' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<LikePostMutation, LikePostMutationVariables>;
 export const UpdateDocument = {
   kind: 'Document',
   definitions: [
@@ -2233,8 +2349,10 @@ export const GetTopicsDocument = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'image' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'color' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'rank' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'id' } },
               ],
             },

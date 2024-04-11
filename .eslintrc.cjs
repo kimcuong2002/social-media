@@ -25,6 +25,17 @@ module.exports = {
       parserOptions: {
         sourceType: 'script',
       },
+      rules: {
+        '@typescript-eslint/ban-types': [
+          'error',
+          {
+            extendDefaults: true,
+            types: {
+              '{}': false,
+            },
+          },
+        ],
+      },
     },
   ],
   parser: '@typescript-eslint/parser',
