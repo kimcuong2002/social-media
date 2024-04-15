@@ -13,7 +13,7 @@ import {
   GET_POST_BY_GROUP,
   LIKE_POST,
 } from '../graphql';
-import { PostInput, PostType, ResPaginationPostData } from '../service/type';
+import { PostInput, PostType, PostTypeRes, ResPaginationPostData } from '../service/type';
 
 export const useCreatePostMutation = () =>
   useMutation<
@@ -37,7 +37,7 @@ export const useGetPostsQuery = (limit: number, page: number, filter = {}) => {
 };
 
 export const useGetPostDetail = (id: string) =>
-  useQuery<{ getPostById: PostType }, OperationVariables>(GET_POST_DETAIL, {
+  useQuery<{ getPostById: PostTypeRes }, OperationVariables>(GET_POST_DETAIL, {
     variables: { id },
   });
 
@@ -45,4 +45,4 @@ export const useGetPostByGroup = () =>
   useQuery<{ getPostByGroup: PostType }, OperationVariables>(GET_POST_BY_GROUP);
 
 export const useLikePost = () =>
-  useMutation<{ likePost: { status: string } }, OperationVariables>(LIKE_POST);
+  useMutation<{ likePost: { status: string } }, OperationVariables>(LIKE_POST)
