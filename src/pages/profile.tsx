@@ -111,7 +111,7 @@ export const Profile = () => {
             <ListPhoto />
             <ListFriend />
           </Box>
-          <Box className="w-full md:w-3/4 md:mt-[255px]">
+          <Box className="w-full md:w-3/4 md:mt-[100px]">
             <CreatePost />
             {posts?.map((item) => (
               <Post
