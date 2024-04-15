@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
 import { Box } from '@chakra-ui/react';
 import { BiCake, BiPhone } from 'react-icons/bi';
@@ -19,9 +19,8 @@ import {
   ListFriend,
   ListPhoto,
   Post,
-  PostTypeRes,
   ProfileAvatar,
-  useGetPostsQuery,
+  useGetPostByAuthor,
 } from '@/features';
 import { useQueryInfoUser } from '@/features/auth';
 import { converDateToString } from '@/utils';
@@ -82,17 +81,17 @@ export const Profile = () => {
     }
   }, [data]);
 
-  const [posts, setPosts] = useState<undefined | PostTypeRes[]>([]);
-  const limit = 1000;
-  const page = 1;
-  const filter = {};
+    const idAuthor = data?.getInfoUser.id;
+    const limit = 100;
+    const page = 1;
 
-  const { data: postsList } = useGetPostsQuery(limit, page, filter);
-  useMemo(() => {
-    if (postsList) {
-      setPosts(postsList.getAllPost.data);
+  const { data: posts } = useGetPostByAuthor(idAuthor as string, limit, page) ;
+  const listPosts = useMemo(() => {
+    if(posts) {
+      const result = posts.getPostByAuthor.data
+      return result
     }
-  }, [postsList]);
+  }, [posts])
 
   return (
     <Box>
@@ -113,7 +112,7 @@ export const Profile = () => {
           </Box>
           <Box className="w-full md:w-3/4 md:mt-[100px]">
             <CreatePost />
-            {posts?.map((item) => (
+            {listPosts?.map((item) => (
               <Post
                 key={item.id}
                 content={item.content}
