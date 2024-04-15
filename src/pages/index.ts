@@ -8,3 +8,4 @@ export * from './friends';
 export * from './group';
 export * from './chat';
 export * from './group-detail';
+export * from "./post-detail"
