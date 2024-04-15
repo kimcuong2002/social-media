@@ -43,13 +43,14 @@ export const GET_POST_DETAIL = gql`
       content
       createdAt
       id
+      updatedAt
+      images
+      isGhim
       author {
         fullname
         id
         avatar
       }
-      images
-      isGhim
       isPostToGroup {
         status
         idGroup
@@ -57,8 +58,6 @@ export const GET_POST_DETAIL = gql`
       topic {
         name
       }
-      updatedAt
-      videos
       usersLiked {
         avatar
         createdAt

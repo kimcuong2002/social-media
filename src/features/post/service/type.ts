@@ -14,12 +14,12 @@ export type PostTypeRes = {
   content: string;
   images?: string[];
   video?: string[];
-  // isGhim?: boolean;
+  isGhim?: boolean;
   usersLiked?: { fullname: string; id: string; avatar: string }[] | undefined;
-  // authorsPostShared?: string[];
-  // statusPostToGroup?: boolean;
-  // verified?: boolean;
-  // idGroup?: string;
+  authorsPostShared?: string[];
+  statusPostToGroup?: boolean;
+  verified?: boolean;
+  idGroup?: string;
   createdAt?: Date;
   updatedAt?: Date;
 };
