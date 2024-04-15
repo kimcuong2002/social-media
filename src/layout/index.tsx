@@ -20,7 +20,9 @@ const LayoutComponent = () => {
               </Box>
             }
           >
-            <Outlet />
+            <Box className="h-[89vh]">
+              <Outlet />
+            </Box>
           </Suspense>
         </ErrorBoundary>
       </Box>

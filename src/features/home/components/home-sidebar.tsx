@@ -1,34 +1,11 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 import { Avatar, Box, Image, Text } from '@chakra-ui/react';
 
-import { menu } from '@/assets';
-import { healt, design, develop, game } from '@/assets';
+import { Topic } from '@/features';
 import { useQueryInfoUser } from '@/features/auth';
+import { useGetAllTopic } from '@/features/topic';
 
-const topics = [
-  {
-    icon: game,
-    name: 'Game',
-  },
-  {
-    icon: design,
-    name: 'Design',
-  },
-
-  {
-    icon: healt,
-    name: 'Healt',
-  },
-  {
-    icon: develop,
-    name: 'Develop',
-  },
-  {
-    icon: menu,
-    name: 'More Topics',
-  },
-];
 const trends = [
   {
     name: 'Wash Hand',
@@ -54,7 +31,17 @@ const trends = [
 
 export const HomeSideBar = () => {
   const sortTrends = trends.sort((a, b) => b.totalPost - a.totalPost);
+  const [allTopics, setAllTopics] = useState<Topic[]>([]);
+
   const { data } = useQueryInfoUser();
+  const { data: topics } = useGetAllTopic();
+
+  useMemo(() => {
+    if (topics) {
+      setAllTopics(topics.topics);
+    }
+  }, [topics]);
+
   const userData = useMemo(() => {
     if (data) {
       const result = {
@@ -76,12 +63,12 @@ export const HomeSideBar = () => {
       <Text className="uppercase my-4 text-violet-800 font-bold" fontSize="sm">
         popular topics
       </Text>
-      {topics.map((item) => (
+      {allTopics.map((item) => (
         <Box
-          key={item.name}
-          className="flex gap-4 items-center my-6 cursor-pointer"
+          key={item.id}
+          className={`flex gap-4 items-center my-6 cursor-pointer bg-${item.color}`}
         >
-          <Image src={item.icon} boxSize="30px" />
+          <Image src={item.image} boxSize="50px" />
           <Text>{item.name}</Text>
         </Box>
       ))}

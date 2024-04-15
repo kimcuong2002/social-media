@@ -8,12 +8,14 @@ export type PostTypeRes = {
   topic: {
     image: string;
     name: string;
+    color: string;
+    id: string;
   };
   content: string;
   images?: string[];
   video?: string[];
   // isGhim?: boolean;
-  // userLiked?: string[];
+  usersLiked?: { fullname: string; id: string; avatar: string }[] | undefined;
   // authorsPostShared?: string[];
   // statusPostToGroup?: boolean;
   // verified?: boolean;
@@ -23,7 +25,7 @@ export type PostTypeRes = {
 };
 
 export type PostType = {
-  id?: string;
+  idPost?: string | undefined;
   images?: string[];
   content?: string;
   typePost?: 'video' | 'content';
@@ -31,6 +33,13 @@ export type PostType = {
   fullname: string;
   avatar?: string;
   createdAt: Date;
+  usersLiked?: { fullname: string; id: string; avatar: string }[] | undefined;
+  topic?: {
+    image: string;
+    name: string;
+    color: string;
+    id: string;
+  };
 };
 
 export type PostInput = Pick<

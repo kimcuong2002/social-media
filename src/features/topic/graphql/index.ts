@@ -1,10 +1,12 @@
 import { gql } from '@apollo/client';
 
 export const GET_TOPICS = gql`
-  query {
+  query getTopics {
     topics {
-      image
       name
+      color
+      image
+      rank
       id
     }
   }

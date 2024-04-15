@@ -7,3 +7,4 @@ export * from './comment/comment';
 export * from './common/button/sidebar-button';
 export * from './common/upload/upload';
 export * from './common/form-custom/form-custom';
+export * from './common/input-file/input-file';

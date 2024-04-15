@@ -11,6 +11,7 @@ import {
   GET_POSTS,
   GET_POST_DETAIL,
   GET_POST_BY_GROUP,
+  LIKE_POST,
 } from '../graphql';
 import { PostInput, PostType, ResPaginationPostData } from '../service/type';
 
@@ -22,8 +23,18 @@ export const useCreatePostMutation = () =>
     ApolloCache<unknown>
   >(CREATE_POST);
 
-export const useGetPostsQuery = () =>
-  useQuery<{ getPosts: ResPaginationPostData }, OperationVariables>(GET_POSTS);
+export const useGetPostsQuery = (limit: number, page: number, filter = {}) => {
+  return useQuery<{ getAllPost: ResPaginationPostData }, OperationVariables>(
+    GET_POSTS,
+    {
+      variables: {
+        limit: limit,
+        page: page,
+        filter: filter,
+      },
+    },
+  );
+};
 
 export const useGetPostDetail = (id: string) =>
   useQuery<{ getPostById: PostType }, OperationVariables>(GET_POST_DETAIL, {
@@ -32,3 +43,6 @@ export const useGetPostDetail = (id: string) =>
 
 export const useGetPostByGroup = () =>
   useQuery<{ getPostByGroup: PostType }, OperationVariables>(GET_POST_BY_GROUP);
+
+export const useLikePost = () =>
+  useMutation<{ likePost: { status: string } }, OperationVariables>(LIKE_POST);

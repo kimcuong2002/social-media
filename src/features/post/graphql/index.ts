@@ -1,39 +1,35 @@
 import { gql } from '@apollo/client';
 
 export const GET_POSTS = gql`
-  query GetPosts($filter: ParamsQueryDto!, $limit: Float!, $page: Float!) {
-    getPosts(filter: $filter, page: $page, limit: $limit) {
+  query GetAllPost($filter: ParamsQueryDto!, $limit: Float!, $page: Float!) {
+    getAllPost(filter: $filter, page: $page, limit: $limit) {
       page
       total
       data {
-        admins {
+        id
+        authorsPostShared {
           fullname
-          id
           avatar
+          id
         }
         author {
           fullname
-          id
           avatar
+          id
         }
-        avatar
-        coverImage
+        content
+        images
+        topic {
+          image
+          name
+          color
+          id
+        }
         createdAt
-        description
-        id
-        idPrivate
-        members {
-          avatar
-          email
+        updatedAt
+        usersLiked {
           fullname
-          gender
-          id
-        }
-        membersReq {
           avatar
-          email
-          fullname
-          gender
           id
         }
       }
@@ -47,7 +43,11 @@ export const GET_POST_DETAIL = gql`
       content
       createdAt
       id
-      author
+      author {
+        fullname
+        id
+        avatar
+      }
       images
       isGhim
       isPostToGroup {
@@ -106,7 +106,7 @@ export const GET_POST_DETAIL = gql`
 `;
 
 export const GET_POST_BY_GROUP = gql`
-  query GetPostsByGroup($idGroup: String, $limit: Float, $page: Float) {
+  query GetPostsByGroup($idGroup: String!, $limit: Float!, $page: Float!) {
     getPostsByGroup(idGroup: $idGroup, limit: $limit, page: $page) {
       page
       total
@@ -119,7 +119,11 @@ export const GET_POST_BY_GROUP = gql`
         content
         createdAt
         id
-        author
+        author {
+          fullname
+          id
+          avatar
+        }
         images
         isGhim
         isPostToGroup {
@@ -144,26 +148,29 @@ export const GET_POST_BY_GROUP = gql`
 export const CREATE_POST = gql`
   mutation createPost($body: CreatePostDto!) {
     createPost(body: $body) {
-      author {
-        fullname
-        avatar
-        email
-      }
       authorsPostShared {
         fullname
         avatar
-        email
       }
       content
-      createAt
+      createdAt
       id
       images
       isGhim
-      isPostToGroup
-      topic
-      updateAt
-      usersLiked
-      videos
+      updatedAt
+      usersLiked {
+        fullname
+        avatar
+      }
+    }
+  }
+`;
+
+export const LIKE_POST = gql`
+  mutation likePost($idPost: String!, $idUser: String!) {
+    likePost(idPost: $idPost, idUser: $idUser) {
+      message
+      status
     }
   }
 `;

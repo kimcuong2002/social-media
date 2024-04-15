@@ -215,12 +215,34 @@ const EditInformation: FC<Props> = ({
               {...field}
               className="!bg-white"
             >
-              <option value={0 as number}>Single</option>
+              <option value={0}>Single</option>
               <option value={1}>Date</option>
               <option value={2}>Married</option>
             </Select>
             {errors.relationship && (
               <ErrorShow message={errors.relationship.message as string} />
+            )}
+          </Box>
+        ),
+      },
+      {
+        isRequired: false,
+        control,
+        name: 'dayOfBirth',
+        element: ({ field }) => (
+          <Box>
+            <Text>Date of birth</Text>
+            <Input
+              placeholder="Select Date and Time"
+              size="md"
+              type="date"
+              id="dayOfBirth"
+              disabled={disable}
+              {...field}
+              className="!bg-white"
+            />
+            {errors.dayOfBirth && (
+              <ErrorShow message={errors.dayOfBirth.message as string} />
             )}
           </Box>
         ),

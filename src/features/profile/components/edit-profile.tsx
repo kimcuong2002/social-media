@@ -20,25 +20,26 @@ import { UpdateInput } from '../service/type';
 import { useQueryInfoUser } from '@/features/auth';
 import { UserType } from '@/features/user';
 
-const defaultValue = {
-  fullname: '',
-  address: '',
-  university: '',
-  company: '',
-  email: '',
-  phone: '',
-  description: '',
-};
-
 export const EditProfile = () => {
   const [user, setUser] = useState<UserType>();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data } = useQueryInfoUser();
+  const { data, refetch } = useQueryInfoUser();
   useMemo(() => {
     if (data) {
       setUser(data?.getInfoUser);
     }
   }, [data]);
+
+  const defaultValue = {
+    fullname: data?.getInfoUser.fullname,
+    address: data?.getInfoUser.address,
+    university: data?.getInfoUser.university,
+    company: data?.getInfoUser.company,
+    email: data?.getInfoUser.email,
+    phone: data?.getInfoUser.phone,
+    description: data?.getInfoUser.description,
+    id: data?.getInfoUser.id,
+  };
 
   const {
     control,
@@ -57,10 +58,11 @@ export const EditProfile = () => {
         },
         id: user?.id,
       },
-      onCompleted: () => {
+      onCompleted: async () => {
         toast.success('Update profile is successfully!');
         onClose();
         reset();
+        await refetch();
       },
       onError: (error) => {
         toast.error(error.message);

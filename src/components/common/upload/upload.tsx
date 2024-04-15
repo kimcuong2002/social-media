@@ -16,6 +16,7 @@ type Props = {
   onChange?: (_: unknown) => void;
   disable?: boolean;
   typeUpload?: 'avatar' | 'coverImage' | 'normal';
+  isMultiple?: boolean;
 };
 
 export const Upload: FC<Props> = ({
@@ -23,6 +24,7 @@ export const Upload: FC<Props> = ({
   onChange,
   disable = false,
   typeUpload = 'normal',
+  isMultiple,
 }) => {
   const { toast } = useToast();
   const [filesUpload, setFilesUpload] = useState<FileList | null>();
@@ -156,7 +158,7 @@ export const Upload: FC<Props> = ({
               className="hidden"
               id="upload"
               type="file"
-              multiple={true}
+              multiple={isMultiple}
               disabled={disable}
               onChange={(e) => {
                 if (e.target.files) {

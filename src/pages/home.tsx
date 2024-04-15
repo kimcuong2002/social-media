@@ -1,30 +1,46 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { Box } from '@chakra-ui/react';
 
 import { CreatePost } from '@/components';
-import { Post, RightNavBar, HomeSideBar } from '@/features';
+import {
+  Post,
+  RightNavBar,
+  HomeSideBar,
+  useGetPostsQuery,
+  PostTypeRes,
+} from '@/features';
 import NavbarLayout from '@/layout/navbar-layout';
-import { PostType } from '@/ts/types';
 
 export const Home = () => {
-  const [listPost] = useState<PostType[]>(
-    localStorage.getItem('Posts')
-      ? (JSON.parse(localStorage.getItem('Posts') as string) as PostType[])
-      : [],
-  );
+  const [posts, setPosts] = useState<undefined | PostTypeRes[]>([]);
+  const limit = 1000;
+  const page = 1;
+  const filter = {};
 
+  const { data } = useGetPostsQuery(limit, page, filter);
+  useMemo(() => {
+    if (data) {
+      setPosts(data.getAllPost.data);
+    }
+  }, [data]);
   return (
     <NavbarLayout navBarChildren={<HomeSideBar />}>
       <Box className="flex w-full justify-between">
         <Box className="hidden md:block"></Box>
-        <Box className="w-full lg:w-11/12 xl:w-8/12 overflow-y-scroll h-screen no-scrollbar">
+        <Box className="w-full lg:w-11/12 xl:w-8/12 overflow-y-scroll h-[95vh] no-scrollbar">
           <CreatePost />
-          {listPost.map((item) => (
+          {posts?.map((item) => (
             <Post
               key={item.id}
               content={item.content}
-              listFile={item.listFile}
+              images={item.images}
+              fullname={item.author.fullname}
+              avatar={item.author.avatar}
+              createdAt={item.createdAt as Date}
+              idPost={item.id}
+              usersLiked={item.usersLiked}
+              topic={item.topic}
             />
           ))}
         </Box>
