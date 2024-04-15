@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Avatar, Box, Text } from '@chakra-ui/react';
 import { BiHeart } from 'react-icons/bi';
 
-import CommentInput from './component/comment-input';
+import CommentInput from './comment-input';
 
 export const Comment = () => {
   const [reply, setReply] = useState(false);

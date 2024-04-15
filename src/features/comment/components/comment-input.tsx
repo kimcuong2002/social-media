@@ -8,7 +8,7 @@ import {
 } from '@chakra-ui/react';
 import { BiSend } from 'react-icons/bi';
 
-import { optionInput } from '../../../features/post/constant';
+import { optionInput } from '../../post/constant';
 
 const CommentInput = () => {
   const actions = optionInput.slice(0, 4);
