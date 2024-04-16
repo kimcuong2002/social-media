@@ -24,3 +24,5 @@ export * from './post/service/type';
 export * from './group/hooks/use-group-query';
 export * from './group/service/type';
 export * from "./post/hooks/use-post-query"
+export * from "./comment/components/comment-input"
+export * from "./comment/components/comment"

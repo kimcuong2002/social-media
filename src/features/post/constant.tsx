@@ -1,9 +1,8 @@
-import { BiFile, BiImage, BiSend, BiSmile, BiVideo } from 'react-icons/bi';
+import { BiImage, BiSend, BiSmile, BiVideo } from 'react-icons/bi';
 
 export const optionInput = [
-  { value: 'video/*', icon: <BiVideo />, id: 1 },
-  { icon: <BiSmile />, id: 2, open: true },
+  { value: 'video/*', icon: <BiVideo />, id: 1, type: 'file', name: 'videos' },
   { value: 'image/*', icon: <BiImage />, id: 3 },
-  { value: 'file', icon: <BiFile />, id: 4 },
-  { value: 'send', icon: <BiSend />, id: 5 },
+  { icon: <BiSmile />, id: 2, open: true, type: 'file' },
+  { icon: <BiSend />, id: 4, type: 'submit' },
 ];

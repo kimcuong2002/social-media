@@ -2,35 +2,22 @@
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = {
-  [K in keyof T]: T[K];
-};
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]?: Maybe<T[SubKey]>;
-};
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]: Maybe<T[SubKey]>;
-};
-export type MakeEmpty<
-  T extends { [key: string]: unknown },
-  K extends keyof T,
-> = { [_ in K]?: never };
-export type Incremental<T> =
-  | T
-  | {
-      [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never;
-    };
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
+export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: { input: string; output: string };
-  String: { input: string; output: string };
-  Boolean: { input: boolean; output: boolean };
-  Int: { input: number; output: number };
-  Float: { input: number; output: number };
+  ID: { input: string; output: string; }
+  String: { input: string; output: string; }
+  Boolean: { input: boolean; output: boolean; }
+  Int: { input: number; output: number; }
+  Float: { input: number; output: number; }
   /** A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format. */
-  DateTime: { input: any; output: any };
+  DateTime: { input: any; output: any; }
   /** The `Upload` scalar type represents a file upload. */
-  Upload: { input: any; output: any };
+  Upload: { input: any; output: any; }
 };
 
 export type CollectionDto = {
@@ -228,170 +215,208 @@ export type Mutation = {
   uploadSingleFiles: ResponseSingleUpload;
 };
 
+
 export type MutationCreateArgs = {
   body: CreateUserDto;
 };
+
 
 export type MutationCreateCollectionArgs = {
   body: CreateCollectionDto;
 };
 
+
 export type MutationCreateGroupArgs = {
   body: CreateGroupDto;
 };
+
 
 export type MutationCreateMessageArgs = {
   body: CreateMessageDto;
 };
 
+
 export type MutationCreatePostArgs = {
   body: CreatePostDto;
 };
+
 
 export type MutationCreateRoomArgs = {
   body: CreateRoomDto;
 };
 
+
 export type MutationCreateSavedArgs = {
   body: CreateSavedDto;
 };
+
 
 export type MutationCreateTopicArgs = {
   body: CreateTopicDto;
 };
 
+
 export type MutationDeleteArgs = {
   id: Scalars['String']['input'];
 };
+
 
 export type MutationDeleteCollectionArgs = {
   id: Scalars['String']['input'];
 };
 
+
 export type MutationDeleteGroupArgs = {
   id: Scalars['String']['input'];
 };
+
 
 export type MutationDeleteMarketCollectionArgs = {
   id: Scalars['String']['input'];
   idMarket: Scalars['String']['input'];
 };
 
+
 export type MutationDeleteMarketSavedArgs = {
   idMarket: Scalars['String']['input'];
   idSaved: Scalars['String']['input'];
 };
 
+
 export type MutationDeleteMessageArgs = {
   id: Scalars['String']['input'];
 };
 
+
 export type MutationDeletePostArgs = {
   id: Scalars['String']['input'];
 };
+
 
 export type MutationDeletePostCollectionArgs = {
   id: Scalars['String']['input'];
   idPost: Scalars['String']['input'];
 };
 
+
 export type MutationDeletePostSavedArgs = {
   idPost: Scalars['String']['input'];
   idSaved: Scalars['String']['input'];
 };
 
+
 export type MutationDeleteRoomArgs = {
   id: Scalars['String']['input'];
 };
+
 
 export type MutationDeleteTopicArgs = {
   id: Scalars['String']['input'];
 };
 
+
 export type MutationGhimPostArgs = {
   idPost: Scalars['String']['input'];
 };
+
 
 export type MutationLikePostArgs = {
   idPost: Scalars['String']['input'];
   idUser: Scalars['String']['input'];
 };
 
+
 export type MutationLoginArgs = {
   body: LoginUserDto;
 };
+
 
 export type MutationSharePostArgs = {
   idPost: Scalars['String']['input'];
   idUser: Scalars['String']['input'];
 };
 
+
 export type MutationSignupArgs = {
   body: SignUpUserDto;
 };
 
+
 export type MutationUpdatFileForUserArgs = {
   files: Array<Scalars['String']['input']>;
 };
+
 
 export type MutationUpdateArgs = {
   body: UpdateUserDto;
   id: Scalars['String']['input'];
 };
 
+
 export type MutationUpdateCollectionArgs = {
   body: UpdateCollectionDto;
   id: Scalars['String']['input'];
 };
+
 
 export type MutationUpdateGroupArgs = {
   body: UpdateGroupDto;
   id: Scalars['String']['input'];
 };
 
+
 export type MutationUpdateMarketCollectionArgs = {
   id: Scalars['String']['input'];
   idMarket: Scalars['String']['input'];
 };
+
 
 export type MutationUpdateMarketSavedArgs = {
   idMarket: Scalars['String']['input'];
   idSaved: Scalars['String']['input'];
 };
 
+
 export type MutationUpdateMessageArgs = {
   body: UpdateMessageDto;
   id: Scalars['String']['input'];
 };
+
 
 export type MutationUpdatePostArgs = {
   body: UpdatePostDto;
   id: Scalars['String']['input'];
 };
 
+
 export type MutationUpdatePostCollectionArgs = {
   id: Scalars['String']['input'];
   idPost: Scalars['String']['input'];
 };
+
 
 export type MutationUpdatePostSavedArgs = {
   idPost: Scalars['String']['input'];
   idSaved: Scalars['String']['input'];
 };
 
+
 export type MutationUpdateRoomArgs = {
   body: UpdateRoomDto;
   id: Scalars['String']['input'];
 };
+
 
 export type MutationUpdateTopicArgs = {
   body: UpdateTopicDto;
   id: Scalars['String']['input'];
 };
 
+
 export type MutationUploadMultipleFilesArgs = {
   files: Array<Scalars['Upload']['input']>;
 };
+
 
 export type MutationUploadSingleFilesArgs = {
   file: Scalars['Upload']['input'];
@@ -454,6 +479,7 @@ export type Query = {
   getGroupById: Group;
   getGroups: PaginationGroupDto;
   getInfoUser: ResponseUserDto;
+  getPostByAuthor: PaginationPostDto;
   getPostById: Post;
   getPostsByGroup: PaginationPostDto;
   getRoomById: Room;
@@ -464,9 +490,11 @@ export type Query = {
   users: PaginationUserDto;
 };
 
+
 export type QueryGetAllMessageArgs = {
   room: Scalars['String']['input'];
 };
+
 
 export type QueryGetAllPostArgs = {
   filter: ParamsQueryDto;
@@ -474,9 +502,11 @@ export type QueryGetAllPostArgs = {
   page: Scalars['Float']['input'];
 };
 
+
 export type QueryGetAllRoomArgs = {
   idUser: Scalars['String']['input'];
 };
+
 
 export type QueryGetCollectionsArgs = {
   idSaved: Scalars['String']['input'];
@@ -484,9 +514,11 @@ export type QueryGetCollectionsArgs = {
   page: Scalars['Float']['input'];
 };
 
+
 export type QueryGetGroupByIdArgs = {
   id: Scalars['String']['input'];
 };
+
 
 export type QueryGetGroupsArgs = {
   filter: ParamsQueryDto;
@@ -494,9 +526,18 @@ export type QueryGetGroupsArgs = {
   page: Scalars['Float']['input'];
 };
 
+
+export type QueryGetPostByAuthorArgs = {
+  idAuthor: Scalars['String']['input'];
+  limit: Scalars['Float']['input'];
+  page: Scalars['Float']['input'];
+};
+
+
 export type QueryGetPostByIdArgs = {
   id: Scalars['String']['input'];
 };
+
 
 export type QueryGetPostsByGroupArgs = {
   idGroup: Scalars['String']['input'];
@@ -504,21 +545,26 @@ export type QueryGetPostsByGroupArgs = {
   page: Scalars['Float']['input'];
 };
 
+
 export type QueryGetRoomByIdArgs = {
   id: Scalars['String']['input'];
 };
+
 
 export type QueryGetSavedArgs = {
   idAuthor: Scalars['String']['input'];
 };
 
+
 export type QueryTopicArgs = {
   name: Scalars['String']['input'];
 };
 
+
 export type QueryUserArgs = {
   username: Scalars['String']['input'];
 };
+
 
 export type QueryUsersArgs = {
   query: QueryPagination;
@@ -720,104 +766,27 @@ export type LoginMutationVariables = Exact<{
   body: LoginUserDto;
 }>;
 
-export type LoginMutation = {
-  __typename?: 'Mutation';
-  login: {
-    __typename?: 'LoginResponse';
-    access_token: string;
-    user: {
-      __typename?: 'User';
-      fullname: string;
-      avatar: string;
-      dayOfBirth: string;
-      description: string;
-      gender: number;
-      id: string;
-      phone: string;
-      email: string;
-      role: string;
-      createdAt: any;
-      friends: Array<{
-        __typename?: 'User';
-        fullname: string;
-        avatar: string;
-        dayOfBirth: string;
-        description: string;
-        gender: number;
-        id: string;
-        phone: string;
-        email: string;
-        role: string;
-        createdAt: any;
-      }>;
-      friendsReq: Array<{
-        __typename?: 'User';
-        fullname: string;
-        avatar: string;
-        dayOfBirth: string;
-        description: string;
-        gender: number;
-        id: string;
-        phone: string;
-        email: string;
-        role: string;
-        createdAt: any;
-      }>;
-    };
-  };
-};
+
+export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'LoginResponse', access_token: string, user: { __typename?: 'User', fullname: string, avatar: string, dayOfBirth: string, description: string, gender: number, id: string, phone: string, email: string, role: string, createdAt: any, friends: Array<{ __typename?: 'User', fullname: string, avatar: string, dayOfBirth: string, description: string, gender: number, id: string, phone: string, email: string, role: string, createdAt: any }>, friendsReq: Array<{ __typename?: 'User', fullname: string, avatar: string, dayOfBirth: string, description: string, gender: number, id: string, phone: string, email: string, role: string, createdAt: any }> } } };
 
 export type SignupMutationVariables = Exact<{
   body: SignUpUserDto;
 }>;
 
-export type SignupMutation = {
-  __typename?: 'Mutation';
-  signup: { __typename?: 'User'; username: string };
-};
 
-export type GetInfoUserQueryVariables = Exact<{ [key: string]: never }>;
+export type SignupMutation = { __typename?: 'Mutation', signup: { __typename?: 'User', username: string } };
 
-export type GetInfoUserQuery = {
-  __typename?: 'Query';
-  getInfoUser: {
-    __typename?: 'ResponseUserDto';
-    avatar: string;
-    createdAt: any;
-    coverImage: string;
-    dayOfBirth: string;
-    description: string;
-    email: string;
-    address: string;
-    company: string;
-    university: string;
-    relationship: number;
-    fullname: string;
-    gender: number;
-    id: string;
-    phone: string;
-    friends: Array<{ __typename?: 'User'; fullname: string; avatar: string }>;
-    friendsReq: Array<{
-      __typename?: 'User';
-      fullname: string;
-      avatar: string;
-    }>;
-  };
-};
+export type GetInfoUserQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetInfoUserQuery = { __typename?: 'Query', getInfoUser: { __typename?: 'ResponseUserDto', avatar: string, createdAt: any, coverImage: string, dayOfBirth: string, description: string, email: string, address: string, company: string, university: string, relationship: number, fullname: string, gender: number, id: string, phone: string, friends: Array<{ __typename?: 'User', fullname: string, avatar: string }>, friendsReq: Array<{ __typename?: 'User', fullname: string, avatar: string }> } };
 
 export type CreateGroupMutationVariables = Exact<{
   body: CreateGroupDto;
 }>;
 
-export type CreateGroupMutation = {
-  __typename?: 'Mutation';
-  createGroup: {
-    __typename?: 'Group';
-    name: string;
-    avatar: string;
-    createdAt: any;
-  };
-};
+
+export type CreateGroupMutation = { __typename?: 'Mutation', createGroup: { __typename?: 'Group', name: string, avatar: string, createdAt: any } };
 
 export type GetGroupsQueryVariables = Exact<{
   filter: ParamsQueryDto;
@@ -825,1784 +794,51 @@ export type GetGroupsQueryVariables = Exact<{
   page: Scalars['Float']['input'];
 }>;
 
-export type GetGroupsQuery = {
-  __typename?: 'Query';
-  getGroups: {
-    __typename?: 'PaginationGroupDto';
-    page: number;
-    total: number;
-    data: Array<{
-      __typename?: 'Group';
-      name: string;
-      avatar: string;
-      id: string;
-      description: string;
-      createdAt: any;
-    }>;
-  };
-};
 
-export type GetAllPostQueryVariables = Exact<{
-  filter: ParamsQueryDto;
-  limit: Scalars['Float']['input'];
-  page: Scalars['Float']['input'];
-}>;
+export type GetGroupsQuery = { __typename?: 'Query', getGroups: { __typename?: 'PaginationGroupDto', data: Array<{ __typename?: 'Group', name: string, id: string, avatar: string, description: string }> } };
 
-export type GetAllPostQuery = {
-  __typename?: 'Query';
-  getAllPost: {
-    __typename?: 'PaginationPostDto';
-    page: number;
-    total: number;
-    data: Array<{
-      __typename?: 'Post';
-      id: string;
-      content: string;
-      images: Array<string>;
-      createdAt: any;
-      updatedAt: any;
-      authorsPostShared: Array<{
-        __typename?: 'User';
-        fullname: string;
-        avatar: string;
-        id: string;
-      }>;
-      author: {
-        __typename?: 'User';
-        fullname: string;
-        avatar: string;
-        id: string;
-      };
-      topic: {
-        __typename?: 'Topic';
-        image: string;
-        name: string;
-        color: string;
-        id: string;
-      };
-      usersLiked: Array<{
-        __typename?: 'User';
-        fullname: string;
-        avatar: string;
-        id: string;
-      }>;
-    }>;
-  };
-};
-
-export type GetPostByIdQueryVariables = Exact<{
+export type GetGroupByIdQueryVariables = Exact<{
   id: Scalars['String']['input'];
 }>;
 
-export type GetPostByIdQuery = {
-  __typename?: 'Query';
-  getPostById: {
-    __typename?: 'Post';
-    content: string;
-    createdAt: any;
-    id: string;
-    images: Array<string>;
-    isGhim: boolean;
-    updatedAt: any;
-    videos: Array<string>;
-    author: {
-      __typename?: 'User';
-      fullname: string;
-      id: string;
-      avatar: string;
-    };
-    isPostToGroup: {
-      __typename?: 'IsPostToGroupDto';
-      status: boolean;
-      idGroup: string;
-    };
-    topic: { __typename?: 'Topic'; name: string };
-    usersLiked: Array<{
-      __typename?: 'User';
-      avatar: string;
-      createdAt: any;
-      dayOfBirth: string;
-      description: string;
-      email: string;
-      fullname: string;
-      gender: number;
-      id: string;
-      phone: string;
-      friends: Array<{
-        __typename?: 'User';
-        fullname: string;
-        id: string;
-        avatar: string;
-      }>;
-      friendsReq: Array<{
-        __typename?: 'User';
-        fullname: string;
-        id: string;
-        avatar: string;
-      }>;
-    }>;
-    authorsPostShared: Array<{
-      __typename?: 'User';
-      avatar: string;
-      createdAt: any;
-      dayOfBirth: string;
-      description: string;
-      email: string;
-      fullname: string;
-      gender: number;
-      id: string;
-      phone: string;
-      friends: Array<{
-        __typename?: 'User';
-        fullname: string;
-        id: string;
-        avatar: string;
-      }>;
-      friendsReq: Array<{
-        __typename?: 'User';
-        fullname: string;
-        id: string;
-        avatar: string;
-      }>;
-    }>;
-  };
-};
 
-export type GetPostsByGroupQueryVariables = Exact<{
-  idGroup: Scalars['String']['input'];
-  limit: Scalars['Float']['input'];
-  page: Scalars['Float']['input'];
-}>;
-
-export type GetPostsByGroupQuery = {
-  __typename?: 'Query';
-  getPostsByGroup: {
-    __typename?: 'PaginationPostDto';
-    page: number;
-    total: number;
-    data: Array<{
-      __typename?: 'Post';
-      content: string;
-      createdAt: any;
-      id: string;
-      images: Array<string>;
-      isGhim: boolean;
-      updatedAt: any;
-      videos: Array<string>;
-      authorsPostShared: Array<{
-        __typename?: 'User';
-        avatar: string;
-        fullname: string;
-        id: string;
-      }>;
-      author: {
-        __typename?: 'User';
-        fullname: string;
-        id: string;
-        avatar: string;
-      };
-      isPostToGroup: {
-        __typename?: 'IsPostToGroupDto';
-        idGroup: string;
-        status: boolean;
-      };
-      topic: { __typename?: 'Topic'; id: string; name: string };
-      usersLiked: Array<{ __typename?: 'User'; id: string; fullname: string }>;
-    }>;
-  };
-};
-
-export type CreatePostMutationVariables = Exact<{
-  body: CreatePostDto;
-}>;
-
-export type CreatePostMutation = {
-  __typename?: 'Mutation';
-  createPost: {
-    __typename?: 'Post';
-    content: string;
-    createdAt: any;
-    id: string;
-    images: Array<string>;
-    isGhim: boolean;
-    updatedAt: any;
-    authorsPostShared: Array<{
-      __typename?: 'User';
-      fullname: string;
-      avatar: string;
-    }>;
-    usersLiked: Array<{
-      __typename?: 'User';
-      fullname: string;
-      avatar: string;
-    }>;
-  };
-};
-
-export type LikePostMutationVariables = Exact<{
-  idPost: Scalars['String']['input'];
-  idUser: Scalars['String']['input'];
-}>;
-
-export type LikePostMutation = {
-  __typename?: 'Mutation';
-  likePost: { __typename?: 'ResponseDto'; message: string; status: number };
-};
+export type GetGroupByIdQuery = { __typename?: 'Query', getGroupById: { __typename?: 'Group', allFiles: Array<string>, avatar: string, coverImage: string, createdAt: any, description: string, id: string, name: string, updatedAt: any, isPrivate: boolean, admins: Array<{ __typename?: 'User', fullname: string, id: string, avatar: string }>, members: Array<{ __typename?: 'User', fullname: string, id: string, avatar: string }>, membersReq: Array<{ __typename?: 'User', fullname: string, id: string, avatar: string }> } };
 
 export type UpdateMutationVariables = Exact<{
   body: UpdateUserDto;
   id: Scalars['String']['input'];
 }>;
 
-export type UpdateMutation = {
-  __typename?: 'Mutation';
-  update: { __typename?: 'ResponseDto'; message: string; status: number };
-};
 
-export type GetTopicsQueryVariables = Exact<{ [key: string]: never }>;
+export type UpdateMutation = { __typename?: 'Mutation', update: { __typename?: 'ResponseDto', message: string, status: number } };
 
-export type GetTopicsQuery = {
-  __typename?: 'Query';
-  topics: Array<{
-    __typename?: 'Topic';
-    name: string;
-    color: string;
-    image: string;
-    rank: number;
-    id: string;
-  }>;
-};
+export type GetTopicsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetTopicsQuery = { __typename?: 'Query', topics: Array<{ __typename?: 'Topic', name: string, color: string, image: string, rank: number, id: string }> };
 
 export type UploadSingleFilesMutationVariables = Exact<{
   file: Scalars['Upload']['input'];
 }>;
 
-export type UploadSingleFilesMutation = {
-  __typename?: 'Mutation';
-  uploadSingleFiles: { __typename?: 'ResponseSingleUpload'; url: string };
-};
+
+export type UploadSingleFilesMutation = { __typename?: 'Mutation', uploadSingleFiles: { __typename?: 'ResponseSingleUpload', url: string } };
 
 export type UploadMultipleFilesMutationVariables = Exact<{
   files: Array<Scalars['Upload']['input']> | Scalars['Upload']['input'];
 }>;
 
-export type UploadMultipleFilesMutation = {
-  __typename?: 'Mutation';
-  uploadMultipleFiles: Array<{
-    __typename?: 'ResponseSingleUpload';
-    url: string;
-  }>;
-};
 
-export const LoginDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'mutation',
-      name: { kind: 'Name', value: 'Login' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'body' } },
-          type: {
-            kind: 'NonNullType',
-            type: {
-              kind: 'NamedType',
-              name: { kind: 'Name', value: 'LoginUserDto' },
-            },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'login' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'body' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'body' },
-                },
-              },
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'user' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'fullname' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'avatar' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'dayOfBirth' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'description' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'gender' },
-                      },
-                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'phone' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'email' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'role' } },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'createdAt' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'friends' },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'fullname' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'avatar' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'dayOfBirth' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'description' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'gender' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'id' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'phone' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'email' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'role' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'createdAt' },
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'friendsReq' },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'fullname' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'avatar' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'dayOfBirth' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'description' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'gender' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'id' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'phone' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'email' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'role' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'createdAt' },
-                            },
-                          ],
-                        },
-                      },
-                    ],
-                  },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'access_token' },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
-export const SignupDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'mutation',
-      name: { kind: 'Name', value: 'Signup' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'body' } },
-          type: {
-            kind: 'NonNullType',
-            type: {
-              kind: 'NamedType',
-              name: { kind: 'Name', value: 'SignUpUserDto' },
-            },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'signup' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'body' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'body' },
-                },
-              },
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'username' } },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<SignupMutation, SignupMutationVariables>;
-export const GetInfoUserDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'GetInfoUser' },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'getInfoUser' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'avatar' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'coverImage' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'dayOfBirth' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'description' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'email' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'address' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'description' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'company' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'university' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'relationship' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'friends' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'fullname' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'avatar' },
-                      },
-                    ],
-                  },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'friendsReq' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'fullname' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'avatar' },
-                      },
-                    ],
-                  },
-                },
-                { kind: 'Field', name: { kind: 'Name', value: 'fullname' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'gender' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'phone' } },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<GetInfoUserQuery, GetInfoUserQueryVariables>;
-export const CreateGroupDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'mutation',
-      name: { kind: 'Name', value: 'createGroup' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'body' } },
-          type: {
-            kind: 'NonNullType',
-            type: {
-              kind: 'NamedType',
-              name: { kind: 'Name', value: 'CreateGroupDto' },
-            },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'createGroup' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'body' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'body' },
-                },
-              },
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'avatar' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<CreateGroupMutation, CreateGroupMutationVariables>;
-export const GetGroupsDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'GetGroups' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: {
-            kind: 'Variable',
-            name: { kind: 'Name', value: 'filter' },
-          },
-          type: {
-            kind: 'NonNullType',
-            type: {
-              kind: 'NamedType',
-              name: { kind: 'Name', value: 'ParamsQueryDto' },
-            },
-          },
-        },
-        {
-          kind: 'VariableDefinition',
-          variable: {
-            kind: 'Variable',
-            name: { kind: 'Name', value: 'limit' },
-          },
-          type: {
-            kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'Float' } },
-          },
-        },
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'page' } },
-          type: {
-            kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'Float' } },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'getGroups' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'filter' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'filter' },
-                },
-              },
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'page' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'page' },
-                },
-              },
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'limit' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'limit' },
-                },
-              },
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'data' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'avatar' },
-                      },
-                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'description' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'createdAt' },
-                      },
-                    ],
-                  },
-                },
-                { kind: 'Field', name: { kind: 'Name', value: 'page' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'total' } },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<GetGroupsQuery, GetGroupsQueryVariables>;
-export const GetAllPostDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'GetAllPost' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: {
-            kind: 'Variable',
-            name: { kind: 'Name', value: 'filter' },
-          },
-          type: {
-            kind: 'NonNullType',
-            type: {
-              kind: 'NamedType',
-              name: { kind: 'Name', value: 'ParamsQueryDto' },
-            },
-          },
-        },
-        {
-          kind: 'VariableDefinition',
-          variable: {
-            kind: 'Variable',
-            name: { kind: 'Name', value: 'limit' },
-          },
-          type: {
-            kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'Float' } },
-          },
-        },
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'page' } },
-          type: {
-            kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'Float' } },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'getAllPost' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'filter' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'filter' },
-                },
-              },
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'page' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'page' },
-                },
-              },
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'limit' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'limit' },
-                },
-              },
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'page' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'total' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'data' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'authorsPostShared' },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'fullname' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'avatar' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'id' },
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'author' },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'fullname' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'avatar' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'id' },
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'content' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'images' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'topic' },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'image' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'name' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'color' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'id' },
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'createdAt' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'updatedAt' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'usersLiked' },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'fullname' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'avatar' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'id' },
-                            },
-                          ],
-                        },
-                      },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<GetAllPostQuery, GetAllPostQueryVariables>;
-export const GetPostByIdDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'GetPostById' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
-          type: {
-            kind: 'NonNullType',
-            type: {
-              kind: 'NamedType',
-              name: { kind: 'Name', value: 'String' },
-            },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'getPostById' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'id' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'id' },
-                },
-              },
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'content' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'author' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'fullname' },
-                      },
-                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'avatar' },
-                      },
-                    ],
-                  },
-                },
-                { kind: 'Field', name: { kind: 'Name', value: 'images' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'isGhim' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'isPostToGroup' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'status' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'idGroup' },
-                      },
-                    ],
-                  },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'topic' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
-                    ],
-                  },
-                },
-                { kind: 'Field', name: { kind: 'Name', value: 'updatedAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'videos' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'usersLiked' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'avatar' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'createdAt' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'dayOfBirth' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'description' },
-                      },
-                      { kind: 'Field', name: { kind: 'Name', value: 'email' } },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'friends' },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'fullname' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'id' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'avatar' },
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'friendsReq' },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'fullname' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'id' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'avatar' },
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'fullname' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'gender' },
-                      },
-                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'phone' } },
-                    ],
-                  },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'authorsPostShared' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'avatar' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'createdAt' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'dayOfBirth' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'description' },
-                      },
-                      { kind: 'Field', name: { kind: 'Name', value: 'email' } },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'friends' },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'fullname' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'id' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'avatar' },
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'friendsReq' },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'fullname' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'id' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'avatar' },
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'fullname' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'gender' },
-                      },
-                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'phone' } },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<GetPostByIdQuery, GetPostByIdQueryVariables>;
-export const GetPostsByGroupDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'GetPostsByGroup' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: {
-            kind: 'Variable',
-            name: { kind: 'Name', value: 'idGroup' },
-          },
-          type: {
-            kind: 'NonNullType',
-            type: {
-              kind: 'NamedType',
-              name: { kind: 'Name', value: 'String' },
-            },
-          },
-        },
-        {
-          kind: 'VariableDefinition',
-          variable: {
-            kind: 'Variable',
-            name: { kind: 'Name', value: 'limit' },
-          },
-          type: {
-            kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'Float' } },
-          },
-        },
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'page' } },
-          type: {
-            kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'Float' } },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'getPostsByGroup' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'idGroup' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'idGroup' },
-                },
-              },
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'limit' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'limit' },
-                },
-              },
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'page' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'page' },
-                },
-              },
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'page' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'total' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'data' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'authorsPostShared' },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'avatar' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'fullname' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'id' },
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'content' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'createdAt' },
-                      },
-                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'author' },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'fullname' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'id' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'avatar' },
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'images' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'isGhim' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'isPostToGroup' },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'idGroup' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'status' },
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'topic' },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'id' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'name' },
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'updatedAt' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'usersLiked' },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'id' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'fullname' },
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'videos' },
-                      },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<
-  GetPostsByGroupQuery,
-  GetPostsByGroupQueryVariables
->;
-export const CreatePostDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'mutation',
-      name: { kind: 'Name', value: 'createPost' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'body' } },
-          type: {
-            kind: 'NonNullType',
-            type: {
-              kind: 'NamedType',
-              name: { kind: 'Name', value: 'CreatePostDto' },
-            },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'createPost' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'body' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'body' },
-                },
-              },
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'authorsPostShared' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'fullname' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'avatar' },
-                      },
-                    ],
-                  },
-                },
-                { kind: 'Field', name: { kind: 'Name', value: 'content' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'images' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'isGhim' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'updatedAt' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'usersLiked' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'fullname' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'avatar' },
-                      },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<CreatePostMutation, CreatePostMutationVariables>;
-export const LikePostDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'mutation',
-      name: { kind: 'Name', value: 'likePost' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: {
-            kind: 'Variable',
-            name: { kind: 'Name', value: 'idPost' },
-          },
-          type: {
-            kind: 'NonNullType',
-            type: {
-              kind: 'NamedType',
-              name: { kind: 'Name', value: 'String' },
-            },
-          },
-        },
-        {
-          kind: 'VariableDefinition',
-          variable: {
-            kind: 'Variable',
-            name: { kind: 'Name', value: 'idUser' },
-          },
-          type: {
-            kind: 'NonNullType',
-            type: {
-              kind: 'NamedType',
-              name: { kind: 'Name', value: 'String' },
-            },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'likePost' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'idPost' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'idPost' },
-                },
-              },
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'idUser' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'idUser' },
-                },
-              },
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'message' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'status' } },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<LikePostMutation, LikePostMutationVariables>;
-export const UpdateDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'mutation',
-      name: { kind: 'Name', value: 'Update' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'body' } },
-          type: {
-            kind: 'NonNullType',
-            type: {
-              kind: 'NamedType',
-              name: { kind: 'Name', value: 'UpdateUserDto' },
-            },
-          },
-        },
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
-          type: {
-            kind: 'NonNullType',
-            type: {
-              kind: 'NamedType',
-              name: { kind: 'Name', value: 'String' },
-            },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'update' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'body' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'body' },
-                },
-              },
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'id' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'id' },
-                },
-              },
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'message' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'status' } },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<UpdateMutation, UpdateMutationVariables>;
-export const GetTopicsDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'getTopics' },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'topics' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'color' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'image' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'rank' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<GetTopicsQuery, GetTopicsQueryVariables>;
-export const UploadSingleFilesDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'mutation',
-      name: { kind: 'Name', value: 'UploadSingleFiles' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'file' } },
-          type: {
-            kind: 'NonNullType',
-            type: {
-              kind: 'NamedType',
-              name: { kind: 'Name', value: 'Upload' },
-            },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'uploadSingleFiles' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'file' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'file' },
-                },
-              },
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'url' } },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<
-  UploadSingleFilesMutation,
-  UploadSingleFilesMutationVariables
->;
-export const UploadMultipleFilesDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'mutation',
-      name: { kind: 'Name', value: 'UploadMultipleFiles' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: {
-            kind: 'Variable',
-            name: { kind: 'Name', value: 'files' },
-          },
-          type: {
-            kind: 'NonNullType',
-            type: {
-              kind: 'ListType',
-              type: {
-                kind: 'NonNullType',
-                type: {
-                  kind: 'NamedType',
-                  name: { kind: 'Name', value: 'Upload' },
-                },
-              },
-            },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'uploadMultipleFiles' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'files' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'files' },
-                },
-              },
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'url' } },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<
-  UploadMultipleFilesMutation,
-  UploadMultipleFilesMutationVariables
->;
+export type UploadMultipleFilesMutation = { __typename?: 'Mutation', uploadMultipleFiles: Array<{ __typename?: 'ResponseSingleUpload', url: string }> };
+
+
+export const LoginDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Login"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"body"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"LoginUserDto"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"login"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"body"},"value":{"kind":"Variable","name":{"kind":"Name","value":"body"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fullname"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}},{"kind":"Field","name":{"kind":"Name","value":"dayOfBirth"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"gender"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"role"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"friends"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fullname"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}},{"kind":"Field","name":{"kind":"Name","value":"dayOfBirth"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"gender"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"role"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}},{"kind":"Field","name":{"kind":"Name","value":"friendsReq"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fullname"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}},{"kind":"Field","name":{"kind":"Name","value":"dayOfBirth"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"gender"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"role"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"access_token"}}]}}]}}]} as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
+export const SignupDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Signup"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"body"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"SignUpUserDto"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signup"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"body"},"value":{"kind":"Variable","name":{"kind":"Name","value":"body"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"username"}}]}}]}}]} as unknown as DocumentNode<SignupMutation, SignupMutationVariables>;
+export const GetInfoUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetInfoUser"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getInfoUser"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"avatar"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"coverImage"}},{"kind":"Field","name":{"kind":"Name","value":"dayOfBirth"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"address"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"company"}},{"kind":"Field","name":{"kind":"Name","value":"university"}},{"kind":"Field","name":{"kind":"Name","value":"relationship"}},{"kind":"Field","name":{"kind":"Name","value":"friends"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fullname"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}}]}},{"kind":"Field","name":{"kind":"Name","value":"friendsReq"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fullname"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}}]}},{"kind":"Field","name":{"kind":"Name","value":"fullname"}},{"kind":"Field","name":{"kind":"Name","value":"gender"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}}]}}]}}]} as unknown as DocumentNode<GetInfoUserQuery, GetInfoUserQueryVariables>;
+export const CreateGroupDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"createGroup"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"body"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CreateGroupDto"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createGroup"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"body"},"value":{"kind":"Variable","name":{"kind":"Name","value":"body"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}}]}}]} as unknown as DocumentNode<CreateGroupMutation, CreateGroupMutationVariables>;
+export const GetGroupsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetGroups"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"filter"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ParamsQueryDto"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Float"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"page"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Float"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getGroups"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"filter"}}},{"kind":"Argument","name":{"kind":"Name","value":"page"},"value":{"kind":"Variable","name":{"kind":"Name","value":"page"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]}}]} as unknown as DocumentNode<GetGroupsQuery, GetGroupsQueryVariables>;
+export const GetGroupByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetGroupById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getGroupById"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"allFiles"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}},{"kind":"Field","name":{"kind":"Name","value":"coverImage"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"isPrivate"}},{"kind":"Field","name":{"kind":"Name","value":"admins"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fullname"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}}]}},{"kind":"Field","name":{"kind":"Name","value":"members"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fullname"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}}]}},{"kind":"Field","name":{"kind":"Name","value":"membersReq"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fullname"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}}]}}]}}]}}]} as unknown as DocumentNode<GetGroupByIdQuery, GetGroupByIdQueryVariables>;
+export const UpdateDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Update"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"body"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UpdateUserDto"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"body"},"value":{"kind":"Variable","name":{"kind":"Name","value":"body"}}},{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}},{"kind":"Field","name":{"kind":"Name","value":"status"}}]}}]}}]} as unknown as DocumentNode<UpdateMutation, UpdateMutationVariables>;
+export const GetTopicsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getTopics"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"topics"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"color"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"rank"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<GetTopicsQuery, GetTopicsQueryVariables>;
+export const UploadSingleFilesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UploadSingleFiles"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"file"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Upload"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uploadSingleFiles"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"file"},"value":{"kind":"Variable","name":{"kind":"Name","value":"file"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]} as unknown as DocumentNode<UploadSingleFilesMutation, UploadSingleFilesMutationVariables>;
+export const UploadMultipleFilesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UploadMultipleFiles"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"files"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Upload"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uploadMultipleFiles"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"files"},"value":{"kind":"Variable","name":{"kind":"Name","value":"files"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]} as unknown as DocumentNode<UploadMultipleFilesMutation, UploadMultipleFilesMutationVariables>;

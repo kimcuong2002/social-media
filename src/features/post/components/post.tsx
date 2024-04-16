@@ -6,10 +6,7 @@ import {
   Text,
   Image,
   Divider,
-  InputGroup,
   Input,
-  InputRightElement,
-  Grid,
   useDisclosure,
 } from '@chakra-ui/react';
 import {
@@ -26,9 +23,8 @@ import { FaRegComments } from 'react-icons/fa';
 import { MdOutlineIosShare } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
-import { optionInput } from '../constant';
 import { Comment } from '@/components';
-import { PostType, useLikePost } from '@/features';
+import { CommentInput, PostType, useLikePost } from '@/features';
 import { useQueryInfoUser } from '@/features/auth';
 import { converDateToString } from '@/utils';
 
@@ -89,6 +85,12 @@ export const Post: FC<PostType> = ({
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const [isTruncated, setIsTruncated] = useState(true);
+
+  const toggleTruncation = () => {
+    setIsTruncated(!isTruncated);
+  };
+
   return (
     <Box className="bg-white my-4 p-4 rounded-lg border-2">
       <Box className="flex items-center gap-2">
@@ -100,7 +102,11 @@ export const Post: FC<PostType> = ({
           </Text>
         </Box>
       </Box>
-      <Text className="my-2">{content}</Text>
+      <Box>
+
+      <Text className={isTruncated ? 'text-ellipsis' : ''}>{content}</Text>
+      <button onClick={toggleTruncation}>{isTruncated ? 'Xem thêm' : 'Thu gọn'}</button>
+      </Box>
       {topic && (
         <Box
           className={`rounded-sm p-1 inline py-1 px-2 font-bold bg-[#${color}]`}
@@ -114,18 +120,16 @@ export const Post: FC<PostType> = ({
           <track src="captions.vtt" kind="captions" label="English" default />
         </video>
       ) : (
-        <Grid
-          className="my-6"
-          templateColumns={{ sm: 'repeat(2,1fr)', md: 'repeat(3,1fr)' }}
-          gap={2}
+        <Box
+          className="my-6 w-full columns-3"
         >
           {images &&
             images.map((item) => (
               <Link to={`posts/${idPost}`} key={item}>
-              <Image src={item} className=" w-full h-40" />
+              <Image src={item} className='m-1'/>
               </Link>
             ))}
-        </Grid>
+        </Box>
       )}
       <Divider className="mb-4" />
       <Box className="flex justify-between items-center my-2">
@@ -160,16 +164,7 @@ export const Post: FC<PostType> = ({
       </Box>
       <Divider className="mb-4" />
       <Comment />
-      <InputGroup className="mt-4">
-        <Input type="tel" placeholder="Type your comment" />
-        <InputRightElement className="gap-2 text-gray-500 mr-10">
-          {optionInput.map((item) => (
-            <Box key={item.id} className="cursor-pointer">
-              {item.icon}
-            </Box>
-          ))}
-        </InputRightElement>
-      </InputGroup>
+      <CommentInput/>
     </Box>
   );
 };

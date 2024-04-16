@@ -27,7 +27,6 @@ export const PostDetail = () => {
   const goBackHandler = () => {
     window.history.back();
   };
-  console.log(postDetail);
   return (
     <Box className="flex ">
       <Box className="w-9/12 bg-black p-4">

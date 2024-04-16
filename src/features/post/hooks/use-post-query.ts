@@ -12,6 +12,7 @@ import {
   GET_POST_DETAIL,
   GET_POST_BY_GROUP,
   LIKE_POST,
+  GET_POST_PY_AUTHOR,
 } from '../graphql';
 import { PostInput, PostType, PostTypeRes, ResPaginationPostData } from '../service/type';
 
@@ -45,4 +46,13 @@ export const useGetPostByGroup = () =>
   useQuery<{ getPostByGroup: PostType }, OperationVariables>(GET_POST_BY_GROUP);
 
 export const useLikePost = () =>
-  useMutation<{ likePost: { status: string } }, OperationVariables>(LIKE_POST)
+  useMutation<{ likePost: { status: string } }, OperationVariables>(LIKE_POST);
+
+export const useGetPostByAuthor = (idAuthor: string, limit: number, page: number) =>
+  useQuery<{ getPostByAuthor: ResPaginationPostData }, OperationVariables>(GET_POST_PY_AUTHOR, {
+    variables: {
+      idAuthor: idAuthor,
+      limit: limit,
+      page: page
+    }
+  });

@@ -26,7 +26,7 @@ export const GroupDetail = () => {
     <Box className=" flex gap-4">
       <Box className="w-3/12 flex gap-2 p-4">
         <IoArrowBackCircleOutline
-          class="text-4xl cursor-pointer"
+          className="text-4xl cursor-pointer"
           onClick={goBackHandler}
         />
         <Box className="!max-h-10">
@@ -67,7 +67,6 @@ export const GroupDetail = () => {
               </Text>
               <Text>{groupDetail?.members?.length} members</Text>
             </Box>
-            <></>
           </Box>
         </Box>
         <Box className="w-9/12 flex ">

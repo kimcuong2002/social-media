@@ -109,6 +109,7 @@ export const GET_POST_BY_GROUP = gql`
     getPostsByGroup(idGroup: $idGroup, limit: $limit, page: $page) {
       page
       total
+      videos
       data {
         authorsPostShared {
           avatar
@@ -138,7 +139,6 @@ export const GET_POST_BY_GROUP = gql`
           id
           fullname
         }
-        videos
       }
     }
   }
@@ -147,10 +147,6 @@ export const GET_POST_BY_GROUP = gql`
 export const CREATE_POST = gql`
   mutation createPost($body: CreatePostDto!) {
     createPost(body: $body) {
-      authorsPostShared {
-        fullname
-        avatar
-      }
       content
       createdAt
       id
@@ -158,6 +154,10 @@ export const CREATE_POST = gql`
       isGhim
       updatedAt
       usersLiked {
+        fullname
+        avatar
+      }
+      authorsPostShared {
         fullname
         avatar
       }
@@ -173,3 +173,40 @@ export const LIKE_POST = gql`
     }
   }
 `;
+
+export const GET_POST_PY_AUTHOR = gql`
+  query GetPostByAuthor($idAuthor: String!, $limit: Float!, $page: Float!){
+    getPostByAuthor(idAuthor: $idAuthor, limit: $limit, page: $page) {
+      page
+      total
+      data {
+        id
+        authorsPostShared {
+          fullname
+          avatar
+          id
+        }
+        author {
+          fullname
+          avatar
+          id
+        }
+        content
+        images
+        topic {
+          image
+          name
+          color
+          id
+        }
+        createdAt
+        updatedAt
+        usersLiked {
+          fullname
+          avatar
+          id
+        }
+      }
+    }
+  }
+`
