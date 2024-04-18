@@ -8,25 +8,33 @@ import {
   Divider,
   Input,
   useDisclosure,
-} from '@chakra-ui/react';
-import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverBody,
+  PopoverArrow,
   Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
   ModalBody,
   ModalCloseButton,
+  IconButton,
 } from '@chakra-ui/react';
 import toast from 'react-hot-toast';
 import { BiLike } from 'react-icons/bi';
 import { FaRegComments } from 'react-icons/fa';
-import { MdOutlineIosShare } from 'react-icons/md';
+import { FaTags } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { HiDotsHorizontal } from 'react-icons/hi';
 
 import { Comment } from '@/components';
-import { CommentInput, PostType, useLikePost } from '@/features';
+import { CommentInput, PostType, useDeletePost, useLikePost } from '@/features';
 import { useQueryInfoUser } from '@/features/auth';
 import { converDateToString } from '@/utils';
+import { IoTrashBinSharp } from 'react-icons/io5';
+import { FaCopy } from 'react-icons/fa6';
+import { PiTelegramLogo } from 'react-icons/pi';
 
 export const Post: FC<PostType> = ({
   idPost,
@@ -39,6 +47,7 @@ export const Post: FC<PostType> = ({
   createdAt,
   usersLiked,
   topic,
+  idAuthor,
 }) => {
   const videoProps = {
     src: videoSrc,
@@ -47,9 +56,12 @@ export const Post: FC<PostType> = ({
     title: 'video',
   };
   const dateCreated = converDateToString(createdAt);
-  const [likePost] = useLikePost();
   const [likedPost, setLikedPost] = useState(false);
   const [countLiked, setCountLiked] = useState(0);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isTruncated, setIsTruncated] = useState(true);
+  const [likePost] = useLikePost();
+  const [deletePost] = useDeletePost();
 
   const { data: userData, refetch } = useQueryInfoUser();
   const handleLikePost = () => {
@@ -83,29 +95,80 @@ export const Post: FC<PostType> = ({
     }
   }, [topic]);
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const [isTruncated, setIsTruncated] = useState(true);
-
   const toggleTruncation = () => {
     setIsTruncated(!isTruncated);
   };
 
+  const handleDeletePost = () => {
+    void deletePost({
+      variables: {
+        id: idPost,
+      },
+      onCompleted: async () => {
+        await refetch();
+        toast.success('Delete post successfully!');
+      },
+      onError: (errors) => {
+        toast.error(errors.message);
+      },
+    });
+  };
+
   return (
     <Box className="bg-white my-4 p-4 rounded-lg border-2">
-      <Box className="flex items-center gap-2">
-        <Avatar src={avatar} />
-        <Box>
-          <Text className="font-bold">{fullname}</Text>
-          <Text fontSize="xs" className="text-gray-500">
-            {dateCreated}
-          </Text>
+      <Box className="flex justify-between">
+        <Box className="flex items-center gap-2">
+          <Avatar src={avatar} />
+          <Box>
+            <Text className="font-bold">{fullname}</Text>
+            <Text fontSize="xs" className="text-gray-500">
+              {dateCreated}
+            </Text>
+          </Box>
         </Box>
+
+        <Popover>
+          <PopoverTrigger>
+            <IconButton
+              aria-label="Add to friends"
+              icon={<HiDotsHorizontal />}
+              className="cursor-pointer text-2xl"
+            />
+          </PopoverTrigger>
+          <PopoverContent>
+            <PopoverArrow />
+            <PopoverBody>
+              {userData?.getInfoUser.id === idAuthor && (
+                <>
+                  <Box
+                    className="flex items-center gap-2 cursor-pointer font-bold"
+                    onClick={handleDeletePost}
+                  >
+                    <IoTrashBinSharp className="text-2xl" />
+                    <Text>Delete Post</Text>
+                  </Box>
+                  <Divider className="my-2" />
+                  <Box className="flex items-center gap-2 cursor-pointer font-bold">
+                    <FaTags className="text-2xl" />
+                    <Text>Ghim Post</Text>
+                  </Box>
+                </>
+              )}
+              {userData?.getInfoUser.id !== idAuthor && (
+                <Box className="flex items-center gap-2 cursor-pointer font-bold">
+                  <FaCopy className="text-2xl" />
+                  <Text>Save Post</Text>
+                </Box>
+              )}
+            </PopoverBody>
+          </PopoverContent>
+        </Popover>
       </Box>
       <Box>
-
-      <Text className={isTruncated ? 'text-ellipsis' : ''}>{content}</Text>
-      <button onClick={toggleTruncation}>{isTruncated ? 'Xem thêm' : 'Thu gọn'}</button>
+        <Text className={isTruncated ? 'text-ellipsis' : ''}>{content}</Text>
+        <button onClick={toggleTruncation}>
+          {isTruncated ? 'Xem thêm' : 'Thu gọn'}
+        </button>
       </Box>
       {topic && (
         <Box
@@ -121,12 +184,14 @@ export const Post: FC<PostType> = ({
         </video>
       ) : (
         <Box
-          className="my-6 w-full columns-3"
+          className={`my-6 w-full bg-[#1F1F1F] ${
+            images && images?.length < 3 ? 'columns-2' : 'columns-3'
+          }`}
         >
           {images &&
             images.map((item) => (
               <Link to={`posts/${idPost}`} key={item}>
-              <Image src={item} className='m-1'/>
+                <Image src={item} />
               </Link>
             ))}
         </Box>
@@ -139,16 +204,18 @@ export const Post: FC<PostType> = ({
               onClick={handleLikePost}
               className={`${
                 likedPost ? 'text-blue-800' : ''
-              } cursor-pointer text-xl`}
+              } cursor-pointer text-2xl`}
             />
             <Box>{countLiked < 100 ? countLiked : '99+'}</Box>
           </Box>
-          <Box className="flex justify-center items-center">
-            <FaRegComments />
-            <Text>Comments</Text>
-          </Box>
+          <Link to={`posts/${idPost}`}>
+            <FaRegComments className="text-2xl cursor-pointer" />
+          </Link>
           <Box>
-            <MdOutlineIosShare onClick={onOpen} />
+            <PiTelegramLogo
+              onClick={onOpen}
+              className="text-2xl cursor-pointer"
+            />
             <Modal isOpen={isOpen} onClose={onClose}>
               <ModalOverlay />
               <ModalContent>
@@ -164,7 +231,7 @@ export const Post: FC<PostType> = ({
       </Box>
       <Divider className="mb-4" />
       <Comment />
-      <CommentInput/>
+      <CommentInput />
     </Box>
   );
 };

@@ -13,8 +13,14 @@ import {
   GET_POST_BY_GROUP,
   LIKE_POST,
   GET_POST_PY_AUTHOR,
+  DELETE_POST,
 } from '../graphql';
-import { PostInput, PostType, PostTypeRes, ResPaginationPostData } from '../service/type';
+import {
+  PostInput,
+  PostType,
+  PostTypeRes,
+  ResPaginationPostData,
+} from '../service/type';
 
 export const useCreatePostMutation = () =>
   useMutation<
@@ -48,11 +54,23 @@ export const useGetPostByGroup = () =>
 export const useLikePost = () =>
   useMutation<{ likePost: { status: string } }, OperationVariables>(LIKE_POST);
 
-export const useGetPostByAuthor = (idAuthor: string, limit: number, page: number) =>
-  useQuery<{ getPostByAuthor: ResPaginationPostData }, OperationVariables>(GET_POST_PY_AUTHOR, {
-    variables: {
-      idAuthor: idAuthor,
-      limit: limit,
-      page: page
-    }
-  });
+export const useGetPostByAuthor = (
+  idAuthor: string,
+  limit: number,
+  page: number,
+) =>
+  useQuery<{ getPostByAuthor: ResPaginationPostData }, OperationVariables>(
+    GET_POST_PY_AUTHOR,
+    {
+      variables: {
+        idAuthor: idAuthor,
+        limit: limit,
+        page: page,
+      },
+    },
+  );
+
+export const useDeletePost = () =>
+  useMutation<{ deletePost: { status: string } }, OperationVariables>(
+    DELETE_POST,
+  );

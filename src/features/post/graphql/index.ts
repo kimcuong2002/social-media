@@ -109,7 +109,6 @@ export const GET_POST_BY_GROUP = gql`
     getPostsByGroup(idGroup: $idGroup, limit: $limit, page: $page) {
       page
       total
-      videos
       data {
         authorsPostShared {
           avatar
@@ -175,7 +174,7 @@ export const LIKE_POST = gql`
 `;
 
 export const GET_POST_PY_AUTHOR = gql`
-  query GetPostByAuthor($idAuthor: String!, $limit: Float!, $page: Float!){
+  query GetPostByAuthor($idAuthor: String!, $limit: Float!, $page: Float!) {
     getPostByAuthor(idAuthor: $idAuthor, limit: $limit, page: $page) {
       page
       total
@@ -209,4 +208,13 @@ export const GET_POST_PY_AUTHOR = gql`
       }
     }
   }
-`
+`;
+
+export const DELETE_POST = gql`
+  mutation deletePost($id: String!) {
+    deletePost(id: $id) {
+      message
+      status
+    }
+  }
+`;
