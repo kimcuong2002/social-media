@@ -32,9 +32,13 @@ const routes = [
         element: <GroupDetail />,
       },
       {
-        path: 'home/posts/:id',
-        element: <PostDetail />,	
-      }
+        path: `home/posts/:id`,
+        element: <PostDetail />,
+      },
+      {
+        path: `profile/posts/:id`,
+        element: <PostDetail />,
+      },
     ],
   },
 ];

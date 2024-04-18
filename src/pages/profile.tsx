@@ -81,17 +81,17 @@ export const Profile = () => {
     }
   }, [data]);
 
-    const idAuthor = data?.getInfoUser.id;
-    const limit = 100;
-    const page = 1;
+  const idAuthor = data?.getInfoUser.id;
+  const limit = 100;
+  const page = 1;
 
-  const { data: posts } = useGetPostByAuthor(idAuthor as string, limit, page) ;
+  const { data: posts } = useGetPostByAuthor(idAuthor as string, limit, page);
   const listPosts = useMemo(() => {
-    if(posts) {
-      const result = posts.getPostByAuthor.data
-      return result
+    if (posts) {
+      const result = posts.getPostByAuthor.data;
+      return result;
     }
-  }, [posts])
+  }, [posts]);
 
   return (
     <Box>
@@ -120,6 +120,7 @@ export const Profile = () => {
                 fullname={item.author.fullname}
                 avatar={item.author.avatar}
                 createdAt={item.createdAt as Date}
+                idPost={item.id}
               />
             ))}
           </Box>

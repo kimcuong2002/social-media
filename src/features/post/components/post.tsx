@@ -6,7 +6,6 @@ import {
   Text,
   Image,
   Divider,
-  Input,
   useDisclosure,
   Popover,
   PopoverTrigger,
@@ -28,13 +27,13 @@ import { FaTags } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { HiDotsHorizontal } from 'react-icons/hi';
 
-import { Comment } from '@/components';
 import { CommentInput, PostType, useDeletePost, useLikePost } from '@/features';
 import { useQueryInfoUser } from '@/features/auth';
 import { converDateToString } from '@/utils';
 import { IoTrashBinSharp } from 'react-icons/io5';
 import { FaCopy } from 'react-icons/fa6';
 import { PiTelegramLogo } from 'react-icons/pi';
+import SharePostForm from './share-post-form';
 
 export const Post: FC<PostType> = ({
   idPost,
@@ -114,6 +113,8 @@ export const Post: FC<PostType> = ({
     });
   };
 
+  const currentPath = window.location.pathname;
+
   return (
     <Box className="bg-white my-4 p-4 rounded-lg border-2">
       <Box className="flex justify-between">
@@ -126,7 +127,6 @@ export const Post: FC<PostType> = ({
             </Text>
           </Box>
         </Box>
-
         <Popover>
           <PopoverTrigger>
             <IconButton
@@ -177,7 +177,6 @@ export const Post: FC<PostType> = ({
           #{topic.name}
         </Box>
       )}
-
       {typePost === 'video' ? (
         <video {...videoProps} controls>
           <track src="captions.vtt" kind="captions" label="English" default />
@@ -190,7 +189,7 @@ export const Post: FC<PostType> = ({
         >
           {images &&
             images.map((item) => (
-              <Link to={`posts/${idPost}`} key={item}>
+              <Link to={`${currentPath}/posts/${idPost}`} key={item}>
                 <Image src={item} />
               </Link>
             ))}
@@ -216,13 +215,14 @@ export const Post: FC<PostType> = ({
               onClick={onOpen}
               className="text-2xl cursor-pointer"
             />
-            <Modal isOpen={isOpen} onClose={onClose}>
+            <Modal isOpen={isOpen} onClose={onClose} size="xl">
               <ModalOverlay />
               <ModalContent>
                 <ModalHeader>Share Post</ModalHeader>
+                <Divider />
                 <ModalCloseButton />
                 <ModalBody>
-                  <Input />
+                  <SharePostForm idPost={idPost as string} />
                 </ModalBody>
               </ModalContent>
             </Modal>
@@ -230,7 +230,6 @@ export const Post: FC<PostType> = ({
         </Box>
       </Box>
       <Divider className="mb-4" />
-      <Comment />
       <CommentInput />
     </Box>
   );
