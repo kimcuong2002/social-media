@@ -106,9 +106,9 @@ export const ProfileAvatar = ({
       <Box className="flex gap-4">
         <Button
           leftIcon={<BsPersonAdd />}
-          colorScheme="teal"
           variant="solid"
           size={{ base: 'xs', lg: 'md' }}
+          className="!bg-[#3182CE] !text-[#eff3f7]"
         >
           Add Friend
         </Button>

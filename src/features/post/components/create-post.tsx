@@ -46,6 +46,7 @@ export const CreatePost: FC<Props> = ({ value, onChange }) => {
   const [uploadMultipleFiles, { loading }] = useUploadMultipleFilesMutation();
   const [createPost] = useCreatePostMutation();
   const [topic, setTopic] = useState('');
+  const inputPost = optionInput.slice(0, 3);
 
   const authPost = useMemo(() => {
     if (data) {
@@ -76,7 +77,6 @@ export const CreatePost: FC<Props> = ({ value, onChange }) => {
     }
     return [];
   }, [topicsData]);
-
 
   const handleChooseTopic = (e: ChangeEvent<HTMLSelectElement>) => {
     setTopic(e.target.value);
@@ -192,7 +192,7 @@ export const CreatePost: FC<Props> = ({ value, onChange }) => {
         <Box>
           <Box className="flex justify-between items-center">
             <Box className="flex gap-4 text-2xl text-gray-500">
-              {optionInput.map((item) => (
+              {inputPost.map((item) => (
                 <Box key={item.id}>
                   <label htmlFor={item.value}>
                     {item.open ? (
@@ -225,7 +225,7 @@ export const CreatePost: FC<Props> = ({ value, onChange }) => {
             <Input
               type="submit"
               colorScheme="whatsapp"
-              className="my-4 cursor-pointer !bg-green-500 !w-40"
+              className="my-4 cursor-pointer !bg-[#3182CE] !w-40 text-white font-bold"
             />
           </Box>
           {openEmoji && <EmojiPicker onEmojiClick={handleEmojiClick} />}
