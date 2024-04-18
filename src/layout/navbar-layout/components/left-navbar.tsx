@@ -20,7 +20,7 @@ const LeftNavBar: FC<Props> = ({ children, className }) => {
             <Button
               variant="ghost"
               fontSize="xl"
-              className={currentPath === item.link ? 'bg-violet-700' : ''}
+              className={currentPath === item.link ? 'bg-violet-700 !text-white' : ''}
             >
               {item.icon}
             </Button>
