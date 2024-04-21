@@ -175,7 +175,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-04-17T11:08:23.742Z\"",
+            "defaultValue": "\"2024-04-21T09:32:02.934Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -271,7 +271,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-04-17T11:08:23.742Z\"",
+            "defaultValue": "\"2024-04-21T09:32:02.934Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -394,7 +394,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-04-17T11:08:23.731Z\"",
+            "defaultValue": "\"2024-04-21T09:32:02.923Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -506,7 +506,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-04-17T11:08:23.731Z\"",
+            "defaultValue": "\"2024-04-21T09:32:02.923Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -565,7 +565,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-04-17T11:08:23.748Z\"",
+            "defaultValue": "\"2024-04-21T09:32:02.939Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -613,7 +613,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-04-17T11:08:23.748Z\"",
+            "defaultValue": "\"2024-04-21T09:32:02.939Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -680,7 +680,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-04-17T11:08:23.720Z\"",
+            "defaultValue": "\"2024-04-21T09:32:02.916Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -784,7 +784,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-04-17T11:08:23.720Z\"",
+            "defaultValue": "\"2024-04-21T09:32:02.916Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -875,7 +875,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-04-17T11:08:23.807Z\"",
+            "defaultValue": "\"2024-04-21T09:32:02.998Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -931,7 +931,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-04-17T11:08:23.807Z\"",
+            "defaultValue": "\"2024-04-21T09:32:02.998Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -974,7 +974,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-04-17T11:08:23.737Z\"",
+            "defaultValue": "\"2024-04-21T09:32:02.929Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -1038,7 +1038,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-04-17T11:08:23.737Z\"",
+            "defaultValue": "\"2024-04-21T09:32:02.929Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -1081,7 +1081,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-04-17T11:08:23.713Z\"",
+            "defaultValue": "\"2024-04-21T09:32:02.909Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -1145,7 +1145,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-04-17T11:08:23.713Z\"",
+            "defaultValue": "\"2024-04-21T09:32:02.909Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -1236,7 +1236,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-04-17T11:08:23.522Z\"",
+            "defaultValue": "\"2024-04-21T09:32:02.731Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -1484,7 +1484,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-04-17T11:08:23.522Z\"",
+            "defaultValue": "\"2024-04-21T09:32:02.731Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -2079,6 +2079,55 @@
         "name": "Mutation",
         "description": null,
         "fields": [
+          {
+            "name": "acceptMemberReqJoinGroup",
+            "description": null,
+            "args": [
+              {
+                "name": "idGroup",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "idMemberReq",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "ResponseDto",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "create",
             "description": null,
@@ -2776,6 +2825,72 @@
             "args": [
               {
                 "name": "idPost",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "ResponseDto",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "joinGroup",
+            "description": null,
+            "args": [
+              {
+                "name": "id",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "ResponseDto",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "leaveGroup",
+            "description": null,
+            "args": [
+              {
+                "name": "id",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -5638,7 +5753,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-04-17T11:08:23.522Z\"",
+            "defaultValue": "\"2024-04-21T09:32:02.731Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -5886,7 +6001,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-04-17T11:08:23.522Z\"",
+            "defaultValue": "\"2024-04-21T09:32:02.731Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -6241,7 +6356,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-04-17T11:08:23.732Z\"",
+            "defaultValue": "\"2024-04-21T09:32:02.924Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -6284,7 +6399,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-04-17T11:08:23.748Z\"",
+            "defaultValue": "\"2024-04-21T09:32:02.940Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -6530,7 +6645,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-04-17T11:08:23.807Z\"",
+            "defaultValue": "\"2024-04-21T09:32:02.998Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -6605,7 +6720,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-04-17T11:08:23.713Z\"",
+            "defaultValue": "\"2024-04-21T09:32:02.910Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -6848,7 +6963,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-04-17T11:08:23.545Z\"",
+            "defaultValue": "\"2024-04-21T09:32:02.751Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
