@@ -23,6 +23,8 @@ export * from './topic/services/type';
 export * from './post/service/type';
 export * from './group/hooks/use-group-query';
 export * from './group/service/type';
-export * from "./post/hooks/use-post-query"
-export * from "./comment/components/comment-input"
-export * from "./comment/components/comment"
+export * from './post/hooks/use-post-query';
+export * from './comment/components/comment-input';
+export * from './comment/components/comment';
+export * from './group/component/group-information';
+export * from './group/component/group-detail-navbar';
