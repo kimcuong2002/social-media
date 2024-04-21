@@ -27,7 +27,7 @@ const GroupCreateForm: FC<Props> = ({ control, errors, disable = false }) => {
         control,
         name: 'name',
         element: ({ field }) => (
-          <Box>
+          <Box className="mb-4 font-bold">
             <Text>Group Name</Text>
             <InputGroup>
               <Input {...field} disabled={disable} id="name" />
@@ -45,7 +45,7 @@ const GroupCreateForm: FC<Props> = ({ control, errors, disable = false }) => {
         control,
         name: 'description',
         element: ({ field }) => (
-          <Box>
+          <Box className="mb-4 font-bold">
             <Text>Description for your Group</Text>
             <InputGroup>
               <Input {...field} id="description" disabled={disable} />
@@ -63,7 +63,7 @@ const GroupCreateForm: FC<Props> = ({ control, errors, disable = false }) => {
         control,
         name: 'avatar',
         element: ({ field }) => (
-          <Box>
+          <Box className="mb-4 font-bold">
             <Text>Group Avatar</Text>
             <Upload
               {...field}
@@ -84,7 +84,7 @@ const GroupCreateForm: FC<Props> = ({ control, errors, disable = false }) => {
         control,
         name: 'coverImage',
         element: ({ field }) => (
-          <Box>
+          <Box className="mb-4 font-bold">
             <Text>Group cover image</Text>
             <Upload
               {...field}

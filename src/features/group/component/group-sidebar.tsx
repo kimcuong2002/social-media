@@ -62,6 +62,7 @@ export const GroupSideBar = () => {
           <ModalContent>
             <ModalHeader>Create new groups</ModalHeader>
             <ModalCloseButton />
+            <Divider />
             <ModalBody>
               <CreateGroup />
             </ModalBody>

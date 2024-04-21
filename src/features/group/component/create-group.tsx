@@ -1,4 +1,4 @@
-import { Box, Input } from '@chakra-ui/react';
+import { Box, Divider, Input } from '@chakra-ui/react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
@@ -24,29 +24,33 @@ const CreateGroup = () => {
   const [createGroup, { loading }] = useCreateGroup();
 
   const onSubmit: SubmitHandler<GroupInput> = (data) => {
-    void createGroup({
-      variables: {
-        body: {
-          ...data,
-          coverImage: data.coverImage[0],
-          avatar: data.avatar[0],
+    if (data.avatar && data.coverImage) {
+      void createGroup({
+        variables: {
+          body: {
+            ...data,
+            coverImage: data.coverImage[0],
+            avatar: data.avatar[0],
+            isPrivate: false,
+          },
         },
-      },
-      onCompleted: () => {
-        toast.success('Create group successfully!');
-        reset(defaultValueForm);
-      },
-      onError: (errors) => {
-        toast.error(errors.message);
-      },
-    });
+        onCompleted: () => {
+          toast.success('Create group successfully!');
+          reset(defaultValueForm);
+        },
+        onError: (errors) => {
+          toast.error(errors.message);
+        },
+      });
+    }
   };
 
   return (
     <Box>
       <form method="POST" onSubmit={handleSubmit(onSubmit)}>
         <GroupCreateForm control={control} errors={errors} disable={loading} />
-        <Input type="submit" />
+        <Divider className="mb-4" />
+        <Input type="submit" className="!bg-[#1DA1F2] text-white" />
       </form>
     </Box>
   );
