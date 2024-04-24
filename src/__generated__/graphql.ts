@@ -56,7 +56,7 @@ export type CreateCollectionDto = {
 
 export type CreateCommentDto = {
   author: Scalars['String']['input'];
-  content?: InputMaybe<Scalars['String']['input']>;
+  content?: Scalars['String']['input'];
   createdAt?: Scalars['DateTime']['input'];
   images?: Array<Scalars['String']['input']>;
   likes?: Array<Scalars['String']['input']>;
@@ -143,6 +143,7 @@ export type CreateUserDto = {
   friendsReq?: Array<Scalars['String']['input']>;
   fullname: Scalars['String']['input'];
   gender?: Scalars['Float']['input'];
+  isActive?: Scalars['Float']['input'];
   password: Scalars['String']['input'];
   phone: Scalars['String']['input'];
   relationship?: Scalars['Float']['input'];
@@ -150,6 +151,7 @@ export type CreateUserDto = {
   university?: Scalars['String']['input'];
   updatedAt?: Scalars['DateTime']['input'];
   username: Scalars['String']['input'];
+  usersBlocked?: Array<Scalars['String']['input']>;
 };
 
 export type Group = {
@@ -202,6 +204,8 @@ export type Message = {
 export type Mutation = {
   __typename?: 'Mutation';
   acceptMemberReqJoinGroup: ResponseDto;
+  activeUser: ResponseDto;
+  blockUser: ResponseDto;
   create: ResponseUserDto;
   createCollection: ResponseDto;
   createComment: Comment;
@@ -224,6 +228,7 @@ export type Mutation = {
   deleteRoom: ResponseDto;
   deleteTopic: ResponseDto;
   ghimPost: ResponseDto;
+  inActiveUser: ResponseDto;
   joinGroup: ResponseDto;
   leaveGroup: ResponseDto;
   likePost: ResponseDto;
@@ -231,6 +236,7 @@ export type Mutation = {
   replyComment: Comment;
   sharePost: ResponseDto;
   signup: User;
+  unBlockUser: ResponseDto;
   updatFileForUser: ResponseDto;
   update: ResponseDto;
   updateCollection: ResponseDto;
@@ -252,6 +258,16 @@ export type Mutation = {
 export type MutationAcceptMemberReqJoinGroupArgs = {
   idGroup: Scalars['String']['input'];
   idMemberReq: Scalars['String']['input'];
+};
+
+
+export type MutationActiveUserArgs = {
+  id: Scalars['String']['input'];
+};
+
+
+export type MutationBlockUserArgs = {
+  idUserBlocked: Scalars['String']['input'];
 };
 
 
@@ -370,6 +386,11 @@ export type MutationGhimPostArgs = {
 };
 
 
+export type MutationInActiveUserArgs = {
+  id: Scalars['String']['input'];
+};
+
+
 export type MutationJoinGroupArgs = {
   id: Scalars['String']['input'];
 };
@@ -405,6 +426,11 @@ export type MutationSharePostArgs = {
 
 export type MutationSignupArgs = {
   body: SignUpUserDto;
+};
+
+
+export type MutationUnBlockUserArgs = {
+  idUserBlocked: Scalars['String']['input'];
 };
 
 
@@ -701,12 +727,14 @@ export type ResponseUserDto = {
   fullname: Scalars['String']['output'];
   gender: Scalars['Float']['output'];
   id: Scalars['ID']['output'];
+  isActive: Scalars['Float']['output'];
   phone: Scalars['String']['output'];
   relationship: Scalars['Float']['output'];
   role: Scalars['String']['output'];
   university: Scalars['String']['output'];
   updatedAt: Scalars['DateTime']['output'];
   username: Scalars['String']['output'];
+  usersBlocked: Array<User>;
 };
 
 export type Room = {
@@ -743,6 +771,7 @@ export type SignUpUserDto = {
   friendsReq?: Array<Scalars['String']['input']>;
   fullname: Scalars['String']['input'];
   gender?: Scalars['Float']['input'];
+  isActive?: Scalars['Float']['input'];
   password: Scalars['String']['input'];
   phone: Scalars['String']['input'];
   relationship?: Scalars['Float']['input'];
@@ -750,6 +779,7 @@ export type SignUpUserDto = {
   university?: Scalars['String']['input'];
   updatedAt?: Scalars['DateTime']['input'];
   username: Scalars['String']['input'];
+  usersBlocked?: Array<Scalars['String']['input']>;
 };
 
 export type Topic = {
@@ -828,12 +858,14 @@ export type UpdateUserDto = {
   friendsReq?: InputMaybe<Array<Scalars['String']['input']>>;
   fullname?: InputMaybe<Scalars['String']['input']>;
   gender?: InputMaybe<Scalars['Float']['input']>;
+  isActive?: InputMaybe<Scalars['Float']['input']>;
   phone?: InputMaybe<Scalars['String']['input']>;
   relationship?: InputMaybe<Scalars['Float']['input']>;
   role?: InputMaybe<Scalars['String']['input']>;
   university?: InputMaybe<Scalars['String']['input']>;
   updatedAt?: Scalars['DateTime']['input'];
   username?: InputMaybe<Scalars['String']['input']>;
+  usersBlocked?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
 export type User = {
@@ -852,6 +884,7 @@ export type User = {
   fullname: Scalars['String']['output'];
   gender: Scalars['Float']['output'];
   id: Scalars['ID']['output'];
+  isActive: Scalars['Float']['output'];
   password: Scalars['String']['output'];
   phone: Scalars['String']['output'];
   relationship: Scalars['Float']['output'];
@@ -859,6 +892,7 @@ export type User = {
   university: Scalars['String']['output'];
   updatedAt: Scalars['DateTime']['output'];
   username: Scalars['String']['output'];
+  usersBlocked: Array<User>;
 };
 
 export type LoginMutationVariables = Exact<{
@@ -879,6 +913,22 @@ export type GetInfoUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetInfoUserQuery = { __typename?: 'Query', getInfoUser: { __typename?: 'ResponseUserDto', avatar: string, createdAt: any, coverImage: string, dayOfBirth: string, description: string, email: string, address: string, company: string, university: string, relationship: number, fullname: string, gender: number, id: string, phone: string, friends: Array<{ __typename?: 'User', fullname: string, avatar: string }>, friendsReq: Array<{ __typename?: 'User', fullname: string, avatar: string }> } };
+
+export type CreateCommentMutationVariables = Exact<{
+  body: CreateCommentDto;
+}>;
+
+
+export type CreateCommentMutation = { __typename?: 'Mutation', createComment: { __typename?: 'Comment', id: string } };
+
+export type GetCommentsQueryVariables = Exact<{
+  limit: Scalars['Float']['input'];
+  page: Scalars['Float']['input'];
+  postId: Scalars['String']['input'];
+}>;
+
+
+export type GetCommentsQuery = { __typename?: 'Query', getComments: { __typename?: 'PaginationCommentDto', page: number, total: number, data: Array<{ __typename?: 'Comment', content: string, createdAt: any, id: string, images: Array<string>, videos: Array<string>, author: { __typename?: 'User', avatar: string, fullname: string, id: string }, replies: Array<{ __typename?: 'Comment', content: string, createdAt: any, id: string, author: { __typename?: 'User', avatar: string, fullname: string, id: string } }> }> } };
 
 export type CreateGroupMutationVariables = Exact<{
   body: CreateGroupDto;
@@ -1027,6 +1077,8 @@ export type UploadMultipleFilesMutation = { __typename?: 'Mutation', uploadMulti
 export const LoginDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Login"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"body"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"LoginUserDto"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"login"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"body"},"value":{"kind":"Variable","name":{"kind":"Name","value":"body"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fullname"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}},{"kind":"Field","name":{"kind":"Name","value":"dayOfBirth"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"gender"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"role"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"friends"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fullname"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}},{"kind":"Field","name":{"kind":"Name","value":"dayOfBirth"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"gender"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"role"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}},{"kind":"Field","name":{"kind":"Name","value":"friendsReq"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fullname"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}},{"kind":"Field","name":{"kind":"Name","value":"dayOfBirth"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"gender"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"role"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"access_token"}}]}}]}}]} as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
 export const SignupDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Signup"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"body"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"SignUpUserDto"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signup"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"body"},"value":{"kind":"Variable","name":{"kind":"Name","value":"body"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"username"}}]}}]}}]} as unknown as DocumentNode<SignupMutation, SignupMutationVariables>;
 export const GetInfoUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetInfoUser"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getInfoUser"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"avatar"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"coverImage"}},{"kind":"Field","name":{"kind":"Name","value":"dayOfBirth"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"address"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"company"}},{"kind":"Field","name":{"kind":"Name","value":"university"}},{"kind":"Field","name":{"kind":"Name","value":"relationship"}},{"kind":"Field","name":{"kind":"Name","value":"friends"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fullname"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}}]}},{"kind":"Field","name":{"kind":"Name","value":"friendsReq"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fullname"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}}]}},{"kind":"Field","name":{"kind":"Name","value":"fullname"}},{"kind":"Field","name":{"kind":"Name","value":"gender"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}}]}}]}}]} as unknown as DocumentNode<GetInfoUserQuery, GetInfoUserQueryVariables>;
+export const CreateCommentDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateComment"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"body"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CreateCommentDto"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createComment"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"body"},"value":{"kind":"Variable","name":{"kind":"Name","value":"body"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<CreateCommentMutation, CreateCommentMutationVariables>;
+export const GetCommentsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetComments"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Float"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"page"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Float"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"postId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getComments"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"page"},"value":{"kind":"Variable","name":{"kind":"Name","value":"page"}}},{"kind":"Argument","name":{"kind":"Name","value":"postId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"postId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"page"}},{"kind":"Field","name":{"kind":"Name","value":"total"}},{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"avatar"}},{"kind":"Field","name":{"kind":"Name","value":"fullname"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"images"}},{"kind":"Field","name":{"kind":"Name","value":"videos"}},{"kind":"Field","name":{"kind":"Name","value":"replies"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"avatar"}},{"kind":"Field","name":{"kind":"Name","value":"fullname"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetCommentsQuery, GetCommentsQueryVariables>;
 export const CreateGroupDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"createGroup"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"body"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CreateGroupDto"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createGroup"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"body"},"value":{"kind":"Variable","name":{"kind":"Name","value":"body"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}}]}}]} as unknown as DocumentNode<CreateGroupMutation, CreateGroupMutationVariables>;
 export const GetGroupsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetGroups"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"filter"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ParamsQueryDto"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Float"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"page"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Float"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getGroups"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"filter"}}},{"kind":"Argument","name":{"kind":"Name","value":"page"},"value":{"kind":"Variable","name":{"kind":"Name","value":"page"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]}}]} as unknown as DocumentNode<GetGroupsQuery, GetGroupsQueryVariables>;
 export const GetGroupByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetGroupById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getGroupById"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"allFiles"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}},{"kind":"Field","name":{"kind":"Name","value":"coverImage"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"isPrivate"}},{"kind":"Field","name":{"kind":"Name","value":"admins"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fullname"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}}]}},{"kind":"Field","name":{"kind":"Name","value":"members"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fullname"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}}]}},{"kind":"Field","name":{"kind":"Name","value":"membersReq"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fullname"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}}]}},{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fullname"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}}]}}]}}]}}]} as unknown as DocumentNode<GetGroupByIdQuery, GetGroupByIdQueryVariables>;
