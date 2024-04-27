@@ -11,7 +11,6 @@ import {
   Avatar,
   Box,
   Divider,
-  Grid,
   Input,
   Text,
   Image,
@@ -33,9 +32,10 @@ import { useUploadMultipleFilesMutation } from '@/hooks';
 type Props = {
   value?: string[];
   onChange?: (_v: string[]) => void;
+  refetch?: () => void;
 };
 
-export const CreatePost: FC<Props> = ({ value, onChange }) => {
+export const CreatePost: FC<Props> = ({ value, onChange, refetch }) => {
   const [files, setFiles] = useState<FileList | null>();
   const [filesPreviews, setFilePreviews] = useState(value || []);
   const [openEmoji, setOpenEmoji] = useState(false);
@@ -82,6 +82,18 @@ export const CreatePost: FC<Props> = ({ value, onChange }) => {
     setTopic(e.target.value);
   };
 
+  const imageFiles: string[] | undefined = useMemo(() => {
+    if (filesPreviews) {
+      return filesPreviews.filter((file: string) => !file.endsWith('.mp4'));
+    }
+  }, [filesPreviews]);
+
+  const videoFiles: string[] | undefined = useMemo(() => {
+    if (filesPreviews) {
+      return filesPreviews.filter((file: string) => file.endsWith('.mp4'));
+    }
+  }, [filesPreviews]);
+
   const handleUploadFile = () => {
     if (files) {
       void uploadMultipleFiles({
@@ -105,8 +117,8 @@ export const CreatePost: FC<Props> = ({ value, onChange }) => {
 
   const { handleSubmit, reset } = useForm<PostInput>();
   const onSubmit: SubmitHandler<PostInput> = (data) => {
-    data.video = [];
-    data.images = filesPreviews;
+    data.video = videoFiles;
+    data.images = imageFiles;
     data.content = content;
     data.topic = topic;
     data.createdAt = new Date();
@@ -120,6 +132,7 @@ export const CreatePost: FC<Props> = ({ value, onChange }) => {
         setTopic('');
         setFiles(null);
         setOpenEmoji(false);
+        refetch && void refetch();
         reset();
       },
       onError: (errors) => {
@@ -145,12 +158,24 @@ export const CreatePost: FC<Props> = ({ value, onChange }) => {
           />
         </Box>
       )}
-      <Grid
-        className="mt-4"
-        templateColumns={{ sm: 'repeat(2,1fr)', md: 'repeat(3,1fr)' }}
-      >
-        {filesPreviews &&
-          filesPreviews.map((item) => (
+      <Box className="mt-4 columns-4">
+        {imageFiles &&
+          imageFiles.map((item) => (
+            <Box key={item} className="relative group">
+              <Image src={item} className=" rounded-md" />
+              <IoCloseSharp
+                className="text-3xl cursor-pointer absolute top-2 right-0 -translate-x-1/2 hidden group-hover:block transform hover:rotate-[45deg] hover:scale-105 hover:duration-300 text-red-700"
+                onClick={() => {
+                  const result = filesPreviews;
+                  result.splice(result.indexOf(item), 1);
+                  setFilePreviews([...result]);
+                  onChange && onChange([...result]);
+                }}
+              />
+            </Box>
+          ))}
+        {videoFiles &&
+          videoFiles.map((item) => (
             <Box key={item} className="relative group">
               <Image src={item} className="w-full h-[150px] rounded-md" />
               <IoCloseSharp
@@ -164,7 +189,7 @@ export const CreatePost: FC<Props> = ({ value, onChange }) => {
               />
             </Box>
           ))}
-      </Grid>
+      </Box>
       <form onSubmit={handleSubmit(onSubmit)}>
         <input
           placeholder="Insert your content"
@@ -189,47 +214,45 @@ export const CreatePost: FC<Props> = ({ value, onChange }) => {
             ) : null,
           )}
         </Select>
-        <Box>
-          <Box className="flex justify-between items-center">
-            <Box className="flex gap-4 text-2xl text-gray-500">
-              {inputPost.map((item) => (
-                <Box key={item.id}>
-                  <label htmlFor={item.value}>
-                    {item.open ? (
-                      <Box
-                        className="cursor-pointer"
-                        onClick={() => setOpenEmoji(!openEmoji)}
-                      >
-                        {item.icon}
-                      </Box>
-                    ) : (
-                      <Box className="cursor-pointer">{item.icon}</Box>
-                    )}
-                  </label>
-                  <Input
-                    multiple
-                    type="file"
-                    name={item.value}
-                    id={item.value}
-                    accept={item.value}
-                    className="hidden"
-                    onChange={(e) => {
-                      if (e.target.files) {
-                        setFiles(e.target.files);
-                      }
-                    }}
-                  />
-                </Box>
-              ))}
-            </Box>
-            <Input
-              type="submit"
-              colorScheme="whatsapp"
-              className="my-4 cursor-pointer !bg-[#3182CE] !w-40 text-white font-bold"
-            />
+        <Box className="flex justify-between items-center">
+          <Box className="flex gap-4 text-2xl text-gray-500">
+            {inputPost.map((item) => (
+              <Box key={item.id}>
+                <label htmlFor={item.value}>
+                  {item.open ? (
+                    <Box
+                      className="cursor-pointer"
+                      onClick={() => setOpenEmoji(!openEmoji)}
+                    >
+                      {item.icon}
+                    </Box>
+                  ) : (
+                    <Box className="cursor-pointer">{item.icon}</Box>
+                  )}
+                </label>
+                <Input
+                  multiple
+                  type="file"
+                  name={item.value}
+                  id={item.value}
+                  accept={item.value}
+                  className="hidden"
+                  onChange={(e) => {
+                    if (e.target.files) {
+                      setFiles(e.target.files);
+                    }
+                  }}
+                />
+              </Box>
+            ))}
           </Box>
-          {openEmoji && <EmojiPicker onEmojiClick={handleEmojiClick} />}
+          <Input
+            type="submit"
+            colorScheme="whatsapp"
+            className="my-4 cursor-pointer !bg-[#3182CE] !w-40 text-white font-bold"
+          />
         </Box>
+        {openEmoji && <EmojiPicker onEmojiClick={handleEmojiClick} />}
       </form>
     </Box>
   );
