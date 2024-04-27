@@ -9,7 +9,6 @@ export interface GroupType {
   createAt?: Date;
   description?: string;
   id?: string;
-  idPrivate?: boolean;
   members?: UserType[];
   membersReq?: UserType[];
   name?: string;
@@ -17,9 +16,14 @@ export interface GroupType {
   isPrivate?: boolean;
 }
 
+export type GroupUpdateType = Omit<
+  GroupType,
+  'createAt' | 'id' | 'updatedAt' | 'members' | 'membersReq'
+>;
+
 export type GroupInput = Pick<
   GroupType,
-  'name' | 'avatar' | 'coverImage' | 'description'
+  'name' | 'avatar' | 'coverImage' | 'description' | 'isPrivate'
 >;
 
 export type ResPaginationGroupData = {
