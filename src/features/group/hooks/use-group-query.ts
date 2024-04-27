@@ -6,8 +6,21 @@ import {
   useQuery,
 } from '@apollo/client';
 
-import { CREATE_GROUP, GET_GROUPS, GET_GROUP_BY_ID } from '../graphql';
-import { GroupInput, GroupType, ResPaginationGroupData } from '../service/type';
+import {
+  ACCEPT_MEMBE_REQ_JOIN_GROUP,
+  CREATE_GROUP,
+  DELETE_GROUP,
+  GET_GROUPS,
+  GET_GROUP_BY_ID,
+  JOIN_GROUP,
+  LEAVE_GROUP,
+} from '../graphql';
+import {
+  GroupInput,
+  GroupType,
+  GroupUpdateType,
+  ResPaginationGroupData,
+} from '../service/type';
 
 export const useCreateGroup = () =>
   useMutation<
@@ -40,3 +53,27 @@ export const useGetGroupById = (id: string) => {
     },
   );
 };
+export const useJoinGroup = () =>
+  useMutation<
+    { joinGroup: { status: string; message: string } },
+    OperationVariables
+  >(JOIN_GROUP);
+
+export const useAcceptMemberJoinGroup = () =>
+  useMutation<
+    { acceptMemberJoinGroup: { status: string; message: string } },
+    OperationVariables
+  >(ACCEPT_MEMBE_REQ_JOIN_GROUP);
+
+export const useLeaveGroup = () =>
+  useMutation<{ leaveGroup: { status: string } }, OperationVariables>(
+    LEAVE_GROUP,
+  );
+
+export const useDeleteGroup = () =>
+  useMutation<{ deleteGroup: { status: string } }, OperationVariables>(
+    DELETE_GROUP,
+  );
+
+export const useUpdateGroup = () =>
+  useMutation<{ updateGroup: { id: string; body: GroupUpdateType } }>;

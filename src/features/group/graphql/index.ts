@@ -50,6 +50,56 @@ export const GET_GROUP_BY_ID = gql`
         id
         avatar
       }
+      author {
+        fullname
+        id
+        avatar
+      }
+    }
+  }
+`;
+
+export const JOIN_GROUP = gql`
+  mutation JoinGroup($id: String!) {
+    joinGroup(id: $id) {
+      status
+      message
+    }
+  }
+`;
+
+export const ACCEPT_MEMBE_REQ_JOIN_GROUP = gql`
+  mutation AcceptMemberReqJoinGroup($idGroup: String!, $idMemberReq: String!) {
+    acceptMemberReqJoinGroup(idGroup: $idGroup, idMemberReq: $idMemberReq) {
+      status
+      message
+    }
+  }
+`;
+
+export const LEAVE_GROUP = gql`
+  mutation LeaveGroup($id: String!) {
+    leaveGroup(id: $id) {
+      status
+      message
+    }
+  }
+`;
+
+export const DELETE_GROUP = gql`
+  mutation DeleteGroup($id: String!) {
+    deleteGroup(id: $id) {
+      status
+      message
+    }
+  }
+`;
+
+export const UPDATE_GROUP = gql`
+  mutation UpdateGroup($id: String!, $body: UpdateGroupDto!) {
+    updateGroup(id: $id, body: $body) {
+      status
+      message
     }
   }
 `;
