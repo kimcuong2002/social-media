@@ -40,12 +40,16 @@ export type PostType = {
     color: string;
     id: string;
   };
+  idAuthor?: string;
+  refetch?: () => void;
 };
 
 export type PostInput = Pick<
   PostTypeRes,
-  'topic' | 'content' | 'images' | 'video' | 'createdAt'
->;
+  'content' | 'images' | 'video' | 'createdAt'
+> & {
+  topic: string;
+};
 
 export type ResPaginationPostData = {
   page: number;

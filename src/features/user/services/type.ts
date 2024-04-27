@@ -1,3 +1,5 @@
+import { EnumActive } from '@/ts/enums/common';
+
 export type UserType = {
   address?: string;
   avatar?: string;
@@ -20,4 +22,6 @@ export type UserType = {
   university?: string;
   updatedAt?: Date;
   username?: string;
+  isActive: EnumActive;
+  usersBlocked: string[];
 };
