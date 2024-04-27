@@ -1,15 +1,14 @@
 import { useMemo } from 'react';
 
-import { Box, Image, Text } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 import { IoArrowBackCircleOutline } from 'react-icons/io5';
 import { useParams } from 'react-router-dom';
 
-import { CreatePost } from '@/components';
-import { useGetGroupById } from '@/features';
+import { GroupInformation, GroupNavbar, useGetGroupById } from '@/features';
 
 export const GroupDetail = () => {
   const params = useParams();
-  const { data } = useGetGroupById(params.id!);
+  const { data, refetch } = useGetGroupById(params.id!);
 
   const groupDetail = useMemo(() => {
     if (data) {
@@ -23,22 +22,20 @@ export const GroupDetail = () => {
   };
 
   return (
-    <Box className=" flex gap-4">
-      <Box className="w-3/12 flex gap-2 p-4">
+    <Box className="flex gap-4 justify-center">
+      <Box className="hidden lg:w-3/12 lg:flex gap-2 p-4 ">
         <IoArrowBackCircleOutline
           className="text-4xl cursor-pointer"
           onClick={goBackHandler}
         />
-        <Box className="!max-h-10">
-          <img
-            src={groupDetail?.avatar}
-            alt=""
-            className="w-16 h-16 rounded-lg "
-          />
-        </Box>
+        <img
+          src={groupDetail?.avatar}
+          alt=""
+          className="w-16 h-16 rounded-xl "
+        />
         <Box>
-          <Text>{groupDetail?.name}</Text>
-          <Box className="flex gap-2">
+          <Text className="font-bold">{groupDetail?.name}</Text>
+          <Box className="flex gap-2 font-bold text-gray-600 text-xs">
             <Text>
               {groupDetail?.isPrivate === true
                 ? 'Private Group'
@@ -48,32 +45,15 @@ export const GroupDetail = () => {
           </Box>
         </Box>
       </Box>
-      <Box className="w-9/12 bg-[#F6E8E7] flex flex-col justify-center items-center">
-        <Box className="w-full flex justify-center items-center bg-gradient-to-b from-[#836A55] to-white to-50%">
-          <Box className="w-10/12 ">
-            <Image
-              src={groupDetail?.coverImage}
-              alt=""
-              className="w-full rounded-b-[30px]"
+      <Box className="w-full lg:w-9/12 bg-[#F1F2F4] flex justify-center items-center">
+        <Box className="w-11/12 lg:w-10/12">
+          {groupDetail && (
+            <GroupInformation
+              groupInformation={groupDetail}
+              refetch={refetch}
             />
-            <Text className="text-3xl font-bold uppercase mt-4 mb-1">
-              {groupDetail?.name}
-            </Text>
-            <Box className="flex gap-4 text-xl">
-              <Text>
-                {groupDetail?.isPrivate === true
-                  ? 'Private Group'
-                  : 'Public Group'}
-              </Text>
-              <Text>{groupDetail?.members?.length} members</Text>
-            </Box>
-          </Box>
-        </Box>
-        <Box className="w-9/12 flex ">
-          <Box className="w-8/12">
-            <CreatePost />
-          </Box>
-          <Box></Box>
+          )}
+          <GroupNavbar data={groupDetail} refetch={refetch} />
         </Box>
       </Box>
     </Box>
