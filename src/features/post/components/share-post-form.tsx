@@ -9,7 +9,7 @@ import {
   InputRightElement,
   Text,
 } from '@chakra-ui/react';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { useGetPostDetail } from '../hooks/use-post-query';
 import { converDateToString } from '@/utils';
 import { FaRegCopy } from 'react-icons/fa';
