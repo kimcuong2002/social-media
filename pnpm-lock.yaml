@@ -62,6 +62,9 @@ importers:
       clsx:
         specifier: ^2.0.0
         version: 2.1.1
+      dayjs:
+        specifier: ^1.11.10
+        version: 1.11.10
       emoji-picker-react:
         specifier: ^4.9.2
         version: 4.9.2(react@18.3.0)
@@ -2545,6 +2548,9 @@ packages:
 
   dataloader@2.2.2:
     resolution: {integrity: sha512-8YnDaaf7N3k/q5HnTJVuzSyLETjoZjVmHc4AeKAzOvKHEFQKcn64OKBfzHYtE9zGjctNM7V9I0MfnUVLpi7M5g==}
+
+  dayjs@1.11.10:
+    resolution: {integrity: sha512-vjAczensTgRcqDERK0SR2XMwsF/tSvnvlv6VcF2GIhg6Sx4yOIt/irsr1RDJsKiIyBzJDpCoXiWWq28MqH2cnQ==}
 
   debounce@1.2.1:
     resolution: {integrity: sha512-XRRe6Glud4rd/ZGQfiV1ruXSfbvfJedlV9Y6zOlP+2K04vBYiJEte6stfFkCP03aMnY5tsipamumUjL14fofug==}
@@ -7782,6 +7788,8 @@ snapshots:
       is-data-view: 1.0.1
 
   dataloader@2.2.2: {}
+
+  dayjs@1.11.10: {}
 
   debounce@1.2.1: {}
 
