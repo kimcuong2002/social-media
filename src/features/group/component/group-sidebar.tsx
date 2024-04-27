@@ -1,22 +1,10 @@
-import {
-  Box,
-  Text,
-  Divider,
-  Button,
-  useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-} from '@chakra-ui/react';
-import { BiNotification, BiPlus } from 'react-icons/bi';
+import { Box, Text, Divider } from '@chakra-ui/react';
+import { BiNotification } from 'react-icons/bi';
 import { MdOutlineEventBusy } from 'react-icons/md';
 import { RiCompassDiscoverLine } from 'react-icons/ri';
 
-import CreateGroup from './create-group';
 import { SideBarButton } from '@/components';
+import CreateGroup from './create-group';
 
 const eventSideBar = [
   {
@@ -34,9 +22,8 @@ const eventSideBar = [
 ];
 
 export const GroupSideBar = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <Box>
+    <>
       <Text className="font-bold" fontSize="2xl">
         Event
       </Text>
@@ -49,25 +36,7 @@ export const GroupSideBar = () => {
             buttonName={item.name}
           />
         ))}
-        <Button
-          leftIcon={<BiPlus className="text-xl" />}
-          colorScheme="facebook"
-          className="my-2"
-          onClick={onOpen}
-        >
-          Create new group
-        </Button>
-        <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Create new groups</ModalHeader>
-            <ModalCloseButton />
-            <Divider />
-            <ModalBody>
-              <CreateGroup />
-            </ModalBody>
-          </ModalContent>
-        </Modal>
+        <CreateGroup />
       </Box>
       <Divider className="my-4" />
       <Text className="uppercase my-4 text-violet-800 font-bold" fontSize="sm">
@@ -75,6 +44,6 @@ export const GroupSideBar = () => {
       </Text>
       <Text className="font-bold cursor-pointer">Danang . 20km</Text>
       <Divider className="my-4" />
-    </Box>
+    </>
   );
 };
