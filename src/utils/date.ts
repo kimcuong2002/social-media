@@ -27,26 +27,26 @@ export const durationTime = (date?: Date): string => {
     const secondDiff = toDate.diff(fromDate, 'second');
 
     if (yearDiff > 0) {
-      return `${yearDiff} năm truoc`;
+      return `${yearDiff} year ago`;
     }
 
     if (monthDiff > 0) {
-      return `${monthDiff} tháng truoc`;
+      return `${monthDiff} month ago`;
     }
 
     if (dayDiff > 0) {
-      return `${dayDiff} ngày truoc`;
+      return `${dayDiff} day ago`;
     }
 
     if (hourDiff > 0) {
-      return `${hourDiff} giờ truoc`;
+      return `${hourDiff} hour ago`;
     }
 
     if (minuteDiff > 0) {
-      return `${minuteDiff} phut`;
+      return `${minuteDiff} minutes`;
     }
     if (secondDiff < 60) {
-      return 'Vua xong';
+      return 'just now';
     }
   }
   return '';
