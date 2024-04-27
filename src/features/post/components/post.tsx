@@ -27,13 +27,14 @@ import { FaTags } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { HiDotsHorizontal } from 'react-icons/hi';
 
-import { CommentInput, PostType, useDeletePost, useLikePost } from '@/features';
+import { PostType, useDeletePost, useLikePost } from '@/features';
 import { useQueryInfoUser } from '@/features/auth';
 import { converDateToString } from '@/utils';
 import { IoTrashBinSharp } from 'react-icons/io5';
 import { FaCopy } from 'react-icons/fa6';
 import { PiTelegramLogo } from 'react-icons/pi';
 import SharePostForm from './share-post-form';
+import { CreateComment } from '@/features/comment/components/create-comment';
 
 export const Post: FC<PostType> = ({
   idPost,
@@ -47,6 +48,7 @@ export const Post: FC<PostType> = ({
   usersLiked,
   topic,
   idAuthor,
+  refetch,
 }) => {
   const videoProps = {
     src: videoSrc,
@@ -62,16 +64,16 @@ export const Post: FC<PostType> = ({
   const [likePost] = useLikePost();
   const [deletePost] = useDeletePost();
 
-  const { data: userData, refetch } = useQueryInfoUser();
+  const { data: userData } = useQueryInfoUser();
   const handleLikePost = () => {
     void likePost({
       variables: {
         idPost: idPost,
         idUser: userData?.getInfoUser.id,
       },
-      onCompleted: async () => {
+      onCompleted: () => {
+        refetch && void refetch();
         setLikedPost(!likedPost);
-        await refetch();
       },
       onError: (errors) => {
         toast.error(errors.message);
@@ -103,8 +105,8 @@ export const Post: FC<PostType> = ({
       variables: {
         id: idPost,
       },
-      onCompleted: async () => {
-        await refetch();
+      onCompleted: () => {
+        refetch && refetch();
         toast.success('Delete post successfully!');
       },
       onError: (errors) => {
@@ -165,9 +167,11 @@ export const Post: FC<PostType> = ({
         </Popover>
       </Box>
       <Box>
-        <Text className={isTruncated ? 'text-ellipsis' : ''}>{content}</Text>
-        <button onClick={toggleTruncation}>
-          {isTruncated ? 'Xem thêm' : 'Thu gọn'}
+        <Text className={`${isTruncated ? 'truncate' : ''} mt-2 `}>
+          {content}
+        </Text>
+        <button onClick={toggleTruncation} className="font-bold mb-2">
+          {isTruncated ? 'See more' : 'Collapse'}
         </button>
       </Box>
       {topic && (
@@ -230,7 +234,7 @@ export const Post: FC<PostType> = ({
         </Box>
       </Box>
       <Divider className="mb-4" />
-      <CommentInput />
+      <CreateComment postId={idPost as string} />
     </Box>
   );
 };
