@@ -11,7 +11,7 @@ type Props = {
 
 const NavbarLayout: FC<Props> = ({ children, navBarChildren }) => {
   return (
-    <Box className="flex justify-between">
+    <Box className="flex justify-between h-full">
       <LeftNavBar>{navBarChildren}</LeftNavBar>
       <Box className="mx-2 w-full flex flex-col overflow-y-auto no-scrollbar lg:w-9/12">
         {children}

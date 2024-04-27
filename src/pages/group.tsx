@@ -22,7 +22,7 @@ export const Group = () => {
   return (
     <NavbarLayout navBarChildren={<GroupSideBar />}>
       <Box className="m-4">
-        <Text className="text-2xl font-bold mb-4">All your groups</Text>
+        <Text className="text-2xl font-bold mb-4">All groups</Text>
         <Grid
           templateColumns={{
             sm: 'repeat(2,1fr)',
