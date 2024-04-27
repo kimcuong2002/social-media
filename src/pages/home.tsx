@@ -3,12 +3,7 @@ import { useMemo } from 'react';
 import { Box } from '@chakra-ui/react';
 
 import { CreatePost } from '@/components';
-import {
-  Post,
-  RightNavBar,
-  HomeSideBar,
-  useGetPostsQuery,
-} from '@/features';
+import { Post, RightNavBar, HomeSideBar, useGetPostsQuery } from '@/features';
 import NavbarLayout from '@/layout/navbar-layout';
 
 export const Home = () => {
@@ -16,11 +11,12 @@ export const Home = () => {
   const page = 1;
   const filter = {};
 
-  const { data } = useGetPostsQuery(limit, page, filter);
+  const { data, refetch } = useGetPostsQuery(limit, page, filter);
+
   const posts = useMemo(() => {
     if (data?.getAllPost) {
-      const result = data.getAllPost.data
-      return result
+      const result = data.getAllPost.data;
+      return result;
     }
   }, [data]);
   return (
@@ -28,7 +24,7 @@ export const Home = () => {
       <Box className="flex w-full justify-between">
         <Box className="hidden md:block"></Box>
         <Box className="w-full lg:w-11/12 xl:w-8/12 overflow-y-scroll h-[95vh] no-scrollbar">
-          <CreatePost />
+          <CreatePost refetch={refetch} />
           {posts?.map((item) => (
             <Post
               key={item.id}
@@ -40,6 +36,8 @@ export const Home = () => {
               idPost={item.id}
               usersLiked={item.usersLiked}
               topic={item.topic}
+              idAuthor={item.author.id}
+              refetch={refetch}
             />
           ))}
         </Box>
