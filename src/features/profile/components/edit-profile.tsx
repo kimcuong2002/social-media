@@ -110,7 +110,10 @@ export const EditProfile = () => {
               </Box>
             </ModalBody>
             <Divider />
-            <Input type="submit" className="cursor-pointer" />
+            <Input
+              type="submit"
+              className="cursor-pointer !bg-[#1877F2] mt-4 font-bold text-white"
+            />
           </form>
         </ModalContent>
       </Modal>
