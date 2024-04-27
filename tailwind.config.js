@@ -83,6 +83,13 @@ module.exports = {
           '-ms-overflow-style': 'none',
           'scrollbar-with': 'none',
         },
+        'truncate': {
+          "width" : "100%",	
+          'display': '-webkit-box',
+          '-webkit-line-clamp': '3',
+          '-webkit-box-orient': 'vertical',
+          'overflow': 'hidden',
+        } 
       };
       addUtilities(newUtilities);
     },
