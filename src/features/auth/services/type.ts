@@ -11,7 +11,7 @@ export type ResponseLogin = {
   expiresIn: string;
 };
 
-export type RegisterInput = {
+export type RegisterInputType = {
   fullname: string;
   phone: string;
   username: string;
