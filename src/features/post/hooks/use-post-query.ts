@@ -14,6 +14,7 @@ import {
   LIKE_POST,
   GET_POST_PY_AUTHOR,
   DELETE_POST,
+  GHIM_POST,
 } from '../graphql';
 import {
   PostInput,
@@ -74,3 +75,6 @@ export const useDeletePost = () =>
   useMutation<{ deletePost: { status: string } }, OperationVariables>(
     DELETE_POST,
   );
+
+export const useGhimPost = () =>
+  useMutation<{ ghimPost: { status: string } }, OperationVariables>(GHIM_POST);

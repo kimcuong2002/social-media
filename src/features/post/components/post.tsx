@@ -27,7 +27,7 @@ import { FaTags } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { HiDotsHorizontal } from 'react-icons/hi';
 
-import { PostType, useDeletePost, useLikePost } from '@/features';
+import { PostType, useDeletePost, useGhimPost, useLikePost } from '@/features';
 import { useQueryInfoUser } from '@/features/auth';
 import { converDateToString } from '@/utils';
 import { IoTrashBinSharp } from 'react-icons/io5';
@@ -63,6 +63,7 @@ export const Post: FC<PostType> = ({
   const [isTruncated, setIsTruncated] = useState(true);
   const [likePost] = useLikePost();
   const [deletePost] = useDeletePost();
+  const [ghimPost] = useGhimPost();
 
   const { data: userData } = useQueryInfoUser();
   const handleLikePost = () => {
@@ -115,6 +116,21 @@ export const Post: FC<PostType> = ({
     });
   };
 
+  const handleGhimPost = () => {
+    void ghimPost({
+      variables: {
+        idPost: idPost,
+      },
+      onCompleted: () => {
+        refetch && void refetch();
+        toast.success('Ghim post successfully!');
+      },
+      onError: (errors) => {
+        toast.error(errors.message);
+      },
+    });
+  };
+
   const currentPath = window.location.pathname;
 
   return (
@@ -150,7 +166,10 @@ export const Post: FC<PostType> = ({
                     <Text>Delete Post</Text>
                   </Box>
                   <Divider className="my-2" />
-                  <Box className="flex items-center gap-2 cursor-pointer font-bold">
+                  <Box
+                    className="flex items-center gap-2 cursor-pointer font-bold"
+                    onClick={handleGhimPost}
+                  >
                     <FaTags className="text-2xl" />
                     <Text>Ghim Post</Text>
                   </Box>

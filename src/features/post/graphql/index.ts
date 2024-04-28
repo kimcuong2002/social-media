@@ -218,3 +218,12 @@ export const DELETE_POST = gql`
     }
   }
 `;
+
+export const GHIM_POST = gql`
+  mutation ghimPost($idPost: String!) {
+    ghimPost(idPost: $idPost) {
+      message
+      status
+    }
+  }
+`;
