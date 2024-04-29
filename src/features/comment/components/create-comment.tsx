@@ -10,7 +10,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { CommentInputType } from '../service';
 
 type Props = {
-  postId: string;
+  postId?: string;
   value?: string[];
   onChange?: (_v: string[]) => void;
   onRefetch?: () => void;
@@ -71,7 +71,7 @@ export const CreateComment = ({ postId, onRefetch }: Props) => {
   const { handleSubmit, reset } = useForm<CommentInputType>();
 
   const onSubmit: SubmitHandler<CommentInputType> = (data) => {
-    data.postId = postId;
+    data.postId = postId as string;
     void createComment({
       variables: {
         body: {

@@ -23,18 +23,17 @@ import {
 import toast from 'react-hot-toast';
 import { BiLike } from 'react-icons/bi';
 import { FaRegComments } from 'react-icons/fa';
-import { FaTags } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { HiDotsHorizontal } from 'react-icons/hi';
 
 import { PostType, useDeletePost, useGhimPost, useLikePost } from '@/features';
 import { useQueryInfoUser } from '@/features/auth';
 import { converDateToString } from '@/utils';
-import { IoTrashBinSharp } from 'react-icons/io5';
-import { FaCopy } from 'react-icons/fa6';
 import { PiTelegramLogo } from 'react-icons/pi';
 import SharePostForm from './share-post-form';
 import { CreateComment } from '@/features/comment/components/create-comment';
+import { CiShoppingTag, CiEdit, CiTrash } from 'react-icons/ci';
+import { BsCopy } from 'react-icons/bs';
 
 export const Post: FC<PostType> = ({
   idPost,
@@ -159,25 +158,32 @@ export const Post: FC<PostType> = ({
               {userData?.getInfoUser.id === idAuthor && (
                 <>
                   <Box
-                    className="flex items-center gap-2 cursor-pointer font-bold"
+                    className="flex items-center gap-2 cursor-pointer"
                     onClick={handleDeletePost}
                   >
-                    <IoTrashBinSharp className="text-2xl" />
-                    <Text>Delete Post</Text>
+                    <CiTrash className="text-2xl" />
+                    <Text className="font-bold">Delete Post</Text>
                   </Box>
                   <Divider className="my-2" />
                   <Box
                     className="flex items-center gap-2 cursor-pointer font-bold"
                     onClick={handleGhimPost}
                   >
-                    <FaTags className="text-2xl" />
-                    <Text>Ghim Post</Text>
+                    <CiShoppingTag className="text-2xl" />
+                    <Text className="font-bold">Ghim Post</Text>
                   </Box>
+                  <Divider className="my-2" />
+                  <Link to={`/edit-post/${idPost}`}>
+                    <Box className="flex items-center gap-2 cursor-pointer font-bold">
+                      <CiEdit className="text-2xl" />
+                      <Text className="font-bold">Edit Post</Text>
+                    </Box>
+                  </Link>
                 </>
               )}
               {userData?.getInfoUser.id !== idAuthor && (
                 <Box className="flex items-center gap-2 cursor-pointer font-bold">
-                  <FaCopy className="text-2xl" />
+                  <BsCopy className="text-2xl" />
                   <Text>Save Post</Text>
                 </Box>
               )}
@@ -245,7 +251,7 @@ export const Post: FC<PostType> = ({
                 <Divider />
                 <ModalCloseButton />
                 <ModalBody>
-                  <SharePostForm idPost={idPost as string} />
+                  <SharePostForm idPost={idPost} idUser={idAuthor} />
                 </ModalBody>
               </ModalContent>
             </Modal>
