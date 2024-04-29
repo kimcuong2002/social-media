@@ -5,7 +5,7 @@ import { Navigate, useRoutes } from 'react-router-dom';
 import { LOGIN_PATH } from '@/data';
 import { routeList } from '@/data/constant/navs';
 import LayoutComponent from '@/layout';
-import { GroupDetail, Login, PostDetail } from '@/pages';
+import { EditPost, GroupDetail, Login, PostDetail } from '@/pages';
 
 const NotFound = lazy(() => import('@/pages/not-found'));
 
@@ -38,6 +38,10 @@ const routes = [
       {
         path: `profile/posts/:id`,
         element: <PostDetail />,
+      },
+      {
+        path: `edit-post/:id`,
+        element: <EditPost />,
       },
     ],
   },

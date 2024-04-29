@@ -15,6 +15,8 @@ import {
   GET_POST_PY_AUTHOR,
   DELETE_POST,
   GHIM_POST,
+  UPDATE_POST,
+  SHARE_POST,
 } from '../graphql';
 import {
   PostInput,
@@ -78,3 +80,14 @@ export const useDeletePost = () =>
 
 export const useGhimPost = () =>
   useMutation<{ ghimPost: { status: string } }, OperationVariables>(GHIM_POST);
+
+export const useUpdatePost = () =>
+  useMutation<
+    { updatePost: { status: string; body: PostInput; id: string } },
+    OperationVariables
+  >(UPDATE_POST);
+
+export const useSharePost = () =>
+  useMutation<{ sharePost: { status: string } }, OperationVariables>(
+    SHARE_POST,
+  );

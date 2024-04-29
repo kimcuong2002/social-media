@@ -3,9 +3,10 @@ export * from './profile';
 export * from './login';
 export * from './market';
 export * from './video';
-export * from './event';
+export * from './collections';
 export * from './friends';
 export * from './group';
 export * from './chat';
 export * from './group-detail';
-export * from "./post-detail"
+export * from './post-detail';
+export * from './edit-post';
