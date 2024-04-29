@@ -227,3 +227,21 @@ export const GHIM_POST = gql`
     }
   }
 `;
+
+export const UPDATE_POST = gql`
+  mutation updatePost($id: String!, $body: UpdatePostDto!) {
+    updatePost(id: $id, body: $body) {
+      status
+      message
+    }
+  }
+`;
+
+export const SHARE_POST = gql`
+  mutation sharePost($idPost: String!, $idUser: String!) {
+    sharePost(idPost: $idPost, idUser: $idUser) {
+      status
+      message
+    }
+  }
+`;

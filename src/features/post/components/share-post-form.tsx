@@ -1,6 +1,7 @@
 import {
   Avatar,
   Box,
+  Button,
   Divider,
   IconButton,
   Img,
@@ -10,23 +11,42 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { FC } from 'react';
-import { useGetPostDetail } from '../hooks/use-post-query';
+import { useGetPostDetail, useSharePost } from '../hooks/use-post-query';
 import { converDateToString } from '@/utils';
 import { FaRegCopy } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 
 export type Props = {
-  idPost: string;
+  idPost?: string;
+  idUser?: string;
 };
-const SharePostForm: FC<Props> = ({ idPost }) => {
-  const { data } = useGetPostDetail(idPost);
+const SharePostForm: FC<Props> = ({ idPost, idUser }) => {
+  const { data } = useGetPostDetail(idPost as string);
   const currentPath = window.location.pathname;
+  const [sharePost] = useSharePost();
+
   const handleCopy = () => {
     navigator.clipboard.writeText(
       `http://localhost:5173${currentPath}/posts/${data?.getPostById.id}`,
     );
     toast.success('Copied!');
   };
+
+  const handleShare = () => {
+    void sharePost({
+      variables: {
+        idPost: idPost,
+        idUser: idUser,
+      },
+      onCompleted: () => {
+        toast.success('Share post successfully!');
+      },
+      onError: (errors) => {
+        toast.error(errors.message);
+      },
+    });
+  };
+
   return (
     <Box>
       <Box className="flex gap-2">
@@ -61,6 +81,7 @@ const SharePostForm: FC<Props> = ({ idPost }) => {
           />
         </InputRightElement>
       </InputGroup>
+      <Button onClick={handleShare}>Share to profile</Button>
     </Box>
   );
 };
