@@ -26,7 +26,7 @@ import { useQueryInfoUser } from '@/features/auth';
 import { converDateToString } from '@/utils';
 
 export const Profile = () => {
-  const { data } = useQueryInfoUser();
+  const { data, refetch } = useQueryInfoUser();
 
   const informationUser = useMemo(() => {
     if (data) {
@@ -53,8 +53,8 @@ export const Profile = () => {
             data.getInfoUser.relationship === 0
               ? 'Single'
               : data.getInfoUser.relationship === 1
-              ? 'Married'
-              : 'Other',
+                ? 'Married'
+                : 'Other',
         },
         {
           id: uuidv4(),
@@ -121,6 +121,10 @@ export const Profile = () => {
                 avatar={item.author.avatar}
                 createdAt={item.createdAt as Date}
                 idPost={item.id}
+                usersLiked={item.usersLiked}
+                topic={item.topic}
+                idAuthor={item.author.id}
+                refetch={refetch}
               />
             ))}
           </Box>
