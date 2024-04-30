@@ -3,8 +3,8 @@ import { gql } from '@apollo/client';
 export const CREATE_COLLECTION = gql`
   mutation CreateCollection($body: CreateCollectionDto!) {
     createCollection(body: $body) {
-      message
-      status
+      id
+      name
     }
   }
 `;
@@ -39,6 +39,20 @@ export const GET_SAVED = gql`
           avatar
         }
         videos
+      }
+    }
+  }
+`;
+
+export const GET_COLLECTIONS = gql`
+  query GetCollections($idSaved: String!, $limit: Float!, $page: Float!) {
+    getCollections(idSaved: $idSaved, limit: $limit, page: $page) {
+      page
+      total
+      data {
+        id
+        name
+        avatar
       }
     }
   }

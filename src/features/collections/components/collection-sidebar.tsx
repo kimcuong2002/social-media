@@ -1,10 +1,12 @@
-import { Box, Text, Divider, Button } from '@chakra-ui/react';
+import { Box, Text, Divider, Avatar } from '@chakra-ui/react';
 import { LuTags } from 'react-icons/lu';
 import { MdOutlineEventBusy } from 'react-icons/md';
 import { RiCompassDiscoverLine } from 'react-icons/ri';
 
 import { SideBarButton } from '@/components';
 import { CreateCollection } from './create-collection';
+import { useGetCollections, useGetSaved } from '../hooks/use-collections-query';
+import { useMemo, useState } from 'react';
 
 const eventSideBar = [
   {
@@ -22,6 +24,20 @@ const eventSideBar = [
 ];
 
 export const CollectionSideBar = () => {
+  const [page] = useState(1);
+  const limit = 10;
+
+  const { data: getSaved } = useGetSaved();
+  const idSaved = useMemo(() => {
+    return getSaved?.getSaved?.id;
+  }, [getSaved]);
+
+  const { data: getCollections } = useGetCollections(
+    idSaved as string,
+    limit,
+    page,
+  );
+
   return (
     <>
       <Text className="font-bold" fontSize="2xl">
@@ -40,9 +56,18 @@ export const CollectionSideBar = () => {
       </Box>
       <Divider className="my-4" />
       <Text className="uppercase my-4 text-violet-800 font-bold" fontSize="sm">
-        Filter
+        All your collection
       </Text>
-      <Text className="font-bold cursor-pointer">Danang . 20km</Text>
+      {getCollections?.getCollections.data.map((item) => (
+        <Box
+          key={item.id}
+          className="flex items-center gap-2 my-2 cursor-pointer hover:bg-slate-200 p-2 rounded-xl"
+        >
+          <Avatar src={item.avatar} />
+          <></>
+          <Text className="font-bold">{item.name}</Text>
+        </Box>
+      ))}
       <Divider className="my-4" />
     </>
   );
