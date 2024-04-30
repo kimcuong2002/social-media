@@ -1,10 +1,23 @@
-import { OperationVariables, useMutation, useQuery } from '@apollo/client';
+import {
+  ApolloCache,
+  DefaultContext,
+  OperationVariables,
+  useMutation,
+  useQuery,
+} from '@apollo/client';
 import {
   CollectionInputType,
+  CollectionUpdateInputType,
   ResPaginationCollectionData,
   SavedType,
 } from '../service';
-import { CREATE_COLLECTION, GET_COLLECTIONS, GET_SAVED } from '../graphql';
+import {
+  CREATE_COLLECTION,
+  DELETE_COLLECTION,
+  GET_COLLECTIONS,
+  GET_SAVED,
+  UPDATE_COLLECTION,
+} from '../graphql';
 
 export const useCreateCollections = () =>
   useMutation<{ variables: { body: CollectionInputType } }, OperationVariables>(
@@ -31,3 +44,14 @@ export const useGetCollections = (
     },
   });
 };
+
+export const useUpdateCollection = () =>
+  useMutation<
+    { variables: { body: CollectionUpdateInputType; id: string } },
+    OperationVariables,
+    DefaultContext,
+    ApolloCache<unknown>
+  >(UPDATE_COLLECTION);
+
+export const useDeleteCollection = () =>
+  useMutation<{ id: string }, OperationVariables>(DELETE_COLLECTION);

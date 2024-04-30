@@ -8,7 +8,7 @@ import {
 
 import useAuthStore from './user-auth-store';
 import { GET_INFOR_USER, LOGIN, SIGN_UP } from '../graphql';
-import { RegisterInput, ResponseLogin } from '../services/type';
+import { RegisterInputType, ResponseLogin } from '../services/type';
 import { UserType } from '@/features/user';
 
 export const useLoginMutation = () =>
@@ -21,7 +21,7 @@ export const useLoginMutation = () =>
 
 export const useSignUpMutation = () =>
   useMutation<
-    { signup: RegisterInput },
+    { signup: RegisterInputType },
     OperationVariables,
     DefaultContext,
     ApolloCache<unknown>

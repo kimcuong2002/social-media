@@ -26,7 +26,11 @@ const defaultValues = {
   avatar: '',
 };
 
-export const CreateCollection = () => {
+type Props = {
+  refetch?: () => void;
+};
+
+export const CreateCollection = ({ refetch }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data: saved } = useGetSaved();
 
@@ -53,6 +57,7 @@ export const CreateCollection = () => {
           reset(defaultValues);
           onClose();
           toast.success('Create collection successfully!');
+          refetch && void refetch();
         },
         onError: (errors) => {
           toast.error(errors.message);
@@ -65,8 +70,7 @@ export const CreateCollection = () => {
     <Box>
       <Button
         leftIcon={<BiPlus className="text-xl" />}
-        colorScheme="facebook"
-        className="my-2"
+        className="my-2 bg-[#E7EFF7] !text-[#0F61AF]"
         onClick={onOpen}
       >
         Create new collection

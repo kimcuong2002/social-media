@@ -57,3 +57,19 @@ export const GET_COLLECTIONS = gql`
     }
   }
 `;
+
+export const UPDATE_COLLECTION = gql`
+  mutation UpdateCollection($id: String!, $body: UpdateCollectionDto!) {
+    updateCollection(id: $id, body: $body) {
+      status
+    }
+  }
+`;
+
+export const DELETE_COLLECTION = gql`
+  mutation DeleteCollection($id: String!) {
+    deleteCollection(id: $id) {
+      status
+    }
+  }
+`;

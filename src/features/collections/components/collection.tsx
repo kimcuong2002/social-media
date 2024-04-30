@@ -19,7 +19,7 @@ export const Collection: FC<Props> = ({
   time,
 }) => {
   return (
-    <Box className="bg-white rounded-xl">
+    <Box className="bg-white rounded-xl border">
       <Image src={thumb} className="w-full h-40 cover rounded-t-xl" />
       <Box className="p-3">
         <Text className="font-bold">{name}</Text>
