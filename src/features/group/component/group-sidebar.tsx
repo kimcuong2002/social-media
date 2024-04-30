@@ -1,27 +1,14 @@
 import { Box, Text, Divider } from '@chakra-ui/react';
-import { BiNotification } from 'react-icons/bi';
-import { MdOutlineEventBusy } from 'react-icons/md';
-import { RiCompassDiscoverLine } from 'react-icons/ri';
 
 import { SideBarButton } from '@/components';
 import CreateGroup from './create-group';
+import { groupSideBarButton } from '../service/constant';
 
-const eventSideBar = [
-  {
-    name: 'Group Feeds',
-    icon: <RiCompassDiscoverLine />,
-  },
-  {
-    name: 'Discover Group',
-    icon: <MdOutlineEventBusy />,
-  },
-  {
-    name: 'Notifcations',
-    icon: <BiNotification />,
-  },
-];
+type Props = {
+  refetch: () => void;
+};
 
-export const GroupSideBar = () => {
+export const GroupSideBar = ({ refetch }: Props) => {
   return (
     <>
       <Text className="font-bold" fontSize="2xl">
@@ -29,20 +16,15 @@ export const GroupSideBar = () => {
       </Text>
       <Divider className="my-4" />
       <Box className="flex flex-col">
-        {eventSideBar.map((item) => (
+        {groupSideBarButton.map((item) => (
           <SideBarButton
             key={item.name}
             buttonIcon={item.icon}
             buttonName={item.name}
           />
         ))}
-        <CreateGroup />
+        <CreateGroup refetch={refetch} />
       </Box>
-      <Divider className="my-4" />
-      <Text className="uppercase my-4 text-violet-800 font-bold" fontSize="sm">
-        Your group created
-      </Text>
-      <Text className="font-bold cursor-pointer">Danang . 20km</Text>
       <Divider className="my-4" />
     </>
   );

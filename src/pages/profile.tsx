@@ -24,10 +24,11 @@ import {
 } from '@/features';
 import { useQueryInfoUser } from '@/features/auth';
 import { converDateToString } from '@/utils';
-import { ID_USER, LIMIT, PAGE } from '@/data';
+import { LIMIT, PAGE } from '@/data';
 
 export const Profile = () => {
   const { data, refetch } = useQueryInfoUser();
+  const { data: userData } = useQueryInfoUser();
 
   const informationUser = useMemo(() => {
     if (data) {
@@ -82,9 +83,11 @@ export const Profile = () => {
     }
   }, [data]);
 
-  const idAuthor = ID_USER;
-
-  const { data: posts } = useGetPostByAuthor(idAuthor, LIMIT, PAGE);
+  const { data: posts } = useGetPostByAuthor(
+    userData?.getInfoUser.id as string,
+    LIMIT,
+    PAGE,
+  );
   const listPosts = useMemo(() => {
     if (posts) {
       const result = posts.getPostByAuthor.data;

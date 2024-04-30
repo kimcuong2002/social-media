@@ -11,7 +11,7 @@ export const Group = () => {
   const [listGroups, setListGroups] = useState<GroupType[]>([]);
   const [page] = useState(PAGE);
 
-  const { data } = useGetGroups(FILTER, LIMIT, page);
+  const { data, refetch } = useGetGroups(FILTER, LIMIT, page);
   useMemo(() => {
     if (data) {
       setListGroups(data.getGroups.data);
@@ -19,7 +19,7 @@ export const Group = () => {
   }, [data]);
 
   return (
-    <NavbarLayout navBarChildren={<GroupSideBar />}>
+    <NavbarLayout navBarChildren={<GroupSideBar refetch={refetch} />}>
       <Box className="m-4">
         <Text className="text-2xl font-bold mb-4">All groups</Text>
         <Grid

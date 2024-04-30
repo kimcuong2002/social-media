@@ -26,7 +26,11 @@ const defaultValueForm = {
   coverImage: '',
 };
 
-const CreateGroup = () => {
+type Props = {
+  refetch: () => void;
+};
+
+const CreateGroup = ({ refetch }: Props) => {
   const {
     control,
     handleSubmit,
@@ -49,6 +53,7 @@ const CreateGroup = () => {
           },
         },
         onCompleted: () => {
+          refetch && void refetch();
           reset(defaultValueForm);
           onClose();
           toast.success('Create group successfully!');
@@ -64,8 +69,7 @@ const CreateGroup = () => {
     <Box className="!w-full">
       <Button
         leftIcon={<BiPlus className="text-xl !w-full" />}
-        colorScheme="facebook"
-        className="my-2"
+        className="my-2 !text-[#0F66BB]"
         onClick={onOpen}
       >
         Create new group

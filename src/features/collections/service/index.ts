@@ -16,6 +16,11 @@ export type CollectionInputType = Pick<
   'name' | 'saved' | 'avatar'
 >;
 
+export type CollectionUpdateInputType = Pick<
+  CollectionType,
+  'id' | 'name' | 'avatar'
+>;
+
 export type SavedType = {
   id: string;
   markets: string[];
