@@ -9,8 +9,8 @@ type Props = {
 
 export const SideBarButton = ({ buttonName, buttonIcon }: Props) => {
   return (
-    <button className="flex justify-start items-center gap-4 py-3 rounded-lg px-4 font-bold  hover:bg-slate-400 hover:text-white group">
-      <Box className="text-green-800 text-2xl group-hover:text-white">
+    <button className="flex justify-start items-center gap-4 py-3 rounded-lg px-4 font-bold  hover:bg-[#D5ECF5] hover:text-[#44408A]">
+      <Box className="text-[#44408A] text-2xl group-hover:!text-[#44408A]">
         {buttonIcon}
       </Box>
       <Text>{buttonName}</Text>
