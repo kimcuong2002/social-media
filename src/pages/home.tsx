@@ -1,17 +1,16 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 import { Box } from '@chakra-ui/react';
 
 import { CreatePost } from '@/components';
 import { Post, RightNavBar, HomeSideBar, useGetPostsQuery } from '@/features';
 import NavbarLayout from '@/layout/navbar-layout';
+import { FILTER, LIMIT, PAGE } from '@/data';
 
 export const Home = () => {
-  const limit = 1000;
-  const page = 1;
-  const filter = {};
+  const [page] = useState(PAGE);
 
-  const { data, refetch } = useGetPostsQuery(limit, page, filter);
+  const { data, refetch } = useGetPostsQuery(LIMIT, page, FILTER);
 
   const posts = useMemo(() => {
     if (data?.getAllPost) {

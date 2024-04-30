@@ -5,14 +5,13 @@ import { Box, Grid, Text } from '@chakra-ui/react';
 import { GroupSideBar, GroupType, useGetGroups } from '@/features';
 import { GroupComponent } from '@/features/group';
 import NavbarLayout from '@/layout/navbar-layout';
+import { FILTER, LIMIT, PAGE } from '@/data';
 
 export const Group = () => {
   const [listGroups, setListGroups] = useState<GroupType[]>([]);
-  const filter = {};
-  const limit = 10;
-  const page = 1;
+  const [page] = useState(PAGE);
 
-  const { data } = useGetGroups(filter, limit, page);
+  const { data } = useGetGroups(FILTER, LIMIT, page);
   useMemo(() => {
     if (data) {
       setListGroups(data.getGroups.data);

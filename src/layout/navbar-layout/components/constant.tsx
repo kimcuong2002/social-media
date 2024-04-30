@@ -16,7 +16,7 @@ import {
   GROUP_PATH,
   MARKET_PATH,
   CHAT_PATH,
-  EVENT_PATH,
+  COLLECTION_PATH,
   VIDEO_PATH,
 } from '@/data';
 
@@ -51,6 +51,6 @@ export const leftNavBar = [
   },
   {
     icon: <BiCalendar />,
-    link: EVENT_PATH,
+    link: COLLECTION_PATH,
   },
 ];

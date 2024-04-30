@@ -7,6 +7,7 @@ import { SideBarButton } from '@/components';
 import { CreateCollection } from './create-collection';
 import { useGetCollections, useGetSaved } from '../hooks/use-collections-query';
 import { useMemo, useState } from 'react';
+import { LIMIT, PAGE } from '@/data';
 
 const eventSideBar = [
   {
@@ -24,8 +25,7 @@ const eventSideBar = [
 ];
 
 export const CollectionSideBar = () => {
-  const [page] = useState(1);
-  const limit = 10;
+  const [page] = useState(PAGE);
 
   const { data: getSaved } = useGetSaved();
   const idSaved = useMemo(() => {
@@ -34,7 +34,7 @@ export const CollectionSideBar = () => {
 
   const { data: getCollections } = useGetCollections(
     idSaved as string,
-    limit,
+    LIMIT,
     page,
   );
 

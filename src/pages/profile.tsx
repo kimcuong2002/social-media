@@ -24,6 +24,7 @@ import {
 } from '@/features';
 import { useQueryInfoUser } from '@/features/auth';
 import { converDateToString } from '@/utils';
+import { ID_USER, LIMIT, PAGE } from '@/data';
 
 export const Profile = () => {
   const { data, refetch } = useQueryInfoUser();
@@ -81,11 +82,9 @@ export const Profile = () => {
     }
   }, [data]);
 
-  const idAuthor = data?.getInfoUser.id;
-  const limit = 100;
-  const page = 1;
+  const idAuthor = ID_USER;
 
-  const { data: posts } = useGetPostByAuthor(idAuthor as string, limit, page);
+  const { data: posts } = useGetPostByAuthor(idAuthor, LIMIT, PAGE);
   const listPosts = useMemo(() => {
     if (posts) {
       const result = posts.getPostByAuthor.data;
