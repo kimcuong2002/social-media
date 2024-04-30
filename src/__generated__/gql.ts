@@ -16,6 +16,12 @@ const documents = {
     "\n  mutation Login($body: LoginUserDto!) {\n    login(body: $body) {\n      user {\n        fullname\n        avatar\n        dayOfBirth\n        description\n        gender\n        id\n        phone\n        email\n        role\n        createdAt\n        friends {\n          fullname\n          avatar\n          dayOfBirth\n          description\n          gender\n          id\n          phone\n          email\n          role\n          createdAt\n        }\n        friendsReq {\n          fullname\n          avatar\n          dayOfBirth\n          description\n          gender\n          id\n          phone\n          email\n          role\n          createdAt\n        }\n      }\n      access_token\n    }\n  }\n": types.LoginDocument,
     "\n  mutation Signup($body: SignUpUserDto!) {\n    signup(body: $body) {\n      username\n    }\n  }\n": types.SignupDocument,
     "\n  query GetInfoUser {\n    getInfoUser {\n      avatar\n      createdAt\n      coverImage\n      dayOfBirth\n      description\n      email\n      address\n      description\n      company\n      university\n      relationship\n      friends {\n        fullname\n        avatar\n      }\n      friendsReq {\n        fullname\n        avatar\n      }\n      fullname\n      gender\n      id\n      phone\n    }\n  }\n": types.GetInfoUserDocument,
+    "\n  mutation CreateCollection($body: CreateCollectionDto!) {\n    createCollection(body: $body) {\n      id\n      name\n    }\n  }\n": types.CreateCollectionDocument,
+    "\n  query GetSaved {\n    getSaved {\n      id\n      markets\n      posts {\n        author {\n          id\n          fullname\n          avatar\n        }\n        authorsPostShared {\n          id\n          fullname\n          avatar\n        }\n        content\n        createdAt\n        id\n        images\n        topic {\n          name\n        }\n        updatedAt\n        usersLiked {\n          id\n          fullname\n          avatar\n        }\n        videos\n      }\n    }\n  }\n": types.GetSavedDocument,
+    "\n  query GetCollections($idSaved: String!, $limit: Float!, $page: Float!) {\n    getCollections(idSaved: $idSaved, limit: $limit, page: $page) {\n      page\n      total\n    }\n  }\n": types.GetCollectionsDocument,
+    "\n  mutation CreateComment($body: CreateCommentDto!) {\n    createComment(body: $body) {\n      id\n    }\n  }\n": types.CreateCommentDocument,
+    "\n  query GetComments($limit: Float!, $page: Float!, $postId: String!) {\n    getComments(limit: $limit, page: $page, postId: $postId) {\n      page\n      total\n      data {\n        author {\n          avatar\n          fullname\n          id\n        }\n        postId\n        content\n        createdAt\n        id\n        images\n        videos\n        replies {\n          author {\n            avatar\n            fullname\n            id\n          }\n          content\n          createdAt\n          id\n        }\n      }\n    }\n  }\n": types.GetCommentsDocument,
+    "\n  mutation ReplyComment($body: CreateCommentDto!, $idCmtParent: String!) {\n    replyComment(body: $body, idCmtParent: $idCmtParent) {\n      message\n      status\n    }\n  }\n": types.ReplyCommentDocument,
     "\n  mutation createGroup($body: CreateGroupDto!) {\n    createGroup(body: $body) {\n      name\n      avatar\n      createdAt\n    }\n  }\n": types.CreateGroupDocument,
     "\n  query GetGroups($filter: ParamsQueryDto!, $limit: Float!, $page: Float!) {\n    getGroups(filter: $filter, page: $page, limit: $limit) {\n      data {\n        name\n        id\n        avatar\n        description\n      }\n    }\n  }\n": types.GetGroupsDocument,
     "\n  query GetGroupById($id: String!) {\n    getGroupById(id: $id) {\n      allFiles\n      avatar\n      coverImage\n      createdAt\n      description\n      id\n      name\n      updatedAt\n      isPrivate\n      admins {\n        fullname\n        id\n        avatar\n      }\n      members {\n        fullname\n        id\n        avatar\n      }\n      membersReq {\n        fullname\n        id\n        avatar\n      }\n      author {\n        fullname\n        id\n        avatar\n      }\n    }\n  }\n": types.GetGroupByIdDocument,
@@ -31,6 +37,9 @@ const documents = {
     "\n  mutation likePost($idPost: String!, $idUser: String!) {\n    likePost(idPost: $idPost, idUser: $idUser) {\n      message\n      status\n    }\n  }\n": types.LikePostDocument,
     "\n  query GetPostByAuthor($idAuthor: String!, $limit: Float!, $page: Float!) {\n    getPostByAuthor(idAuthor: $idAuthor, limit: $limit, page: $page) {\n      page\n      total\n      data {\n        id\n        authorsPostShared {\n          fullname\n          avatar\n          id\n        }\n        author {\n          fullname\n          avatar\n          id\n        }\n        content\n        images\n        topic {\n          image\n          name\n          color\n          id\n        }\n        createdAt\n        updatedAt\n        usersLiked {\n          fullname\n          avatar\n          id\n        }\n      }\n    }\n  }\n": types.GetPostByAuthorDocument,
     "\n  mutation deletePost($id: String!) {\n    deletePost(id: $id) {\n      message\n      status\n    }\n  }\n": types.DeletePostDocument,
+    "\n  mutation ghimPost($idPost: String!) {\n    ghimPost(idPost: $idPost) {\n      message\n      status\n    }\n  }\n": types.GhimPostDocument,
+    "\n  mutation updatePost($id: String!, $body: UpdatePostDto!) {\n    updatePost(id: $id, body: $body) {\n      status\n      message\n    }\n  }\n": types.UpdatePostDocument,
+    "\n  mutation sharePost($idPost: String!, $idUser: String!) {\n    sharePost(idPost: $idPost, idUser: $idUser) {\n      status\n      message\n    }\n  }\n": types.SharePostDocument,
     "\n  mutation Update($body: UpdateUserDto!, $id: String!) {\n    update(body: $body, id: $id) {\n      message\n      status\n    }\n  }\n": types.UpdateDocument,
     "\n  query getTopics {\n    topics {\n      name\n      color\n      image\n      rank\n      id\n    }\n  }\n": types.GetTopicsDocument,
     "\n  mutation UploadSingleFiles($file: Upload!) {\n    uploadSingleFiles(file: $file) {\n      url\n    }\n  }\n": types.UploadSingleFilesDocument,
@@ -63,6 +72,30 @@ export function gql(source: "\n  mutation Signup($body: SignUpUserDto!) {\n    s
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query GetInfoUser {\n    getInfoUser {\n      avatar\n      createdAt\n      coverImage\n      dayOfBirth\n      description\n      email\n      address\n      description\n      company\n      university\n      relationship\n      friends {\n        fullname\n        avatar\n      }\n      friendsReq {\n        fullname\n        avatar\n      }\n      fullname\n      gender\n      id\n      phone\n    }\n  }\n"): (typeof documents)["\n  query GetInfoUser {\n    getInfoUser {\n      avatar\n      createdAt\n      coverImage\n      dayOfBirth\n      description\n      email\n      address\n      description\n      company\n      university\n      relationship\n      friends {\n        fullname\n        avatar\n      }\n      friendsReq {\n        fullname\n        avatar\n      }\n      fullname\n      gender\n      id\n      phone\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation CreateCollection($body: CreateCollectionDto!) {\n    createCollection(body: $body) {\n      id\n      name\n    }\n  }\n"): (typeof documents)["\n  mutation CreateCollection($body: CreateCollectionDto!) {\n    createCollection(body: $body) {\n      id\n      name\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query GetSaved {\n    getSaved {\n      id\n      markets\n      posts {\n        author {\n          id\n          fullname\n          avatar\n        }\n        authorsPostShared {\n          id\n          fullname\n          avatar\n        }\n        content\n        createdAt\n        id\n        images\n        topic {\n          name\n        }\n        updatedAt\n        usersLiked {\n          id\n          fullname\n          avatar\n        }\n        videos\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetSaved {\n    getSaved {\n      id\n      markets\n      posts {\n        author {\n          id\n          fullname\n          avatar\n        }\n        authorsPostShared {\n          id\n          fullname\n          avatar\n        }\n        content\n        createdAt\n        id\n        images\n        topic {\n          name\n        }\n        updatedAt\n        usersLiked {\n          id\n          fullname\n          avatar\n        }\n        videos\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query GetCollections($idSaved: String!, $limit: Float!, $page: Float!) {\n    getCollections(idSaved: $idSaved, limit: $limit, page: $page) {\n      page\n      total\n    }\n  }\n"): (typeof documents)["\n  query GetCollections($idSaved: String!, $limit: Float!, $page: Float!) {\n    getCollections(idSaved: $idSaved, limit: $limit, page: $page) {\n      page\n      total\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation CreateComment($body: CreateCommentDto!) {\n    createComment(body: $body) {\n      id\n    }\n  }\n"): (typeof documents)["\n  mutation CreateComment($body: CreateCommentDto!) {\n    createComment(body: $body) {\n      id\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query GetComments($limit: Float!, $page: Float!, $postId: String!) {\n    getComments(limit: $limit, page: $page, postId: $postId) {\n      page\n      total\n      data {\n        author {\n          avatar\n          fullname\n          id\n        }\n        postId\n        content\n        createdAt\n        id\n        images\n        videos\n        replies {\n          author {\n            avatar\n            fullname\n            id\n          }\n          content\n          createdAt\n          id\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetComments($limit: Float!, $page: Float!, $postId: String!) {\n    getComments(limit: $limit, page: $page, postId: $postId) {\n      page\n      total\n      data {\n        author {\n          avatar\n          fullname\n          id\n        }\n        postId\n        content\n        createdAt\n        id\n        images\n        videos\n        replies {\n          author {\n            avatar\n            fullname\n            id\n          }\n          content\n          createdAt\n          id\n        }\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation ReplyComment($body: CreateCommentDto!, $idCmtParent: String!) {\n    replyComment(body: $body, idCmtParent: $idCmtParent) {\n      message\n      status\n    }\n  }\n"): (typeof documents)["\n  mutation ReplyComment($body: CreateCommentDto!, $idCmtParent: String!) {\n    replyComment(body: $body, idCmtParent: $idCmtParent) {\n      message\n      status\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -123,6 +156,18 @@ export function gql(source: "\n  query GetPostByAuthor($idAuthor: String!, $limi
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  mutation deletePost($id: String!) {\n    deletePost(id: $id) {\n      message\n      status\n    }\n  }\n"): (typeof documents)["\n  mutation deletePost($id: String!) {\n    deletePost(id: $id) {\n      message\n      status\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation ghimPost($idPost: String!) {\n    ghimPost(idPost: $idPost) {\n      message\n      status\n    }\n  }\n"): (typeof documents)["\n  mutation ghimPost($idPost: String!) {\n    ghimPost(idPost: $idPost) {\n      message\n      status\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation updatePost($id: String!, $body: UpdatePostDto!) {\n    updatePost(id: $id, body: $body) {\n      status\n      message\n    }\n  }\n"): (typeof documents)["\n  mutation updatePost($id: String!, $body: UpdatePostDto!) {\n    updatePost(id: $id, body: $body) {\n      status\n      message\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation sharePost($idPost: String!, $idUser: String!) {\n    sharePost(idPost: $idPost, idUser: $idUser) {\n      status\n      message\n    }\n  }\n"): (typeof documents)["\n  mutation sharePost($idPost: String!, $idUser: String!) {\n    sharePost(idPost: $idPost, idUser: $idUser) {\n      status\n      message\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
