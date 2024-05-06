@@ -13,7 +13,7 @@ type Props = {
 const LeftNavBar: FC<Props> = ({ children, className }) => {
   const [activeLink, setActivelink] = useState(leftNavBar[0].link);
   return (
-    <Box className={`gap-1 w-3/12 hidden lg:flex ${className}`}>
+    <Box className={`gap-1 w-3/12 hidden lg:flex h-[90vh] ${className}`}>
       <Box className="flex flex-col gap-2 bg-white p-2">
         {leftNavBar.map((item) => (
           <Link to={item.link} key={item.link}>

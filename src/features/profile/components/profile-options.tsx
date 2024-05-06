@@ -19,12 +19,12 @@ import { RiSettings4Line } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 
 import warning from '../../../lottie/warningwarning.json';
-import { useAuthStore } from '@/features/auth';
+import { useAuthStore, useQueryInfoUser } from '@/features/auth';
 
 export const ProfileOptions = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
   const { logout } = useAuthStore();
+  const { data: user } = useQueryInfoUser();
 
   const handleLogOut = () => {
     logout();
@@ -35,7 +35,7 @@ export const ProfileOptions = () => {
     {
       icon: <RiProfileLine />,
       name: 'View Profile',
-      link: '/profile',
+      link: `/profile/${user?.getInfoUser.id}`,
     },
     {
       icon: <RiSettings4Line />,

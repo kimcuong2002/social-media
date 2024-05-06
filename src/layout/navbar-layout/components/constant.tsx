@@ -7,11 +7,9 @@ import {
   BiVideo,
 } from 'react-icons/bi';
 import { HiOutlineUserGroup } from 'react-icons/hi2';
-import { RxAvatar } from 'react-icons/rx';
 
 import {
   HOME_PATH,
-  PROFILE_PATH,
   FRIEND_PATH,
   GROUP_PATH,
   MARKET_PATH,
@@ -24,10 +22,6 @@ export const leftNavBar = [
   {
     icon: <BiHome />,
     link: HOME_PATH,
-  },
-  {
-    icon: <RxAvatar />,
-    link: PROFILE_PATH,
   },
   {
     icon: <BiGroup />,

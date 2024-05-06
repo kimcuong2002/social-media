@@ -24,6 +24,13 @@ import {
 } from '@/pages';
 import PrivateRoute from '@/routes/private-route';
 import { capitalizeFirstLetter } from '@/utils';
+import { useQueryInfoUser } from '@/features/auth';
+
+const idUser = () => {
+  const { data } = useQueryInfoUser();
+  const result = data?.getInfoUser.id;
+  return result;
+};
 
 const navs: TypeNavs[] = [
   {
@@ -33,7 +40,7 @@ const navs: TypeNavs[] = [
   },
   {
     key: PROFILE_PATH,
-    label: 'profile',
+    label: `profile/${idUser}`,
     element: <Profile />,
   },
   {

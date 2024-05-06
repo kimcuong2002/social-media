@@ -18,8 +18,10 @@ import healt from './healt.svg';
 import icons from './icons.png';
 import menu from './menu.png';
 import video from './video.mp4';
+import hello from './hello.jpg';
 
 export {
+  hello,
   avatardefault,
   video,
   anh1,

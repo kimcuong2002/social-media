@@ -12,7 +12,7 @@ export const GroupSideBar = ({ refetch }: Props) => {
   return (
     <>
       <Text className="font-bold" fontSize="2xl">
-        Event
+        Groups
       </Text>
       <Divider className="my-4" />
       <Box className="flex flex-col">

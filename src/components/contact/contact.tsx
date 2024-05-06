@@ -11,7 +11,7 @@ export type ContactType = {
 
 export const Contact: FC<ContactType> = ({ thumb, name, state }) => {
   return (
-    <Box className="flex justify-start items-center gap-4 my-2">
+    <Box className="flex justify-start items-center gap-4 my-3 cursor-pointer hover:bg-[#F6F6FE] p-2 rounded-lg">
       <Avatar src={thumb} size="sm">
         <AvatarBadge
           borderColor={state === 'off' ? 'papayawhip' : ''}

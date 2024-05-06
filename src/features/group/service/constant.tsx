@@ -6,11 +6,11 @@ export const groupSideBarButton = [
     icon: <CiLocationArrow1 />,
   },
   {
-    name: 'Discover Group',
+    name: 'Priate Groups',
     icon: <CiLock />,
   },
   {
-    name: 'Notifcations',
+    name: 'Public Groups',
     icon: <CiUnlock />,
   },
 ];

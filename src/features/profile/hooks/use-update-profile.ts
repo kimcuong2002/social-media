@@ -5,7 +5,7 @@ import {
   useMutation,
 } from '@apollo/client';
 
-import { UPDATE_PROFILE } from '../graphql';
+import { SEND_FRIEND_REQUEST, UPDATE_PROFILE } from '../graphql';
 import { UpdateInput } from '../service/type';
 
 export const useUpdateProfile = () =>
@@ -15,3 +15,9 @@ export const useUpdateProfile = () =>
     DefaultContext,
     ApolloCache<unknown>
   >(UPDATE_PROFILE);
+
+export const useSendReqFriend = () =>
+  useMutation<
+    { sendReqFriend: { status: string; message: string } },
+    OperationVariables
+  >(SEND_FRIEND_REQUEST);

@@ -27,3 +27,5 @@ export * from './group/component/group-detail-navbar';
 export * from './group/component/group-information';
 export * from './collections/components/collection';
 export * from './collections/components/collection-sidebar';
+export * from './message/components/message-sidebar';
+export * from './user/hooks/use-user-query';

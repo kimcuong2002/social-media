@@ -65,6 +65,7 @@ export const Post: FC<PostType> = ({
   const [ghimPost] = useGhimPost();
 
   const { data: userData } = useQueryInfoUser();
+
   const handleLikePost = () => {
     void likePost({
       variables: {
@@ -136,9 +137,13 @@ export const Post: FC<PostType> = ({
     <Box className="bg-white my-4 p-4 rounded-lg border-2">
       <Box className="flex justify-between">
         <Box className="flex items-center gap-2">
-          <Avatar src={avatar} />
+          <Link to={`/profile/${idAuthor}`}>
+            <Avatar src={avatar} className="hover:cursor-pointer" />
+          </Link>
           <Box>
-            <Text className="font-bold">{fullname}</Text>
+            <Link to={`/profile/${idAuthor}`}>
+              <Text className="font-bold cursor-pointer">{fullname}</Text>
+            </Link>
             <Text fontSize="xs" className="text-gray-500">
               {dateCreated}
             </Text>

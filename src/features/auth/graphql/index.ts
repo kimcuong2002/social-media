@@ -70,10 +70,7 @@ export const GET_INFOR_USER = gql`
         fullname
         avatar
       }
-      friendsReq {
-        fullname
-        avatar
-      }
+
       fullname
       gender
       id

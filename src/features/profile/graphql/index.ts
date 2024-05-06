@@ -8,3 +8,12 @@ export const UPDATE_PROFILE = gql`
     }
   }
 `;
+
+export const SEND_FRIEND_REQUEST = gql`
+  mutation sendReqFriend($idFriend: String!) {
+    sendReqFriend(idFriend: $idFriend) {
+      status
+      message
+    }
+  }
+`;

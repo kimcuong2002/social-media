@@ -86,7 +86,7 @@ export const ProfileAvatar = ({
               <form onSubmit={handleSubmit(updateAvatar)}>
                 <Upload
                   typeUpload="avatar"
-                  onChange={(data) => setValue(data)}
+                  onChange={(data) => setValue(data as [])}
                 />
                 <Input
                   type="submit"
