@@ -21,14 +21,17 @@ import {
   Post,
   ProfileAvatar,
   useGetPostByAuthor,
+  useGetUserById,
 } from '@/features';
-import { useQueryInfoUser } from '@/features/auth';
 import { converDateToString } from '@/utils';
 import { LIMIT, PAGE } from '@/data';
+import { useParams } from 'react-router-dom';
+import { useQueryInfoUser } from '@/features/auth';
 
 export const Profile = () => {
-  const { data, refetch } = useQueryInfoUser();
-  const { data: userData } = useQueryInfoUser();
+  const param = useParams();
+  const { data, refetch } = useGetUserById(param.id!);
+  const { data: authorData } = useQueryInfoUser();
 
   const informationUser = useMemo(() => {
     if (data) {
@@ -36,47 +39,47 @@ export const Profile = () => {
         {
           id: uuidv4(),
           icon: <MdOutlineHome />,
-          name: data.getInfoUser.address,
+          name: data.getUserById.address,
         },
         {
           id: uuidv4(),
           icon: <MdOutlineAddHomeWork />,
-          name: data.getInfoUser.company,
+          name: data.getUserById.company,
         },
         {
           id: uuidv4(),
           icon: <MdOutlineBook />,
-          name: data.getInfoUser.university,
+          name: data.getUserById.university,
         },
         {
           id: uuidv4(),
           icon: <FaRegHeart />,
           name:
-            data.getInfoUser.relationship === 0
+            data.getUserById.relationship === 0
               ? 'Single'
-              : data.getInfoUser.relationship === 1
+              : data.getUserById.relationship === 1
                 ? 'Married'
                 : 'Other',
         },
         {
           id: uuidv4(),
           icon: <BiCake />,
-          name: data.getInfoUser.dayOfBirth,
+          name: data.getUserById.dayOfBirth,
         },
         {
           id: uuidv4(),
           icon: <BiPhone />,
-          name: data.getInfoUser.phone,
+          name: data.getUserById.phone,
         },
         {
           id: uuidv4(),
           icon: <MdOutlineMailOutline />,
-          name: data.getInfoUser.email,
+          name: data.getUserById.email,
         },
         {
           id: uuidv4(),
           icon: <MdOutlineTimer />,
-          name: converDateToString(data.getInfoUser.createdAt as Date),
+          name: converDateToString(data.getUserById.createdAt as Date),
         },
       ];
       return result;
@@ -84,7 +87,7 @@ export const Profile = () => {
   }, [data]);
 
   const { data: posts } = useGetPostByAuthor(
-    userData?.getInfoUser.id as string,
+    data?.getUserById.id as string,
     LIMIT,
     PAGE,
   );
@@ -103,17 +106,13 @@ export const Profile = () => {
       <Box className="flex w-full justify-center items-center absolute top-2/4 bg-white">
         <Box className="flex flex-col gap-4 w-5/6 md:w-full md:flex-row md:mx-4 lg:w-full xl:w-4/6">
           <Box className="w-full md:w-1/4 z-20">
-            <ProfileAvatar
-              avatarLink={data?.getInfoUser.avatar}
-              fullnameUser={data?.getInfoUser.fullname as string}
-              description={data?.getInfoUser.description}
-            />
-            <Information informationUser={informationUser} />
+            <ProfileAvatar />
+            <Information informationUser={informationUser!} />
             <ListPhoto />
             <ListFriend />
           </Box>
           <Box className="w-full md:w-3/4 md:mt-[100px]">
-            <CreatePost />
+            {authorData?.getInfoUser.id === param.id ? <CreatePost /> : ''}
             {listPosts?.map((item) => (
               <Post
                 key={item.id}

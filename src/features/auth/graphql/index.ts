@@ -66,11 +66,6 @@ export const GET_INFOR_USER = gql`
       company
       university
       relationship
-      friends {
-        fullname
-        avatar
-      }
-
       fullname
       gender
       id

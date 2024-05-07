@@ -21,26 +21,24 @@ import { BiCamera } from 'react-icons/bi';
 import { BsPersonAdd } from 'react-icons/bs';
 import { FaFacebookMessenger } from 'react-icons/fa';
 
-import { useUpdateProfile } from '../hooks/use-update-profile';
+import {
+  useSendReqFriend,
+  useUpdateProfile,
+} from '../hooks/use-update-profile';
 import { Upload } from '@/components';
 import { useQueryInfoUser } from '@/features/auth';
+import { useGetUserById } from '@/features/user/hooks/use-user-query';
+import { useParams } from 'react-router-dom';
 
-type Props = {
-  avatarLink?: string;
-  fullnameUser: string;
-  description?: string;
-};
-
-export const ProfileAvatar = ({
-  avatarLink,
-  fullnameUser,
-  description,
-}: Props) => {
+export const ProfileAvatar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [avatar] = useState<string>(avatarLink ? avatarLink : '');
   const [value, setValue] = useState([]);
   const [update] = useUpdateProfile();
-  const { data: userData, refetch } = useQueryInfoUser();
+  const param = useParams();
+  const { data: authorData, refetch } = useQueryInfoUser();
+  const { data: userData } = useGetUserById(param.id!);
+
+  const [sendReqFriend] = useSendReqFriend();
 
   const { handleSubmit } = useForm();
 
@@ -51,7 +49,7 @@ export const ProfileAvatar = ({
           body: {
             avatar: value[0],
           },
-          id: userData?.getInfoUser.id,
+          id: authorData?.getInfoUser.id,
         },
         onCompleted: async () => {
           toast.success('Update profile is successfully!');
@@ -65,13 +63,28 @@ export const ProfileAvatar = ({
     }
   };
 
+  const handleSendReqFriend = () => {
+    void sendReqFriend({
+      variables: {
+        idFriend: param.id,
+      },
+      onCompleted: async () => {
+        toast.success('Send request is successfully!');
+        await refetch();
+      },
+      onError: (error) => {
+        toast.error(error.message);
+      },
+    });
+  };
+
   return (
     <Box className="bg-white flex flex-col justify-center items-center w-full py-4 rounded-lg border-2 mt-4">
       <Box className="relative">
-        {avatar ? (
-          <Avatar src={avatar} size="2xl" />
+        {userData?.getUserById.avatar ? (
+          <Avatar src={userData?.getUserById.avatar} size="2xl" />
         ) : (
-          <Avatar src={userData?.getInfoUser.avatar} size="2xl" />
+          <Avatar src="" size="2xl" />
         )}
         <BiCamera
           className="cursor-pointer bg-gray-300 p-1 text-2xl rounded-full absolute bottom-0 right-0 -translate-x-1/2 -translate-y-1/2"
@@ -98,26 +111,31 @@ export const ProfileAvatar = ({
         </Modal>
       </Box>
       <Text className="font-bold mt-5" fontSize={{ base: 'md', lg: 'lg' }}>
-        {fullnameUser}
+        {userData?.getUserById.fullname}
       </Text>
       <Text className="text-gray-500 mt-2 mb-4" fontSize="sm">
-        {description}
+        {userData?.getUserById.description}
       </Text>
-      <Box className="flex gap-4">
-        <Button
-          leftIcon={<BsPersonAdd />}
-          variant="solid"
-          size={{ base: 'xs', lg: 'md' }}
-          className="!bg-[#3182CE] !text-[#eff3f7]"
-        >
-          Add Friend
-        </Button>
-        <IconButton
-          aria-label="Add to friends"
-          icon={<FaFacebookMessenger />}
-          size={{ base: 'xs', lg: 'md' }}
-        />
-      </Box>
+      {authorData?.getInfoUser.id === param.id ? (
+        ''
+      ) : (
+        <Box className="flex gap-4">
+          <Button
+            leftIcon={<BsPersonAdd />}
+            variant="solid"
+            size={{ base: 'xs', lg: 'md' }}
+            className="!bg-[#3182CE] !text-[#eff3f7]"
+            onClick={handleSendReqFriend}
+          >
+            Add Friend
+          </Button>
+          <IconButton
+            aria-label="Add to friends"
+            icon={<FaFacebookMessenger />}
+            size={{ base: 'xs', lg: 'md' }}
+          />
+        </Box>
+      )}
     </Box>
   );
 };

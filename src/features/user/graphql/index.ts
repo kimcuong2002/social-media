@@ -14,10 +14,6 @@ export const GET_USER_BY_ID = gql`
       company
       university
       relationship
-      friends {
-        fullname
-        avatar
-      }
       fullname
       gender
       id

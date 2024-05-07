@@ -17,3 +17,30 @@ export const SEND_FRIEND_REQUEST = gql`
     }
   }
 `;
+
+export const ACCEPT_FRIEND_REQUEST = gql`
+  mutation acceptReqFriend($idFriend: String!) {
+    acceptReqFriend(idFriend: $idFriend) {
+      status
+      message
+    }
+  }
+`;
+
+export const DELETE_FRIEND = gql`
+  mutation deleteFriend($idFriend: String!) {
+    deleteFriend(idFriend: $idFriend) {
+      status
+      message
+    }
+  }
+`;
+
+export const REJECT_FRIEND_REQUEST = gql`
+  mutation rejectReqFriend($idFriend: String!) {
+    rejectReqFriend(idFriend: $idFriend) {
+      status
+      message
+    }
+  }
+`;
