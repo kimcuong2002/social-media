@@ -4,7 +4,7 @@ import { Box, Grid, GridItem, Text } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { avataa } from '@/assets';
-import { FriendSideBar, Friend } from '@/features';
+import { FriendSideBar, Friend, useGetFriends } from '@/features';
 import NavbarLayout from '@/layout/navbar-layout';
 
 const friends = [
@@ -79,6 +79,9 @@ const friends = [
 export const Friends = () => {
   const [totalFriendRequest, setTotalFriendRequest] = useState(0);
   const [totalFriend, setTotalFriend] = useState(0);
+
+  const { data: friendss } = useGetFriends();
+  console.log('🚀 ~ Friends ~ friends:', friendss);
 
   const friendRequest = friends.filter((item) => item.isFriend == false);
   const listFriends = friends.filter((item) => item.isFriend == true);

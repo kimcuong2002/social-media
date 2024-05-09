@@ -1,10 +1,6 @@
 import { Box } from '@chakra-ui/react';
 import { BiGroup } from 'react-icons/bi';
-import {
-  IoMenuOutline,
-  IoPersonAddOutline,
-  IoStarOutline,
-} from 'react-icons/io5';
+import { IoMenuOutline, IoPersonAddOutline } from 'react-icons/io5';
 
 import { SideBarButton } from '@/components';
 
@@ -16,10 +12,6 @@ const friendsSideBar = [
   {
     name: 'Friends request',
     icon: <IoPersonAddOutline />,
-  },
-  {
-    name: 'Suggestion Friends',
-    icon: <IoStarOutline />,
   },
   {
     name: 'All Friends',

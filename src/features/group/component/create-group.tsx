@@ -68,8 +68,8 @@ const CreateGroup = ({ refetch }: Props) => {
   return (
     <Box className="!w-full">
       <Button
-        leftIcon={<BiPlus className="text-xl !w-full" />}
-        className="my-2 !text-[#0F66BB]"
+        leftIcon={<BiPlus className="text-xl" />}
+        className="my-2 !text-[#0F66BB] !w-full"
         onClick={onOpen}
       >
         Create new group

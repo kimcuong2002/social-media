@@ -29,3 +29,5 @@ export * from './collections/components/collection';
 export * from './collections/components/collection-sidebar';
 export * from './message/components/message-sidebar';
 export * from './user/hooks/use-user-query';
+export * from './market/hooks/use-market-query';
+export * from './friends/hooks/use-friend-query';
