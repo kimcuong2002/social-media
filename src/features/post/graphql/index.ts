@@ -64,16 +64,6 @@ export const GET_POST_DETAIL = gql`
         dayOfBirth
         description
         email
-        friends {
-          fullname
-          id
-          avatar
-        }
-        friendsReq {
-          fullname
-          id
-          avatar
-        }
         fullname
         gender
         id
@@ -85,16 +75,7 @@ export const GET_POST_DETAIL = gql`
         dayOfBirth
         description
         email
-        friends {
-          fullname
-          id
-          avatar
-        }
-        friendsReq {
-          fullname
-          id
-          avatar
-        }
+
         fullname
         gender
         id

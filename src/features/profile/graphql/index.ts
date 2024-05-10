@@ -9,27 +9,9 @@ export const UPDATE_PROFILE = gql`
   }
 `;
 
-export const SEND_FRIEND_REQUEST = gql`
-  mutation sendReqFriend($idFriend: String!) {
-    sendReqFriend(idFriend: $idFriend) {
-      status
-      message
-    }
-  }
-`;
-
-export const ACCEPT_FRIEND_REQUEST = gql`
-  mutation acceptReqFriend($idFriend: String!) {
-    acceptReqFriend(idFriend: $idFriend) {
-      status
-      message
-    }
-  }
-`;
-
 export const DELETE_FRIEND = gql`
-  mutation deleteFriend($idFriend: String!) {
-    deleteFriend(idFriend: $idFriend) {
+  mutation deleteFriend($friendId: String!) {
+    deleteFriend(friendId: $friendId) {
       status
       message
     }
@@ -37,8 +19,26 @@ export const DELETE_FRIEND = gql`
 `;
 
 export const REJECT_FRIEND_REQUEST = gql`
-  mutation rejectReqFriend($idFriend: String!) {
-    rejectReqFriend(idFriend: $idFriend) {
+  mutation rejectReqFriend($friendId: String!) {
+    rejectReqFriend(friendId: $friendId) {
+      status
+      message
+    }
+  }
+`;
+
+export const SEND_FRIEND_REQUEST = gql`
+  mutation requestAddFriend($friendId: String!) {
+    requestAddFriend(friendId: $friendId) {
+      status
+      message
+    }
+  }
+`;
+
+export const ACCEPT_FRIEND_REQUEST = gql`
+  mutation acceptFriendReq($friendId: String!) {
+    acceptFriendReq(friendId: $friendId) {
       status
       message
     }
