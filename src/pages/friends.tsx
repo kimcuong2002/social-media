@@ -1,112 +1,15 @@
-import { useEffect, useState } from 'react';
-
 import { Box, Grid, GridItem, Text } from '@chakra-ui/react';
-import { v4 as uuidv4 } from 'uuid';
 
-import { avataa } from '@/assets';
 import { FriendSideBar, Friend, useGetFriends } from '@/features';
 import NavbarLayout from '@/layout/navbar-layout';
 
-const friends = [
-  {
-    id: uuidv4(),
-    name: 'Kim Cuong',
-    thumb: avataa,
-    isFriend: true,
-  },
-  {
-    id: uuidv4(),
-    name: 'Kim Cuong',
-    thumb: avataa,
-    isFriend: false,
-  },
-  {
-    id: uuidv4(),
-    name: 'Kim Cuong',
-    thumb: avataa,
-    isFriend: false,
-  },
-  {
-    id: uuidv4(),
-    name: 'Kim Cuong',
-    thumb: avataa,
-    isFriend: true,
-  },
-  {
-    id: uuidv4(),
-    name: 'Kim Cuong',
-    thumb: avataa,
-    isFriend: false,
-  },
-  {
-    id: uuidv4(),
-    name: 'Kim Cuong',
-    thumb: avataa,
-    isFriend: true,
-  },
-  {
-    id: uuidv4(),
-    name: 'Kim Cuong',
-    thumb: avataa,
-    isFriend: false,
-  },
-  {
-    id: uuidv4(),
-    name: 'Kim Cuong',
-    thumb: avataa,
-    isFriend: true,
-  },
-  {
-    id: uuidv4(),
-    name: 'Kim Cuong',
-    thumb: avataa,
-    isFriend: false,
-  },
-  {
-    id: uuidv4(),
-    name: 'Kim Cuong',
-    thumb: avataa,
-    isFriend: true,
-  },
-  {
-    id: uuidv4(),
-    name: 'Kim Cuong',
-    thumb: avataa,
-    isFriend: false,
-  },
-];
-
 export const Friends = () => {
-  const [totalFriendRequest, setTotalFriendRequest] = useState(0);
-  const [totalFriend, setTotalFriend] = useState(0);
+  const { data: friends, refetch } = useGetFriends();
 
-  const { data: friendss } = useGetFriends();
-  console.log('🚀 ~ Friends ~ friends:', friendss);
-
-  const friendRequest = friends.filter((item) => item.isFriend == false);
-  const listFriends = friends.filter((item) => item.isFriend == true);
-
-  useEffect(() => {
-    const totalFriendRequest = friendRequest.reduce((total, user) => {
-      if (user.isFriend === false) {
-        return total + 1;
-      } else {
-        return total;
-      }
-    }, 0);
-    setTotalFriendRequest(totalFriendRequest);
-  }, [friendRequest]);
-
-  useEffect(() => {
-    const allFriends = listFriends.reduce((total, user) => {
-      if (user.isFriend === true) {
-        return total + 1;
-      } else {
-        return total;
-      }
-    }, 0);
-    setTotalFriend(allFriends);
-  }, [listFriends]);
+  const friendRequest = friends?.getFriends.friendsReq;
+  const listFriends = friends?.getFriends.friends;
+  const totalFriendRequest = friends?.getFriends.friendsReq.length;
+  const totalFriend = friends?.getFriends.friends.length;
 
   return (
     <NavbarLayout navBarChildren={<FriendSideBar />}>
@@ -116,12 +19,14 @@ export const Friends = () => {
             Friend Request: {totalFriendRequest}
           </Text>
           <Grid templateColumns="repeat(6, 1fr)" gap={6} className="w-full">
-            {friendRequest.map((item) => (
-              <GridItem key={item.id}>
+            {friendRequest?.map((friend) => (
+              <GridItem key={friend.id}>
                 <Friend
-                  isFriend={item.isFriend}
-                  name={item.name}
-                  thumb={item.thumb}
+                  isFriend={false}
+                  fullname={friend.fullname!}
+                  id={friend.id!}
+                  avatar={friend.avatar!}
+                  refetch={refetch}
                 />
               </GridItem>
             ))}
@@ -130,12 +35,14 @@ export const Friends = () => {
             All Friends: {totalFriend}
           </Text>
           <Grid templateColumns="repeat(6, 1fr)" gap={6} className="w-full">
-            {listFriends.map((item) => (
-              <GridItem key={item.id}>
+            {listFriends?.map((friend) => (
+              <GridItem key={friend.id}>
                 <Friend
-                  isFriend={item.isFriend}
-                  name={item.name}
-                  thumb={item.thumb}
+                  isFriend={true}
+                  fullname={friend.fullname!}
+                  id={friend.id!}
+                  avatar={friend.avatar!}
+                  refetch={refetch}
                 />
               </GridItem>
             ))}

@@ -62,7 +62,7 @@ export const PostDetail = () => {
             className="text-4xl text-white cursor-pointer"
             onClick={goBackHandler}
           />
-          <Box className="  p-4">
+          <Box className="p-4">
             {postDetail?.images && (
               <Swiper
                 pagination={{
@@ -97,7 +97,7 @@ export const PostDetail = () => {
         className={`${postDetail?.images && postDetail.images.length > 0 ? 'w-3/12 ' : 'w-full flex justify-center bg-black'}`}
       >
         <Box
-          className={` ${postDetail?.images && postDetail.images.length > 0 ? '!h-[99vh] p-4 overflow-y-scroll no-scrollbar' : 'w-5/12 bg-white'}`}
+          className={` ${postDetail?.images && postDetail.images.length > 0 ? '!h-[99vh] !p-4 overflow-y-scroll no-scrollbar' : 'w-5/12 bg-white p-4 border'}`}
         >
           <Box className="flex gap-2">
             <Avatar src={postDetail?.author.avatar} />
@@ -111,10 +111,7 @@ export const PostDetail = () => {
           <Text className="my-2">{postDetail?.content}</Text>
           <Box className="w-full flex justify-between items-center">
             <Box className="flex gap-1">
-              <BiLike
-                className="bg-[#039DFC] text-white text-2xl p-1 rounded-full"
-                onClick={handleLikePost}
-              />
+              <BiLike className="bg-[#039DFC] text-white text-2xl p-1 rounded-full cursor-pointer" />
               <Text>{postDetail?.usersLiked?.length}</Text>
             </Box>
             <Box className="flex gap-1">
@@ -124,7 +121,7 @@ export const PostDetail = () => {
           </Box>
           <Divider className="mt-2" />
           <Box className="flex justify-around items-center my-2 text-xl">
-            <BiLike />
+            <BiLike onClick={handleLikePost} className="cursor-pointer" />
             <FaRegComments />
             <PiTelegramLogo />
           </Box>
@@ -140,6 +137,7 @@ export const PostDetail = () => {
               videos={comment.videos}
               createdAt={comment.createdAt}
               postId={comment.postId}
+              refetch={refetch}
             />
           ))}
           <Box className="flex justify-between mb-2 font-bold text-[##545659]">

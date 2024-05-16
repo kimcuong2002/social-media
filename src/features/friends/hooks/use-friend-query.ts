@@ -1,7 +1,37 @@
-import { useQuery } from '@apollo/client';
+import { OperationVariables, useMutation, useQuery } from '@apollo/client';
 import { ListFriendType } from '../service/type';
-import { GET_FRIENDS } from '../graphql';
+import {
+  ACCEPT_FRIEND_REQUEST,
+  DELETE_FRIEND,
+  GET_FRIENDS,
+  REJECT_FRIEND_REQUEST,
+  SEND_FRIEND_REQUEST,
+} from '../graphql';
 
 export const useGetFriends = () => {
   return useQuery<{ getFriends: ListFriendType }>(GET_FRIENDS);
 };
+
+export const useSendReqFriend = () =>
+  useMutation<
+    { sendReqFriend: { status: string; message: string } },
+    OperationVariables
+  >(SEND_FRIEND_REQUEST);
+
+export const useAcceptReqFriend = () =>
+  useMutation<
+    { acceptReqFriend: { status: string; message: string } },
+    OperationVariables
+  >(ACCEPT_FRIEND_REQUEST);
+
+export const useDeleteFriend = () =>
+  useMutation<
+    { deleteFriend: { status: string; message: string } },
+    OperationVariables
+  >(DELETE_FRIEND);
+
+export const useRejectReqFriend = () =>
+  useMutation<
+    { rejectReqFriend: { status: string; message: string } },
+    OperationVariables
+  >(REJECT_FRIEND_REQUEST);

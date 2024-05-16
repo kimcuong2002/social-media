@@ -31,3 +31,8 @@ export * from './message/components/message-sidebar';
 export * from './user/hooks/use-user-query';
 export * from './market/hooks/use-market-query';
 export * from './friends/hooks/use-friend-query';
+export * from './message/hooks/use-messages-query';
+export * from './friends/hooks/use-friend-query';
+export * from './profile/hooks/use-update-profile';
+export * from './auth/hooks/user-auth-query';
+export * from './auth/hooks/user-auth-store';

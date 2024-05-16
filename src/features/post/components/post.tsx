@@ -4,7 +4,6 @@ import {
   Avatar,
   Box,
   Text,
-  Image,
   Divider,
   useDisclosure,
   Popover,
@@ -21,12 +20,18 @@ import {
   IconButton,
 } from '@chakra-ui/react';
 import toast from 'react-hot-toast';
-import { BiLike } from 'react-icons/bi';
+import { AiTwotoneLike } from 'react-icons/ai';
 import { FaRegComments } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { HiDotsHorizontal } from 'react-icons/hi';
 
-import { PostType, useDeletePost, useGhimPost, useLikePost } from '@/features';
+import {
+  Comment,
+  PostType,
+  useDeletePost,
+  useGhimPost,
+  useLikePost,
+} from '@/features';
 import { useQueryInfoUser } from '@/features/auth';
 import { converDateToString } from '@/utils';
 import { PiTelegramLogo } from 'react-icons/pi';
@@ -34,6 +39,8 @@ import SharePostForm from './share-post-form';
 import { CreateComment } from '@/features/comment/components/create-comment';
 import { CiShoppingTag, CiEdit, CiTrash } from 'react-icons/ci';
 import { BsCopy } from 'react-icons/bs';
+import { useGetCommentsQuery } from '@/features/comment/hooks/use-comment-query';
+import { LIMIT, PAGE } from '@/data';
 
 export const Post: FC<PostType> = ({
   idPost,
@@ -65,6 +72,12 @@ export const Post: FC<PostType> = ({
   const [ghimPost] = useGhimPost();
 
   const { data: userData } = useQueryInfoUser();
+  const { data: comments, refetch: refetchComments } = useGetCommentsQuery(
+    LIMIT,
+    PAGE,
+    idPost!,
+  );
+  const commentDemo = comments?.getComments.data.slice(0, 2);
 
   const handleLikePost = () => {
     void likePost({
@@ -216,24 +229,20 @@ export const Post: FC<PostType> = ({
           <track src="captions.vtt" kind="captions" label="English" default />
         </video>
       ) : (
-        <Box
-          className={`my-6 w-full bg-[#1F1F1F] ${
-            images && images?.length < 3 ? 'columns-2' : 'columns-3'
-          }`}
-        >
+        <Box className={`my-6 w-full columns-2 md:columns-3 !space-y-4`}>
           {images &&
             images.map((item) => (
               <Link to={`${currentPath}/posts/${idPost}`} key={item}>
-                <Image src={item} />
+                <img src={item} className="w-full py-2 !rounded-md" />
               </Link>
             ))}
         </Box>
       )}
       <Divider className="mb-4" />
       <Box className="flex justify-between items-center my-2">
-        <Box className="w-full flex justify-around">
+        <Box className="w-full  flex justify-around">
           <Box className="flex items-center gap-1">
-            <BiLike
+            <AiTwotoneLike
               onClick={handleLikePost}
               className={`${
                 likedPost ? 'text-blue-800' : ''
@@ -264,7 +273,21 @@ export const Post: FC<PostType> = ({
         </Box>
       </Box>
       <Divider className="mb-4" />
-      <CreateComment postId={idPost as string} />
+      {commentDemo?.map((comment: any) => (
+        <Comment
+          refetch={refetchComments}
+          key={comment.id}
+          author={comment.author}
+          content={comment.content}
+          id={comment.id}
+          images={comment.images}
+          replies={comment.replies}
+          videos={comment.videos}
+          createdAt={comment.createdAt}
+          postId={comment.postId}
+        />
+      ))}
+      <CreateComment postId={idPost as string} onRefetch={refetchComments} />
     </Box>
   );
 };

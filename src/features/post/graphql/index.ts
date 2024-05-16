@@ -8,14 +8,13 @@ export const GET_POSTS = gql`
       data {
         id
         authorsPostShared {
-          fullname
           avatar
           id
         }
         author {
-          fullname
           avatar
           id
+          fullname
         }
         content
         images
@@ -28,7 +27,6 @@ export const GET_POSTS = gql`
         createdAt
         updatedAt
         usersLiked {
-          fullname
           avatar
           id
         }

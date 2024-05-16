@@ -14,6 +14,7 @@ export const Comment: FC<CommentType> = ({
   id,
   postId,
   replies,
+  refetch,
 }) => {
   const [repCmt, setRepCmt] = useState(false);
   return (
@@ -43,7 +44,13 @@ export const Comment: FC<CommentType> = ({
               Reply
             </Text>
           </Box>
-          {repCmt && <CreateReplyCmt idCmtParent={id} postId={postId} />}
+          {repCmt && (
+            <CreateReplyCmt
+              idCmtParent={id}
+              postId={postId}
+              refetch={refetch}
+            />
+          )}
         </>
         <Box className="flex flex-col mt-4">
           {replies?.map((reply) => (

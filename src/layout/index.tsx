@@ -20,7 +20,7 @@ const LayoutComponent = () => {
               </Box>
             }
           >
-            <Box className="h-[89vh]">
+            <Box className="h-[85vh]">
               <Outlet />
             </Box>
           </Suspense>

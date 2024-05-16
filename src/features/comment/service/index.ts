@@ -11,6 +11,7 @@ export type CommentType = {
   replies?: CommentType[];
   updatedAt?: Date;
   videos?: string[];
+  refetch: () => void;
 };
 
 export type CommentInputType = {

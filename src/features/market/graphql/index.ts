@@ -86,3 +86,13 @@ export const UPDATE_PRODUCT = gql`
     }
   }
 `;
+
+export const GET_CATEGORIES = gql`
+  query categories {
+    categories {
+      id
+      name
+      rank
+    }
+  }
+`;

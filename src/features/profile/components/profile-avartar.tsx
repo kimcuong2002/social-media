@@ -21,14 +21,17 @@ import { BiCamera } from 'react-icons/bi';
 import { BsPersonAdd } from 'react-icons/bs';
 import { FaFacebookMessenger } from 'react-icons/fa';
 
+import { Upload } from '@/components';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
+  useCreateRoom,
+  useDeleteFriend,
+  useGetFriends,
+  useGetUserById,
+  useQueryInfoUser,
   useSendReqFriend,
   useUpdateProfile,
-} from '../hooks/use-update-profile';
-import { Upload } from '@/components';
-import { useQueryInfoUser } from '@/features/auth';
-import { useGetUserById } from '@/features/user/hooks/use-user-query';
-import { useParams } from 'react-router-dom';
+} from '@/features';
 
 export const ProfileAvatar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -37,10 +40,13 @@ export const ProfileAvatar = () => {
   const param = useParams();
   const { data: authorData, refetch } = useQueryInfoUser();
   const { data: userData } = useGetUserById(param.id!);
-
   const [sendReqFriend] = useSendReqFriend();
-
   const { handleSubmit } = useForm();
+  const [createRoom] = useCreateRoom();
+  const navigate = useNavigate();
+  const { data: friends } = useGetFriends();
+  const [deleteFriend] = useDeleteFriend();
+  console.log('🚀 ~ ProfileAvatar ~ friends:', friends);
 
   const updateAvatar = () => {
     if (value.length > 0) {
@@ -66,10 +72,52 @@ export const ProfileAvatar = () => {
   const handleSendReqFriend = () => {
     void sendReqFriend({
       variables: {
-        idFriend: param.id,
+        friendId: param.id,
       },
       onCompleted: async () => {
         toast.success('Send request is successfully!');
+        await refetch();
+      },
+      onError: (error) => {
+        toast.error(error.message);
+      },
+    });
+  };
+
+  const handleDeleteFriend = () => {
+    void deleteFriend({
+      variables: {
+        friendId: param.id,
+      },
+      onCompleted: async () => {
+        toast.success('Delete friend is successfully!');
+        await refetch();
+      },
+      onError: (error) => {
+        toast.error(error.message);
+      },
+    });
+  };
+
+  const result = [];
+  result.push(authorData?.getInfoUser.id);
+  result.push(userData?.getUserById.id);
+
+  const idNameRoom = result.filter(
+    (item) => item !== authorData?.getInfoUser.id,
+  );
+  const { data: nameRoom } = useGetUserById(idNameRoom[0]!);
+
+  const handleCreateRoom = () => {
+    void createRoom({
+      variables: {
+        body: {
+          members: [param.id, authorData?.getInfoUser.id],
+          name: nameRoom?.getUserById.fullname,
+        },
+      },
+      onCompleted: async (data) => {
+        navigate(`/message/${data.createRoom.id}`);
         await refetch();
       },
       onError: (error) => {
@@ -125,14 +173,24 @@ export const ProfileAvatar = () => {
             variant="solid"
             size={{ base: 'xs', lg: 'md' }}
             className="!bg-[#3182CE] !text-[#eff3f7]"
-            onClick={handleSendReqFriend}
+            {...(friends?.getFriends.friends.filter(
+              (friend) => friend.id === param.id,
+            )
+              ? { onClick: handleDeleteFriend }
+              : { onClick: handleSendReqFriend })}
           >
-            Add Friend
+            {friends?.getFriends.friends &&
+            friends?.getFriends.friends.filter(
+              (friend) => friend.id === param.id,
+            )
+              ? 'Delete Friend'
+              : 'Add Friend'}
           </Button>
           <IconButton
             aria-label="Add to friends"
             icon={<FaFacebookMessenger />}
             size={{ base: 'xs', lg: 'md' }}
+            onClick={handleCreateRoom}
           />
         </Box>
       )}

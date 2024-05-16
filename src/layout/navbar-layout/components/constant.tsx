@@ -13,7 +13,7 @@ import {
   FRIEND_PATH,
   GROUP_PATH,
   MARKET_PATH,
-  CHAT_PATH,
+  MESSAGE_PATH,
   COLLECTION_PATH,
   VIDEO_PATH,
 } from '@/data';
@@ -37,7 +37,7 @@ export const leftNavBar = [
   },
   {
     icon: <BiMessage />,
-    link: CHAT_PATH,
+    link: MESSAGE_PATH,
   },
   {
     icon: <BiVideo />,

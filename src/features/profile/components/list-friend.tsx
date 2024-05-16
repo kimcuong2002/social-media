@@ -1,6 +1,6 @@
 import { Box, Divider, Text } from '@chakra-ui/react';
 
-import { Contact } from '@/components';
+// import { Contact } from '@/components';
 import { datas } from '@/data';
 
 export const ListFriend = () => {
@@ -13,14 +13,14 @@ export const ListFriend = () => {
         <Text className="text-green-900 font-bold cursor-pointer">See all</Text>
       </Box>
       <Divider className="my-2" />
-      {listFriends.map((item) => (
+      {/* {listFriends.map((item) => (
         <Contact
           key={item.id}
           name={item.name}
           state={item.state}
           thumb={item.thumb}
         />
-      ))}
+      ))} */}
     </Box>
   );
 };

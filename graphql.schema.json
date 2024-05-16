@@ -20,6 +20,97 @@
       },
       {
         "kind": "OBJECT",
+        "name": "Category",
+        "description": null,
+        "fields": [
+          {
+            "name": "createdAt",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "name",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "rank",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updatedAt",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
         "name": "CollectionDto",
         "description": null,
         "fields": [
@@ -378,6 +469,81 @@
       },
       {
         "kind": "INPUT_OBJECT",
+        "name": "CreateCategoryDto",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "createdAt",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              }
+            },
+            "defaultValue": "\"2024-05-10T16:32:03.462Z\"",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "name",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "rank",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updatedAt",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              }
+            },
+            "defaultValue": "\"2024-05-10T16:32:03.462Z\"",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
         "name": "CreateCollectionDto",
         "description": null,
         "fields": null,
@@ -410,7 +576,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-05-07T10:47:26.705Z\"",
+            "defaultValue": "\"2024-05-10T16:32:03.379Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -506,7 +672,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-05-07T10:47:26.705Z\"",
+            "defaultValue": "\"2024-05-10T16:32:03.379Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -549,7 +715,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-05-07T10:47:26.778Z\"",
+            "defaultValue": "\"2024-05-10T16:32:03.448Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -653,7 +819,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-05-07T10:47:26.779Z\"",
+            "defaultValue": "\"2024-05-10T16:32:03.448Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -800,7 +966,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-05-07T10:47:26.694Z\"",
+            "defaultValue": "\"2024-05-10T16:32:03.368Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -912,7 +1078,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-05-07T10:47:26.694Z\"",
+            "defaultValue": "\"2024-05-10T16:32:03.368Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -955,7 +1121,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-05-07T10:47:26.787Z\"",
+            "defaultValue": "\"2024-05-10T16:32:03.454Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -1059,7 +1225,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-05-07T10:47:26.787Z\"",
+            "defaultValue": "\"2024-05-10T16:32:03.454Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -1142,7 +1308,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-05-07T10:47:26.711Z\"",
+            "defaultValue": "\"2024-05-10T16:32:03.384Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -1190,7 +1356,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-05-07T10:47:26.711Z\"",
+            "defaultValue": "\"2024-05-10T16:32:03.384Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -1257,7 +1423,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-05-07T10:47:26.686Z\"",
+            "defaultValue": "\"2024-05-10T16:32:03.358Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -1377,7 +1543,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-05-07T10:47:26.686Z\"",
+            "defaultValue": "\"2024-05-10T16:32:03.358Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -1468,7 +1634,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-05-07T10:47:26.772Z\"",
+            "defaultValue": "\"2024-05-10T16:32:03.442Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -1524,7 +1690,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-05-07T10:47:26.772Z\"",
+            "defaultValue": "\"2024-05-10T16:32:03.442Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -1567,7 +1733,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-05-07T10:47:26.699Z\"",
+            "defaultValue": "\"2024-05-10T16:32:03.373Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -1631,7 +1797,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-05-07T10:47:26.699Z\"",
+            "defaultValue": "\"2024-05-10T16:32:03.373Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -1674,7 +1840,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-05-07T10:47:26.680Z\"",
+            "defaultValue": "\"2024-05-10T16:32:03.351Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -1738,7 +1904,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-05-07T10:47:26.680Z\"",
+            "defaultValue": "\"2024-05-10T16:32:03.351Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -1829,7 +1995,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-05-07T10:47:26.493Z\"",
+            "defaultValue": "\"2024-05-10T16:32:03.175Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -1883,54 +2049,6 @@
           },
           {
             "name": "files",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            "defaultValue": "[]",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "friends",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            "defaultValue": "[]",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "friendsReq",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -2093,7 +2211,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-05-07T10:47:26.493Z\"",
+            "defaultValue": "\"2024-05-10T16:32:03.175Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -2159,6 +2277,129 @@
         "fields": null,
         "inputFields": null,
         "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Friend",
+        "description": null,
+        "fields": [
+          {
+            "name": "author",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "User",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "createdAt",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "friends",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "User",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "friendsReq",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "User",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updatedAt",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
         "enumValues": null,
         "possibleTypes": null
       },
@@ -2916,27 +3157,11 @@
         "description": null,
         "fields": [
           {
-            "name": "acceptMemberReqJoinGroup",
+            "name": "acceptFriendReq",
             "description": null,
             "args": [
               {
-                "name": "idGroup",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "idMemberReq",
+                "name": "friendId",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -2965,11 +3190,27 @@
             "deprecationReason": null
           },
           {
-            "name": "acceptReqFriend",
+            "name": "acceptMemberReqJoinGroup",
             "description": null,
             "args": [
               {
-                "name": "idFriend",
+                "name": "idGroup",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "idMemberReq",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -3090,6 +3331,39 @@
               "ofType": {
                 "kind": "OBJECT",
                 "name": "ResponseUserDto",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "createCategory",
+            "description": null,
+            "args": [
+              {
+                "name": "body",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "CreateCategoryDto",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Category",
                 "ofType": null
               }
             },
@@ -3513,7 +3787,7 @@
             "description": null,
             "args": [
               {
-                "name": "idFriend",
+                "name": "friendId",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -4154,7 +4428,7 @@
             "description": null,
             "args": [
               {
-                "name": "idFriend",
+                "name": "friendId",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -4232,11 +4506,11 @@
             "deprecationReason": null
           },
           {
-            "name": "sendReqFriend",
+            "name": "requestAddFriend",
             "description": null,
             "args": [
               {
-                "name": "idFriend",
+                "name": "friendId",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -5827,6 +6101,63 @@
         "description": null,
         "fields": [
           {
+            "name": "categories",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "Category",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "category",
+            "description": null,
+            "args": [
+              {
+                "name": "name",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Category",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "getAllMessage",
             "description": null,
             "args": [
@@ -6130,6 +6461,22 @@
               "ofType": {
                 "kind": "OBJECT",
                 "name": "PaginationCommentDto",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "getFriends",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Friend",
                 "ofType": null
               }
             },
@@ -7101,54 +7448,6 @@
             "deprecationReason": null
           },
           {
-            "name": "friends",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "OBJECT",
-                    "name": "User",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "friendsReq",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "OBJECT",
-                    "name": "User",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "fullname",
             "description": null,
             "args": [],
@@ -7658,7 +7957,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-05-07T10:47:26.493Z\"",
+            "defaultValue": "\"2024-05-10T16:32:03.175Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -7712,54 +8011,6 @@
           },
           {
             "name": "files",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            "defaultValue": "[]",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "friends",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            "defaultValue": "[]",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "friendsReq",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -7922,7 +8173,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-05-07T10:47:26.493Z\"",
+            "defaultValue": "\"2024-05-10T16:32:03.175Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -8317,7 +8568,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-05-07T10:47:26.694Z\"",
+            "defaultValue": "\"2024-05-10T16:32:03.368Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -8360,7 +8611,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-05-07T10:47:26.711Z\"",
+            "defaultValue": "\"2024-05-10T16:32:03.384Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -8618,7 +8869,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-05-07T10:47:26.773Z\"",
+            "defaultValue": "\"2024-05-10T16:32:03.443Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -8693,7 +8944,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-05-07T10:47:26.680Z\"",
+            "defaultValue": "\"2024-05-10T16:32:03.352Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -8813,46 +9064,6 @@
             "deprecationReason": null
           },
           {
-            "name": "friends",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "friendsReq",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "fullname",
             "description": null,
             "type": {
@@ -8948,7 +9159,7 @@
                 "ofType": null
               }
             },
-            "defaultValue": "\"2024-05-07T10:47:26.514Z\"",
+            "defaultValue": "\"2024-05-10T16:32:03.194Z\"",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -9148,54 +9359,6 @@
                   "ofType": {
                     "kind": "SCALAR",
                     "name": "String",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "friends",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "OBJECT",
-                    "name": "User",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "friendsReq",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "OBJECT",
-                    "name": "User",
                     "ofType": null
                   }
                 }

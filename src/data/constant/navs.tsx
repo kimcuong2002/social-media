@@ -2,7 +2,7 @@ import { cloneDeep } from 'lodash';
 import { Link } from 'react-router-dom';
 
 import {
-  CHAT_PATH,
+  MESSAGE_PATH,
   FRIEND_PATH,
   GROUP_PATH,
   HOME_PATH,
@@ -17,7 +17,7 @@ import {
   Friends,
   Group,
   Home,
-  Chat,
+  Message,
   Profile,
   Video,
   CollectionPage,
@@ -64,9 +64,9 @@ const navs: TypeNavs[] = [
     element: <Group />,
   },
   {
-    key: CHAT_PATH,
-    label: 'chat',
-    element: <Chat />,
+    key: MESSAGE_PATH,
+    label: 'message',
+    element: <Message />,
   },
   {
     key: COLLECTION_PATH,

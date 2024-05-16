@@ -19,11 +19,13 @@ import { useUpdateProfile } from '../hooks/use-update-profile';
 import { UpdateInput } from '../service/type';
 import { useQueryInfoUser } from '@/features/auth';
 import { UserType } from '@/features/user';
+import { useParams } from 'react-router-dom';
 
 export const EditProfile = () => {
   const [user, setUser] = useState<UserType>();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data, refetch } = useQueryInfoUser();
+  const param = useParams();
   useMemo(() => {
     if (data) {
       setUser(data?.getInfoUser);
@@ -72,12 +74,14 @@ export const EditProfile = () => {
 
   return (
     <Box>
-      <Text
-        onClick={onOpen}
-        className="text-green-900 font-bold cursor-pointer"
-      >
-        View Details
-      </Text>
+      {param.id === user?.id && (
+        <Text
+          onClick={onOpen}
+          className="text-green-900 font-bold cursor-pointer"
+        >
+          View Details
+        </Text>
+      )}
       <Modal isOpen={isOpen} onClose={onClose} size="4xl">
         <ModalOverlay />
         <ModalContent>

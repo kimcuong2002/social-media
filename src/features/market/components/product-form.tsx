@@ -6,10 +6,12 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { Control, FieldErrors } from 'react-hook-form';
-import { InputProductType } from '../service/type';
+import { CategoryType, InputProductType } from '../service/type';
 import { FC, useMemo } from 'react';
 import { DataFieldInputType } from '@/ts/types';
 import { FormCustom, Upload } from '@/components';
+import { useQueryCategories } from '../hooks/use-category-query';
+import { categoriesItem } from '../service/constant';
 
 export type Props = {
   control: Control<InputProductType, unknown>;
@@ -18,6 +20,18 @@ export type Props = {
 };
 
 const ProductForm: FC<Props> = ({ control, errors, disable = false }) => {
+  const { data: categories } = useQueryCategories();
+
+  const allCategories = useMemo(() => {
+    if (categories) {
+      return categories.categories.map((item: CategoryType) => ({
+        ...item,
+        icon: categoriesItem[item.rank - 1].icon,
+      }));
+    }
+    return [];
+  }, [categories]);
+
   const dataFormCustom: DataFieldInputType<InputProductType>[] = useMemo(
     () => [
       {
@@ -82,12 +96,19 @@ const ProductForm: FC<Props> = ({ control, errors, disable = false }) => {
           <Box className="mb-4 font-bold">
             <Text>Category</Text>
             <InputGroup>
-              <Input
+              <select
                 {...field}
                 id="category"
                 disabled={disable}
-                type="number"
-              />
+                className="w-full border !border-[#E2E8F0] outline-[#E2E8F0] h-10"
+              >
+                {allCategories.map((item) => (
+                  <option value={item.rank} key={item.id}>
+                    {item.name}
+                  </option>
+                ))}
+              </select>
+
               {errors.category && (
                 <FormErrorMessage>
                   {errors.category.message as string}
@@ -97,24 +118,24 @@ const ProductForm: FC<Props> = ({ control, errors, disable = false }) => {
           </Box>
         ),
       },
-      {
-        isRequired: true,
-        control,
-        name: 'location',
-        element: ({ field }) => (
-          <Box className="mb-4 font-bold">
-            <Text>Location</Text>
-            <InputGroup>
-              <Input {...field} id="location" disabled={disable} />
-              {errors.location && (
-                <FormErrorMessage>
-                  {errors.location.message as string}
-                </FormErrorMessage>
-              )}
-            </InputGroup>
-          </Box>
-        ),
-      },
+      // {
+      //   isRequired: true,
+      //   control,
+      //   name: 'location',
+      //   element: ({ field }) => (
+      //     <Box className="mb-4 font-bold">
+      //       <Text>Location</Text>
+      //       <InputGroup>
+      //         <Input {...field} id="location" disabled={disable} />
+      //         {errors.location && (
+      //           <FormErrorMessage>
+      //             {errors.location.message as string}
+      //           </FormErrorMessage>
+      //         )}
+      //       </InputGroup>
+      //     </Box>
+      //   ),
+      // },
       {
         isRequired: true,
         control,

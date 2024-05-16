@@ -3,7 +3,7 @@ import { useMemo, useState } from 'react';
 import { Box } from '@chakra-ui/react';
 
 import { CreatePost } from '@/components';
-import { Post, RightNavBar, HomeSideBar, useGetPostsQuery } from '@/features';
+import { Post, HomeSideBar, useGetPostsQuery } from '@/features';
 import NavbarLayout from '@/layout/navbar-layout';
 import { FILTER, LIMIT, PAGE } from '@/data';
 
@@ -18,11 +18,12 @@ export const Home = () => {
       return result;
     }
   }, [data]);
+
   return (
     <NavbarLayout navBarChildren={<HomeSideBar />}>
       <Box className="flex w-full justify-between">
         <Box className="hidden md:block"></Box>
-        <Box className="w-full lg:w-11/12 xl:w-8/12 overflow-y-scroll h-[95vh] no-scrollbar">
+        <Box className="w-full lg:w-11/12 xl:w-8/12 overflow-y-scroll  h-[92vh]  no-scrollbar">
           <CreatePost refetch={refetch} />
           {posts?.map((item) => (
             <Post
@@ -41,7 +42,7 @@ export const Home = () => {
           ))}
         </Box>
         <Box className="hidden md:block"></Box>
-        <RightNavBar className="w-3/12" />
+        {/* <RightNavBar className="w-3/12" /> */}
       </Box>
     </NavbarLayout>
   );

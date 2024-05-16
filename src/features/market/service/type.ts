@@ -30,3 +30,9 @@ export type ResPaginationProductData = {
   total: number;
   data: ProductType[];
 };
+
+export type CategoryType = {
+  id: number;
+  name: string;
+  rank: number;
+};

@@ -6,4 +6,4 @@ export const VIDEO_PATH = '/video';
 export const FRIEND_PATH = '/friend';
 export const GROUP_PATH = '/group';
 export const COLLECTION_PATH = '/collections';
-export const CHAT_PATH = '/chat';
+export const MESSAGE_PATH = '/message/:id';

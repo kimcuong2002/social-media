@@ -4,9 +4,7 @@ import {
   BiCloudLightning,
   BiFile,
   BiHeart,
-  BiMailSend,
   BiMusic,
-  BiNotification,
   BiPencil,
   BiVideo,
 } from 'react-icons/bi';
@@ -14,19 +12,11 @@ import { RxAvatar } from 'react-icons/rx';
 
 export const marketSidebarItem = [
   {
-    name: 'Find all item',
+    name: 'All products',
     icon: <BiCart />,
   },
   {
-    name: 'Notifications',
-    icon: <BiNotification />,
-  },
-  {
-    name: 'Inbox',
-    icon: <BiMailSend />,
-  },
-  {
-    name: 'My account',
+    name: 'YourProducts',
     icon: <RxAvatar />,
   },
 ];

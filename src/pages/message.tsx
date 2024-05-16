@@ -3,7 +3,7 @@ import { ContactDetail } from '@/features/message/components/contact-detail';
 import LeftNavBar from '@/layout/navbar-layout/components/left-navbar';
 import { Box } from '@chakra-ui/react';
 
-export const Chat = () => {
+export const Message = () => {
   return (
     <Box className="flex">
       <LeftNavBar children={<MessageSideBar />} />

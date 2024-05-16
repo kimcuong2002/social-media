@@ -1,3 +1,5 @@
+import { useCreateMessage } from '@/features';
+import { useQueryInfoUser } from '@/features/auth';
 import { useUploadMultipleFilesMutation } from '@/hooks';
 import { Box, Input, Spinner, Image } from '@chakra-ui/react';
 import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
@@ -5,14 +7,26 @@ import { SetStateAction, useEffect, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
 import { BiImage, BiSmile, BiVideo, BiSend } from 'react-icons/bi';
 import { IoCloseSharp } from 'react-icons/io5';
+import io from 'socket.io-client';
 
-export const InputMessage = () => {
+type Props = {
+  refetch?: () => void;
+  className?: string;
+  idRoom: string;
+};
+
+export const InputMessage = ({ className, idRoom }: Props) => {
   const [openEmoij, setOpenEmoij] = useState(false);
   const [content, setContent] = useState('');
   const [files, setFiles] = useState<FileList | null>();
   const [filesPreview, setFilesPreview] = useState<string[]>([]);
 
+  const socket = io(import.meta.env.VITE_API_URL);
+  console.log('🚀 ~ InputMessage ~ socket:', socket);
+
+  const { data: userData } = useQueryInfoUser();
   const [uploadMultipleFiles, { loading }] = useUploadMultipleFilesMutation();
+  const [createMessage] = useCreateMessage();
 
   const handleChangeContent = (e: React.ChangeEvent<HTMLInputElement>) => {
     setContent(e.target.value);
@@ -57,8 +71,31 @@ export const InputMessage = () => {
     }
   }, [filesPreview]);
 
+  const handleCreateMessage = () => {
+    void createMessage({
+      variables: {
+        body: {
+          author: userData?.getInfoUser.id,
+          content: content,
+          room: idRoom,
+          typeMessage: 'text',
+        },
+      },
+      onCompleted: () => {
+        setContent('');
+        setFilesPreview([]);
+        setFiles(null);
+        setOpenEmoij(false);
+        toast.success('Send message successfully!');
+      },
+      onError: (errors) => {
+        toast.error(errors.message);
+      },
+    });
+  };
+
   return (
-    <Box>
+    <Box className={` ${className}`}>
       {openEmoij && (
         <EmojiPicker onEmojiClick={handleEmojiClick} className="mt-4" />
       )}
@@ -137,7 +174,7 @@ export const InputMessage = () => {
           onClick={() => setOpenEmoij(!openEmoij)}
         />
         <Input value={content} onChange={handleChangeContent} />
-        <button type="submit">
+        <button type="submit" onClick={handleCreateMessage}>
           <BiSend className="cursor-pointer" />
         </button>
       </Box>

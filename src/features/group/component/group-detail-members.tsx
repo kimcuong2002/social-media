@@ -17,7 +17,7 @@ const GroupDetailMembers = ({ data }: Props) => {
           <Img src={member.avatar} alt="" className="h-64 rounded-t-lg" />
           <Box className="p-2">
             <Text className="font-bold">{member.fullname}</Text>
-            <Link to={`profile/${member.id}`}>
+            <Link to={`/profile/${member.id}`}>
               <Button className="w-full my-2 !bg-[#0866FF] !text-white">
                 View Profile
               </Button>

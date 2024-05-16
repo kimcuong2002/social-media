@@ -28,6 +28,9 @@ const CreateProduct = ({ refetch }: Props) => {
   const [latitude, setLatitude] = useState<number>();
   const [longitude, setLongitude] = useState<number>();
 
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [createProduct, { loading }] = useCreateProduct();
+
   const handleChangeLocation = useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -57,9 +60,6 @@ const CreateProduct = ({ refetch }: Props) => {
     reset,
     formState: { errors },
   } = useForm();
-
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [createProduct, { loading }] = useCreateProduct();
 
   const onSubmit: SubmitHandler<InputProductType> = (data) => {
     console.log(data);
@@ -104,7 +104,7 @@ const CreateProduct = ({ refetch }: Props) => {
                 errors={errors}
                 disable={loading}
               />
-              <Text>Location</Text>
+              <Text className="font-bold">Location</Text>
               {latitude && longitude ? (
                 <ReactMapGL
                   {...viewport}

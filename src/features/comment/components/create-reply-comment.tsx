@@ -15,9 +15,10 @@ type Props = {
   idCmtParent?: string;
   value?: string[];
   onChange?: (_v: string[]) => void;
+  refetch?: () => void;
 };
 
-export const CreateReplyCmt: FC<Props> = ({ postId, idCmtParent }) => {
+export const CreateReplyCmt: FC<Props> = ({ postId, idCmtParent, refetch }) => {
   const [content, setContent] = useState('');
   const [openEmoij, setOpenEmoij] = useState(false);
   const [files, setFiles] = useState<FileList | null>();
@@ -42,6 +43,7 @@ export const CreateReplyCmt: FC<Props> = ({ postId, idCmtParent }) => {
           files: files,
         },
         onCompleted: (data) => {
+          refetch && void refetch();
           const result: SetStateAction<string[]> = [];
           data.uploadMultipleFiles.map((item) => result.push(item.url));
           setFilesPreview([...filesPreview, ...result]);

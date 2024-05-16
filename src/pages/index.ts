@@ -6,7 +6,7 @@ export * from './video';
 export * from './collections';
 export * from './friends';
 export * from './group';
-export * from './chat';
+export * from './message';
 export * from './group-detail';
 export * from './post-detail';
 export * from './edit-post';
