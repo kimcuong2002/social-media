@@ -21,28 +21,31 @@ import {
 } from '@chakra-ui/react';
 import toast from 'react-hot-toast';
 import { AiTwotoneLike } from 'react-icons/ai';
+import { BsCopy } from 'react-icons/bs';
+import { CiShoppingTag, CiEdit, CiTrash } from 'react-icons/ci';
 import { FaRegComments } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
 import { HiDotsHorizontal } from 'react-icons/hi';
+import { PiTelegramLogo } from 'react-icons/pi';
+import { Link } from 'react-router-dom';
 
+import SharePostForm from './share-post-form';
+import { LIMIT, PAGE } from '@/data';
 import {
   Comment,
+  CreateComment,
   PostType,
+  useDeleteComment,
   useDeletePost,
+  useGetCommentsQuery,
+  useGetGroupById,
   useGhimPost,
   useLikePost,
+  useQueryInfoUser,
 } from '@/features';
-import { useQueryInfoUser } from '@/features/auth';
 import { converDateToString } from '@/utils';
-import { PiTelegramLogo } from 'react-icons/pi';
-import SharePostForm from './share-post-form';
-import { CreateComment } from '@/features/comment/components/create-comment';
-import { CiShoppingTag, CiEdit, CiTrash } from 'react-icons/ci';
-import { BsCopy } from 'react-icons/bs';
-import { useGetCommentsQuery } from '@/features/comment/hooks/use-comment-query';
-import { LIMIT, PAGE } from '@/data';
 
 export const Post: FC<PostType> = ({
+  isPostToGroup,
   idPost,
   content,
   images,
@@ -70,7 +73,7 @@ export const Post: FC<PostType> = ({
   const [likePost] = useLikePost();
   const [deletePost] = useDeletePost();
   const [ghimPost] = useGhimPost();
-
+  // const [deleteComment] = useDeleteComment();
   const { data: userData } = useQueryInfoUser();
   const { data: comments, refetch: refetchComments } = useGetCommentsQuery(
     LIMIT,
@@ -78,6 +81,7 @@ export const Post: FC<PostType> = ({
     idPost!,
   );
   const commentDemo = comments?.getComments.data.slice(0, 2);
+  const { data: group } = useGetGroupById(isPostToGroup?.idGroup!);
 
   const handleLikePost = () => {
     void likePost({
@@ -150,16 +154,43 @@ export const Post: FC<PostType> = ({
     <Box className="bg-white my-4 p-4 rounded-lg border-2">
       <Box className="flex justify-between">
         <Box className="flex items-center gap-2">
-          <Link to={`/profile/${idAuthor}`}>
-            <Avatar src={avatar} className="hover:cursor-pointer" />
-          </Link>
-          <Box>
+          <Box className="relative">
+            {group?.getGroupById.avatar && (
+              <Link to={`/group/${group?.getGroupById.id}`}>
+                <Avatar
+                  src={group?.getGroupById.avatar}
+                  className="hover:cursor-pointer"
+                />
+              </Link>
+            )}
             <Link to={`/profile/${idAuthor}`}>
-              <Text className="font-bold cursor-pointer">{fullname}</Text>
+              <Avatar
+                src={avatar}
+                className={`hover:cursor-pointer ${group?.getGroupById.avatar && 'absolute top-full right-0 -translate-x-full translate-y-full'}`}
+                size={group?.getGroupById.avatar && 'xs'}
+              />
             </Link>
-            <Text fontSize="xs" className="text-gray-500">
-              {dateCreated}
-            </Text>
+          </Box>
+          <Box>
+            <Link to={`/group/${group?.getGroupById.id}`}>
+              <Text className="font-bold cursor-pointer">
+                {group?.getGroupById.name}
+              </Text>
+            </Link>
+            <Box
+              className={`${group?.getGroupById.name && 'flex items-center gap-2'}`}
+            >
+              <Link to={`/profile/${idAuthor}`}>
+                <Text
+                  className={`font-bold cursor-pointer ${group?.getGroupById.name ? 'text-[#4f4f50] ' : ''}`}
+                >
+                  {fullname}
+                </Text>
+              </Link>
+              <Text fontSize="xs" className="text-gray-500">
+                {dateCreated}
+              </Text>
+            </Box>
           </Box>
         </Box>
         <Popover>
@@ -250,7 +281,7 @@ export const Post: FC<PostType> = ({
             />
             <Box>{countLiked < 100 ? countLiked : '99+'}</Box>
           </Box>
-          <Link to={`posts/${idPost}`}>
+          <Link to={`/posts/${idPost}`}>
             <FaRegComments className="text-2xl cursor-pointer" />
           </Link>
           <Box>

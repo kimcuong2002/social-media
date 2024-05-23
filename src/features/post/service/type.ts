@@ -21,7 +21,13 @@ export type PostTypeRes = {
   verified?: boolean;
   idGroup?: string;
   createdAt?: Date;
+  quantityComments?: number;
   updatedAt?: Date;
+  isPostToGroup?: {
+    idGroup: string;
+    status: boolean;
+    verified: boolean;
+  };
 };
 
 export type PostType = {
@@ -33,6 +39,7 @@ export type PostType = {
   fullname: string;
   avatar?: string;
   createdAt: Date;
+  quantityComments?: number;
   usersLiked?: { fullname: string; id: string; avatar: string }[] | undefined;
   topic?: {
     image: string;
@@ -41,6 +48,12 @@ export type PostType = {
     id: string;
   };
   idAuthor?: string;
+  isPostToGroup?: {
+    idGroup: string;
+    status: boolean;
+    verified: boolean;
+  };
+
   refetch?: () => void;
 };
 
@@ -49,10 +62,11 @@ export type PostInput = Pick<
   'content' | 'images' | 'video' | 'createdAt'
 > & {
   topic: string;
+  idGroup?: string;
 };
 
 export type ResPaginationPostData = {
+  data: PostTypeRes[];
   page: number;
   limit: number;
-  data: PostTypeRes[];
 };

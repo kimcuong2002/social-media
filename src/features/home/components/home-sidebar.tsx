@@ -2,35 +2,9 @@ import { useMemo, useState } from 'react';
 
 import { Avatar, Box, Image, Text } from '@chakra-ui/react';
 
-import { Topic } from '@/features';
-import { useQueryInfoUser } from '@/features/auth';
-import { useGetAllTopic } from '@/features/topic';
-
-const trends = [
-  {
-    name: 'Wash Hand',
-    totalPost: 400,
-  },
-  {
-    name: 'Phi Phai',
-    totalPost: 260,
-  },
-  {
-    name: 'Study',
-    totalPost: 572,
-  },
-  {
-    name: 'Code tools',
-    totalPost: 832,
-  },
-  {
-    name: 'Chill',
-    totalPost: 382,
-  },
-];
+import { Topic, useGetAllTopic, useQueryInfoUser } from '@/features';
 
 export const HomeSideBar = () => {
-  const sortTrends = trends.sort((a, b) => b.totalPost - a.totalPost);
   const [allTopics, setAllTopics] = useState<Topic[]>([]);
 
   const { data } = useQueryInfoUser();
@@ -70,19 +44,6 @@ export const HomeSideBar = () => {
         >
           <Image src={item.image} boxSize="50px" />
           <Text>{item.name}</Text>
-        </Box>
-      ))}
-      <Text className="uppercase my-4 text-violet-800 font-bold" fontSize="sm">
-        Trend for you
-      </Text>
-      {sortTrends.map((item) => (
-        <Box key={item.name} className="my-3">
-          <Text className="font-bold" fontSize="sm">
-            {item.name}
-          </Text>
-          <Text className="text-gray-500" fontSize="xs">
-            {item.totalPost} Post
-          </Text>
         </Box>
       ))}
     </Box>

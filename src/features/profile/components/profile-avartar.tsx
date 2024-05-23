@@ -46,7 +46,6 @@ export const ProfileAvatar = () => {
   const navigate = useNavigate();
   const { data: friends } = useGetFriends();
   const [deleteFriend] = useDeleteFriend();
-  console.log('🚀 ~ ProfileAvatar ~ friends:', friends);
 
   const updateAvatar = () => {
     if (value.length > 0) {
@@ -179,8 +178,7 @@ export const ProfileAvatar = () => {
               ? { onClick: handleDeleteFriend }
               : { onClick: handleSendReqFriend })}
           >
-            {friends?.getFriends.friends &&
-            friends?.getFriends.friends.filter(
+            {friends?.getFriends.friends.filter(
               (friend) => friend.id === param.id,
             )
               ? 'Delete Friend'

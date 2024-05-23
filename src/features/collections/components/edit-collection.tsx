@@ -24,7 +24,6 @@ const EditCollection = ({
   refetch,
   onClose,
 }: Props) => {
-  console.log('🚀 ~ idCollection:', idCollection);
   const [updateCollection] = useUpdateCollection();
   const [uploadSingleFile] = useUploadSingleFileMutation();
 

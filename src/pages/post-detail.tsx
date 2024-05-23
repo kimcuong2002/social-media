@@ -12,11 +12,15 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import { Comment, useGetPostDetail, useLikePost } from '@/features';
-import { converDateToString } from '@/utils';
-import { useGetCommentsQuery } from '@/features/comment/hooks/use-comment-query';
-import { CreateComment } from '@/features/comment/components/create-comment';
 import { ID_USER, LIMIT, PAGE } from '@/data';
+import {
+  Comment,
+  CreateComment,
+  useGetCommentsQuery,
+  useGetPostDetail,
+  useLikePost,
+} from '@/features';
+import { converDateToString } from '@/utils';
 
 export const PostDetail = () => {
   const [page, setPage] = useState(PAGE);

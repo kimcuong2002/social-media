@@ -118,24 +118,6 @@ const ProductForm: FC<Props> = ({ control, errors, disable = false }) => {
           </Box>
         ),
       },
-      // {
-      //   isRequired: true,
-      //   control,
-      //   name: 'location',
-      //   element: ({ field }) => (
-      //     <Box className="mb-4 font-bold">
-      //       <Text>Location</Text>
-      //       <InputGroup>
-      //         <Input {...field} id="location" disabled={disable} />
-      //         {errors.location && (
-      //           <FormErrorMessage>
-      //             {errors.location.message as string}
-      //           </FormErrorMessage>
-      //         )}
-      //       </InputGroup>
-      //     </Box>
-      //   ),
-      // },
       {
         isRequired: true,
         control,
@@ -157,6 +139,25 @@ const ProductForm: FC<Props> = ({ control, errors, disable = false }) => {
           </Box>
         ),
       },
+      {
+        isRequired: true,
+        control,
+        name: 'location',
+        element: ({ field }) => (
+          <Box className="mb-4 font-bold">
+            <Text>Location</Text>
+            <InputGroup>
+              <Input {...field} id="location" disabled={disable} />
+              {errors.location && (
+                <FormErrorMessage>
+                  {errors.location.message as string}
+                </FormErrorMessage>
+              )}
+            </InputGroup>
+          </Box>
+        ),
+      },
+
       // {
       //   isRequired: true,
       //   control,

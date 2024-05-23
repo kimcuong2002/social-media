@@ -25,3 +25,9 @@ export type UserType = {
   isActive: EnumActive;
   usersBlocked: string[];
 };
+
+export type ResAllUserPagination = {
+  data: UserType[];
+  total: number;
+  page: number;
+};

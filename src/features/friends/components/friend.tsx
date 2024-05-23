@@ -6,11 +6,13 @@ import {
 } from '../hooks/use-friend-query';
 import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { BsPersonAdd } from 'react-icons/bs';
 type Props = {
   avatar: string;
   fullname: string;
   id: string;
-  isFriend: boolean;
+  isFriend?: boolean;
+  isSuggest?: boolean;
   refetch: () => void;
 };
 
@@ -19,6 +21,7 @@ export const Friend = ({
   fullname,
   id,
   isFriend = false,
+  isSuggest = false,
   refetch,
 }: Props) => {
   const [acceptFriend] = useAcceptReqFriend();
@@ -53,16 +56,28 @@ export const Friend = ({
       <Avatar src={avatar} size="2xl" />
       <Text className="text-xl font-bold cursor-pointer">{fullname}</Text>
       {isFriend == true ? (
-        <Link to={`/profile/${id}`}>
-          <Button
-            leftIcon={<AiOutlineMessage />}
-            colorScheme="blue"
-            variant="outline"
-            className="w-full"
-          >
-            View Profile
-          </Button>
-        </Link>
+        <Box className="flex flex-col gap-2 w-full">
+          <Link to={`/profile/${id}`}>
+            <Button
+              leftIcon={<AiOutlineMessage />}
+              colorScheme="blue"
+              variant="outline"
+              className="w-full"
+            >
+              View Profile
+            </Button>
+          </Link>
+          {isSuggest === true && (
+            <Button
+              leftIcon={<BsPersonAdd />}
+              colorScheme="blue"
+              variant="solid"
+              className="w-full"
+            >
+              Add Friend
+            </Button>
+          )}
+        </Box>
       ) : (
         <Box className="flex flex-col gap-2 w-full">
           <Button
@@ -72,6 +87,7 @@ export const Friend = ({
           >
             Confirm
           </Button>
+
           <Button
             colorScheme="blue"
             variant="outline"

@@ -5,12 +5,14 @@ import {
   useMutation,
   useQuery,
 } from '@apollo/client';
-import { CommentInputType, ResPaginationCommentData } from '../service';
+
 import {
   CREATE_COMMENT,
   CREATE_GET_COMMENT_REPLY,
+  DELETE_COMMENT,
   GET_COMMENTS,
 } from '../graphql';
+import { CommentInputType, ResPaginationCommentData } from '../service';
 
 export const useCreateComment = () =>
   useMutation<
@@ -49,3 +51,9 @@ export const useCreateReplyComment = () =>
     DefaultContext,
     ApolloCache<unknown>
   >(CREATE_GET_COMMENT_REPLY);
+
+export const useDeleteComment = () => {
+  useMutation<{ deleteComment: { status: string } }, OperationVariables>(
+    DELETE_COMMENT,
+  );
+};

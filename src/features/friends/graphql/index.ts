@@ -52,3 +52,17 @@ export const ACCEPT_FRIEND_REQUEST = gql`
     }
   }
 `;
+
+export const GET_USERS = gql`
+  query GetUsers($limit: Float!, $page: Float!) {
+    users(query: { limit: $limit, page: $page }) {
+      data {
+        role
+        avatar
+        id
+        fullname
+        email
+      }
+    }
+  }
+`;

@@ -39,7 +39,6 @@ export const LoginForm = () => {
   const [login] = useLoginMutation();
 
   const onSubmit: SubmitHandler<LoginValues> = (data) => {
-    console.log('🚀 ~ LoginForm ~ data:', data);
     void login({
       variables: { body: data },
       onCompleted: (data) => {

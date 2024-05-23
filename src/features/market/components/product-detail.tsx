@@ -1,4 +1,4 @@
-import { Box, IconButton, Text } from '@chakra-ui/react';
+import { Avatar, Box, Button, IconButton, Text } from '@chakra-ui/react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import 'swiper/css';
@@ -6,31 +6,46 @@ import 'swiper/css/effect-cube';
 import 'swiper/css/pagination';
 
 import { ProductType } from '../service/type';
-import { useGetProdcutById } from '@/features';
+import { useCreateRoom, useGetProdcutById, useQueryInfoUser } from '@/features';
 import { useMemo } from 'react';
 import { CiShare2, CiShoppingTag } from 'react-icons/ci';
+import { IoChatbubbleEllipsesSharp } from 'react-icons/io5';
 import { EffectCube, Pagination } from 'swiper/modules';
+import { Link, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import UpdateProduct from './update-product';
 
-const ProductDetail = ({
-  id,
-  name,
-  category,
-  author,
-  images,
-  createdAt,
-  description,
-  price,
-  location,
-}: ProductType) => {
+const ProductDetail = ({ id }: ProductType) => {
+  const navigate = useNavigate();
   const { data } = useGetProdcutById(id!);
   const productDetail = useMemo(() => {
     return data?.getProductById;
   }, [data]);
+  const { data: userData } = useQueryInfoUser();
+
+  const [createRoom] = useCreateRoom();
+
+  const handleCreateRoom = () => {
+    void createRoom({
+      variables: {
+        body: {
+          members: [productDetail?.author?.id, userData?.getInfoUser.id],
+          name: productDetail?.name,
+        },
+      },
+      onCompleted: async (data) => {
+        navigate(`/message/${data.createRoom.id}`);
+      },
+      onError: (error) => {
+        toast.error(error.message);
+      },
+    });
+  };
 
   return (
     <Box>
       <Box className="flex gap-2 p-2">
-        <Box className="w-7/12">
+        <Box className="w-6/12">
           <Swiper
             effect={'cube'}
             grabCursor={true}
@@ -51,7 +66,7 @@ const ProductDetail = ({
             ))}
           </Swiper>
         </Box>
-        <Box className="w-5/12">
+        <Box className="w-6/12">
           <Text className="font-bold text-3xl">{productDetail?.name}</Text>
           <Box className="flex justify-between items-center">
             <Text className="text-[#147ADA] font-bold text-xl">
@@ -65,10 +80,33 @@ const ProductDetail = ({
           <Text className="text-[#898694] mt-4">Description</Text>
           <Text>{productDetail?.description}</Text>
           <Text className="text-[#898694] mt-4">Location</Text>
-          <Text>{}</Text>
+          <Text>{productDetail?.location}</Text>
         </Box>
       </Box>
-      <Box>mess</Box>
+      {userData?.getInfoUser.id !== productDetail?.author?.id ? (
+        <Box className="bg-[#F1F5F9] rounded-lg">
+          <Box className="flex items-center gap-4 p-2">
+            <IoChatbubbleEllipsesSharp className="text-[#6665F8]" />
+            <Text>Send Message to seller</Text>
+            <Link to={`/profile/${productDetail?.author?.id}`}>
+              <Box className="flex items-center gap-2 cursor-pointer">
+                <Avatar src={productDetail?.author?.avatar} />
+                <Text className="font-bold">
+                  {productDetail?.author?.fullname}
+                </Text>
+              </Box>
+            </Link>
+          </Box>
+          <Button
+            className="!bg-[#0B5FAE] !text-white w-full"
+            onClick={handleCreateRoom}
+          >
+            Send Message
+          </Button>
+        </Box>
+      ) : (
+        <UpdateProduct />
+      )}
     </Box>
   );
 };

@@ -15,12 +15,12 @@ const LayoutComponent = () => {
         <ErrorBoundary fallbackRender={fallbackRender}>
           <Suspense
             fallback={
-              <Box className="w-full h-full flex justify-center items-center">
+              <Box className="w-full flex justify-center items-center">
                 <Text>Loading...</Text>
               </Box>
             }
           >
-            <Box className="h-[85vh]">
+            <Box className="h-[calc(100vh-126px)]">
               <Outlet />
             </Box>
           </Suspense>

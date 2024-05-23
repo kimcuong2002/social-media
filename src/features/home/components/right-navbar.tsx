@@ -1,32 +1,21 @@
-import { useEffect, useState } from 'react';
-
 import { Box, Divider, IconButton, Text } from '@chakra-ui/react';
 import { LuSearch } from 'react-icons/lu';
 
 import { Contact } from '@/components';
-import { datas } from '@/data';
+import { useGetAllRoom, useQueryInfoUser } from '@/features';
 
 type Props = {
   className?: string;
 };
 
 export const RightNavBar = ({ className }: Props) => {
-  const [totalOnline, setTotalOnline] = useState(0);
-
-  useEffect(() => {
-    const onTotal = datas.reduce((accumlator, contact) => {
-      if (contact.state === 'on') {
-        return accumlator + 1;
-      }
-      return accumlator;
-    }, 0);
-
-    setTotalOnline(onTotal);
-  }, [totalOnline]);
+  const { data: userData } = useQueryInfoUser();
+  const { data } = useGetAllRoom(userData?.getInfoUser.id!);
+  const totalRoom = data?.getAllRoom.length;
 
   return (
     <Box className={`bg-white p-4 w-2/12 hidden xl:block ${className}`}>
-      <Box className="flex justify-between items-center">
+      <Box className="flex justify-between rooms-center">
         <Text className="font-bold">Contact</Text>
         <IconButton
           aria-label="Search database"
@@ -36,15 +25,16 @@ export const RightNavBar = ({ className }: Props) => {
       </Box>
       <Divider className="my-4" />
       <Text fontSize="sm" className="text-gray-500">
-        Online - {totalOnline}
+        Online - {totalRoom}
       </Text>
-      <Box className="h-[80vh] overflow-y-scroll no-scrollbar">
-        {datas.map((item) => (
+      <Box className=" overflow-y-scroll no-scrollbar">
+        {data?.getAllRoom.map((room) => (
           <Contact
-            key={item.id}
-            name={item.name}
-            thumb={item.thumb}
-            state={item.state}
+            key={room.id}
+            name={room.name}
+            members={room.members}
+            idUser={userData?.getInfoUser.id!}
+            idRoom={room.id}
           />
         ))}
       </Box>

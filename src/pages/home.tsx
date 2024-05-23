@@ -3,14 +3,15 @@ import { useMemo, useState } from 'react';
 import { Box } from '@chakra-ui/react';
 
 import { CreatePost } from '@/components';
-import { Post, HomeSideBar, useGetPostsQuery } from '@/features';
-import NavbarLayout from '@/layout/navbar-layout';
 import { FILTER, LIMIT, PAGE } from '@/data';
+import { Post, HomeSideBar, useGetPostsQuery, RightNavBar } from '@/features';
+import NavbarLayout from '@/layout/navbar-layout';
 
 export const Home = () => {
   const [page] = useState(PAGE);
 
   const { data, refetch } = useGetPostsQuery(LIMIT, page, FILTER);
+  console.log('🚀 ~ Home ~ data:', data);
 
   const posts = useMemo(() => {
     if (data?.getAllPost) {
@@ -23,7 +24,7 @@ export const Home = () => {
     <NavbarLayout navBarChildren={<HomeSideBar />}>
       <Box className="flex w-full justify-between">
         <Box className="hidden md:block"></Box>
-        <Box className="w-full lg:w-11/12 xl:w-8/12 overflow-y-scroll  h-[92vh]  no-scrollbar">
+        <Box className="w-full lg:w-11/12 xl:w-8/12 overflow-y-scroll h-100vh  no-scrollbar">
           <CreatePost refetch={refetch} />
           {posts?.map((item) => (
             <Post
@@ -37,12 +38,13 @@ export const Home = () => {
               usersLiked={item.usersLiked}
               topic={item.topic}
               idAuthor={item.author.id}
+              isPostToGroup={item.isPostToGroup}
               refetch={refetch}
             />
           ))}
         </Box>
         <Box className="hidden md:block"></Box>
-        {/* <RightNavBar className="w-3/12" /> */}
+        <RightNavBar className="w-3/12" />
       </Box>
     </NavbarLayout>
   );

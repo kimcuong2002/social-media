@@ -22,10 +22,7 @@ export const Contact: FC<ContactType> = ({
 }) => {
   const userChat = members.filter((member) => member.id !== idUser);
 
-  // console.log('🚀 ~ userChat:', userChat[0]);
-  // const avatar = userChat[0].avatar;
-  // console.log('🚀 ~ avatar:', avatar);
-  // // console.log(members);
+  const avatar = userChat[0].avatar;
 
   return (
     <Link to={`/message/${idRoom}`}>

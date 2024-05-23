@@ -47,7 +47,7 @@ export const useGetProdcutById = (id: string) => {
   });
 };
 
-export const useGEtProductsByUser = (
+export const useGetProductsByUser = (
   filter = {},
   limit: number,
   page: number,

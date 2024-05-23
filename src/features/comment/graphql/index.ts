@@ -48,3 +48,11 @@ export const CREATE_GET_COMMENT_REPLY = gql`
     }
   }
 `;
+
+export const DELETE_COMMENT = gql`
+  mutation DeleteComment($id: String!, $idCmtParent: String!) {
+    deleteComment(id: $id, idCmtParent: $idCmtParent) {
+      id
+    }
+  }
+`;

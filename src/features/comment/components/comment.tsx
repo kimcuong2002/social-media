@@ -4,6 +4,7 @@ import { Avatar, Box, Img, Text } from '@chakra-ui/react';
 import { CommentType } from '../service';
 import { durationTime } from '@/utils';
 import { CreateReplyCmt } from './create-reply-comment';
+import { useQueryInfoUser } from '@/features/auth';
 
 export const Comment: FC<CommentType> = ({
   author,
@@ -17,6 +18,7 @@ export const Comment: FC<CommentType> = ({
   refetch,
 }) => {
   const [repCmt, setRepCmt] = useState(false);
+  const { data: authData } = useQueryInfoUser();
   return (
     <Box className="flex gap-2 my-4">
       <Avatar src={author?.avatar} />
@@ -26,7 +28,7 @@ export const Comment: FC<CommentType> = ({
             <Text className="font-medium">{author?.fullname}</Text>
             <Text>{content}</Text>
           </Box>
-          <Box className="columns-2 mt-2">
+          <Box className="columns-2 mt-2 !space-y-4">
             {images?.map((img) => (
               <Img src={img} alt="" key={img} className="rounded-lg" />
             ))}
@@ -43,6 +45,9 @@ export const Comment: FC<CommentType> = ({
             >
               Reply
             </Text>
+            {author?.id === authData?.getInfoUser.id && (
+              <Text className="font-bold cursor-pointer">Delete</Text>
+            )}
           </Box>
           {repCmt && (
             <CreateReplyCmt
@@ -52,7 +57,7 @@ export const Comment: FC<CommentType> = ({
             />
           )}
         </>
-        <Box className="flex flex-col mt-4">
+        <Box className="flex flex-col mt-2">
           {replies?.map((reply) => (
             <Box key={reply.id} className="flex gap-2">
               <Avatar src={reply.author?.avatar} />
@@ -61,7 +66,7 @@ export const Comment: FC<CommentType> = ({
                   <Text className="font-medium">{reply.author?.fullname}</Text>
                   <Text>{reply.content}</Text>
                 </Box>
-                <Box className="columns-2 mt-2">
+                <Box className="columns-2 mt-1">
                   {reply.images?.map((img) => (
                     <Img src={img} alt="" key={img} className="rounded-lg" />
                   ))}
@@ -71,7 +76,16 @@ export const Comment: FC<CommentType> = ({
                     <Img src={video} alt="" key={video} />
                   ))}
                 </Box>
-                <Text className="text-xs">{durationTime(reply.createdAt)}</Text>
+                <Box className="flex gap-2 text-xs mb-4">
+                  <Text className="text-xs">
+                    {durationTime(reply.createdAt)}
+                  </Text>
+                  {reply.author?.id === authData?.getInfoUser.id && (
+                    <Text className="font-bold cursor-pointer text-xs">
+                      Delete
+                    </Text>
+                  )}
+                </Box>
               </Box>
             </Box>
           ))}

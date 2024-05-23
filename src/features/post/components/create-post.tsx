@@ -28,14 +28,23 @@ import { useCreatePostMutation } from '@/features';
 import { useQueryInfoUser } from '@/features/auth';
 import { useGetAllTopic } from '@/features/topic';
 import { useUploadMultipleFilesMutation } from '@/hooks';
+import { useParams } from 'react-router-dom';
 
 type Props = {
   value?: string[];
   onChange?: (_v: string[]) => void;
   refetch?: () => void;
+  isGroup?: boolean;
 };
 
-export const CreatePost: FC<Props> = ({ value, onChange, refetch }) => {
+export const CreatePost: FC<Props> = ({
+  value,
+  onChange,
+  refetch,
+  isGroup = false,
+}) => {
+  const param = useParams();
+  const idGroup = isGroup === true ? param?.id : undefined;
   const [files, setFiles] = useState<FileList | null>();
   const [filesPreviews, setFilePreviews] = useState(value || []);
   const [openEmoji, setOpenEmoji] = useState(false);
@@ -122,6 +131,7 @@ export const CreatePost: FC<Props> = ({ value, onChange, refetch }) => {
     data.content = content;
     data.topic = topic;
     data.createdAt = new Date();
+    data.idGroup = idGroup;
     void createPost({
       variables: { body: data },
       onCompleted: () => {

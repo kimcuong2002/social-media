@@ -13,19 +13,26 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalContent,
+  InputGroup,
+  InputRightElement,
+  Button,
 } from '@chakra-ui/react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
 import { ErrorShow } from '@/features';
-import { RegisterInput, useSignUpMutation } from '@/features/auth';
+import { RegisterInputType, useSignUpMutation } from '@/features/auth';
+import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 
 export const SignUpForm = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [show, setShow] = useState(false);
   const [gender, setGender] = useState(Number);
   const [male, setMale] = useState(false);
   const [female, setFemale] = useState(false);
   const [other, setOther] = useState(false);
+
+  const handleClick = () => setShow(!show);
   const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (value === '1') {
@@ -51,11 +58,11 @@ export const SignUpForm = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<RegisterInput>();
+  } = useForm<RegisterInputType>();
 
   const [signup] = useSignUpMutation();
 
-  const onSubmit: SubmitHandler<RegisterInput> = (data) => {
+  const onSubmit: SubmitHandler<RegisterInputType> = (data) => {
     data.gender = gender;
     void signup({
       variables: { body: data },
@@ -152,22 +159,29 @@ export const SignUpForm = () => {
                 {errors?.username && (
                   <ErrorShow message={errors.username.message as string} />
                 )}
-                <Input
-                  id="password"
-                  placeholder="Password"
-                  type="password"
-                  {...register('password', {
-                    required: 'Please input your password',
-                    maxLength: {
-                      value: 50,
-                      message: 'Password cannot exceed 50 characters',
-                    },
-                    minLength: {
-                      value: 5,
-                      message: 'Password cannot be less than 5 characters',
-                    },
-                  })}
-                />
+                <InputGroup size="md">
+                  <Input
+                    type={show ? 'text' : 'password'}
+                    id="password"
+                    placeholder="Password"
+                    {...register('password', {
+                      required: 'Please input your password',
+                      maxLength: {
+                        value: 50,
+                        message: 'Password cannot exceed 50 characters',
+                      },
+                      minLength: {
+                        value: 5,
+                        message: 'Password cannot be less than 5 characters',
+                      },
+                    })}
+                  />
+                  <InputRightElement width="3rem">
+                    <Button h="1.75rem" size="sm" onClick={handleClick}>
+                      {show ? <FaRegEyeSlash /> : <FaRegEye />}
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
                 {errors?.password && (
                   <ErrorShow message={errors.password.message as string} />
                 )}

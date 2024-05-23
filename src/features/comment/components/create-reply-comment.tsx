@@ -98,6 +98,7 @@ export const CreateReplyCmt: FC<Props> = ({ postId, idCmtParent, refetch }) => {
         },
       });
     }
+    console.log('🚀 ~ onSubmit ~ data:', data);
   };
 
   return (

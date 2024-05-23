@@ -1,10 +1,9 @@
 import { Box, Divider, Text } from '@chakra-ui/react';
 
 // import { Contact } from '@/components';
-import { datas } from '@/data';
 
 export const ListFriend = () => {
-  const listFriends = datas.slice(0, 10);
+  // const listFriends = datas.slice(0, 10);
 
   return (
     <Box className="bg-white mt-4 p-4 rounded-lg border-2">

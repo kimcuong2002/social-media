@@ -24,6 +24,11 @@ export const GET_POSTS = gql`
           color
           id
         }
+        isPostToGroup {
+          status
+          idGroup
+          verified
+        }
         createdAt
         updatedAt
         usersLiked {
@@ -73,7 +78,6 @@ export const GET_POST_DETAIL = gql`
         dayOfBirth
         description
         email
-
         fullname
         gender
         id
@@ -86,38 +90,31 @@ export const GET_POST_DETAIL = gql`
 export const GET_POST_BY_GROUP = gql`
   query GetPostsByGroup($idGroup: String!, $limit: Float!, $page: Float!) {
     getPostsByGroup(idGroup: $idGroup, limit: $limit, page: $page) {
-      page
-      total
       data {
-        authorsPostShared {
-          avatar
-          fullname
-          id
-        }
-        content
-        createdAt
         id
         author {
           fullname
-          id
           avatar
-        }
-        images
-        isGhim
-        isPostToGroup {
-          idGroup
-          status
-        }
-        topic {
           id
-          name
         }
+        content
+        images
+        topic {
+          image
+          name
+          color
+          id
+        }
+        createdAt
         updatedAt
         usersLiked {
-          id
           fullname
+          avatar
+          id
         }
       }
+      page
+      total
     }
   }
 `;

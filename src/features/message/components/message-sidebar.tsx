@@ -21,6 +21,7 @@ export const MessageSideBar = () => {
       <Box className="h-[77vh] overflow-y-scroll no-scrollbar">
         {data?.getAllRoom.map((item) => (
           <Contact
+            key={item.id}
             name={item.name}
             members={item.members}
             idUser={userData?.getInfoUser.id!}

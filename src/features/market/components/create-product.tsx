@@ -94,7 +94,7 @@ const CreateProduct = ({ refetch }: Props) => {
       <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Create new groups</ModalHeader>
+          <ModalHeader>Create new product</ModalHeader>
           <ModalCloseButton />
           <Divider />
           <ModalBody>
@@ -104,7 +104,6 @@ const CreateProduct = ({ refetch }: Props) => {
                 errors={errors}
                 disable={loading}
               />
-              <Text className="font-bold">Location</Text>
               {latitude && longitude ? (
                 <ReactMapGL
                   {...viewport}

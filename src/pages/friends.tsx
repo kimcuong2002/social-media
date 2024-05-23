@@ -1,10 +1,30 @@
+import { useMemo, useState } from 'react';
+
 import { Box, Grid, GridItem, Text } from '@chakra-ui/react';
 
-import { FriendSideBar, Friend, useGetFriends } from '@/features';
+import { LIMIT, PAGE } from '@/data';
+import {
+  FriendSideBar,
+  Friend,
+  useGetFriends,
+  useGetAllUser,
+  useQueryInfoUser,
+} from '@/features';
 import NavbarLayout from '@/layout/navbar-layout';
 
 export const Friends = () => {
+  const [page, setPage] = useState(PAGE);
   const { data: friends, refetch } = useGetFriends();
+  const { data: users } = useGetAllUser(LIMIT, page);
+  const { data: author } = useQueryInfoUser();
+
+  const suggestFriend = useMemo(() => {
+    const data1 = users?.users.data.filter(
+      (user) => user.id !== author?.getInfoUser.id,
+    );
+    const data2 = data1?.filter((user) => user.role !== 'admin');
+    return data2;
+  }, [users]);
 
   const friendRequest = friends?.getFriends.friendsReq;
   const listFriends = friends?.getFriends.friends;
@@ -43,6 +63,21 @@ export const Friends = () => {
                   id={friend.id!}
                   avatar={friend.avatar!}
                   refetch={refetch}
+                />
+              </GridItem>
+            ))}
+          </Grid>
+          <Text className="my-6 font-bold text-3xl">Suggest</Text>
+          <Grid templateColumns="repeat(5, 1fr)" gap={6} className="w-full">
+            {suggestFriend?.map((friend) => (
+              <GridItem key={friend.id}>
+                <Friend
+                  isFriend={true}
+                  fullname={friend.fullname!}
+                  id={friend.id!}
+                  refetch={refetch}
+                  avatar={friend.avatar!}
+                  isSuggest={true}
                 />
               </GridItem>
             ))}

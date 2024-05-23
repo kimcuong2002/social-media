@@ -3,10 +3,12 @@ import { ListFriendType } from '../service/type';
 import {
   ACCEPT_FRIEND_REQUEST,
   DELETE_FRIEND,
+  GET_USERS,
   GET_FRIENDS,
   REJECT_FRIEND_REQUEST,
   SEND_FRIEND_REQUEST,
 } from '../graphql';
+import { ResAllUserPagination } from '@/features/user';
 
 export const useGetFriends = () => {
   return useQuery<{ getFriends: ListFriendType }>(GET_FRIENDS);
@@ -35,3 +37,15 @@ export const useRejectReqFriend = () =>
     { rejectReqFriend: { status: string; message: string } },
     OperationVariables
   >(REJECT_FRIEND_REQUEST);
+
+export const useGetAllUser = (limit: number, page: number) => {
+  return useQuery<{ users: ResAllUserPagination }, OperationVariables>(
+    GET_USERS,
+    {
+      variables: {
+        limit: limit,
+        page: page,
+      },
+    },
+  );
+};

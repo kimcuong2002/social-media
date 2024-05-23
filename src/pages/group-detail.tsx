@@ -33,16 +33,12 @@ export const GroupDetail = () => {
           alt=""
           className="w-16 h-16 rounded-xl "
         />
-        <Box>
-          <Text className="font-bold">{groupDetail?.name}</Text>
-          <Box className="flex gap-2 font-bold text-gray-600 text-xs">
-            <Text>
-              {groupDetail?.isPrivate === true
-                ? 'Private Group'
-                : 'Public Group'}
-            </Text>
-            <Text>{groupDetail?.members?.length} members</Text>
-          </Box>
+        <Text className="font-bold">{groupDetail?.name}</Text>
+        <Box className="flex gap-2 font-bold text-gray-600 text-xs">
+          <Text>
+            {groupDetail?.isPrivate === true ? 'Private Group' : 'Public Group'}
+          </Text>
+          <Text>{groupDetail?.members?.length} members</Text>
         </Box>
       </Box>
       <Box className="w-full lg:w-9/12 bg-[#F1F2F4] flex justify-center items-center">

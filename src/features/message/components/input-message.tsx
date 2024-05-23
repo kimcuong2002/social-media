@@ -22,7 +22,6 @@ export const InputMessage = ({ className, idRoom }: Props) => {
   const [filesPreview, setFilesPreview] = useState<string[]>([]);
 
   const socket = io(import.meta.env.VITE_API_URL);
-  console.log('🚀 ~ InputMessage ~ socket:', socket);
 
   const { data: userData } = useQueryInfoUser();
   const [uploadMultipleFiles, { loading }] = useUploadMultipleFilesMutation();

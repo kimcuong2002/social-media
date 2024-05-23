@@ -18,12 +18,7 @@ import {
   UPDATE_POST,
   SHARE_POST,
 } from '../graphql';
-import {
-  PostInput,
-  PostType,
-  PostTypeRes,
-  ResPaginationPostData,
-} from '../service/type';
+import { PostInput, PostTypeRes, ResPaginationPostData } from '../service/type';
 
 export const useCreatePostMutation = () =>
   useMutation<
@@ -51,11 +46,21 @@ export const useGetPostDetail = (id: string) =>
     variables: { id },
   });
 
-export const useGetPostByGroup = () =>
-  useQuery<{ getPostByGroup: PostType }, OperationVariables>(GET_POST_BY_GROUP);
-
-export const useLikePost = () =>
-  useMutation<{ likePost: { status: string } }, OperationVariables>(LIKE_POST);
+export const useGetPostByGroup = (
+  idGroup: string,
+  limit: number,
+  page: number,
+) =>
+  useQuery<{ getPostsByGroup: ResPaginationPostData }, OperationVariables>(
+    GET_POST_BY_GROUP,
+    {
+      variables: {
+        idGroup: idGroup,
+        limit: limit,
+        page: page,
+      },
+    },
+  );
 
 export const useGetPostByAuthor = (
   idAuthor: string,
@@ -72,6 +77,9 @@ export const useGetPostByAuthor = (
       },
     },
   );
+
+export const useLikePost = () =>
+  useMutation<{ likePost: { status: string } }, OperationVariables>(LIKE_POST);
 
 export const useDeletePost = () =>
   useMutation<{ deletePost: { status: string } }, OperationVariables>(

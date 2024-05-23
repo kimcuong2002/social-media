@@ -108,7 +108,7 @@ export const Profile = () => {
           <Box className="w-full md:w-1/4 z-20">
             <ProfileAvatar />
             <Information informationUser={informationUser!} />
-            <ListPhoto />
+            <ListPhoto files={data?.getUserById.files!} />
             <ListFriend />
           </Box>
           <Box className="w-full md:w-3/4 md:mt-[115px]">

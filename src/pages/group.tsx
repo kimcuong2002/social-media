@@ -2,10 +2,14 @@ import { useMemo, useState } from 'react';
 
 import { Box, Grid, Text } from '@chakra-ui/react';
 
-import { GroupSideBar, GroupType, useGetGroups } from '@/features';
-import { GroupComponent } from '@/features/group';
-import NavbarLayout from '@/layout/navbar-layout';
 import { FILTER, LIMIT, PAGE } from '@/data';
+import {
+  GroupComponent,
+  GroupSideBar,
+  GroupType,
+  useGetGroups,
+} from '@/features';
+import NavbarLayout from '@/layout/navbar-layout';
 
 export const Group = () => {
   const [listGroups, setListGroups] = useState<GroupType[]>([]);
