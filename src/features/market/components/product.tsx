@@ -5,6 +5,7 @@ import { ProductType } from '../service/type';
 import { Modal, ModalOverlay, ModalContent, ModalBody } from '@chakra-ui/react';
 import ProductDetail from './product-detail';
 export const Category: FC<ProductType> = ({
+  refetch,
   id,
   location,
   name,
@@ -29,7 +30,7 @@ export const Category: FC<ProductType> = ({
         <ModalOverlay />
         <ModalContent>
           <ModalBody>
-            <ProductDetail id={id} />
+            <ProductDetail id={id} refetch={refetch} />
           </ModalBody>
         </ModalContent>
       </Modal>

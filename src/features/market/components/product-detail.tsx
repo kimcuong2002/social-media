@@ -6,24 +6,29 @@ import 'swiper/css/effect-cube';
 import 'swiper/css/pagination';
 
 import { ProductType } from '../service/type';
-import { useCreateRoom, useGetProdcutById, useQueryInfoUser } from '@/features';
+import {
+  useCreateRoom,
+  useDeleteProduct,
+  useGetProdcutById,
+  useQueryInfoUser,
+} from '@/features';
 import { useMemo } from 'react';
-import { CiShare2, CiShoppingTag } from 'react-icons/ci';
+import { CiCircleRemove, CiShare2, CiShoppingTag } from 'react-icons/ci';
 import { IoChatbubbleEllipsesSharp } from 'react-icons/io5';
 import { EffectCube, Pagination } from 'swiper/modules';
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import UpdateProduct from './update-product';
 
-const ProductDetail = ({ id }: ProductType) => {
+const ProductDetail = ({ id, refetch }: ProductType) => {
   const navigate = useNavigate();
   const { data } = useGetProdcutById(id!);
   const productDetail = useMemo(() => {
     return data?.getProductById;
   }, [data]);
   const { data: userData } = useQueryInfoUser();
-
   const [createRoom] = useCreateRoom();
+  const [deleteProduct] = useDeleteProduct();
 
   const handleCreateRoom = () => {
     void createRoom({
@@ -42,8 +47,19 @@ const ProductDetail = ({ id }: ProductType) => {
     });
   };
 
+  const handleDeleteProduct = () => {
+    void deleteProduct({
+      variables: {
+        id: productDetail?.id,
+      },
+      onCompleted: () => {
+        refetch && void refetch();
+      },
+    });
+  };
+
   return (
-    <Box>
+    <>
       <Box className="flex gap-2 p-2">
         <Box className="w-6/12">
           <Swiper
@@ -75,12 +91,19 @@ const ProductDetail = ({ id }: ProductType) => {
             <Box className="flex gap-2">
               <IconButton icon={<CiShare2 />} aria-label={''} />
               <IconButton icon={<CiShoppingTag />} aria-label="" />
+              {productDetail?.author?.id === userData?.getInfoUser.id && (
+                <IconButton
+                  icon={<CiCircleRemove />}
+                  aria-label=""
+                  onClick={handleDeleteProduct}
+                />
+              )}
             </Box>
           </Box>
-          <Text className="text-[#898694] mt-4">Description</Text>
-          <Text>{productDetail?.description}</Text>
-          <Text className="text-[#898694] mt-4">Location</Text>
-          <Text>{productDetail?.location}</Text>
+          <Text className="text-[#898694] mt-4 font-bold">Description</Text>
+          <Text className="font-bold">{productDetail?.description}</Text>
+          <Text className="text-[#898694] mt-4 font-bold">Location</Text>
+          <Text className="font-bold">{productDetail?.location}</Text>
         </Box>
       </Box>
       {userData?.getInfoUser.id !== productDetail?.author?.id ? (
@@ -107,7 +130,7 @@ const ProductDetail = ({ id }: ProductType) => {
       ) : (
         <UpdateProduct />
       )}
-    </Box>
+    </>
   );
 };
 

@@ -32,6 +32,7 @@ export const Market = () => {
               location={item.location}
               price={item.price}
               id={item.id}
+              refetch={refetch}
             />
           ))}
         </Grid>

@@ -96,3 +96,11 @@ export const GET_CATEGORIES = gql`
     }
   }
 `;
+
+export const DELETE_PRODUCT = gql`
+  mutation deleteProduct($id: String!) {
+    deleteProduct(id: $id) {
+      id
+    }
+  }
+`;

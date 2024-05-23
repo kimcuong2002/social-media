@@ -12,6 +12,7 @@ import {
 } from '../service/type';
 import {
   CREATE_PRODUCT,
+  DELETE_PRODUCT,
   GET_PRODUCTS,
   GET_PRODUCTS_BY_USER,
   GET_PRODUCT_BY_ID,
@@ -62,6 +63,17 @@ export const useGetProductsByUser = (
 };
 
 export const useUpdateProduct = () =>
-  useMutation<{
-    updateProduct: { id: string; body: InputProductType };
-  }>(UPDATE_PRODUCT);
+  useMutation<
+    {
+      updateProduct: { id: string; body: InputProductType };
+    },
+    OperationVariables
+  >(UPDATE_PRODUCT);
+
+export const useDeleteProduct = () =>
+  useMutation<
+    {
+      deleteProduct: { status: string };
+    },
+    OperationVariables
+  >(DELETE_PRODUCT);
