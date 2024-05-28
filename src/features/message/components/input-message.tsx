@@ -1,27 +1,29 @@
-import { useCreateMessage } from '@/features';
-import { useQueryInfoUser } from '@/features/auth';
-import { useUploadMultipleFilesMutation } from '@/hooks';
+import { SetStateAction, useEffect, useMemo, useState } from 'react';
+
 import { Box, Input, Spinner, Image } from '@chakra-ui/react';
 import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
-import { SetStateAction, useEffect, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
 import { BiImage, BiSmile, BiVideo, BiSend } from 'react-icons/bi';
 import { IoCloseSharp } from 'react-icons/io5';
-import io from 'socket.io-client';
+import { Socket } from 'socket.io-client';
+
+import { useCreateMessage } from '@/features';
+import { useQueryInfoUser } from '@/features/auth';
+import { useUploadMultipleFilesMutation } from '@/hooks';
 
 type Props = {
   refetch?: () => void;
   className?: string;
   idRoom: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  socket: Socket<any, any>
 };
 
-export const InputMessage = ({ className, idRoom }: Props) => {
+export const InputMessage = ({ className, idRoom, socket }: Props) => {
   const [openEmoij, setOpenEmoij] = useState(false);
   const [content, setContent] = useState('');
   const [files, setFiles] = useState<FileList | null>();
   const [filesPreview, setFilesPreview] = useState<string[]>([]);
-
-  const socket = io(import.meta.env.VITE_API_URL);
 
   const { data: userData } = useQueryInfoUser();
   const [uploadMultipleFiles, { loading }] = useUploadMultipleFilesMutation();
@@ -56,6 +58,7 @@ export const InputMessage = ({ className, idRoom }: Props) => {
 
   useEffect(() => {
     void handleUploadFile();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [files]);
 
   const imageFiles: string[] | undefined = useMemo(() => {
@@ -71,6 +74,10 @@ export const InputMessage = ({ className, idRoom }: Props) => {
   }, [filesPreview]);
 
   const handleCreateMessage = () => {
+    socket.emit("sendMessage", {
+      content,
+      type: "text",
+    });
     void createMessage({
       variables: {
         body: {
@@ -85,7 +92,6 @@ export const InputMessage = ({ className, idRoom }: Props) => {
         setFilesPreview([]);
         setFiles(null);
         setOpenEmoij(false);
-        toast.success('Send message successfully!');
       },
       onError: (errors) => {
         toast.error(errors.message);
@@ -173,7 +179,7 @@ export const InputMessage = ({ className, idRoom }: Props) => {
           onClick={() => setOpenEmoij(!openEmoij)}
         />
         <Input value={content} onChange={handleChangeContent} />
-        <button type="submit" onClick={handleCreateMessage}>
+        <button disabled={!content} type="submit" onClick={handleCreateMessage}>
           <BiSend className="cursor-pointer" />
         </button>
       </Box>

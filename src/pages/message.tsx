@@ -6,7 +6,9 @@ import LeftNavBar from '@/layout/navbar-layout/components/left-navbar';
 export const Message = () => {
   return (
     <Box className="flex">
-      <LeftNavBar children={<MessageSideBar />} />
+      <LeftNavBar>
+        <MessageSideBar />
+      </LeftNavBar>
       <Box className="w-full">
         <ContactDetail />
       </Box>

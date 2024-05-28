@@ -1,6 +1,7 @@
-import { Contact } from '@/components';
 import { Box, Divider, Input, Text } from '@chakra-ui/react';
+
 import { useGetAllRoom } from '../hooks/use-messages-query';
+import { Contact } from '@/components';
 import { useQueryInfoUser } from '@/features/auth';
 
 export const MessageSideBar = () => {

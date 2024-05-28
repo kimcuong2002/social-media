@@ -1,38 +1,62 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+import { useEffect, useRef, useState } from 'react';
+
 import { Avatar, Box, Divider, Image, Text } from '@chakra-ui/react';
-import { IoCall, IoVideocam } from 'react-icons/io5';
 import { GoDotFill } from 'react-icons/go';
-import { InputMessage } from './input-message';
+import { IoCall, IoVideocam } from 'react-icons/io5';
 import { Link, useParams } from 'react-router-dom';
-import { useGetAllMessage, useGetRoomById, useQueryInfoUser } from '@/features';
-import { useState } from 'react';
-import { MessageType } from '../service/type';
 import { io } from 'socket.io-client';
 
+import { InputMessage } from './input-message';
+import { useGetAllMessage, useGetRoomById, useQueryInfoUser } from '@/features';
+
+
 export const ContactDetail = () => {
-  const [messages, setMessages] = useState<MessageType[]>([]);
+  const [messages, setMessages] = useState<any[]>([]);
   const param = useParams();
   const id = param.id;
   const { data } = useGetRoomById(id!);
   const { data: author } = useQueryInfoUser();
+  const messageRef = useRef<any>();
   const avatarContact = data?.getRoomById.members.filter(
     (member) => member.id !== author?.getInfoUser.id,
   );
   const nameContact = data?.getRoomById.members.filter(
     (member) => member.id !== author?.getInfoUser.id,
   );
-  const { data: allMessages } = useGetAllMessage(id!);
+  const { data: allMessages  } = useGetAllMessage(id!);
+
+  useEffect(() => {
+   if(allMessages) {
+    setMessages([...allMessages.getAllMessage]);
+   }
+  }, [allMessages])
 
   const socket = io(`http://localhost:8080`, {
     autoConnect: true,
+    auth: {
+      authorization: `Bearer ${localStorage.getItem("token")}` 
+    }
   });
 
-  socket.on('received_message', (message) => {
-    let arr: MessageType[] = messages;
+  useEffect(() => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+      messageRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages])
+
+  socket.on('recMessage', (message: {
+    content: string;
+    type: string;
+  }) => {
+    let arr: any[] = messages;
     if (message) {
-      arr = [...arr, { ...message }];
+      arr = [...arr, message ];
     }
     setMessages([...arr]);
   });
+
   return (
     <Box className="flex">
       <Box className="p-4 relative h-[93vh] w-8/12 border">
@@ -60,8 +84,9 @@ export const ContactDetail = () => {
         </Box>
         <Divider className="my-2 !w-full" />
         <Box className="flex flex-col gap-4 h-[76vh] overflow-y-scroll no-scrollbar">
-          {allMessages?.getAllMessage.map((message) => (
+          {messages.map((message) => (
             <Box
+              ref={messageRef}
               className={`flex gap-2 ${message.author.id === author?.getInfoUser.id ? 'justify-end' : ''}`}
               key={message.id}
             >
@@ -82,6 +107,7 @@ export const ContactDetail = () => {
         <InputMessage
           className="absolute bottom-0 w-11/12"
           idRoom={param.id!}
+          socket={socket}
         />
       </Box>
       <Box className="w-4/12 p-4">
