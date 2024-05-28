@@ -168,11 +168,11 @@ export const CreatePost: FC<Props> = ({
           />
         </Box>
       )}
-      <Box className="mt-4 columns-4">
+      <Box className="mt-4 columns-4 space-y-4">
         {imageFiles &&
           imageFiles.map((item) => (
-            <Box key={item} className="relative group">
-              <Image src={item} className=" rounded-md" />
+            <Box key={item} className="relative group ">
+              <Image src={item} className="rounded-md w-full" />
               <IoCloseSharp
                 className="text-3xl cursor-pointer absolute top-2 right-0 -translate-x-1/2 hidden group-hover:block transform hover:rotate-[45deg] hover:scale-105 hover:duration-300 text-red-700"
                 onClick={() => {

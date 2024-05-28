@@ -66,3 +66,11 @@ export const GET_USERS = gql`
     }
   }
 `;
+
+export const CREATE_FRIEND = gql`
+  mutation CreateFriend($body: CreateFriendDto!, $idUser: String!) {
+    createFriend(body: $body, idUser: $idUser) {
+      id
+    }
+  }
+`;

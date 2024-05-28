@@ -10,7 +10,6 @@ import {
 } from '@chakra-ui/react';
 import { Control, FieldErrors } from 'react-hook-form';
 import { BiPhone } from 'react-icons/bi';
-// import { FaRegHeart } from 'react-icons/fa';
 import {
   MdOutlineAddHomeWork,
   MdOutlineBook,

@@ -18,7 +18,6 @@ import {
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { BiCamera } from 'react-icons/bi';
-import { BsPersonAdd } from 'react-icons/bs';
 import { FaFacebookMessenger } from 'react-icons/fa';
 
 import { Upload } from '@/components';
@@ -38,8 +37,8 @@ export const ProfileAvatar = () => {
   const [value, setValue] = useState([]);
   const [update] = useUpdateProfile();
   const param = useParams();
-  const { data: authorData, refetch } = useQueryInfoUser();
-  const { data: userData } = useGetUserById(param.id!);
+  const { data: authorData } = useQueryInfoUser();
+  const { data: userData, refetch } = useGetUserById(param.id!);
   const [sendReqFriend] = useSendReqFriend();
   const { handleSubmit } = useForm();
   const [createRoom] = useCreateRoom();
@@ -56,10 +55,10 @@ export const ProfileAvatar = () => {
           },
           id: authorData?.getInfoUser.id,
         },
-        onCompleted: async () => {
-          toast.success('Update profile is successfully!');
+        onCompleted: () => {
+          toast.success('Update avatar is successfully!');
           onClose();
-          await refetch();
+          refetch && void refetch();
         },
         onError: (error) => {
           toast.error(error.message);
@@ -128,11 +127,7 @@ export const ProfileAvatar = () => {
   return (
     <Box className="bg-white flex flex-col justify-center items-center w-full py-4 rounded-lg border-2 mt-4">
       <Box className="relative">
-        {userData?.getUserById.avatar ? (
-          <Avatar src={userData?.getUserById.avatar} size="2xl" />
-        ) : (
-          <Avatar src="" size="2xl" />
-        )}
+        <Avatar src={userData?.getUserById.avatar} size="2xl" />
         <BiCamera
           className="cursor-pointer bg-gray-300 p-1 text-2xl rounded-full absolute bottom-0 right-0 -translate-x-1/2 -translate-y-1/2"
           onClick={onOpen}
@@ -167,23 +162,14 @@ export const ProfileAvatar = () => {
         ''
       ) : (
         <Box className="flex gap-4">
-          <Button
-            leftIcon={<BsPersonAdd />}
-            variant="solid"
-            size={{ base: 'xs', lg: 'md' }}
-            className="!bg-[#3182CE] !text-[#eff3f7]"
-            {...(friends?.getFriends.friends.filter(
-              (friend) => friend.id === param.id,
-            )
-              ? { onClick: handleDeleteFriend }
-              : { onClick: handleSendReqFriend })}
-          >
-            {friends?.getFriends.friends.filter(
-              (friend) => friend.id === param.id,
-            )
-              ? 'Delete Friend'
-              : 'Add Friend'}
-          </Button>
+          {friends?.getFriends.friends.filter(
+            (friend) => friend.id !== param.id,
+          ) ? (
+            <Button onClick={handleSendReqFriend}>Add Friend</Button>
+          ) : (
+            <Button onClick={handleDeleteFriend}>Delete Friend</Button>
+          )}
+
           <IconButton
             aria-label="Add to friends"
             icon={<FaFacebookMessenger />}

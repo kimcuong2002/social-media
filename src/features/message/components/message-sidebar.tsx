@@ -22,7 +22,6 @@ export const MessageSideBar = () => {
         {data?.getAllRoom.map((item) => (
           <Contact
             key={item.id}
-            name={item.name}
             members={item.members}
             idUser={userData?.getInfoUser.id!}
             idRoom={item.id}

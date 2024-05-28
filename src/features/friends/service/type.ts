@@ -4,3 +4,8 @@ export type ListFriendType = {
   friends: UserType[];
   friendsReq: UserType[];
 };
+
+export type CreateFriendType = {
+  friends: string[];
+  friendsReq: string[];
+};

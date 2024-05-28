@@ -69,7 +69,7 @@ export const ContactDetail = () => {
                 <Avatar src={message.author.avatar} />
               )}
               <Text
-                className={`  text-xl p-2 rounded-3xl ${author?.getInfoUser.id === message.author.id ? 'bg-[#625EF1] text-white' : 'bg-[#d8d8d8] text-black'}`}
+                className={`text-xl p-2 rounded-3xl  ${author?.getInfoUser.id === message.author.id ? 'bg-[#625EF1] text-white' : 'bg-[#d8d8d8] text-black'}`}
               >
                 {message.content}
               </Text>

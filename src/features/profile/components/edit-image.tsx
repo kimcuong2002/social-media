@@ -16,7 +16,7 @@ const EditImage: FC<Props> = ({ user }) => {
           <Image
             src={user?.coverImage}
             alt="Image"
-            className="mb-[-10%] rounded-t-xl"
+            className="mb-[-10%] rounded-t-xl w-full"
           />
         </Box>
         <Avatar

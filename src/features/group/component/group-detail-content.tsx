@@ -17,7 +17,6 @@ const GroupDetailContent = () => {
       return result;
     }
   }, [posts]);
-  console.log('🚀 ~ listPosts ~ listPosts:', listPosts);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(`http://localhost:5173${currentPath}`);

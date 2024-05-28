@@ -8,14 +8,15 @@ type Props = {
     name?: string;
     id: string;
   }[];
+  refetch: () => void;
 };
 
-export const Information = ({ informationUser }: Props) => {
+export const Information = ({ informationUser, refetch }: Props) => {
   return (
     <Box className="bg-white mt-4 p-4 rounded-lg border-2">
       <Box className="flex justify-between items-center">
         <Text className="font-bold">Information</Text>
-        <EditProfile />
+        <EditProfile refetchInforUser={refetch} />
       </Box>
       <Divider className="my-2" />
       <Box>

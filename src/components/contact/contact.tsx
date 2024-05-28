@@ -1,41 +1,35 @@
 import { FC } from 'react';
 
-import { Box, Text } from '@chakra-ui/react';
+import { Avatar, AvatarBadge, Box, Text } from '@chakra-ui/react';
 import { UserType } from '@/features/user';
 import { Link } from 'react-router-dom';
+import { useQueryInfoUser } from '@/features';
 
 export type ContactType = {
   idUser: string;
   id?: number;
   members: UserType[];
-  name: string;
   state?: 'on' | 'off';
   idRoom?: string;
 };
 
-export const Contact: FC<ContactType> = ({
-  idUser,
-  members,
-  name,
-  state = 'on',
-  idRoom,
-}) => {
-  const userChat = members.filter((member) => member.id !== idUser);
-
-  const avatar = userChat[0].avatar;
-
+export const Contact: FC<ContactType> = ({ members, idRoom, state = 'on' }) => {
+  const { data: authorData } = useQueryInfoUser();
+  const listName = members.filter(
+    (item) => item.id !== authorData?.getInfoUser.id,
+  );
   return (
     <Link to={`/message/${idRoom}`}>
       <Box className="flex justify-start items-center gap-4 my-3 cursor-pointer hover:bg-[#F6F6FE] p-2 rounded-lg ">
-        {/* <Avatar src={avatar} size="sm">
-        <AvatarBadge
-          borderColor={state === 'off' ? 'papayawhip' : ''}
-          bg={state === 'on' ? 'green.500' : 'tomato'}
-          boxSize="1.25em"
-        />
-      </Avatar> */}
+        <Avatar src={listName[0].avatar} size="sm">
+          <AvatarBadge
+            borderColor={state === 'off' ? 'papayawhip' : ''}
+            bg={state === 'on' ? 'green.500' : 'tomato'}
+            boxSize="1.25em"
+          />
+        </Avatar>
         <Text fontSize="sm" className="font-bold">
-          {name}
+          {listName[0].fullname}
         </Text>
       </Box>
     </Link>

@@ -20,9 +20,9 @@ import {
 import { SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
-import { ErrorShow } from '@/features';
-import { RegisterInputType, useSignUpMutation } from '@/features/auth';
+import { ErrorShow, useCreateFriend } from '@/features';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
+import { RegisterInputType, useSignUpMutation } from '@/features/auth';
 
 export const SignUpForm = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -31,6 +31,7 @@ export const SignUpForm = () => {
   const [male, setMale] = useState(false);
   const [female, setFemale] = useState(false);
   const [other, setOther] = useState(false);
+  const [createFriend] = useCreateFriend();
 
   const handleClick = () => setShow(!show);
   const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -66,10 +67,26 @@ export const SignUpForm = () => {
     data.gender = gender;
     void signup({
       variables: { body: data },
-      onCompleted: () => {
+      onCompleted: (data) => {
         toast.success('Sign up is successfully');
         onClose();
+        const id = data.signup.id;
         reset();
+        void createFriend({
+          variables: {
+            body: {
+              friends: [],
+              friendsReq: [],
+            },
+            idUser: id,
+          },
+          onCompleted: () => {
+            toast.success('asdkfasjkd');
+          },
+          onError: (errors) => {
+            toast.error(errors.message);
+          },
+        });
       },
       onError: (errors) => {
         toast.error(errors.message);

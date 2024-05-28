@@ -30,7 +30,7 @@ import { useQueryInfoUser } from '@/features/auth';
 
 export const Profile = () => {
   const param = useParams();
-  const { data, refetch } = useGetUserById(param.id!);
+  const { data } = useGetUserById(param.id!);
   const { data: authorData } = useQueryInfoUser();
 
   const informationUser = useMemo(() => {
@@ -86,7 +86,7 @@ export const Profile = () => {
     }
   }, [data]);
 
-  const { data: posts } = useGetPostByAuthor(
+  const { data: posts, refetch: refetchPostsAuthor } = useGetPostByAuthor(
     data?.getUserById.id as string,
     LIMIT,
     PAGE,
@@ -107,12 +107,19 @@ export const Profile = () => {
         <Box className="flex flex-col gap-4 w-5/6 md:w-full md:flex-row md:mx-4 lg:w-full xl:w-4/6">
           <Box className="w-full md:w-1/4 z-20">
             <ProfileAvatar />
-            <Information informationUser={informationUser!} />
+            <Information
+              informationUser={informationUser!}
+              refetch={refetchPostsAuthor}
+            />
             <ListPhoto files={data?.getUserById.files!} />
             <ListFriend />
           </Box>
           <Box className="w-full md:w-3/4 md:mt-[115px]">
-            {authorData?.getInfoUser.id === param.id ? <CreatePost /> : ''}
+            {authorData?.getInfoUser.id === param.id ? (
+              <CreatePost refetch={refetchPostsAuthor} />
+            ) : (
+              ''
+            )}
             {listPosts?.map((item) => (
               <Post
                 key={item.id}
@@ -125,7 +132,7 @@ export const Profile = () => {
                 usersLiked={item.usersLiked}
                 topic={item.topic}
                 idAuthor={item.author.id}
-                refetch={refetch}
+                refetch={refetchPostsAuthor}
               />
             ))}
           </Box>

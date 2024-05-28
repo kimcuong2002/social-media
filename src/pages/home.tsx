@@ -11,7 +11,6 @@ export const Home = () => {
   const [page] = useState(PAGE);
 
   const { data, refetch } = useGetPostsQuery(LIMIT, page, FILTER);
-  console.log('🚀 ~ Home ~ data:', data);
 
   const posts = useMemo(() => {
     if (data?.getAllPost) {

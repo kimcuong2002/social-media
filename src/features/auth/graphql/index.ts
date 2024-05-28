@@ -24,6 +24,7 @@ export const SIGN_UP = gql`
   mutation Signup($body: CreateUserDto!) {
     signup(body: $body) {
       username
+      id
     }
   }
 `;

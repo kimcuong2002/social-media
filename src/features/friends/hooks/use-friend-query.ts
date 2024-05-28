@@ -1,5 +1,11 @@
-import { OperationVariables, useMutation, useQuery } from '@apollo/client';
-import { ListFriendType } from '../service/type';
+import {
+  ApolloCache,
+  DefaultContext,
+  OperationVariables,
+  useMutation,
+  useQuery,
+} from '@apollo/client';
+import { CreateFriendType, ListFriendType } from '../service/type';
 import {
   ACCEPT_FRIEND_REQUEST,
   DELETE_FRIEND,
@@ -7,6 +13,7 @@ import {
   GET_FRIENDS,
   REJECT_FRIEND_REQUEST,
   SEND_FRIEND_REQUEST,
+  CREATE_FRIEND,
 } from '../graphql';
 import { ResAllUserPagination } from '@/features/user';
 
@@ -49,3 +56,11 @@ export const useGetAllUser = (limit: number, page: number) => {
     },
   );
 };
+
+export const useCreateFriend = () =>
+  useMutation<
+    { createFriend: { body: CreateFriendType; idUser: string } },
+    OperationVariables,
+    DefaultContext,
+    ApolloCache<unknown>
+  >(CREATE_FRIEND);

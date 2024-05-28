@@ -21,10 +21,14 @@ import { useQueryInfoUser } from '@/features/auth';
 import { UserType } from '@/features/user';
 import { useParams } from 'react-router-dom';
 
-export const EditProfile = () => {
+type Props = {
+  refetchInforUser: () => void;
+};
+
+export const EditProfile = ({ refetchInforUser }: Props) => {
   const [user, setUser] = useState<UserType>();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data, refetch } = useQueryInfoUser();
+  const { data } = useQueryInfoUser();
   const param = useParams();
   useMemo(() => {
     if (data) {
@@ -60,11 +64,11 @@ export const EditProfile = () => {
         },
         id: user?.id,
       },
-      onCompleted: async () => {
+      onCompleted: () => {
         toast.success('Update profile is successfully!');
         onClose();
         reset();
-        await refetch();
+        refetchInforUser && void refetchInforUser();
       },
       onError: (error) => {
         toast.error(error.message);
@@ -85,7 +89,7 @@ export const EditProfile = () => {
       <Modal isOpen={isOpen} onClose={onClose} size="4xl">
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Edit Details</ModalHeader>
+          <ModalHeader className="!font-bold">Edit Details</ModalHeader>
           <ModalCloseButton />
           <ModalHeader className="text-gray-500 !text-sm !pt-0">
             Provide details about yourself and any other pertinent information.

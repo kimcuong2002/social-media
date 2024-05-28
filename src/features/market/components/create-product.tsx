@@ -9,7 +9,6 @@ import {
   ModalHeader,
   ModalOverlay,
   useDisclosure,
-  Text,
 } from '@chakra-ui/react';
 import { InputProductType } from '../service/type';
 import { useCreateProduct } from '../hooks/use-market-query';

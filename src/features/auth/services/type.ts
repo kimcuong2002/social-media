@@ -9,6 +9,7 @@ export type ResponseLogin = {
   access_token: string;
   user: UserType;
   expiresIn: string;
+  id: string;
 };
 
 export type RegisterInputType = {
@@ -18,4 +19,5 @@ export type RegisterInputType = {
   password: string;
   email: string;
   gender: number;
+  id?: string;
 };
