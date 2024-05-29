@@ -30,7 +30,7 @@ import { useQueryInfoUser } from '@/features/auth';
 
 export const Profile = () => {
   const param = useParams();
-  const { data } = useGetUserById(param.id!);
+  const { data, refetch: refetchInforUser } = useGetUserById(param.id!);
   const { data: authorData } = useQueryInfoUser();
 
   const informationUser = useMemo(() => {
@@ -109,7 +109,7 @@ export const Profile = () => {
             <ProfileAvatar />
             <Information
               informationUser={informationUser!}
-              refetch={refetchPostsAuthor}
+              refetch={refetchInforUser}
             />
             <ListPhoto files={data?.getUserById.files!} />
             <ListFriend />

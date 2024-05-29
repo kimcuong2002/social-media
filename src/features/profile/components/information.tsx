@@ -16,7 +16,7 @@ export const Information = ({ informationUser, refetch }: Props) => {
     <Box className="bg-white mt-4 p-4 rounded-lg border-2">
       <Box className="flex justify-between items-center">
         <Text className="font-bold">Information</Text>
-        <EditProfile refetchInforUser={refetch} />
+        <EditProfile refetch={refetch} />
       </Box>
       <Divider className="my-2" />
       <Box>

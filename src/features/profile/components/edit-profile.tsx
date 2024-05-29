@@ -22,10 +22,10 @@ import { UserType } from '@/features/user';
 import { useParams } from 'react-router-dom';
 
 type Props = {
-  refetchInforUser: () => void;
+  refetch: () => void;
 };
 
-export const EditProfile = ({ refetchInforUser }: Props) => {
+export const EditProfile = ({ refetch }: Props) => {
   const [user, setUser] = useState<UserType>();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data } = useQueryInfoUser();
@@ -68,7 +68,7 @@ export const EditProfile = ({ refetchInforUser }: Props) => {
         toast.success('Update profile is successfully!');
         onClose();
         reset();
-        refetchInforUser && void refetchInforUser();
+        refetch && void refetch();
       },
       onError: (error) => {
         toast.error(error.message);

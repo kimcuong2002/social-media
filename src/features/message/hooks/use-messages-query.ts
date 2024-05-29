@@ -4,7 +4,6 @@ import {
   OperationVariables,
   useLazyQuery,
   useMutation,
-  useQuery,
 } from '@apollo/client';
 
 import {
@@ -14,12 +13,7 @@ import {
   GET_ALL_ROOMS,
   GET_ROOM_BY_ID,
 } from '../graphql';
-import {
-  MessageInputType,
-  MessageType,
-  RoomCreateType,
-  RoomType,
-} from '../service/type';
+import { MessageInputType, RoomCreateType } from '../service/type';
 
 export const useCreateRoom = () =>
   useMutation<
@@ -30,9 +24,7 @@ export const useCreateRoom = () =>
   >(CREATE_ROOM);
 
 export const useGetRoomById = () => {
-  return useLazyQuery(
-    GET_ROOM_BY_ID
-  );
+  return useLazyQuery(GET_ROOM_BY_ID);
 };
 
 export const useCreateMessage = () =>
@@ -44,13 +36,9 @@ export const useCreateMessage = () =>
   >(CREATE_MESSAGE);
 
 export const useGetAllMessage = () => {
-  return useLazyQuery(
-    GET_ALL_MESSAGES
-  );
+  return useLazyQuery(GET_ALL_MESSAGES);
 };
 
 export const useGetAllRoom = () => {
-  return useLazyQuery(
-    GET_ALL_ROOMS
-  );
+  return useLazyQuery(GET_ALL_ROOMS);
 };
