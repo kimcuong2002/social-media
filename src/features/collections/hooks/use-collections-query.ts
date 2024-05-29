@@ -17,6 +17,7 @@ import {
   GET_COLLECTIONS,
   GET_SAVED,
   UPDATE_COLLECTION,
+  UPDATE_POSTSAVED,
 } from '../graphql';
 
 export const useCreateCollections = () =>
@@ -55,3 +56,11 @@ export const useUpdateCollection = () =>
 
 export const useDeleteCollection = () =>
   useMutation<{ id: string }, OperationVariables>(DELETE_COLLECTION);
+
+export const useUpdatePostSaved = () =>
+  useMutation<{
+    variables: {
+      idPost: string;
+      idUser: string;
+    };
+  }>(UPDATE_POSTSAVED);

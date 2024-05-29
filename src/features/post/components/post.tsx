@@ -20,7 +20,7 @@ import {
   IconButton,
 } from '@chakra-ui/react';
 import toast from 'react-hot-toast';
-import { AiTwotoneLike } from 'react-icons/ai';
+import { AiFillLike, AiOutlineLike } from 'react-icons/ai';
 import { BsCopy } from 'react-icons/bs';
 import { CiShoppingTag, CiEdit, CiTrash } from 'react-icons/ci';
 import { FaRegComments } from 'react-icons/fa';
@@ -34,7 +34,6 @@ import {
   Comment,
   CreateComment,
   PostType,
-  useDeleteComment,
   useDeletePost,
   useGetCommentsQuery,
   useGetGroupById,
@@ -43,6 +42,7 @@ import {
   useQueryInfoUser,
 } from '@/features';
 import { converDateToString } from '@/utils';
+import { useUpdateCollection } from '@/features/collections/hooks/use-collections-query';
 
 export const Post: FC<PostType> = ({
   isPostToGroup,
@@ -73,7 +73,6 @@ export const Post: FC<PostType> = ({
   const [likePost] = useLikePost();
   const [deletePost] = useDeletePost();
   const [ghimPost] = useGhimPost();
-  // const [deleteComment] = useDeleteComment();
   const { data: userData } = useQueryInfoUser();
   const { data: comments, refetch: refetchComments } = useGetCommentsQuery(
     LIMIT,
@@ -82,6 +81,22 @@ export const Post: FC<PostType> = ({
   );
   const commentDemo = comments?.getComments.data.slice(0, 2);
   const { data: group } = useGetGroupById(isPostToGroup?.idGroup!);
+  const [savePost] = useUpdateCollection();
+
+  const handleSavePostToCollection = () => {
+    void savePost({
+      variables: {
+        idPost: idPost,
+        idSaved: userData?.getInfoUser.id,
+      },
+      onCompleted: () => {
+        refetch && void refetch();
+      },
+      onError: (errors) => {
+        toast.error(errors.message);
+      },
+    });
+  };
 
   const handleLikePost = () => {
     void likePost({
@@ -147,8 +162,6 @@ export const Post: FC<PostType> = ({
       },
     });
   };
-
-  const currentPath = window.location.pathname;
 
   return (
     <Box className="bg-white my-4 p-4 rounded-lg border-2">
@@ -273,12 +286,17 @@ export const Post: FC<PostType> = ({
       <Box className="flex justify-between items-center my-2">
         <Box className="w-full  flex justify-around">
           <Box className="flex items-center gap-1">
-            <AiTwotoneLike
-              onClick={handleLikePost}
-              className={`${
-                likedPost ? 'text-blue-800' : ''
-              } cursor-pointer text-2xl`}
-            />
+            {likedPost ? (
+              <AiFillLike
+                onClick={handleLikePost}
+                className=" cursor-pointer text-2xl text-[#0566FF]"
+              />
+            ) : (
+              <AiOutlineLike
+                onClick={handleLikePost}
+                className=" cursor-pointer text-2xl hover:scale-150"
+              />
+            )}
             <Box>{countLiked < 100 ? countLiked : '99+'}</Box>
           </Box>
           <Link to={`/posts/${idPost}`}>

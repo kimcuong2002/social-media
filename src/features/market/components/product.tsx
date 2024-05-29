@@ -30,7 +30,7 @@ export const Category: FC<ProductType> = ({
         <ModalOverlay />
         <ModalContent>
           <ModalBody>
-            <ProductDetail id={id} refetch={refetch} />
+            <ProductDetail id={id} refetch={refetch} onClose={onClose} />
           </ModalBody>
         </ModalContent>
       </Modal>

@@ -61,10 +61,10 @@ const SharePostForm: FC<Props> = ({ idPost, idUser }) => {
       </Box>
       <Text className="mt-4">{data?.getPostById.content}</Text>
       <Text className="font-bold mb-4">{`#${data?.getPostById.topic.name}`}</Text>
-      <Box className="w-full columns-3">
+      <Box className="w-full columns-3 space-y-4">
         {data?.getPostById.images &&
           data?.getPostById.images.map((img) => (
-            <Img src={img} alt="" className="w-full" />
+            <Img src={img} alt="" className="w-full rounded-lg" />
           ))}
       </Box>
       <Divider className="mt-4" />

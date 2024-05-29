@@ -13,6 +13,7 @@ export type ProductType = {
   price?: number;
   updatedAt?: Date;
   refetch?: () => void;
+  onClose?: () => void;
 };
 
 export type InputProductType = Pick<

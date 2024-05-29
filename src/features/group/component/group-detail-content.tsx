@@ -10,7 +10,11 @@ const GroupDetailContent = () => {
   const currentPath = window.location.pathname;
   const param = useParams();
   const idGroup = param.id as string;
-  const { data: posts } = useGetPostByGroup(idGroup, 10, 1);
+  const { data: posts, refetch: postGroupRefetch } = useGetPostByGroup(
+    idGroup,
+    10,
+    1,
+  );
   const listPosts = useMemo(() => {
     if (posts) {
       const result = posts.getPostsByGroup.data;
@@ -26,7 +30,7 @@ const GroupDetailContent = () => {
   return (
     <Box className="lg:flex gap-2 mb-4">
       <Box className="w-full lg:w-9/12">
-        <CreatePost isGroup={true} />
+        <CreatePost isGroup={true} refetch={postGroupRefetch} />
         {listPosts?.map((post) => (
           <Post
             key={post.id}
@@ -39,6 +43,7 @@ const GroupDetailContent = () => {
             usersLiked={post.usersLiked}
             topic={post.topic}
             idAuthor={post.author.id}
+            refetch={postGroupRefetch}
           />
         ))}
       </Box>

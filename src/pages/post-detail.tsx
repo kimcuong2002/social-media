@@ -1,6 +1,18 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
-import { Avatar, Box, Divider, Text } from '@chakra-ui/react';
+import {
+  Avatar,
+  Box,
+  Divider,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+  Text,
+  useDisclosure,
+} from '@chakra-ui/react';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { BiLike } from 'react-icons/bi';
 import { FaRegComments } from 'react-icons/fa';
@@ -8,24 +20,31 @@ import { PiTelegramLogo } from 'react-icons/pi';
 import { useParams } from 'react-router-dom';
 import { Pagination, Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { AiFillLike, AiOutlineLike } from 'react-icons/ai';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import { ID_USER, LIMIT, PAGE } from '@/data';
+import { LIMIT, PAGE } from '@/data';
 import {
   Comment,
   CreateComment,
   useGetCommentsQuery,
   useGetPostDetail,
   useLikePost,
+  useQueryInfoUser,
 } from '@/features';
 import { converDateToString } from '@/utils';
+import toast from 'react-hot-toast';
+import SharePostForm from '@/features/post/components/share-post-form';
 
 export const PostDetail = () => {
+  const [likedPost, setLikedPost] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [page, setPage] = useState(PAGE);
   const params = useParams();
   const postId = params.id;
+  const { data: authorData } = useQueryInfoUser();
 
   const { data } = useGetPostDetail(params.id as string);
   const { data: comments, refetch } = useGetCommentsQuery(
@@ -55,8 +74,33 @@ export const PostDetail = () => {
   }, [comments]);
 
   const handleLikePost = () => {
-    void likePost({ variables: { idPost: postId as string, idUser: ID_USER } });
+    void likePost({
+      variables: {
+        idPost: postId as string,
+        idUser: authorData?.getInfoUser.id,
+      },
+      onCompleted: () => {
+        refetch && void refetch();
+        setLikedPost(!likedPost);
+      },
+      onError: (errors) => {
+        toast.error(errors.message);
+      },
+    });
   };
+
+  useEffect(() => {
+    if (
+      data?.getPostById.usersLiked &&
+      data?.getPostById.usersLiked.length > 0
+    ) {
+      data?.getPostById.usersLiked.find(
+        (item) => item.id === authorData?.getInfoUser.id,
+      )
+        ? setLikedPost(true)
+        : setLikedPost(false);
+    }
+  }, [data?.getPostById.usersLiked]);
 
   return (
     <Box className="flex !bg-white h-[100vh]">
@@ -120,14 +164,38 @@ export const PostDetail = () => {
             </Box>
             <Box className="flex gap-1">
               <FaRegComments className="bg-[#039DFC] text-white text-2xl p-1 rounded-full" />
-              <Text>{1}</Text>
+              <Text>{total}</Text>
             </Box>
           </Box>
           <Divider className="mt-2" />
           <Box className="flex justify-around items-center my-2 text-xl">
-            <BiLike onClick={handleLikePost} className="cursor-pointer" />
+            {likedPost ? (
+              <AiFillLike
+                onClick={handleLikePost}
+                className=" cursor-pointer text-2xl text-[#0566FF]"
+              />
+            ) : (
+              <AiOutlineLike
+                onClick={handleLikePost}
+                className=" cursor-pointer text-2xl hover:scale-150"
+              />
+            )}
             <FaRegComments />
-            <PiTelegramLogo />
+            <PiTelegramLogo onClick={onOpen} className="cursor-pointer" />
+            <Modal isOpen={isOpen} onClose={onClose} size="xl">
+              <ModalOverlay />
+              <ModalContent>
+                <ModalHeader>Share Post</ModalHeader>
+                <Divider />
+                <ModalCloseButton />
+                <ModalBody>
+                  <SharePostForm
+                    idPost={data?.getPostById.id}
+                    idUser={authorData?.getInfoUser.id}
+                  />
+                </ModalBody>
+              </ModalContent>
+            </Modal>
           </Box>
           <Divider className="mb-2" />
           {allComment?.map((comment: any) => (

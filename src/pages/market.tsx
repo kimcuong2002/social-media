@@ -7,6 +7,7 @@ import { useMemo } from 'react';
 
 export const Market = () => {
   const { data, refetch } = useGetProducts(FILTER, LIMIT, PAGE);
+  console.log('🚀 ~ Market ~ data:', data);
   const products = useMemo(() => {
     return data?.getProducts.data;
   }, [data]);

@@ -20,7 +20,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import UpdateProduct from './update-product';
 
-const ProductDetail = ({ id, refetch }: ProductType) => {
+const ProductDetail = ({ id, refetch, onClose }: ProductType) => {
   const navigate = useNavigate();
   const { data } = useGetProdcutById(id!);
   const productDetail = useMemo(() => {
@@ -53,6 +53,7 @@ const ProductDetail = ({ id, refetch }: ProductType) => {
         id: productDetail?.id,
       },
       onCompleted: () => {
+        onClose && void onClose();
         refetch && void refetch();
       },
     });

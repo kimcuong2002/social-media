@@ -73,3 +73,12 @@ export const DELETE_COLLECTION = gql`
     }
   }
 `;
+
+export const UPDATE_POSTSAVED = gql`
+  mutation UpdatePostSaved($idPost: String!, $idSaved: string!) {
+    updatePostSaved(idPost: $idPost, idSaved: $idSaved) {
+      status
+      message
+    }
+  }
+`;
