@@ -8,7 +8,7 @@ import { useMemo } from 'react';
 import { CategoryType } from '../service/type';
 
 type Props = {
-  refetch: () => void;
+  refetch?: () => void;
 };
 
 export const CartSideBar = ({ refetch }: Props) => {

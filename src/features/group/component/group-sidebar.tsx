@@ -5,7 +5,7 @@ import CreateGroup from './create-group';
 import { groupSideBarButton } from '../service/constant';
 
 type Props = {
-  refetch: () => void;
+  refetch?: () => void;
 };
 
 export const GroupSideBar = ({ refetch }: Props) => {

@@ -27,7 +27,7 @@ const defaultValueForm = {
 };
 
 type Props = {
-  refetch: () => void;
+  refetch?: () => void;
 };
 
 const CreateGroup = ({ refetch }: Props) => {

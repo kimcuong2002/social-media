@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 
-import { Avatar, Box, Image, Text } from '@chakra-ui/react';
+import { Avatar, Box, Text } from '@chakra-ui/react';
 
 import { Topic, useGetAllTopic, useQueryInfoUser } from '@/features';
 
@@ -42,8 +42,10 @@ export const HomeSideBar = () => {
           key={item.id}
           className={`flex gap-4 items-center my-6 cursor-pointer bg-${item.color}`}
         >
-          <Image src={item.image} boxSize="50px" />
-          <Text>{item.name}</Text>
+          <Box className="!border rounded-full bg-red-100">
+            <img src={item.image} className="!border h-10 w-10 rounded-full" />
+          </Box>
+          <Text className="font-bold">{item.name}</Text>
         </Box>
       ))}
     </Box>

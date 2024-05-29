@@ -43,7 +43,6 @@ export const CreateReplyCmt: FC<Props> = ({ postId, idCmtParent, refetch }) => {
           files: files,
         },
         onCompleted: (data) => {
-          refetch && void refetch();
           const result: SetStateAction<string[]> = [];
           data.uploadMultipleFiles.map((item) => result.push(item.url));
           setFilesPreview([...filesPreview, ...result]);
@@ -91,7 +90,7 @@ export const CreateReplyCmt: FC<Props> = ({ postId, idCmtParent, refetch }) => {
           setFilesPreview([]);
           setOpenEmoij(false);
           reset();
-          toast.success('Create reply comment successfully!');
+          refetch && void refetch();
         },
         onError: (errors) => {
           toast.error(errors.message);
