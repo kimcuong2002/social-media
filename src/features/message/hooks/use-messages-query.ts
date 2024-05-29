@@ -2,15 +2,11 @@ import {
   ApolloCache,
   DefaultContext,
   OperationVariables,
+  useLazyQuery,
   useMutation,
   useQuery,
 } from '@apollo/client';
-import {
-  MessageInputType,
-  MessageType,
-  RoomCreateType,
-  RoomType,
-} from '../service/type';
+
 import {
   CREATE_MESSAGE,
   CREATE_ROOM,
@@ -18,6 +14,12 @@ import {
   GET_ALL_ROOMS,
   GET_ROOM_BY_ID,
 } from '../graphql';
+import {
+  MessageInputType,
+  MessageType,
+  RoomCreateType,
+  RoomType,
+} from '../service/type';
 
 export const useCreateRoom = () =>
   useMutation<
@@ -27,12 +29,9 @@ export const useCreateRoom = () =>
     ApolloCache<unknown>
   >(CREATE_ROOM);
 
-export const useGetRoomById = (id: string) => {
-  return useQuery<{ getRoomById: RoomType }, OperationVariables>(
-    GET_ROOM_BY_ID,
-    {
-      variables: { id: id },
-    },
+export const useGetRoomById = () => {
+  return useLazyQuery(
+    GET_ROOM_BY_ID
   );
 };
 
@@ -44,20 +43,14 @@ export const useCreateMessage = () =>
     ApolloCache<unknown>
   >(CREATE_MESSAGE);
 
-export const useGetAllMessage = (room: string) => {
-  return useQuery<{ getAllMessage: MessageType[] }, OperationVariables>(
-    GET_ALL_MESSAGES,
-    { variables: { room: room } },
+export const useGetAllMessage = () => {
+  return useLazyQuery(
+    GET_ALL_MESSAGES
   );
 };
 
-export const useGetAllRoom = (idUser: string) => {
-  return useQuery<{ getAllRoom: RoomType[] }, OperationVariables>(
-    GET_ALL_ROOMS,
-    {
-      variables: {
-        idUser: idUser,
-      },
-    },
+export const useGetAllRoom = () => {
+  return useLazyQuery(
+    GET_ALL_ROOMS
   );
 };

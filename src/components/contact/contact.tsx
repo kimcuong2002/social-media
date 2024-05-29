@@ -1,26 +1,26 @@
 import { FC } from 'react';
 
 import { Avatar, AvatarBadge, Box, Text } from '@chakra-ui/react';
-import { UserType } from '@/features/user';
-import { Link } from 'react-router-dom';
+
 import { useQueryInfoUser } from '@/features';
+import { UserType } from '@/features/user';
 
 export type ContactType = {
   idUser: string;
   id?: number;
   members: UserType[];
   state?: 'on' | 'off';
-  idRoom?: string;
+  idRoom: string;
+  clickRoom: (id: string) => void;
 };
 
-export const Contact: FC<ContactType> = ({ members, idRoom, state = 'on' }) => {
+export const Contact: FC<ContactType> = ({ members, idRoom,  clickRoom, state = 'on' }) => {
   const { data: authorData } = useQueryInfoUser();
   const listName = members.filter(
     (item) => item.id !== authorData?.getInfoUser.id,
   );
   return (
-    <Link to={`/message/${idRoom}`}>
-      <Box className="flex justify-start items-center gap-4 my-3 cursor-pointer hover:bg-[#F6F6FE] p-2 rounded-lg ">
+      <Box onClick={() => clickRoom(idRoom)} className="flex justify-start items-center gap-4 my-3 cursor-pointer hover:bg-[#F6F6FE] p-2 rounded-lg ">
         <Avatar src={listName[0].avatar} size="sm">
           <AvatarBadge
             borderColor={state === 'off' ? 'papayawhip' : ''}
@@ -32,6 +32,5 @@ export const Contact: FC<ContactType> = ({ members, idRoom, state = 'on' }) => {
           {listName[0].fullname}
         </Text>
       </Box>
-    </Link>
   );
 };

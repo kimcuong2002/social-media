@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { SetStateAction, useEffect, useMemo, useState } from 'react';
 
 import { Box, Input, Spinner, Image } from '@chakra-ui/react';
@@ -8,24 +9,22 @@ import { IoCloseSharp } from 'react-icons/io5';
 import { Socket } from 'socket.io-client';
 
 import { useCreateMessage } from '@/features';
-import { useQueryInfoUser } from '@/features/auth';
 import { useUploadMultipleFilesMutation } from '@/hooks';
 
 type Props = {
   refetch?: () => void;
   className?: string;
   idRoom: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  socket: Socket<any, any>
+  socket: Socket<any, any>;
+  userInfo: any;
 };
 
-export const InputMessage = ({ className, idRoom, socket }: Props) => {
+export const InputMessage = ({ className, idRoom, socket, userInfo }: Props) => {
   const [openEmoij, setOpenEmoij] = useState(false);
   const [content, setContent] = useState('');
   const [files, setFiles] = useState<FileList | null>();
   const [filesPreview, setFilesPreview] = useState<string[]>([]);
 
-  const { data: userData } = useQueryInfoUser();
   const [uploadMultipleFiles, { loading }] = useUploadMultipleFilesMutation();
   const [createMessage] = useCreateMessage();
 
@@ -81,7 +80,7 @@ export const InputMessage = ({ className, idRoom, socket }: Props) => {
     void createMessage({
       variables: {
         body: {
-          author: userData?.getInfoUser.id,
+          author: userInfo.id,
           content: content,
           room: idRoom,
           typeMessage: 'text',

@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-restricted-imports
 import { EnumActive } from '@/ts/enums/common';
 
 export type UserType = {
@@ -14,7 +15,7 @@ export type UserType = {
   friendsReq?: UserType[];
   fullname?: string;
   gender?: number;
-  id?: string;
+  id: string;
   password: string;
   phone?: string;
   relationship?: number;
