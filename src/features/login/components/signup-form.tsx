@@ -80,9 +80,6 @@ export const SignUpForm = () => {
             },
             idUser: id,
           },
-          onCompleted: () => {
-            toast.success('asdkfasjkd');
-          },
           onError: (errors) => {
             toast.error(errors.message);
           },

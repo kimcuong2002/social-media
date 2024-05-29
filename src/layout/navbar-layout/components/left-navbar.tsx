@@ -1,7 +1,7 @@
 import { FC, ReactNode, useState } from 'react';
 
 import { Box, Button } from '@chakra-ui/react';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { leftNavBar } from './constant';
 
@@ -11,7 +11,8 @@ type Props = {
 };
 
 const LeftNavBar: FC<Props> = ({ children, className }) => {
-  const param = useParams();
+  const currentPath = window.location.pathname;
+  const [pathName, setPathName] = useState(currentPath);
 
   return (
     <Box className={`gap-1 w-3/12 hidden lg:flex ${className}`}>
@@ -22,8 +23,9 @@ const LeftNavBar: FC<Props> = ({ children, className }) => {
               variant="ghost"
               fontSize="xl"
               className={
-                param.pathname === item.link ? 'bg-[#3182CE] !text-white' : ''
+                pathName === item.link ? 'bg-[#3182CE] !text-white' : ''
               }
+              onClick={() => setPathName(item.link)}
             >
               {item.icon}
             </Button>

@@ -12,7 +12,14 @@ import {
 } from '@chakra-ui/react';
 import { BiMenu } from 'react-icons/bi';
 
-import { CartSideBar, GroupSideBar, HomeSideBar } from '@/features';
+import {
+  CartSideBar,
+  CollectionSideBar,
+  FriendSideBar,
+  GroupSideBar,
+  HomeSideBar,
+  VideoSideBar,
+} from '@/features';
 import LeftNavBar from '@/layout/navbar-layout/components/left-navbar';
 
 const MobileMenu = () => {
@@ -20,24 +27,26 @@ const MobileMenu = () => {
 
   const currentPath = window.location.pathname;
   useEffect(() => {
-    if (currentPath == '/') {
+    if (currentPath == '/home') {
       setSidebarComponent(<HomeSideBar />);
-    } else if (currentPath == '/cart') {
+    } else if (currentPath == '/market') {
       setSidebarComponent(<CartSideBar />);
-    } else {
+    } else if (currentPath == '/group') {
       setSidebarComponent(<GroupSideBar />);
+    } else if (currentPath == '/friend') {
+      setSidebarComponent(<FriendSideBar />);
+    } else if (currentPath == '/video') {
+      setSidebarComponent(<VideoSideBar />);
+    } else if (currentPath == '/collections') {
+      setSidebarComponent(<CollectionSideBar />);
     }
   }, [currentPath]);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const handleClick = () => {
-    onOpen();
-  };
-
   return (
     <Box className="lg:hidden">
-      <Button px="0" onClick={() => handleClick()}>
+      <Button px="0" onClick={onOpen}>
         <WrapItem className="bg-gray-500 p-2 rounded-full">
           <BiMenu className="text-md lg:text-xl text-white" />
         </WrapItem>

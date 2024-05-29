@@ -14,7 +14,7 @@ export const Home = () => {
 
   const posts = useMemo(() => {
     if (data?.getAllPost) {
-      const result = data.getAllPost.data;
+      const result = data.getAllPost.data.reverse();
       return result;
     }
   }, [data]);

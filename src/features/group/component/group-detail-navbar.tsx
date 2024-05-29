@@ -28,10 +28,7 @@ const groupNav = [
     name: 'All',
     element: 'all',
   },
-  {
-    name: 'Topic',
-    element: 'topic',
-  },
+
   {
     name: 'Members',
     element: 'members',
@@ -39,10 +36,6 @@ const groupNav = [
   {
     name: 'Members request',
     element: 'members-request',
-  },
-  {
-    name: 'Files',
-    element: 'files',
   },
 ];
 

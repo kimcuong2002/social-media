@@ -20,7 +20,7 @@ import { useEffect, useState } from 'react';
 import ReactMapGL from 'react-map-gl';
 
 type Props = {
-  refetch: () => void;
+  refetch?: () => void;
 };
 
 const CreateProduct = ({ refetch }: Props) => {
