@@ -12,7 +12,6 @@ import { io } from 'socket.io-client';
 import { InputMessage } from './input-message';
 import { useGetAllMessage, useGetRoomById, useQueryInfoUser } from '@/features';
 
-
 export const ContactDetail = () => {
   const [messages, setMessages] = useState<any[]>([]);
   const param = useParams();
@@ -26,33 +25,30 @@ export const ContactDetail = () => {
   const nameContact = data?.getRoomById.members.filter(
     (member) => member.id !== author?.getInfoUser.id,
   );
-  const { data: allMessages  } = useGetAllMessage(id!);
+  const { data: allMessages } = useGetAllMessage(id!);
 
   useEffect(() => {
-   if(allMessages) {
-    setMessages([...allMessages.getAllMessage]);
-   }
-  }, [allMessages])
+    if (allMessages) {
+      setMessages([...allMessages.getAllMessage]);
+    }
+  }, [allMessages]);
 
-  const socket = io(`http://localhost:8080`, {
+  const socket = io(`${import.meta.env.VITE_API_URL}`, {
     autoConnect: true,
     auth: {
-      authorization: `Bearer ${localStorage.getItem("token")}` 
-    }
+      authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
   });
 
   useEffect(() => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-      messageRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages])
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    messageRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
-  socket.on('recMessage', (message: {
-    content: string;
-    type: string;
-  }) => {
+  socket.on('recMessage', (message: { content: string; type: string }) => {
     let arr: any[] = messages;
     if (message) {
-      arr = [...arr, message ];
+      arr = [...arr, message];
     }
     setMessages([...arr]);
   });

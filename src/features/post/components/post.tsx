@@ -263,7 +263,7 @@ export const Post: FC<PostType> = ({
         <Box className={`my-6 w-full columns-2 md:columns-3 !space-y-4`}>
           {images &&
             images.map((item) => (
-              <Link to={`${currentPath}/posts/${idPost}`} key={item}>
+              <Link to={`/posts/${idPost}`} key={item}>
                 <img src={item} className="w-full py-2 !rounded-md" />
               </Link>
             ))}
